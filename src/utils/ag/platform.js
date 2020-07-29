@@ -1,58 +1,50 @@
 import * as cmd from './cmd'
 import { websocket } from './websocket'
 
-const loginUrl = 'wss://cua242.vpcdn.com:5035'
-
-const userInfo = {
-  // 真实账号
-  // isTrial: false,
-  // loginName: 'F55yyagary2910',
-  // password: '3c099cb7ef4f1917d978812077f1b98a',
-
-  // 试玩账号
-  isTrial: true,
-  loginName: 'F55wwntest9732422',
-  password: '0d092657906a18a085298f7990f57fbe'
-}
-
-function loginPlatform() {
-  return new Promise((resolve, reject) => {
+function loginPlatform(agConfig, onMsg, onBalance) {
+  return new Promise((resolve) => {
     let isLogin = false
-
     websocket(
-      loginUrl,
+      agConfig.urlList[Math.floor(Math.random() * agConfig.urlList.length)] + `:${agConfig.loginPort}`,
       (ws, isConnect) => {
-        ws.send(cmd.clientLogin(userInfo.loginName, userInfo.password, userInfo.isTrial).buffer)
+        ws.send(cmd.clientLogin(agConfig.loginName, agConfig.password, agConfig.isTrial).buffer)
         setTimeout(() => {
           if (!isConnect) {
+            onMsg('AG平台登录超时')
             ws.close()
-            reject('登录超时')
           }
         }, 10000)
+        agConfig.currentPlatformWebSocket = ws
       },
       (ws, result) => {
+        // console.log('5035：', result)
+        // onMsg(JSON.stringify(result))
         switch (result.respId) {
           case 131185:
             isLogin = true
+            onMsg(`登陆AG平台成功`)
             break
           // 账号密码登录返回，获取token ClientLoginResp
           case 131073:
-            isLogin ? (userInfo.token = result.tokenBytes) : (ws.close(), reject('登录失败'))
+            isLogin ? (agConfig.token = result.tokenBytes) : (onMsg('AG平台登录失败'), ws.close())
             break
           // 获取余额 ClientInfoResp
           case 131087:
-            userInfo.balance = result.account
+            onMsg(`当前余额：${result.account}`)
+            onBalance(result.account)
             break
           default:
-            resolve(userInfo)
+            resolve(agConfig)
             break
         }
       },
-      (ws, event) => {
-        reject('PLATFORM 连接错误', event)
+      (ws) => {
+        ws.close()
+        onMsg('AG平台登录错误')
       },
-      (ws, event) => {
-        console.log('PLATFORM 连接关闭', event)
+      (ws) => {
+        ws.close()
+        onMsg('AG平台连接关闭')
       }
     )
   })

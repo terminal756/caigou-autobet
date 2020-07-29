@@ -1,25 +1,23 @@
 import * as cmd from './cmd'
-import { egret } from '../agingame/egret'
 import { assemble } from './analysis'
+import { egret } from './static/egret'
 
 export function websocket(url, onConnect, onMessage, onError, onClose) {
   const ws = new WebSocket(url)
   ws.binaryType = 'arraybuffer'
-
   let isConnect = false
   let heartbeat
-
   function sendHeartbeat() {
     heartbeat = setInterval(() => {
       ws.send(cmd.keepAlive().buffer)
       ws.send(cmd.UCGateAlive().buffer)
     }, 10000)
   }
-
   ws.onopen = () => {
-    sendHeartbeat()
+    if (ws.readyState !== ws.CLOSED || ws.readyState !== ws.CLOSING) {
+      sendHeartbeat()
+    }
   }
-
   ws.onmessage = (event) => {
     const result = assemble(new egret.ByteArray(event.data))
     if (result && result.respId === 8781826) {
@@ -31,14 +29,12 @@ export function websocket(url, onConnect, onMessage, onError, onClose) {
       if (isConnect) onMessage(ws, result)
     }
   }
-
-  ws.onerror = (event) => {
-    onError(ws, event)
+  ws.onerror = () => {
+    onError(ws)
     clearInterval(heartbeat)
   }
-
-  ws.onclose = (event) => {
-    onClose(ws, event)
+  ws.onclose = () => {
+    onClose(ws)
     clearInterval(heartbeat)
   }
 }

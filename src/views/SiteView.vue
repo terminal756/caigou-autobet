@@ -40,7 +40,7 @@
             </v-list-item>
           </v-list>
         </v-card-text>
-        <v-tabs v-model="tab" align-with-title class="flex-grow-0 flex-shrink-0">
+        <v-tabs v-model="tab" align-with-title class="flex-grow-0 flex-shrink-0" show-arrows>
           <v-tabs-slider color="primary"></v-tabs-slider>
           <v-tab v-for="item in scheme.sites" :key="item.siteId">
             <template class="red--text">
@@ -79,6 +79,7 @@
   </v-app>
 </template>
 <script>
+import _ from 'lodash'
 import { remote, ipcRenderer } from 'electron'
 const RendererWindowUtils = require('../utils/RendererWindowUtils')
 export default {
@@ -153,7 +154,7 @@ export default {
                         awaitPromise: true
                       })
                       .then((res) => {
-                        agInfo.loginName = res.result.value
+                        if (res.result.value) agInfo.loginName = res.result.value
                       })
                     webContents.debugger
                       .sendCommand('Runtime.evaluate', {
@@ -161,7 +162,7 @@ export default {
                         awaitPromise: true
                       })
                       .then((res) => {
-                        agInfo.password = res.result.value
+                        if (res.result.value) agInfo.password = res.result.value
                       })
                     webContents.debugger
                       .sendCommand('Runtime.evaluate', {
@@ -169,7 +170,15 @@ export default {
                         awaitPromise: true
                       })
                       .then((res) => {
-                        agInfo.isTrial = res.result.value
+                        if (res.result.value) agInfo.isTrial = res.result.value
+                      })
+                    webContents.debugger
+                      .sendCommand('Runtime.evaluate', {
+                        expression: 'Core.ExternalData.version_seq',
+                        awaitPromise: true
+                      })
+                      .then((res) => {
+                        if (res.result.value) agInfo.version_seq = res.result.value
                       })
                     this.gameInfo.schemeId = this.scheme.schemeId
                     agInfo.siteId = this.scheme.sites[index].siteId
@@ -185,6 +194,9 @@ export default {
                         }
                         if (sameSite.isTrial !== agInfo.isTrial) {
                           sameSite.isTrial = agInfo.isTrial
+                        }
+                        if (sameSite.version_seq !== agInfo.version_seq) {
+                          sameSite.version_seq = agInfo.version_seq
                         }
                         if (sameSite.urlList !== agInfo.urlList) {
                           sameSite.urlList = agInfo.urlList
@@ -210,11 +222,22 @@ export default {
     },
     currentAGInfo() {
       setTimeout(() => {
-        if (this.currentAGInfo.length === this.scheme.sites.length) {
-          this.loginSuccessDialog = true
-          ipcRenderer.send('gameInfo', JSON.stringify(this.gameInfo))
+        let hasValue = true
+        this.currentAGInfo.map((a) => {
+          for (const key in a) {
+            if (!a[key]) hasValue = false
+          }
+        })
+        console.log('hasValue:', hasValue)
+        console.log('this.gameInfo:', this.gameInfo)
+        if (hasValue) {
+          if (this.currentAGInfo.length === this.scheme.sites.length) {
+            this.loginSuccessDialog = true
+            console.log('登录参数 gameInfo', this.gameInfo)
+            ipcRenderer.send('gameInfo', JSON.stringify(this.gameInfo))
+          }
         }
-      }, 100)
+      }, 1000)
     }
   },
   created() {

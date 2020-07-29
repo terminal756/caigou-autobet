@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { egret } from '../agingame/egret'
+import { egret } from './egret'
 
 var e,
   n,
@@ -7,14 +7,12 @@ var e,
   bytes = {},
   i = 0,
   o = 12
-;((e = bytes.ReadyState || (bytes.ReadyState = {}))[(e.CONNECTING = 0)] =
-  'CONNECTING'),
+;((e = bytes.ReadyState || (bytes.ReadyState = {}))[(e.CONNECTING = 0)] = 'CONNECTING'),
   (e[(e.OPEN = 1)] = 'OPEN'),
   (e[(e.CLOSING = 2)] = 'CLOSING'),
   (e[(e.CLOSED = 3)] = 'CLOSED'),
   (e[(e.DEAD = 4)] = 'DEAD'),
-  ((n = bytes.UCGatePluginType || (bytes.UCGatePluginType = {}))[(n.USER = 0)] =
-    'USER'),
+  ((n = bytes.UCGatePluginType || (bytes.UCGatePluginType = {}))[(n.USER = 0)] = 'USER'),
   (n[(n.USER_STREAM = 1)] = 'USER_STREAM'),
   (n[(n.USER_STREAM_IP = 2)] = 'USER_STREAM_IP'),
   (n[(n.STREAM = 3)] = 'STREAM'),
@@ -35,7 +33,7 @@ var f = function (t, e) {
   return (f =
     Object.setPrototypeOf ||
     ({
-      __proto__: [],
+      __proto__: []
     } instanceof Array &&
       function (t, e) {
         t.__proto__ = e
@@ -48,9 +46,7 @@ function l(t, e) {
   function n() {
     this.constructor = t
   }
-  f(t, e),
-    (t.prototype =
-      null === e ? Object.create(e) : ((n.prototype = e.prototype), new n()))
+  f(t, e), (t.prototype = null === e ? Object.create(e) : ((n.prototype = e.prototype), new n()))
 }
 function h(t, e, n, r) {
   return new (n || (n = Promise))(function (i, o) {
@@ -90,13 +86,13 @@ function p(t, e) {
         return i[1]
       },
       trys: [],
-      ops: [],
+      ops: []
     }
   return (
     (o = {
       next: s(0),
       throw: s(1),
-      return: s(2),
+      return: s(2)
     }),
     'function' == typeof Symbol &&
       (o[Symbol.iterator] = function () {
@@ -113,12 +109,7 @@ function p(t, e) {
             if (
               ((n = 1),
               r &&
-                (i =
-                  2 & o[0]
-                    ? r.return
-                    : o[0]
-                    ? r.throw || ((i = r.return) && i.call(r), 0)
-                    : r.next) &&
+                (i = 2 & o[0] ? r.return : o[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) &&
                 !(i = i.call(r, o[1])).done)
             )
               return i
@@ -132,7 +123,7 @@ function p(t, e) {
                   a.label++,
                   {
                     value: o[1],
-                    done: !1,
+                    done: !1
                   }
                 )
               case 5:
@@ -142,10 +133,7 @@ function p(t, e) {
                 ;(o = a.ops.pop()), a.trys.pop()
                 continue
               default:
-                if (
-                  !(i = (i = a.trys).length > 0 && i[i.length - 1]) &&
-                  (6 === o[0] || 2 === o[0])
-                ) {
+                if (!(i = (i = a.trys).length > 0 && i[i.length - 1]) && (6 === o[0] || 2 === o[0])) {
                   a = 0
                   continue
                 }
@@ -173,7 +161,7 @@ function p(t, e) {
         if (5 & o[0]) throw o[1]
         return {
           value: o[0] ? o[1] : void 0,
-          done: !0,
+          done: !0
         }
       })([o, s])
     }
@@ -185,14 +173,12 @@ var d = (function () {
     }
     return (
       (t.prototype.setTimeout = function (t, e) {
-        for (var n = [], r = 2; r < arguments.length; r++)
-          n[r - 2] = arguments[r]
+        for (var n = [], r = 2; r < arguments.length; r++) n[r - 2] = arguments[r]
         var i = window.setTimeout.apply(window, [t, e].concat(n))
         return this.timeoutSet.add(i), i
       }),
       (t.prototype.setInterval = function (t, e) {
-        for (var n = [], r = 2; r < arguments.length; r++)
-          n[r - 2] = arguments[r]
+        for (var n = [], r = 2; r < arguments.length; r++) n[r - 2] = arguments[r]
         var i = window.setInterval.apply(window, [t, e].concat(n))
         return this.intervalSet.add(i), i
       }),
@@ -223,7 +209,7 @@ var d = (function () {
       (t.prototype.startTick = function (t, e) {
         this.egretTickers.set(t, {
           callback: t,
-          scope: e,
+          scope: e
         }),
           egret.startTick(t, e)
       }),
@@ -256,7 +242,7 @@ var d = (function () {
         ;(this._worker = new Worker(
           URL.createObjectURL(
             new Blob([g], {
-              type: 'application/javascript',
+              type: 'application/javascript'
             })
           )
         )),
@@ -265,17 +251,13 @@ var d = (function () {
           }),
           this._worker.postMessage('check:0'),
           (window.onbeforeunload = function () {
-            t._worker.terminate(),
-              console.log('NonstopTimer.timeWorker.terminate')
+            t._worker.terminate(), console.log('NonstopTimer.timeWorker.terminate')
           }),
           (this.checkTimer = window.setTimeout(function () {
-            clearTimeout(t.checkTimer),
-              t.isWorker || (t._worker.terminate(), t.replaceNonWorker())
+            clearTimeout(t.checkTimer), t.isWorker || (t._worker.terminate(), t.replaceNonWorker())
           }, 200))
       } catch (t) {
-        console.warn('mostly can not new web worker'),
-          console.warn(t),
-          this.replaceNonWorker()
+        console.warn('mostly can not new web worker'), console.warn(t), this.replaceNonWorker()
       }
     }
     return (
@@ -295,15 +277,14 @@ var d = (function () {
           ;(this._refCount = t), this._refCount
         },
         enumerable: !0,
-        configurable: !0,
+        configurable: !0
       }),
       (t.prototype.calibrate = function () {
         var t = Date.now()
         this._worker.postMessage('calibrate:' + t.toString())
       }),
       (t.prototype.setTimeout = function (t, e) {
-        for (var n = [], r = 2; r < arguments.length; r++)
-          n[r - 2] = arguments[r]
+        for (var n = [], r = 2; r < arguments.length; r++) n[r - 2] = arguments[r]
         var i = e || 0
         i > this.timeError && (i -= this.timeError)
         var o = this.$getTimerID()
@@ -312,15 +293,14 @@ var d = (function () {
             fn: t,
             delay: i,
             params: n || [],
-            status: !1,
+            status: !1
           }),
           this._worker.postMessage('createTimeout:' + o + ':' + i),
           o
         )
       }),
       (t.prototype.setInterval = function (t, e) {
-        for (var n = [], r = 2; r < arguments.length; r++)
-          n[r - 2] = arguments[r]
+        for (var n = [], r = 2; r < arguments.length; r++) n[r - 2] = arguments[r]
         var i = e,
           o = this.$getTimerID()
         return (
@@ -328,21 +308,17 @@ var d = (function () {
             fn: t,
             delay: i,
             params: n || [],
-            status: !1,
+            status: !1
           }),
           this._worker.postMessage('createInterval:' + o + ':' + i),
           o
         )
       }),
       (t.prototype.clearTimeout = function (t) {
-        this.timeoutMap.get(t) &&
-          (this._worker.postMessage('clearTimeout:' + t),
-          this.timeoutMap.delete(t))
+        this.timeoutMap.get(t) && (this._worker.postMessage('clearTimeout:' + t), this.timeoutMap.delete(t))
       }),
       (t.prototype.clearInterval = function (t) {
-        this.intervalMap.get(t) &&
-          (this._worker.postMessage('clearInterval:' + t),
-          this.intervalMap.delete(t))
+        this.intervalMap.get(t) && (this._worker.postMessage('clearInterval:' + t), this.intervalMap.delete(t))
       }),
       (t.prototype.clearTimeoutSet = function (t) {
         var e = this
@@ -456,32 +432,28 @@ var d = (function () {
         get: function () {
           return window.egret
             ? (this._egret || (this._egret = new y()), this._egret)
-            : void console.warn(
-                'Cannot find egret, please make sure you have imported egret'
-              )
+            : void console.warn('Cannot find egret, please make sure you have imported egret')
         },
         enumerable: !0,
-        configurable: !0,
+        configurable: !0
       }),
       Object.defineProperty(t.prototype, 'timeError', {
         get: function () {
           return this.worker.timeError
         },
         enumerable: !0,
-        configurable: !0,
+        configurable: !0
       }),
       (t.prototype.calibrate = function () {
         this.worker.calibrate()
       }),
       (t.prototype.setTimeout = function (t, e) {
-        for (var n, r = [], i = 2; i < arguments.length; i++)
-          r[i - 2] = arguments[i]
+        for (var n, r = [], i = 2; i < arguments.length; i++) r[i - 2] = arguments[i]
         var o = (n = this.worker).setTimeout.apply(n, [t, e].concat(r))
         return this.timeoutSet.add(o), o
       }),
       (t.prototype.setInterval = function (t, e) {
-        for (var n, r = [], i = 2; i < arguments.length; i++)
-          r[i - 2] = arguments[i]
+        for (var n, r = [], i = 2; i < arguments.length; i++) r[i - 2] = arguments[i]
         var o = (n = this.worker).setInterval.apply(n, [t, e].concat(r))
         return this.intervalSet.add(o), o
       }),
@@ -517,10 +489,7 @@ var d = (function () {
   })(egret.ByteArray),
   T = (function () {
     function t(t, e) {
-      ;(this.respId = t),
-        (e.position = 8),
-        (this.seqNo = e.readUnsignedInt()),
-        (this.packetLength = e.length)
+      ;(this.respId = t), (e.position = 8), (this.seqNo = e.readUnsignedInt()), (this.packetLength = e.length)
     }
     return (
       (t.prototype.parseResp = function (t) {}),
@@ -563,7 +532,7 @@ function R(t, e, n) {
   void 0 === e && (e = []), void 0 === n && (n = {})
   for (
     var r = {
-        arrayBehaviour: n.arrayBehaviour || 'replace',
+        arrayBehaviour: n.arrayBehaviour || 'replace'
       },
       i = e.map(function (t) {
         return t || {}
@@ -618,7 +587,7 @@ function I() {
         singleRetry: 1,
         totalRetry: 7,
         pendingTime: 1e3,
-        forceRetryTime: 0,
+        forceRetryTime: 0
       },
       lineSelect: {
         cache: !0,
@@ -627,18 +596,18 @@ function I() {
         repeat: 3,
         refPort: '',
         respId: s,
-        reqId: c,
+        reqId: c
       },
       crypto: {
         enable: !1,
         encryptList: [],
-        decryptList: [],
+        decryptList: []
       },
       qna: {
         version: '',
         userIp: '',
-        aliveList: [],
-      },
+        aliveList: []
+      }
     },
     M
   )
@@ -646,15 +615,7 @@ function I() {
 function O(t, e, n) {
   void 0 === n && (n = i)
   var r = new w()
-  if (
-    ((r.cmdId = t),
-    (r.seqNo = n),
-    r.writeUnsignedInt(t),
-    r.writeUnsignedInt(o),
-    r.writeUnsignedInt(n),
-    !e)
-  )
-    return r
+  if (((r.cmdId = t), (r.seqNo = n), r.writeUnsignedInt(t), r.writeUnsignedInt(o), r.writeUnsignedInt(n), !e)) return r
   e(r)
   var a = r.position
   return (r.position = 4), r.writeUnsignedInt(a), r
@@ -677,7 +638,7 @@ var N = new E(),
       Object.defineProperty({}, 'a', {
         get: function () {
           return 7
-        },
+        }
       }).a
     )
   }),
@@ -692,7 +653,7 @@ function L(t, e) {
   return (
     t(
       (e = {
-        exports: {},
+        exports: {}
       }),
       e.exports
     ),
@@ -721,18 +682,16 @@ var x = L(function (t) {
         Object.defineProperty(z('div'), 'a', {
           get: function () {
             return 7
-          },
+          }
         }).a
       )
     }),
   H = function (t, e) {
     if (!F(t)) return t
     var n, r
-    if (e && 'function' == typeof (n = t.toString) && !F((r = n.call(t))))
-      return r
+    if (e && 'function' == typeof (n = t.toString) && !F((r = n.call(t)))) return r
     if ('function' == typeof (n = t.valueOf) && !F((r = n.call(t)))) return r
-    if (!e && 'function' == typeof (n = t.toString) && !F((r = n.call(t))))
-      return r
+    if (!e && 'function' == typeof (n = t.toString) && !F((r = n.call(t)))) return r
     throw TypeError("Can't convert object to primitive value")
   },
   j = Object.defineProperty,
@@ -744,10 +703,9 @@ var x = L(function (t) {
             try {
               return j(t, e, n)
             } catch (t) {}
-          if ('get' in n || 'set' in n)
-            throw TypeError('Accessors not supported!')
+          if ('get' in n || 'set' in n) throw TypeError('Accessors not supported!')
           return 'value' in n && (t[e] = n.value), t
-        },
+        }
   },
   Q = function () {
     var t = C(this),
@@ -765,14 +723,14 @@ D &&
   'g' != /./g.flags &&
   W.f(RegExp.prototype, 'flags', {
     configurable: !0,
-    get: Q,
+    get: Q
   })
 var G = function (t, e) {
     return {
       enumerable: !(1 & t),
       configurable: !(2 & t),
       writable: !(4 & t),
-      value: e,
+      value: e
     }
   },
   K = D
@@ -793,7 +751,7 @@ var G = function (t, e) {
   },
   tt = L(function (t) {
     var e = (t.exports = {
-      version: '2.5.7',
+      version: '2.5.7'
     })
     'number' == typeof __e && (__e = e)
   }),
@@ -811,13 +769,7 @@ var G = function (t, e) {
           a && (q(i, 'name') || K(i, 'name', n)),
             t[n] !== i &&
               (a && (q(i, e) || K(i, e, t[n] ? '' + t[n] : r.join(String(n)))),
-              t === x
-                ? (t[n] = i)
-                : o
-                ? t[n]
-                  ? (t[n] = i)
-                  : K(t, n, i)
-                : (delete t[n], K(t, n, i)))
+              t === x ? (t[n] = i) : o ? (t[n] ? (t[n] = i) : K(t, n, i)) : (delete t[n], K(t, n, i)))
         })(Function.prototype, 'toString', function () {
           return ('function' == typeof this && this[e]) || n.call(this)
         })
@@ -831,17 +783,13 @@ U(function () {
     '/a/b' !=
     nt.call({
       source: 'a',
-      flags: 'b',
+      flags: 'b'
     })
   )
 })
   ? rt(function () {
       var t = C(this)
-      return '/'.concat(
-        t.source,
-        '/',
-        'flags' in t ? t.flags : !D && t instanceof RegExp ? Q.call(t) : void 0
-      )
+      return '/'.concat(t.source, '/', 'flags' in t ? t.flags : !D && t instanceof RegExp ? Q.call(t) : void 0)
     })
   : 'toString' != nt.name &&
     rt(function () {
@@ -866,7 +814,7 @@ var st = {}.toString,
     })('versions', []).push({
       version: tt.version,
       mode: 'global',
-      copyright: '© 2018 Denis Pushkarev (zloirock.ru)',
+      copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
     })
   }),
   ft = L(function (t) {
@@ -925,25 +873,19 @@ var yt = (function (t) {
       (e.prototype.pipeEvent = function (t, e) {
         var n = {
           originType: t,
-          data: e,
+          data: e
         }
         return this.dispatchEventWith('EVT_PIPE', !0, n, !1)
       }),
       (e.prototype.appendPipeAt = function (t) {
-        ;(this.prevPipe = t),
-          t.addEventListener('EVT_PIPE', this.onPropagate, this)
+        ;(this.prevPipe = t), t.addEventListener('EVT_PIPE', this.onPropagate, this)
       }),
       (e.prototype.outputEventAt = function (t) {
         ;(this.shouldOutputEvent = !0), this.appendPipeAt(t)
       }),
       (e.prototype.removeFromPipe = function () {
         this.prevPipe
-          ? (this.prevPipe.removeEventListener(
-              'EVT_PIPE',
-              this.onPropagate,
-              this
-            ),
-            (this.prevPipe = null))
+          ? (this.prevPipe.removeEventListener('EVT_PIPE', this.onPropagate, this), (this.prevPipe = null))
           : console.warn('Need append to a pipe first')
       }),
       (e.prototype.onPipeEvent = function (t, e, n) {}),
@@ -951,9 +893,7 @@ var yt = (function (t) {
         var e = t.data
         this.onPipeEvent(e.originType, e.data, t),
           t.$isPropagationStopped ||
-            (this.shouldOutputEvent
-              ? this.dispatchEventWith(e.originType, !1, e.data)
-              : this.dispatchEvent(t))
+            (this.shouldOutputEvent ? this.dispatchEventWith(e.originType, !1, e.data) : this.dispatchEvent(t))
       }),
       e
     )
@@ -965,10 +905,7 @@ var yt = (function (t) {
     return l(e, t), (e.prototype.onDestory = function () {}), e
   })(yt)
 function vt(t, e, n) {
-  return (
-    (n = n || '0'),
-    (t += '').length >= e ? t : new Array(e - t.length + 1).join(n) + t
-  )
+  return (n = n || '0'), (t += '').length >= e ? t : new Array(e - t.length + 1).join(n) + t
 }
 var Et = (function (t) {
     function e(e) {
@@ -997,8 +934,7 @@ var Et = (function (t) {
                       ', seq:' +
                       e.seqNo
                   )
-                : 'number' == typeof e.op &&
-                  console.log(this.config.tag + ' receive: ' + e.op.toString())
+                : 'number' == typeof e.op && console.log(this.config.tag + ' receive: ' + e.op.toString())
               break
             case 'EVENT_CLOSE':
               console.log(this.config.tag + ' close!')
@@ -1015,13 +951,7 @@ var Et = (function (t) {
                 a = i.getInt32(4),
                 s = i.getInt32(8)
               console.log(
-                this.config.tag +
-                  ' receive dataview: 0x' +
-                  vt(o.toString(16), 6) +
-                  ', length:' +
-                  a +
-                  ', seq:' +
-                  s
+                this.config.tag + ' receive dataview: 0x' + vt(o.toString(16), 6) + ', length:' + a + ', seq:' + s
               )
           }
       }),
@@ -1048,11 +978,7 @@ var Et = (function (t) {
         var e = this.getRespClazzByID(t.respId)
         if (e) {
           var n = t
-          return (
-            (n = new e(t.respId, t.bytes)).parseResponse(t.bytes),
-            (n.parseResponse = null),
-            n
-          )
+          return (n = new e(t.respId, t.bytes)).parseResponse(t.bytes), (n.parseResponse = null), n
         }
         return null
       }),
@@ -1094,14 +1020,9 @@ var Et = (function (t) {
               ? (n.beatPeriod = -1)
               : n.config.heartBeatPeriod >= 100
               ? (n.beatPeriod = n.config.heartBeatPeriod)
-              : (console.warn(
-                  'UC heartbeat period should be longer than 100ms, automatically set to 5000 ms.'
-                ),
+              : (console.warn('UC heartbeat period should be longer than 100ms, automatically set to 5000 ms.'),
                 (n.beatPeriod = 5e3))
-            : (console.warn(
-                'config.ucUeartBeatPeriod is NaN, automatically set to 5000 ms.'
-              ),
-              (n.beatPeriod = 5e3)),
+            : (console.warn('config.ucUeartBeatPeriod is NaN, automatically set to 5000 ms.'), (n.beatPeriod = 5e3)),
           (n.beatCMD = n.getBeatCMD()),
           n
         )
@@ -1142,16 +1063,11 @@ var Et = (function (t) {
         (i.hasValidPacket = !1),
         (i.singleRetryCount = 0),
         (i.totalRetryCount = 0),
-        (i.totalRetryCount =
-          i.config.reconnect.totalRetry < 0
-            ? 1 / 0
-            : i.config.reconnect.totalRetry),
+        (i.totalRetryCount = i.config.reconnect.totalRetry < 0 ? 1 / 0 : i.config.reconnect.totalRetry),
         i.config.reconnect.forceRetryTime >= 3e3 &&
           (i.forceRetryInterval && N.clearInterval(i.forceRetryInterval),
           (i.forceRetryInterval = N.setInterval(function () {
-            ;(i.socket.readyState === bytes.ReadyState.OPEN &&
-              i.hasValidPacket) ||
-              i.reconnect()
+            ;(i.socket.readyState === bytes.ReadyState.OPEN && i.hasValidPacket) || i.reconnect()
           }, i.config.reconnect.forceRetryTime))),
         i
       )
@@ -1167,9 +1083,7 @@ var Et = (function (t) {
             break
           case 'EVENT_CLOSE':
             e && 4033 === e.code
-              ? (n.stopPropagation(),
-                this.pipeEvent('EVENT_CLOSE', e),
-                this.kill())
+              ? (n.stopPropagation(), this.pipeEvent('EVENT_CLOSE', e), this.kill())
               : this.totalRetryCount > 0
               ? this.forceRetryInterval || this.reconnect()
               : (n.stopPropagation(),
@@ -1180,8 +1094,7 @@ var Et = (function (t) {
       }),
       (n.prototype.reconnect = function () {
         this.totalRetryCount--,
-          this.hasValidPacket &&
-          this.singleRetryCount < this.config.reconnect.singleRetry
+          this.hasValidPacket && this.singleRetryCount < this.config.reconnect.singleRetry
             ? (this.singleRetryCount++, this.connectWithDelay())
             : this.connectNextURL()
       }),
@@ -1239,14 +1152,9 @@ var Et = (function (t) {
               ? (n.beatPeriod = -1)
               : n.config.ucHeartBeatPeriod >= 100
               ? (n.beatPeriod = n.config.ucHeartBeatPeriod)
-              : (console.warn(
-                  'UC heartbeat period should be longer than 100ms, automatically set to 5000 ms.'
-                ),
+              : (console.warn('UC heartbeat period should be longer than 100ms, automatically set to 5000 ms.'),
                 (n.beatPeriod = 5e3))
-            : (console.warn(
-                'config.ucHeartBeatPeriod is NaN, automatically set to 5000 ms.'
-              ),
-              (n.beatPeriod = 5e3)),
+            : (console.warn('config.ucHeartBeatPeriod is NaN, automatically set to 5000 ms.'), (n.beatPeriod = 5e3)),
           (n.ucgateBeatCMD = n.getBeatCMD()),
           n
         )
@@ -1263,15 +1171,11 @@ var Et = (function (t) {
                 : this.socket.writeBytes(this.getValidHostCMD()),
                 this.beatPeriod > 0 &&
                   ((this.lastPacketTime = Date.now()),
-                  (this.beatInterval = N.setInterval(
-                    this.doBeat.bind(this),
-                    this.beatPeriod
-                  )))
+                  (this.beatInterval = N.setInterval(this.doBeat.bind(this), this.beatPeriod)))
               break
             case r:
               this.beatPeriod > 0 && (this.lastPacketTime = Date.now()),
-                e.respId === this.config.lineSelect.respId &&
-                  (n.stopPropagation(), this.pipeEvent('EVENT_PONG'))
+                e.respId === this.config.lineSelect.respId && (n.stopPropagation(), this.pipeEvent('EVENT_PONG'))
               break
             case 'EVENT_CLOSE':
               this.beatPeriod > 0 && N.clearInterval(this.beatInterval)
@@ -1306,26 +1210,20 @@ var Et = (function (t) {
       }),
       (e.prototype.assemble = function (t) {
         for (
-          this.bytearray.position = this.bytearray.length,
-            this.bytearray.writeBytes(t);
+          this.bytearray.position = this.bytearray.length, this.bytearray.writeBytes(t);
           this.bytearray.length >= 12;
 
         ) {
           this.bytearray.position = 4
           var e = this.bytearray.readUnsignedInt()
-          if (!e)
-            return void console.warn(
-              'Cannot read packet length, skip parsing this packet'
-            )
+          if (!e) return void console.warn('Cannot read packet length, skip parsing this packet')
           if (!(this.bytearray.length >= e)) break
           var n = new egret.ByteArray(this.bytearray.buffer.slice(0, e)),
             i = new _(n.readUnsignedInt(), n)
           this.pipeEvent(r, i),
             this.bytearray.length === e
               ? this.bytearray.clear()
-              : (this.bytearray = new egret.ByteArray(
-                  this.bytearray.buffer.slice(e)
-                ))
+              : (this.bytearray = new egret.ByteArray(this.bytearray.buffer.slice(e)))
         }
       }),
       e
@@ -1343,25 +1241,17 @@ var Et = (function (t) {
           var i = void 0
           null !== (i = e instanceof _ ? this.parse(e) : e)
             ? (n.stopPropagation(), this.pipeEvent(r, i))
-            : this.config.dataview &&
-              (n.stopPropagation(),
-              this.pipeEvent('EVENT_DATA_VIEW', e.bytes.dataView))
+            : this.config.dataview && (n.stopPropagation(), this.pipeEvent('EVENT_DATA_VIEW', e.bytes.dataView))
         }
       }),
       (e.prototype.parse = function (t) {
         ;(t instanceof T != !1 && !0 !== isNaN(t.respId)) ||
-          (console.warn(
-            'Invalid data type, please check if "AssemblePacket" has pluged'
-          ),
-          this.pipeEvent(r, t))
+          (console.warn('Invalid data type, please check if "AssemblePacket" has pluged'), this.pipeEvent(r, t))
         var e = t.respId,
           n = this.responseMap.get(e),
           i = t
         return n
-          ? ((i = new n(e, t.bytes)).parseResponse(t.bytes),
-            (i.parseResponse = null),
-            delete i.parseResponse,
-            i)
+          ? ((i = new n(e, t.bytes)).parseResponse(t.bytes), (i.parseResponse = null), delete i.parseResponse, i)
           : null
       }),
       e
@@ -1406,32 +1296,18 @@ var Et = (function (t) {
       d = p.prototype || (p.prototype = {})
     for (r in (c && (n = e), n))
       (o = ((i = !s && h && void 0 !== h[r]) ? h : n)[r]),
-        (a =
-          l && i
-            ? Rt(o, x)
-            : f && 'function' == typeof o
-            ? Rt(Function.call, o)
-            : o),
+        (a = l && i ? Rt(o, x) : f && 'function' == typeof o ? Rt(Function.call, o) : o),
         h && et(h, r, o, t & kt.U),
         p[r] != o && K(p, r, a),
         f && d[r] != o && (d[r] = o)
   }
-;(x.core = tt),
-  (kt.F = 1),
-  (kt.G = 2),
-  (kt.S = 4),
-  (kt.P = 8),
-  (kt.B = 16),
-  (kt.W = 32),
-  (kt.U = 64),
-  (kt.R = 128)
+;(x.core = tt), (kt.F = 1), (kt.G = 2), (kt.S = 4), (kt.P = 8), (kt.B = 16), (kt.W = 32), (kt.U = 64), (kt.R = 128)
 var Mt,
   It,
   Ot,
   Pt = kt,
   Nt = function (t, e, n, r) {
-    if (!(t instanceof e) || (void 0 !== r && r in t))
-      throw TypeError(n + ': incorrect invocation!')
+    if (!(t instanceof e) || (void 0 !== r && r in t)) throw TypeError(n + ': incorrect invocation!')
     return t
   },
   Ut = function (t, e, n, r) {
@@ -1479,11 +1355,8 @@ var Mt,
         if ('function' != typeof l) throw TypeError(t + ' is not iterable!')
         if (Lt(l)) {
           for (s = Vt(t.length); s > p; p++)
-            if ((f = r ? h(C((c = t[p]))[0], c[1]) : h(t[p])) === e || f === n)
-              return f
-        } else
-          for (u = l.call(t); !(c = u.next()).done; )
-            if ((f = Ut(u, h, c.value, r)) === e || f === n) return f
+            if ((f = r ? h(C((c = t[p]))[0], c[1]) : h(t[p])) === e || f === n) return f
+        } else for (u = l.call(t); !(c = u.next()).done; ) if ((f = Ut(u, h, c.value, r)) === e || f === n) return f
       })
     ;(r.BREAK = e), (r.RETURN = n)
   }),
@@ -1529,9 +1402,7 @@ var Mt,
             case 3:
               return r ? t(e[0], e[1], e[2]) : t.call(n, e[0], e[1], e[2])
             case 4:
-              return r
-                ? t(e[0], e[1], e[2], e[3])
-                : t.call(n, e[0], e[1], e[2], e[3])
+              return r ? t(e[0], e[1], e[2], e[3]) : t.call(n, e[0], e[1], e[2], e[3])
           }
           t.apply(n, e)
         })('function' == typeof t ? t : Function(t), e)
@@ -1552,9 +1423,7 @@ var Mt,
         te.now(Rt(re, t, 1))
       })
     : Zt
-    ? ((Ot = (It = new Zt()).port2),
-      (It.port1.onmessage = ie),
-      (Mt = Rt(Ot.postMessage, Ot, 1)))
+    ? ((Ot = (It = new Zt()).port2), (It.port1.onmessage = ie), (Mt = Rt(Ot.postMessage, Ot, 1)))
     : x.addEventListener && 'function' == typeof postMessage && !x.importScripts
     ? ((Mt = function (t) {
         x.postMessage(t + '', '*')
@@ -1572,7 +1441,7 @@ var Mt,
             }))
 var oe = {
     set: Jt,
-    clear: $t,
+    clear: $t
   },
   ae = oe.set,
   se = x.MutationObserver || x.WebKitMutationObserver,
@@ -1591,18 +1460,18 @@ function le(t) {
 var he = {
     f: function (t) {
       return new le(t)
-    },
+    }
   },
   pe = function (t) {
     try {
       return {
         e: !1,
-        v: t(),
+        v: t()
       }
     } catch (t) {
       return {
         e: !0,
-        v: t,
+        v: t
       }
     }
   },
@@ -1619,7 +1488,7 @@ var he = {
       !q((t = n ? t : t.prototype), Ee) &&
       ve(t, Ee, {
         configurable: !0,
-        value: e,
+        value: e
       })
   },
   Te = ft('species'),
@@ -1632,7 +1501,7 @@ var he = {
         configurable: !0,
         get: function () {
           return this
-        },
+        }
       })
   },
   Ae = ft('iterator'),
@@ -1654,7 +1523,7 @@ var me,
         i = r[Ae]()
       ;(i.next = function () {
         return {
-          done: (n = !0),
+          done: (n = !0)
         }
       }),
         (r[Ae] = function () {
@@ -1699,7 +1568,7 @@ var me,
       var o = !0,
         a = document.createTextNode('')
       new se(r).observe(a, {
-        characterData: !0,
+        characterData: !0
       }),
         (n = function () {
           a.data = o = !o
@@ -1708,7 +1577,7 @@ var me,
     return function (r) {
       var i = {
         fn: r,
-        next: void 0,
+        next: void 0
       }
       e && (e.next = i), t || ((t = i), n()), (e = i)
     }
@@ -1759,14 +1628,8 @@ var me,
               try {
                 s
                   ? (i || (2 == t._h && je(t), (t._h = 1)),
-                    !0 === s
-                      ? (n = r)
-                      : (f && f.enter(), (n = s(r)), f && (f.exit(), (a = !0))),
-                    n === e.promise
-                      ? u(Pe('Promise-chain cycle'))
-                      : (o = Xe(n))
-                      ? o.call(n, c, u)
-                      : c(n))
+                    !0 === s ? (n = r) : (f && f.enter(), (n = s(r)), f && (f.exit(), (a = !0))),
+                    n === e.promise ? u(Pe('Promise-chain cycle')) : (o = Xe(n)) ? o.call(n, c, u) : c(n))
                   : u(r)
               } catch (t) {
                 f && !a && f.exit(), u(t)
@@ -1795,11 +1658,9 @@ var me,
               : (n = x.onunhandledrejection)
               ? n({
                   promise: t,
-                  reason: i,
+                  reason: i
                 })
-              : (r = x.console) &&
-                r.error &&
-                r.error('Unhandled promise rejection', i)
+              : (r = x.console) && r.error && r.error('Unhandled promise rejection', i)
           })),
           (t._h = Ce || He(t) ? 2 : 1)),
         (t._a = void 0),
@@ -1819,18 +1680,13 @@ var me,
         : (e = x.onrejectionhandled) &&
           e({
             promise: t,
-            reason: t._v,
+            reason: t._v
           })
     })
   },
   We = function (t) {
     var e = this
-    e._d ||
-      ((e._d = !0),
-      ((e = e._w || e)._v = t),
-      (e._s = 2),
-      e._a || (e._a = e._c.slice()),
-      ze(e, !0))
+    e._d || ((e._d = !0), ((e = e._w || e)._v = t), (e._s = 2), e._a || (e._a = e._c.slice()), ze(e, !0))
   },
   Qe = function (t) {
     var e,
@@ -1843,7 +1699,7 @@ var me,
           ? Oe(function () {
               var r = {
                 _w: n,
-                _d: !1,
+                _d: !1
               }
               try {
                 e.call(t, Rt(Qe, r, 1), Rt(We, r, 1))
@@ -1856,7 +1712,7 @@ var me,
         We.call(
           {
             _w: n,
-            _d: !1,
+            _d: !1
           },
           t
         )
@@ -1895,19 +1751,17 @@ Be ||
     },
     catch: function (t) {
       return this.then(void 0, t)
-    },
+    }
   })),
   (Re = function () {
     var t = new me()
-    ;(this.promise = t),
-      (this.resolve = Rt(Qe, t, 1)),
-      (this.reject = Rt(We, t, 1))
+    ;(this.promise = t), (this.resolve = Rt(Qe, t, 1)), (this.reject = Rt(We, t, 1))
   }),
   (he.f = xe = function (t) {
     return t === Fe || t === ke ? new Re(t) : Se(t)
   })),
   Pt(Pt.G + Pt.W + Pt.F * !Be, {
-    Promise: Fe,
+    Promise: Fe
   }),
   we(Fe, 'Promise'),
   _e('Promise'),
@@ -1916,7 +1770,7 @@ Be ||
     reject: function (t) {
       var e = xe(this)
       return (0, e.reject)(t), e.promise
-    },
+    }
   }),
   Pt(Pt.S + Pt.F * !Be, 'Promise', {
     resolve: function (t) {
@@ -1925,7 +1779,7 @@ Be ||
         var n = he.f(t)
         return (0, n.resolve)(e), n.promise
       })(this, t)
-    },
+    }
   }),
   Pt(
     Pt.S +
@@ -1970,7 +1824,7 @@ Be ||
             })
           })
         return i.e && r(i.v), n.promise
-      },
+      }
     }
   )
 var Ge = ft('unscopables'),
@@ -1982,7 +1836,7 @@ var Ye = function (t) {
   qe = function (t, e) {
     return {
       value: e,
-      done: !!t,
+      done: !!t
     }
   },
   Je = Object('z').propertyIsEnumerable(0)
@@ -2010,8 +1864,7 @@ var Ye = function (t) {
         s = nn(r, a)
       if (t && n != n) {
         for (; a > s; ) if ((i = o[s++]) != i) return !0
-      } else
-        for (; a > s; s++) if ((t || s in o) && o[s] === n) return t || s || 0
+      } else for (; a > s; s++) if ((t || s in o) && o[s] === n) return t || s || 0
       return !t && -1
     }
   },
@@ -2030,9 +1883,7 @@ var Ye = function (t) {
     for (; e.length > i; ) q(r, (n = e[i++])) && (~sn(o, n) || o.push(n))
     return o
   },
-  fn = 'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'.split(
-    ','
-  ),
+  fn = 'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'.split(','),
   ln =
     Object.keys ||
     function (t) {
@@ -2042,8 +1893,7 @@ var Ye = function (t) {
     ? Object.defineProperties
     : function (t, e) {
         C(t)
-        for (var n, r = ln(e), i = r.length, o = 0; i > o; )
-          W.f(t, (n = r[o++]), e[n])
+        for (var n, r = ln(e), i = r.length, o = 0; i > o; ) W.f(t, (n = r[o++]), e[n])
         return t
       },
   pn = an('IE_PROTO'),
@@ -2071,12 +1921,7 @@ var Ye = function (t) {
     function (t, e) {
       var n
       return (
-        null !== t
-          ? ((dn.prototype = C(t)),
-            (n = new dn()),
-            (dn.prototype = null),
-            (n[pn] = t))
-          : (n = yn()),
+        null !== t ? ((dn.prototype = C(t)), (n = new dn()), (dn.prototype = null), (n[pn] = t)) : (n = yn()),
         void 0 === e ? n : hn(n, e)
       )
     },
@@ -2086,7 +1931,7 @@ K(vn, ft('iterator'), function () {
 })
 var En = function (t, e, n) {
     ;(t.prototype = gn(vn, {
-      next: G(1, n),
+      next: G(1, n)
     })),
       we(t, e + ' Iterator')
   },
@@ -2161,7 +2006,7 @@ var En = function (t, e, n) {
         ((s = {
           values: h ? g : f('values'),
           keys: o ? g : f('keys'),
-          entries: v,
+          entries: v
         }),
         a)
       )
@@ -2221,7 +2066,7 @@ for (
       StyleSheetList: !0,
       TextTrackCueList: !1,
       TextTrackList: !1,
-      TouchList: !1,
+      TouchList: !1
     },
     Nn = ln(Pn),
     Un = 0;
@@ -2233,10 +2078,7 @@ for (
     Cn = Pn[Fn],
     Ln = x[Fn],
     xn = Ln && Ln.prototype
-  if (
-    xn &&
-    (xn[Mn] || K(xn, Mn, On), xn[In] || K(xn, In, Fn), (Dt[Fn] = On), Cn)
-  )
+  if (xn && (xn[Mn] || K(xn, Mn, On), xn[In] || K(xn, In, Fn), (Dt[Fn] = On), Cn))
     for (Dn in kn) xn[Dn] || et(xn, Dn, kn[Dn], !0)
 }
 var Bn = (function (t) {
@@ -2250,11 +2092,7 @@ var Bn = (function (t) {
       ? t
         ? ''
         : void 0
-      : (r = o.charCodeAt(a)) < 55296 ||
-        r > 56319 ||
-        a + 1 === s ||
-        (i = o.charCodeAt(a + 1)) < 56320 ||
-        i > 57343
+      : (r = o.charCodeAt(a)) < 55296 || r > 56319 || a + 1 === s || (i = o.charCodeAt(a + 1)) < 56320 || i > 57343
       ? t
         ? o.charAt(a)
         : r
@@ -2276,13 +2114,13 @@ Rn(
     return n >= e.length
       ? {
           value: void 0,
-          done: !0,
+          done: !0
         }
       : ((t = Bn(e, n)),
         (this._i += t.length),
         {
           value: t,
-          done: !1,
+          done: !1
         })
   }
 )
@@ -2302,18 +2140,15 @@ var Xn = L(function (t) {
         n(t, e, {
           value: {
             i: 'O' + ++r,
-            w: {},
-          },
+            w: {}
+          }
         })
       },
       s = (t.exports = {
         KEY: e,
         NEED: !1,
         fastKey: function (t, n) {
-          if (!F(t))
-            return 'symbol' == typeof t
-              ? t
-              : ('string' == typeof t ? 'S' : 'P') + t
+          if (!F(t)) return 'symbol' == typeof t ? t : ('string' == typeof t ? 'S' : 'P') + t
           if (!q(t, e)) {
             if (!i(t)) return 'F'
             if (!n) return 'E'
@@ -2331,7 +2166,7 @@ var Xn = L(function (t) {
         },
         onFreeze: function (t) {
           return o && s.NEED && i(t) && !q(t, e) && a(t), t
-        },
+        }
       })
   }),
   zn =
@@ -2341,8 +2176,7 @@ var Xn = L(function (t) {
     Xn.getWeak,
     Xn.onFreeze,
     function (t, e) {
-      if (!F(t) || t._t !== e)
-        throw TypeError('Incompatible receiver, ' + e + ' required!')
+      if (!F(t) || t._t !== e) throw TypeError('Incompatible receiver, ' + e + ' required!')
       return t
     }),
   Vn = W.f,
@@ -2390,22 +2224,18 @@ var Xn = L(function (t) {
           },
           forEach: function (t) {
             zn(this, e)
-            for (
-              var n, r = Rt(t, arguments.length > 1 ? arguments[1] : void 0, 3);
-              (n = n ? n.n : this._f);
-
-            )
+            for (var n, r = Rt(t, arguments.length > 1 ? arguments[1] : void 0, 3); (n = n ? n.n : this._f); )
               for (r(n.v, n.k, this); n && n.r; ) n = n.p
           },
           has: function (t) {
             return !!Wn(zn(this, e), t)
-          },
+          }
         }),
         D &&
           Vn(i.prototype, 'size', {
             get: function () {
               return zn(this, e)[jn]
-            },
+            }
           }),
         i
       )
@@ -2423,7 +2253,7 @@ var Xn = L(function (t) {
               v: n,
               p: (r = t._l),
               n: void 0,
-              r: !1,
+              r: !1
             }),
             t._f || (t._f = o),
             r && (r.n = o),
@@ -2451,10 +2281,10 @@ var Xn = L(function (t) {
         !0
       ),
         _e(e)
-    },
+    }
   },
   Gn = {
-    f: {}.propertyIsEnumerable,
+    f: {}.propertyIsEnumerable
   },
   Kn = Object.getOwnPropertyDescriptor,
   Yn = {
@@ -2466,11 +2296,10 @@ var Xn = L(function (t) {
               return Kn(t, e)
             } catch (t) {}
           if (q(t, e)) return G(!Gn.f.call(t, e), t[e])
-        },
+        }
   },
   qn = function (t, e) {
-    if ((C(t), !F(e) && null !== e))
-      throw TypeError(e + ": can't set as prototype!")
+    if ((C(t), !F(e) && null !== e)) throw TypeError(e + ": can't set as prototype!")
   },
   Jn = {
     set:
@@ -2478,12 +2307,7 @@ var Xn = L(function (t) {
       ('__proto__' in {}
         ? (function (t, e, n) {
             try {
-              ;(n = Rt(
-                Function.call,
-                Yn.f(Object.prototype, '__proto__').set,
-                2
-              ))(t, []),
-                (e = !(t instanceof Array))
+              ;(n = Rt(Function.call, Yn.f(Object.prototype, '__proto__').set, 2))(t, []), (e = !(t instanceof Array))
             } catch (t) {
               e = !0
             }
@@ -2492,20 +2316,12 @@ var Xn = L(function (t) {
             }
           })({}, !1)
         : void 0),
-    check: qn,
+    check: qn
   }.set,
   $n = function (t, e, n) {
     var r,
       i = e.constructor
-    return (
-      i !== n &&
-        'function' == typeof i &&
-        (r = i.prototype) !== n.prototype &&
-        F(r) &&
-        Jn &&
-        Jn(t, r),
-      t
-    )
+    return i !== n && 'function' == typeof i && (r = i.prototype) !== n.prototype && F(r) && Jn && Jn(t, r), t
   },
   Zn = function (t, e, n, r, i, o) {
     var a = x[t],
@@ -2571,15 +2387,8 @@ var Xn = L(function (t) {
         (d || g) && (l('delete'), l('has'), i && l('get')),
         (g || p) && l(c),
         o && u.clear && delete u.clear
-    } else
-      (s = r.getConstructor(e, t, i, c)), ge(s.prototype, n), (Xn.NEED = !0)
-    return (
-      we(s, t),
-      (f[t] = s),
-      Pt(Pt.G + Pt.W + Pt.F * (s != a), f),
-      o || r.setStrong(s, t, i),
-      s
-    )
+    } else (s = r.getConstructor(e, t, i, c)), ge(s.prototype, n), (Xn.NEED = !0)
+    return we(s, t), (f[t] = s), Pt(Pt.G + Pt.W + Pt.F * (s != a), f), o || r.setStrong(s, t, i), s
   }
 Zn(
   'Map',
@@ -2595,18 +2404,13 @@ Zn(
     },
     set: function (t, e) {
       return Qn.def(zn(this, 'Map'), 0 === t ? 0 : t, e)
-    },
+    }
   },
   Qn,
   !0
 )
 function tr() {
-  for (
-    var t = 0;
-    t < 9007199254740991 && (!window || 'function' != typeof window.setTimeout);
-    t++
-  )
-    t--
+  for (var t = 0; t < 9007199254740991 && (!window || 'function' != typeof window.setTimeout); t++) t--
 }
 var er = (function (e) {
     function n(t) {
@@ -2633,16 +2437,14 @@ var er = (function (e) {
             : bytes.ReadyState.DEAD
         },
         enumerable: !0,
-        configurable: !0,
+        configurable: !0
       }),
       Object.defineProperty(n.prototype, 'url', {
         get: function () {
-          return this.singleSocket && this.singleSocket.url
-            ? this.singleSocket.url
-            : null
+          return this.singleSocket && this.singleSocket.url ? this.singleSocket.url : null
         },
         enumerable: !0,
-        configurable: !0,
+        configurable: !0
       }),
       (n.prototype.isOpen = function () {
         return this.readyState === bytes.ReadyState.OPEN
@@ -2654,32 +2456,19 @@ var er = (function (e) {
             switch (r.label) {
               case 0:
                 if (this.socketSelector.connecting)
-                  return (
-                    console.warn(
-                      'Call connect too fast, the socket is connecting!'
-                    ),
-                    [2]
-                  )
+                  return console.warn('Call connect too fast, the socket is connecting!'), [2]
                 if (
                   (this.killSocket(),
                   this.config.tag || (this.config.tag = this.getTag()),
                   !(t = this.getUrlList()) || 0 === t.length)
                 )
-                  return (
-                    console.error('Invalid url list!'),
-                    [2, Promise.reject('Invalid url list!')]
-                  )
+                  return console.error('Invalid url list!'), [2, Promise.reject('Invalid url list!')]
                 this.setupRespClazzMap(),
-                  this.config.debug &&
-                    console.log(this.config.tag + ' connecting...'),
+                  this.config.debug && console.log(this.config.tag + ' connecting...'),
                   this.dispatchEventWith('EVENT_CONNECTING'),
                   (r.label = 1)
               case 1:
-                return (
-                  r.trys.push([1, 3, , 4]),
-                  (e = this),
-                  [4, this.socketSelector.getSocket(t)]
-                )
+                return r.trys.push([1, 3, , 4]), (e = this), [4, this.socketSelector.getSocket(t)]
               case 2:
                 return (e.singleSocket = r.sent()), [2, this.onSocketSelected()]
               case 3:
@@ -2690,11 +2479,7 @@ var er = (function (e) {
                   n.code !== a.BREAK_BY_RESET)
                 )
                   throw n
-                return (
-                  this.config.debug &&
-                    console.warn(this.config.tag + ' Connect cancel!!'),
-                  [3, 4]
-                )
+                return this.config.debug && console.warn(this.config.tag + ' Connect cancel!!'), [3, 4]
               case 4:
                 return [2]
             }
@@ -2708,30 +2493,16 @@ var er = (function (e) {
             switch (r.label) {
               case 0:
                 if (this.socketSelector.connecting)
-                  return (
-                    console.warn(
-                      'Call sortLines too fast, the socket is connecting!'
-                    ),
-                    [2]
-                  )
+                  return console.warn('Call sortLines too fast, the socket is connecting!'), [2]
                 if (
                   (this.killSocket(),
                   this.config.tag || (this.config.tag = this.getTag()),
                   !(t = this.getUrlList()) || 0 === t.length)
                 )
-                  return (
-                    console.error('Invalid url list!'),
-                    [2, Promise.reject('Invalid url list!')]
-                  )
-                this.config.debug &&
-                  console.log(this.config.tag + ' connecting...'),
-                  (r.label = 1)
+                  return console.error('Invalid url list!'), [2, Promise.reject('Invalid url list!')]
+                this.config.debug && console.log(this.config.tag + ' connecting...'), (r.label = 1)
               case 1:
-                return (
-                  r.trys.push([1, 3, , 4]),
-                  (e = this),
-                  [4, this.socketSelector.getSocket(t, !0)]
-                )
+                return r.trys.push([1, 3, , 4]), (e = this), [4, this.socketSelector.getSocket(t, !0)]
               case 2:
                 return (
                   (e.singleSocket = r.sent()),
@@ -2740,17 +2511,8 @@ var er = (function (e) {
                   [2, this.sortedUrlList]
                 )
               case 3:
-                if (
-                  ((n = r.sent()),
-                  (this.singleSocket = null),
-                  n.code !== a.BREAK_BY_RESET)
-                )
-                  throw n
-                return (
-                  this.config.debug &&
-                    console.warn(this.config.tag + ' Connect cancel!!'),
-                  [3, 4]
-                )
+                if (((n = r.sent()), (this.singleSocket = null), n.code !== a.BREAK_BY_RESET)) throw n
+                return this.config.debug && console.warn(this.config.tag + ' Connect cancel!!'), [3, 4]
               case 4:
                 return [2]
             }
@@ -2769,9 +2531,7 @@ var er = (function (e) {
           return p(this, function (t) {
             switch (t.label) {
               case 0:
-                return this.socketSelector.connecting
-                  ? [4, this.socketSelector.reset()]
-                  : [3, 2]
+                return this.socketSelector.connecting ? [4, this.socketSelector.reset()] : [3, 2]
               case 1:
                 t.sent(),
                   this.config.debug && console.log(this.config.tag + ' close'),
@@ -2779,10 +2539,7 @@ var er = (function (e) {
                   (t.label = 2)
               case 2:
                 return (
-                  this.singleSocket &&
-                    (this.singleSocket.close(4033, 'kill socket'),
-                    (this.singleSocket = null)),
-                  [2]
+                  this.singleSocket && (this.singleSocket.close(4033, 'kill socket'), (this.singleSocket = null)), [2]
                 )
             }
           })
@@ -2797,8 +2554,7 @@ var er = (function (e) {
       (n.prototype.writeBytes = function (t) {
         this.isOpen()
           ? this.singleSocket.writeBytes(t)
-          : this.config.debug &&
-            console.warn(this.config.tag + ' is not open, cannot write bytes')
+          : this.config.debug && console.warn(this.config.tag + ' is not open, cannot write bytes')
       }),
       (n.prototype.customConfig = function () {}),
       (n.prototype.getTag = function () {
@@ -2847,9 +2603,7 @@ var er = (function (e) {
         this.printLog(e)
         var i = []
         this.pluginStack.forEach(function (t, e) {
-          t.doSend &&
-            'function' == typeof t.doSend &&
-            i.unshift(t.doSend.bind(t))
+          t.doSend && 'function' == typeof t.doSend && i.unshift(t.doSend.bind(t))
         }),
           i.forEach(function (t, i) {
             ;(n = t(e)) !== e && r.printLog(n, ' really')
@@ -2863,10 +2617,7 @@ var er = (function (e) {
             r = void 0
           t instanceof w
             ? ((n = t.cmdId), (r = t.seqNo))
-            : ((t.position = 0),
-              (n = t.readUnsignedInt()),
-              (t.position = 8),
-              (r = t.readUnsignedInt())),
+            : ((t.position = 0), (n = t.readUnsignedInt()), (t.position = 8), (r = t.readUnsignedInt())),
             console.log(
               '[' +
                 this.url +
@@ -2887,8 +2638,7 @@ var er = (function (e) {
       }),
       (e.prototype.removeAllPlugins = function () {
         this.pluginStack.forEach(function (t) {
-          t.onDestory && 'function' == typeof t.onDestory && t.onDestory(),
-            (t = null)
+          t.onDestory && 'function' == typeof t.onDestory && t.onDestory(), (t = null)
         }),
           (this.pluginStack = []),
           this.pipeEnd.appendPipeAt(this),
@@ -2936,12 +2686,7 @@ var er = (function (e) {
                 (this.socket.readyState === bytes.ReadyState.CONNECTING ||
                   this.socket.readyState === bytes.ReadyState.OPEN)
                   ? this.url === e
-                    ? (console.warn(
-                        'ReadyState is ' +
-                          this.socket.readyState +
-                          ', do nothing'
-                      ),
-                      [2, void 0])
+                    ? (console.warn('ReadyState is ' + this.socket.readyState + ', do nothing'), [2, void 0])
                     : (this.close(4033, 'reconnect to another url'), [2, r()])
                   : [2, r()]
               )
@@ -2957,12 +2702,10 @@ var er = (function (e) {
               : bytes.ReadyState.CLOSED
           },
           enumerable: !0,
-          configurable: !0,
+          configurable: !0
         }),
         (n.prototype.send = function (t) {
-          this.socket
-            ? this.socket.send(t)
-            : console.warn('Send before connect!')
+          this.socket ? this.socket.send(t) : console.warn('Send before connect!')
         }),
         (n.prototype.close = function (e, n) {
           if (this.socket)
@@ -2975,7 +2718,7 @@ var er = (function (e) {
                   (this._readyState = bytes.ReadyState.CLOSED),
                   this.pipeEvent('EVENT_CLOSE', {
                     code: e,
-                    reason: n,
+                    reason: n
                   }),
                   this.socket)
                 ) {
@@ -2993,7 +2736,7 @@ var er = (function (e) {
                   (this.socket = null),
                   this.pipeEvent('EVENT_CLOSE', {
                     code: e,
-                    reason: n,
+                    reason: n
                   })
             }
           else console.warn('Close before connect!')
@@ -3092,11 +2835,7 @@ rr('split', 2, function (t, e, n) {
         f,
         l,
         h = [],
-        p =
-          (t.ignoreCase ? 'i' : '') +
-          (t.multiline ? 'm' : '') +
-          (t.unicode ? 'u' : '') +
-          (t.sticky ? 'y' : ''),
+        p = (t.ignoreCase ? 'i' : '') + (t.multiline ? 'm' : '') + (t.unicode ? 'u' : '') + (t.sticky ? 'y' : ''),
         d = 0,
         y = void 0 === e ? 4294967295 : e >>> 0,
         g = new RegExp(t.source, p + 'g')
@@ -3109,8 +2848,7 @@ rr('split', 2, function (t, e, n) {
           !a &&
             c.length > 1 &&
             c[0].replace(s, function () {
-              for (l = 1; l < arguments.length - 2; l++)
-                void 0 === arguments[l] && (c[l] = void 0)
+              for (l = 1; l < arguments.length - 2; l++) void 0 === arguments[l] && (c[l] = void 0)
             }),
           c.length > 1 && c.index < n.length && o.apply(h, c.slice(1)),
           (f = c[0].length),
@@ -3120,10 +2858,7 @@ rr('split', 2, function (t, e, n) {
 
       )
         g.lastIndex === c.index && g.lastIndex++
-      return (
-        d === n.length ? (!f && g.test('')) || h.push('') : h.push(n.slice(d)),
-        h.length > y ? h.slice(0, y) : h
-      )
+      return d === n.length ? (!f && g.test('')) || h.push('') : h.push(n.slice(d)), h.length > y ? h.slice(0, y) : h
     }
   } else
     '0'.split(void 0, 0).length &&
@@ -3136,7 +2871,7 @@ rr('split', 2, function (t, e, n) {
         a = null == r ? void 0 : r[e]
       return void 0 !== a ? a.call(r, o, i) : n.call(String(o), r, i)
     },
-    n,
+    n
   ]
 })
 Pt(Pt.P, 'String', {
@@ -3147,7 +2882,7 @@ Pt(Pt.P, 'String', {
     if (r < 0 || r == 1 / 0) throw RangeError("Count can't be negative")
     for (; r > 0; (r >>>= 1) && (e += e)) 1 & r && (n += e)
     return n
-  },
+  }
 }),
   rr('replace', 2, function (t, e, n) {
     return [
@@ -3156,7 +2891,7 @@ Pt(Pt.P, 'String', {
           a = null == r ? void 0 : r[e]
         return void 0 !== a ? a.call(r, o, i) : n.call(String(o), r, i)
       },
-      n,
+      n
     ]
   })
 Zn(
@@ -3169,7 +2904,7 @@ Zn(
   {
     add: function (t) {
       return Qn.def(zn(this, 'Set'), (t = 0 === t ? 0 : t), t)
-    },
+    }
   },
   Qn
 )
@@ -3194,7 +2929,7 @@ for (
             return this._connecting
           },
           enumerable: !0,
-          configurable: !0,
+          configurable: !0
         }),
         (e.prototype.getSocket = function (t, e) {
           return (
@@ -3207,7 +2942,7 @@ for (
                     if (0 === t.length)
                       throw {
                         code: a.EMPTY_URL,
-                        msg: 'Empty urlList!',
+                        msg: 'Empty urlList!'
                       }
                     return (
                       (this.urlList = t),
@@ -3219,21 +2954,13 @@ for (
                         this.config.lineSelect.cache &&
                         (r &&
                           r !== n &&
-                          (this.sortedUrlList = this.cacheManager
-                            .getCache(r)
-                            .map(function (t) {
-                              return t.replace(':' + r, ':' + n)
-                            })),
-                        0 === this.sortedUrlList.length &&
-                          (this.sortedUrlList = this.cacheManager.getCache(n))),
+                          (this.sortedUrlList = this.cacheManager.getCache(r).map(function (t) {
+                            return t.replace(':' + r, ':' + n)
+                          })),
+                        0 === this.sortedUrlList.length && (this.sortedUrlList = this.cacheManager.getCache(n))),
                       0 === this.sortedUrlList.length
                         ? ((this.lastPromise = this.retryGetBestSocket()),
-                          this.cacheManager.setCache(
-                            n,
-                            this.sortedUrlList,
-                            this.config.lineSelect.cacheTime,
-                            e
-                          ))
+                          this.cacheManager.setCache(n, this.sortedUrlList, this.config.lineSelect.cacheTime, e))
                         : (this.lastPromise = this.retryOpenSocket()),
                       [4, this.lastPromise]
                     )
@@ -3256,10 +2983,7 @@ for (
                     (this._connecting = !1),
                     (e.label = 1)
                 case 1:
-                  return (
-                    e.trys.push([1, 4, , 5]),
-                    this.lastPromise ? [4, this.lastPromise] : [3, 3]
-                  )
+                  return e.trys.push([1, 4, , 5]), this.lastPromise ? [4, this.lastPromise] : [3, 3]
                 case 2:
                   e.sent(), (e.label = 3)
                 case 3:
@@ -3282,28 +3006,21 @@ for (
                     if (!this._connecting)
                       throw {
                         code: a.BREAK_BY_RESET,
-                        msg: 'Break by reset!',
+                        msg: 'Break by reset!'
                       }
                     e.label = 1
                   case 1:
-                    return (
-                      e.trys.push([1, 3, , 7]), [4, this.tryGetBestSocket()]
-                    )
+                    return e.trys.push([1, 3, , 7]), [4, this.tryGetBestSocket()]
                   case 2:
                     return [2, e.sent()]
                   case 3:
-                    return (
-                      e.sent(),
-                      t < this.config.lineSelect.repeat
-                        ? [4, this.retryGetBestSocket(t + 1)]
-                        : [3, 5]
-                    )
+                    return e.sent(), t < this.config.lineSelect.repeat ? [4, this.retryGetBestSocket(t + 1)] : [3, 5]
                   case 4:
                     return [2, e.sent()]
                   case 5:
                     throw {
                       code: a.REPEAT_TOO_MANY,
-                      msg: 'Repeat too many!',
+                      msg: 'Repeat too many!'
                     }
                   case 6:
                     return [3, 7]
@@ -3364,9 +3081,7 @@ for (
                               return (
                                 (i = this.socketFactory.createSocket()),
                                 (o = function (t) {
-                                  N.clearTimeout(e),
-                                    s.socketGrp.delete(i),
-                                    n(t.currentTarget)
+                                  N.clearTimeout(e), s.socketGrp.delete(i), n(t.currentTarget)
                                 }),
                                 i.once('EVENT_PONG', o, this),
                                 this.socketGrp.add(i),
@@ -3381,7 +3096,7 @@ for (
                                     s.socketGrp.delete(i),
                                     r({
                                       code: a.TIMEOUT,
-                                      msg: 'Select socket timeout!',
+                                      msg: 'Select socket timeout!'
                                     })
                                 }, this.config.lineSelect.duration)),
                                 [2]
@@ -3389,7 +3104,7 @@ for (
                           }
                         })
                       })
-                    }),
+                    })
                   ]
                 case 1:
                   return [2, n.sent()]
@@ -3411,27 +3126,20 @@ for (
                     if (!this._connecting)
                       throw {
                         code: a.BREAK_BY_RESET,
-                        msg: 'Break by reset!',
+                        msg: 'Break by reset!'
                       }
                     e.label = 1
                   case 1:
                     return (
-                      e.trys.push([1, 3, , 4]),
-                      [
-                        4,
-                        this.trySocket(
-                          this.sortedUrlList[t % this.sortedUrlList.length]
-                        ),
-                      ]
+                      e.trys.push([1, 3, , 4]), [4, this.trySocket(this.sortedUrlList[t % this.sortedUrlList.length])]
                     )
                   case 2:
                     return [2, e.sent()]
                   case 3:
-                    if ((e.sent(), t < this.config.lineSelect.repeat))
-                      return [2, this.retryOpenSocket(t + 1)]
+                    if ((e.sent(), t < this.config.lineSelect.repeat)) return [2, this.retryOpenSocket(t + 1)]
                     throw {
                       code: a.REPEAT_TOO_MANY,
-                      msg: 'Repeat too many!',
+                      msg: 'Repeat too many!'
                     }
                   case 4:
                     return [2]
@@ -3461,9 +3169,7 @@ for (
       return (
         (t.prototype.setCache = function (t, e, n, r) {
           void 0 === r && (r = !1),
-            r && e
-              ? this.cacheMap.set(t, new cr(e, n))
-              : this.cacheMap.has(t) || this.cacheMap.set(t, new cr(e, n))
+            r && e ? this.cacheMap.set(t, new cr(e, n)) : this.cacheMap.has(t) || this.cacheMap.set(t, new cr(e, n))
         }),
         (t.prototype.removeCache = function (t) {
           var e = this.cacheMap.get(t)
@@ -3471,11 +3177,7 @@ for (
         }),
         (t.prototype.getCache = function (t) {
           var e = this.cacheMap.get(t)
-          return void 0 === e
-            ? []
-            : e.isExpired()
-            ? (this.cacheMap.delete(t), [])
-            : e.urlList
+          return void 0 === e ? [] : e.isExpired() ? (this.cacheMap.delete(t), []) : e.urlList
         }),
         t
       )
@@ -3492,18 +3194,10 @@ for (
         }),
         (e.prototype.createSocket = function () {
           var t = new nr(this.config, WebSocket)
-          return (
-            t.appendPlugin(new bt()),
-            t.appendPlugin(new At(this.config)),
-            t.appendPlugin(new Tt(this.config)),
-            t
-          )
+          return t.appendPlugin(new bt()), t.appendPlugin(new At(this.config)), t.appendPlugin(new Tt(this.config)), t
         }),
         (e.prototype.appendPluginAfter = function () {
-          tr(),
-            this.singleSocket.appendPlugin(
-              new _t(this.config, this.sortedUrlList)
-            )
+          tr(), this.singleSocket.appendPlugin(new _t(this.config, this.sortedUrlList))
         }),
         e
       )
@@ -3554,8 +3248,7 @@ for (
           }),
           (e.prototype.removeRespClazz = function (t, e) {
             void 0 === e && (e = '_default_'),
-              this.dynRespClazzMapMap.has(e) &&
-                this.dynRespClazzMapMap.get(e).delete(t)
+              this.dynRespClazzMapMap.has(e) && this.dynRespClazzMapMap.get(e).delete(t)
           }),
           e
         )
@@ -3571,14 +3264,12 @@ for (
   gr < 9;
 
 )
-  (ar = x[vr[gr++]])
-    ? (K(ar.prototype, hr, !0), K(ar.prototype, pr, !0))
-    : (yr = !1)
+  (ar = x[vr[gr++]]) ? (K(ar.prototype, hr, !0), K(ar.prototype, pr, !0)) : (yr = !1)
 var Er = {
     ABV: dr,
     CONSTR: yr,
     TYPED: hr,
-    VIEW: pr,
+    VIEW: pr
   },
   wr = function (t) {
     if (void 0 === t) return 0
@@ -3593,7 +3284,7 @@ var Er = {
       Object.getOwnPropertyNames ||
       function (t) {
         return un(t, Tr)
-      },
+      }
   },
   Ar = function (t) {
     for (
@@ -3644,8 +3335,7 @@ var Er = {
           ? ((i = t != t ? 1 : 0), (r = c))
           : ((r = d(y(t) / g)),
             t * (o = p(2, -r)) < 1 && (r--, (o *= 2)),
-            (t += r + u >= 1 ? l / o : l * p(2, 1 - u)) * o >= 2 &&
-              (r++, (o /= 2)),
+            (t += r + u >= 1 ? l / o : l * p(2, 1 - u)) * o >= 2 && (r++, (o /= 2)),
             r + u >= c
               ? ((i = 0), (r = c))
               : r + u >= 1
@@ -3667,11 +3357,7 @@ var Er = {
         u = t[c--],
         l = 127 & u
       for (u >>= 7; s > 0; l = 256 * l + t[c], c--, s -= 8);
-      for (
-        r = l & ((1 << -s) - 1), l >>= -s, s += e;
-        s > 0;
-        r = 256 * r + t[c], c--, s -= 8
-      );
+      for (r = l & ((1 << -s) - 1), l >>= -s, s += e; s > 0; r = 256 * r + t[c], c--, s -= 8);
       if (0 === l) l = 1 - a
       else {
         if (l === o) return r ? NaN : u ? -f : f
@@ -3701,7 +3387,7 @@ var Er = {
       r(t[i], e, {
         get: function () {
           return this[n]
-        },
+        }
       })
     }
     function I(t, e, n, r) {
@@ -3715,8 +3401,7 @@ var Er = {
     function O(t, e, n, r, i, a) {
       var s = wr(+n)
       if (s + e > t[E]) throw u(o)
-      for (var c = t[v]._b, f = s + t[w], l = r(+i), h = 0; h < e; h++)
-        c[f + h] = l[a ? h : e - h - 1]
+      for (var c = t[v]._b, f = s + t[w], l = r(+i), h = 0; h < e; h++) c[f + h] = l[a ? h : e - h - 1]
     }
     if (Er.ABV) {
       if (
@@ -3756,7 +3441,7 @@ var Er = {
               },
               setUint8: function (t, e) {
                 B.call(this, t, (e << 24) >> 24)
-              },
+              }
             },
             !0
           )
@@ -3771,15 +3456,10 @@ var Er = {
           var r = t[E],
             i = Xt(e)
           if (i < 0 || i > r) throw u('Wrong offset!')
-          if (i + (n = void 0 === n ? r - i : Vt(n)) > r)
-            throw u('Wrong length!')
+          if (i + (n = void 0 === n ? r - i : Vt(n)) > r) throw u('Wrong length!')
           ;(this[v] = t), (this[w] = i), (this[E] = n)
         }),
-        D &&
-          (M(a, 'byteLength', '_l'),
-          M(s, 'buffer', '_b'),
-          M(s, 'byteLength', '_l'),
-          M(s, 'byteOffset', '_o')),
+        D && (M(a, 'byteLength', '_l'), M(s, 'buffer', '_b'), M(s, 'byteLength', '_l'), M(s, 'byteOffset', '_o')),
         ge(s[i], {
           getInt8: function (t) {
             return (I(this, 1, t)[0] << 24) >> 24
@@ -3830,13 +3510,9 @@ var Er = {
           },
           setFloat64: function (t, e) {
             O(this, 8, t, R, e, arguments[2])
-          },
+          }
         })
-    we(a, 'ArrayBuffer'),
-      we(s, 'DataView'),
-      K(s[i], Er.VIEW, !0),
-      (e.ArrayBuffer = a),
-      (e.DataView = s)
+    we(a, 'ArrayBuffer'), we(s, 'DataView'), K(s[i], Er.VIEW, !0), (e.ArrayBuffer = a), (e.DataView = s)
   }),
   mr =
     Array.isArray ||
@@ -3849,9 +3525,7 @@ var Er = {
       var e
       return (
         mr(t) &&
-          ('function' != typeof (e = t.constructor) ||
-            (e !== Array && !mr(e.prototype)) ||
-            (e = void 0),
+          ('function' != typeof (e = t.constructor) || (e !== Array && !mr(e.prototype)) || (e = void 0),
           F(e) && null === (e = e[Sr]) && (e = void 0)),
         void 0 === e ? Array : e
       )
@@ -3905,11 +3579,7 @@ var Er = {
         a = arguments.length > 2 ? arguments[2] : void 0,
         s = Math.min((void 0 === a ? r : nn(a, r)) - o, r - i),
         c = 1
-      for (
-        o < i && i < o + s && ((c = -1), (o += s - 1), (i += s - 1));
-        s-- > 0;
-
-      )
+      for (o < i && i < o + s && ((c = -1), (o += s - 1), (i += s - 1)); s-- > 0; )
         o in n ? (n[i] = n[o]) : delete n[i], (i += c), (o += c)
       return n
     },
@@ -4008,8 +3678,7 @@ var Er = {
           throw Y(t + ' is not a typed array!')
         },
         zt = function (t, e) {
-          if (!(E(t) && St in t))
-            throw Y('It is not a typed array constructor!')
+          if (!(E(t) && St in t)) throw Y('It is not a typed array constructor!')
           return new t(e)
         },
         Ht = function (t, e) {
@@ -4023,7 +3692,7 @@ var Er = {
           V(t, e, {
             get: function () {
               return this._d[n]
-            },
+            }
           })
         },
         Kt = function (t) {
@@ -4039,24 +3708,15 @@ var Er = {
             l = void 0 !== f,
             p = m(c)
           if (null != p && !T(p)) {
-            for (s = p.call(c), r = [], e = 0; !(o = s.next()).done; e++)
-              r.push(o.value)
+            for (s = p.call(c), r = [], e = 0; !(o = s.next()).done; e++) r.push(o.value)
             c = r
           }
-          for (
-            l && u > 2 && (f = a(f, arguments[2], 2)),
-              e = 0,
-              n = h(c.length),
-              i = zt(this, n);
-            n > e;
-            e++
-          )
+          for (l && u > 2 && (f = a(f, arguments[2], 2)), e = 0, n = h(c.length), i = zt(this, n); n > e; e++)
             i[e] = l ? f(c[e], e) : c[e]
           return i
         },
         Yt = function () {
-          for (var t = 0, e = arguments.length, n = zt(this, e); e > t; )
-            n[t] = arguments[t++]
+          for (var t = 0, e = arguments.length, n = zt(this, e); e > t; ) n[t] = arguments[t++]
           return n
         },
         qt =
@@ -4069,12 +3729,7 @@ var Er = {
         },
         $t = {
           copyWithin: function (t, e) {
-            return B.call(
-              Bt(this),
-              t,
-              e,
-              arguments.length > 2 ? arguments[2] : void 0
-            )
+            return B.call(Bt(this), t, e, arguments.length > 2 ? arguments[2] : void 0)
           },
           every: function (t) {
             return ot(Bt(this), t, arguments.length > 1 ? arguments[1] : void 0)
@@ -4083,10 +3738,7 @@ var Er = {
             return L.apply(Bt(this), arguments)
           },
           filter: function (t) {
-            return Ht(
-              this,
-              rt(Bt(this), t, arguments.length > 1 ? arguments[1] : void 0)
-            )
+            return Ht(this, rt(Bt(this), t, arguments.length > 1 ? arguments[1] : void 0))
           },
           find: function (t) {
             return at(Bt(this), t, arguments.length > 1 ? arguments[1] : void 0)
@@ -4119,11 +3771,7 @@ var Er = {
             return vt.apply(Bt(this), arguments)
           },
           reverse: function () {
-            for (
-              var t, e = Bt(this).length, n = Math.floor(e / 2), r = 0;
-              r < n;
-
-            )
+            for (var t, e = Bt(this).length, n = Math.floor(e / 2), r = 0; r < n; )
               (t = this[r]), (this[r++] = this[--e]), (this[e] = t)
             return this
           },
@@ -4142,7 +3790,7 @@ var Er = {
               n.byteOffset + i * n.BYTES_PER_ELEMENT,
               h((void 0 === e ? r : d(e, r)) - i)
             )
-          },
+          }
         },
         Zt = function (t, e) {
           return Ht(this, Tt.call(Bt(this), t, e))
@@ -4166,16 +3814,10 @@ var Er = {
           },
           values: function () {
             return lt.call(Bt(this))
-          },
+          }
         },
         ne = function (t, e) {
-          return (
-            E(t) &&
-            t[It] &&
-            'symbol' != typeof e &&
-            e in t &&
-            String(+e) == String(e)
-          )
+          return E(t) && t[It] && 'symbol' != typeof e && e in t && String(+e) == String(e)
         },
         re = function (t, e) {
           return ne(t, (e = y(e, !0))) ? c(2, t[e]) : j(t, e)
@@ -4193,7 +3835,7 @@ var Er = {
       Mt || ((z.f = re), (X.f = ie)),
         r(r.S + r.F * !Mt, 'Object', {
           getOwnPropertyDescriptor: re,
-          defineProperty: ie,
+          defineProperty: ie
         }),
         n(function () {
           _t.call({})
@@ -4209,7 +3851,7 @@ var Er = {
           set: te,
           constructor: function () {},
           toString: _t,
-          toLocaleString: Jt,
+          toLocaleString: Jt
         }),
         Qt(oe, 'buffer', 'b'),
         Qt(oe, 'byteOffset', 'o'),
@@ -4218,7 +3860,7 @@ var Er = {
         V(oe, mt, {
           get: function () {
             return this[It]
-          },
+          }
         }),
         (t.exports = function (t, o, a, c) {
           var f = t + ((c = !!c) ? 'Clamped' : '') + 'Array',
@@ -4241,13 +3883,10 @@ var Er = {
                 set: function (t) {
                   return (function (t, e, n) {
                     var r = t._d
-                    c &&
-                      (n =
-                        (n = Math.round(n)) < 0 ? 0 : n > 255 ? 255 : 255 & n),
-                      r.v[d](e * o + r.o, n, Ft)
+                    c && (n = (n = Math.round(n)) < 0 ? 0 : n > 255 ? 255 : 255 & n), r.v[d](e * o + r.o, n, Ft)
                   })(this, e, t)
                 },
-                enumerable: !0,
+                enumerable: !0
               })
             }
           T
@@ -4260,13 +3899,7 @@ var Er = {
                   d = 0,
                   g = 0
                 if (E(e)) {
-                  if (
-                    !(
-                      e instanceof tt ||
-                      'ArrayBuffer' == (l = v(e)) ||
-                      'SharedArrayBuffer' == l
-                    )
-                  )
+                  if (!(e instanceof tt || 'ArrayBuffer' == (l = v(e)) || 'SharedArrayBuffer' == l))
                     return It in e ? Wt(y, e) : Kt.call(y, e)
                   ;(i = e), (g = xt(n, o))
                   var w = e.byteLength
@@ -4282,7 +3915,7 @@ var Er = {
                     o: g,
                     l: a,
                     e: c,
-                    v: new et(i),
+                    v: new et(i)
                   });
                   d < c;
 
@@ -4305,9 +3938,7 @@ var Er = {
                 return (
                   s(t, y, f),
                   E(e)
-                    ? e instanceof tt ||
-                      'ArrayBuffer' == (i = v(e)) ||
-                      'SharedArrayBuffer' == i
+                    ? e instanceof tt || 'ArrayBuffer' == (i = v(e)) || 'SharedArrayBuffer' == i
                       ? void 0 !== r
                         ? new g(e, xt(n, o), r)
                         : void 0 !== n
@@ -4319,9 +3950,7 @@ var Er = {
                     : new g(p(e))
                 )
               })),
-              nt(w !== Function.prototype ? b(g).concat(b(w)) : b(g), function (
-                t
-              ) {
+              nt(w !== Function.prototype ? b(g).concat(b(w)) : b(g), function (t) {
                 t in y || u(y, t, g[t])
               }),
               (y.prototype = S),
@@ -4337,12 +3966,12 @@ var Er = {
               V(S, mt, {
                 get: function () {
                   return f
-                },
+                }
               }),
             (m[f] = y),
             r(r.G + r.W + r.F * (y != g), m),
             r(r.S, f, {
-              BYTES_PER_ELEMENT: o,
+              BYTES_PER_ELEMENT: o
             }),
             r(
               r.S +
@@ -4353,14 +3982,14 @@ var Er = {
               f,
               {
                 from: Kt,
-                of: Yt,
+                of: Yt
               }
             ),
             'BYTES_PER_ELEMENT' in S || u(S, 'BYTES_PER_ELEMENT', o),
             r(r.P, f, $t),
             C(f),
             r(r.P + r.F * Ct, f, {
-              set: te,
+              set: te
             }),
             r(r.P + r.F * !M, f, ee),
             S.toString != _t && (S.toString = _t),
@@ -4372,23 +4001,21 @@ var Er = {
                   }),
               f,
               {
-                slice: Zt,
+                slice: Zt
               }
             ),
             r(
               r.P +
                 r.F *
                   (n(function () {
-                    return (
-                      [1, 2].toLocaleString() != new y([1, 2]).toLocaleString()
-                    )
+                    return [1, 2].toLocaleString() != new y([1, 2]).toLocaleString()
                   }) ||
                     !n(function () {
                       S.toLocaleString.call([1, 2])
                     })),
               f,
               {
-                toLocaleString: Jt,
+                toLocaleString: Jt
               }
             ),
             (P[f] = M ? k : I),
@@ -4414,12 +4041,7 @@ var Or = '\t\n\v\f\r   ᠎             　\u2028\u2
     n && (r[n] = o), Pt(Pt.P + Pt.F * i, 'String', r)
   },
   Fr = (Dr.trim = function (t, e) {
-    return (
-      (t = String($e(t))),
-      1 & e && (t = t.replace(Nr, '')),
-      2 & e && (t = t.replace(Ur, '')),
-      t
-    )
+    return (t = String($e(t))), 1 & e && (t = t.replace(Nr, '')), 2 & e && (t = t.replace(Ur, '')), t
   }),
   Cr = Dr,
   Lr = _r.f,
@@ -4453,8 +4075,7 @@ var Or = '\t\n\v\f\r   ᠎             　\u2028\u2
           default:
             return +e
         }
-        for (var a, s = e.slice(2), c = 0, u = s.length; c < u; c++)
-          if ((a = s.charCodeAt(c)) < 48 || a > i) return NaN
+        for (var a, s = e.slice(2), c = 0, u = s.length; c < u; c++) if ((a = s.charCodeAt(c)) < 48 || a > i) return NaN
         return parseInt(s, r)
       }
     }
@@ -4488,7 +4109,7 @@ if (!zr(' 0o1') || !zr('0b1') || zr('+0x1')) {
   ;(zr.prototype = Hr), (Hr.constructor = zr), et(x, 'Number', zr)
 }
 Pt(Pt.G + Pt.W + Pt.F * !Er.ABV, {
-  DataView: br.DataView,
+  DataView: br.DataView
 }),
   Ir('Uint32', 4, function (t) {
     return function (e, n, r) {
@@ -4521,15 +4142,10 @@ function $r(t) {
     h = 0,
     p = Number.POSITIVE_INFINITY
   for (c = 0; c < l; ++c) t[c] > h && (h = t[c]), t[c] < p && (p = t[c])
-  for (
-    e = 1 << h, n = new (Jr ? Uint32Array : Array)(e), r = 1, i = 0, o = 2;
-    r <= h;
-
-  ) {
+  for (e = 1 << h, n = new (Jr ? Uint32Array : Array)(e), r = 1, i = 0, o = 2; r <= h; ) {
     for (c = 0; c < l; ++c)
       if (t[c] === r) {
-        for (a = 0, s = i, u = 0; u < r; ++u)
-          (a = (a << 1) | (1 & s)), (s >>= 1)
+        for (a = 0, s = i, u = 0; u < r; ++u) (a = (a << 1) | (1 & s)), (s >>= 1)
         for (f = (r << 16) | c, u = a; u < e; u += o) n[u] = f
         ++i
       }
@@ -4554,8 +4170,7 @@ function Zr(t, e) {
     this.i)
   ) {
     case ti:
-      ;(this.b = 32768),
-        (this.c = new (Jr ? Uint8Array : Array)(32768 + this.h + 258))
+      ;(this.b = 32768), (this.c = new (Jr ? Uint8Array : Array)(32768 + this.h + 258))
       break
     case ei:
       ;(this.b = 0),
@@ -4572,7 +4187,7 @@ var ti = 0,
   ei = 1,
   ni = {
     t: ti,
-    s: ei,
+    s: ei
   }
 Zr.prototype.k = function () {
   for (; !this.m; ) {
@@ -4587,18 +4202,14 @@ Zr.prototype.k = function () {
           a = qr,
           s = r.length,
           c = qr
-        if (((this.d = this.f = 0), n + 1 >= o))
-          throw Error('invalid uncompressed block header: LEN')
-        if (((a = e[n++] | (e[n++] << 8)), n + 1 >= o))
-          throw Error('invalid uncompressed block header: NLEN')
-        if (a === ~(e[n++] | (e[n++] << 8)))
-          throw Error('invalid uncompressed block header: length verify')
+        if (((this.d = this.f = 0), n + 1 >= o)) throw Error('invalid uncompressed block header: LEN')
+        if (((a = e[n++] | (e[n++] << 8)), n + 1 >= o)) throw Error('invalid uncompressed block header: NLEN')
+        if (a === ~(e[n++] | (e[n++] << 8))) throw Error('invalid uncompressed block header: length verify')
         if (n + a > e.length) throw Error('input buffer is broken')
         switch (this.i) {
           case ti:
             for (; i + a > r.length; ) {
-              if (((a -= c = s - i), Jr))
-                r.set(e.subarray(n, n + c), i), (i += c), (n += c)
+              if (((a -= c = s - i), Jr)) r.set(e.subarray(n, n + c), i), (i += c), (n += c)
               else for (; c--; ) r[i++] = e[n++]
               ;(this.b = i), (r = this.e()), (i = this.b)
             }
@@ -4606,7 +4217,7 @@ Zr.prototype.k = function () {
           case ei:
             for (; i + a > r.length; )
               r = this.e({
-                p: 2,
+                p: 2
               })
             break
           default:
@@ -4635,11 +4246,7 @@ Zr.prototype.k = function () {
           _ = qr
         for (_ = 0; _ < y; ++_) g[ai[_]] = _i(this, 3)
         if (!Jr) for (_ = y, y = g.length; _ < y; ++_) g[ai[_]] = 0
-        for (
-          u = $r(g), v = new (Jr ? Uint8Array : Array)(p + d), _ = 0, h = p + d;
-          _ < h;
-
-        )
+        for (u = $r(g), v = new (Jr ? Uint8Array : Array)(p + d), _ = 0, h = p + d; _ < h; )
           switch ((E = Ai(this, u))) {
             case 16:
               for (T = 3 + _i(this, 2); T--; ) v[_++] = w
@@ -4655,9 +4262,7 @@ Zr.prototype.k = function () {
             default:
               w = v[_++] = E
           }
-        ;(f = $r(Jr ? v.subarray(0, p) : v.slice(0, p))),
-          (l = $r(Jr ? v.subarray(p) : v.slice(p))),
-          this.j(f, l)
+        ;(f = $r(Jr ? v.subarray(0, p) : v.slice(0, p))), (l = $r(Jr ? v.subarray(p) : v.slice(p))), this.j(f, l)
         break
       default:
         throw Error('unknown BTYPE: ' + t)
@@ -4700,42 +4305,10 @@ var ri,
     227,
     258,
     258,
-    258,
+    258
   ],
   ci = Jr ? new Uint16Array(si) : si,
-  ui = [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    1,
-    1,
-    1,
-    2,
-    2,
-    2,
-    2,
-    3,
-    3,
-    3,
-    3,
-    4,
-    4,
-    4,
-    4,
-    5,
-    5,
-    5,
-    5,
-    0,
-    0,
-    0,
-  ],
+  ui = [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0, 0, 0],
   fi = Jr ? new Uint8Array(ui) : ui,
   li = [
     1,
@@ -4767,45 +4340,13 @@ var ri,
     8193,
     12289,
     16385,
-    24577,
+    24577
   ],
   hi = Jr ? new Uint16Array(li) : li,
-  pi = [
-    0,
-    0,
-    0,
-    0,
-    1,
-    1,
-    2,
-    2,
-    3,
-    3,
-    4,
-    4,
-    5,
-    5,
-    6,
-    6,
-    7,
-    7,
-    8,
-    8,
-    9,
-    9,
-    10,
-    10,
-    11,
-    11,
-    12,
-    12,
-    13,
-    13,
-  ],
+  pi = [0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13],
   di = Jr ? new Uint8Array(pi) : pi,
   yi = new (Jr ? Uint8Array : Array)(288)
-for (ri = 0, ii = yi.length; ri < ii; ++ri)
-  yi[ri] = 143 >= ri ? 8 : 255 >= ri ? 9 : 279 >= ri ? 7 : 8
+for (ri = 0, ii = yi.length; ri < ii; ++ri) yi[ri] = 143 >= ri ? 8 : 255 >= ri ? 9 : 279 >= ri ? 7 : 8
 var gi,
   vi,
   Ei = $r(yi),
@@ -4820,22 +4361,9 @@ function _i(t, e) {
   return (n = r & ((1 << e) - 1)), (t.f = r >>> e), (t.d = i - e), (t.a = a), n
 }
 function Ai(t, e) {
-  for (
-    var n,
-      r,
-      i = t.f,
-      o = t.d,
-      a = t.input,
-      s = t.a,
-      c = a.length,
-      u = e[0],
-      f = e[1];
-    o < f && !(s >= c);
-
-  )
+  for (var n, r, i = t.f, o = t.d, a = t.input, s = t.a, c = a.length, u = e[0], f = e[1]; o < f && !(s >= c); )
     (i |= a[s++] << o), (o += 8)
-  if ((r = (n = u[i & ((1 << f) - 1)]) >>> 16) > o)
-    throw Error('invalid code length: ' + r)
+  if ((r = (n = u[i & ((1 << f) - 1)]) >>> 16) > o) throw Error('invalid code length: ' + r)
   return (t.f = i >> r), (t.d = o - r), (t.a = s), 65535 & n
 }
 ;(Zr.prototype.j = function (t, e) {
@@ -4843,8 +4371,7 @@ function Ai(t, e) {
     r = this.b
   this.o = t
   for (var i, o, a, s, c = n.length - 258; 256 !== (i = Ai(this, t)); )
-    if (256 > i)
-      r >= c && ((this.b = r), (n = this.e()), (r = this.b)), (n[r++] = i)
+    if (256 > i) r >= c && ((this.b = r), (n = this.e()), (r = this.b)), (n[r++] = i)
     else
       for (
         s = ci[(o = i - 257)],
@@ -4889,8 +4416,7 @@ function Ai(t, e) {
       i = this.c
     if (Jr) n.set(i.subarray(32768, n.length))
     else for (t = 0, e = n.length; t < e; ++t) n[t] = i[t + 32768]
-    if ((this.g.push(n), (this.l += n.length), Jr))
-      i.set(i.subarray(r, r + 32768))
+    if ((this.g.push(n), (this.l += n.length), Jr)) i.set(i.subarray(r, r + 32768))
     else for (t = 0; 32768 > t; ++t) i[t] = i[r + t]
     return (this.b = 32768), i
   }),
@@ -4902,14 +4428,9 @@ function Ai(t, e) {
       o = this.input,
       a = this.c
     return (
-      t &&
-        ('number' == typeof t.p && (i = t.p),
-        'number' == typeof t.u && (i += t.u)),
+      t && ('number' == typeof t.p && (i = t.p), 'number' == typeof t.u && (i += t.u)),
       2 > i
-        ? (n =
-            (r = (((o.length - this.a) / this.o[2] / 2) * 258) | 0) < a.length
-              ? a.length + r
-              : a.length << 1)
+        ? (n = (r = (((o.length - this.a) / this.o[2] / 2) * 258) | 0) < a.length ? a.length + r : a.length << 1)
         : (n = a.length * i),
       Jr ? (e = new Uint8Array(n)).set(a) : (e = a),
       (this.c = e)
@@ -4925,10 +4446,8 @@ function Ai(t, e) {
       a = this.c,
       s = this.g,
       c = new (Jr ? Uint8Array : Array)(this.l + (this.b - 32768))
-    if (0 === s.length)
-      return Jr ? this.c.subarray(32768, this.b) : this.c.slice(32768, this.b)
-    for (e = 0, n = s.length; e < n; ++e)
-      for (r = 0, i = (t = s[e]).length; r < i; ++r) c[o++] = t[r]
+    if (0 === s.length) return Jr ? this.c.subarray(32768, this.b) : this.c.slice(32768, this.b)
+    for (e = 0, n = s.length; e < n; ++e) for (r = 0, i = (t = s[e]).length; r < i; ++r) c[o++] = t[r]
     for (e = 32768, n = this.b; e < n; ++e) c[o++] = a[e]
     return (this.g = []), (this.buffer = c)
   }),
@@ -4950,8 +4469,7 @@ var bi = (function () {
       switch (
         ((this.input = t),
         (this.a = 0),
-        (!e && (e = {})) ||
-          (e.index && (this.a = e.index), e.verify && (this.A = e.verify)),
+        (!e && (e = {})) || (e.index && (this.a = e.index), e.verify && (this.A = e.verify)),
         (n = t[this.a++]),
         (r = t[this.a++]),
         15 & n)
@@ -4962,14 +4480,13 @@ var bi = (function () {
         default:
           throw Error('unsupported compression method')
       }
-      if (0 != ((n << 8) + r) % 31)
-        throw Error('invalid fcheck flag:' + (((n << 8) + r) % 31))
+      if (0 != ((n << 8) + r) % 31) throw Error('invalid fcheck flag:' + (((n << 8) + r) % 31))
       if (32 & r) throw Error('fdict flag is not supported')
       this.q = new Zr(t, {
         index: this.a,
         bufferSize: e.bufferSize,
         bufferType: e.bufferType,
-        resize: e.resize,
+        resize: e.resize
       })
     }
     return (
@@ -4978,19 +4495,13 @@ var bi = (function () {
           e,
           n = this.input
         if (((t = this.q.k()), (this.a = this.q.a), this.A)) {
-          e =
-            ((n[this.a++] << 24) |
-              (n[this.a++] << 16) |
-              (n[this.a++] << 8) |
-              n[this.a++]) >>>
-            0
+          e = ((n[this.a++] << 24) | (n[this.a++] << 16) | (n[this.a++] << 8) | n[this.a++]) >>> 0
           var r = t
           if ('string' == typeof r) {
             var i,
               o,
               a = r.split('')
-            for (i = 0, o = a.length; i < o; i++)
-              a[i] = (255 & a[i].charCodeAt(0)) >>> 0
+            for (i = 0, o = a.length; i < o; i++) a[i] = (255 & a[i].charCodeAt(0)) >>> 0
             r = a
           }
           for (var s, c = 1, u = 0, f = r.length, l = 0; 0 < f; ) {
@@ -5000,8 +4511,7 @@ var bi = (function () {
             } while (--s)
             ;(c %= 65521), (u %= 65521)
           }
-          if (e !== ((u << 16) | c) >>> 0)
-            throw Error('invalid adler-32 checksum')
+          if (e !== ((u << 16) | c) >>> 0) throw Error('invalid adler-32 checksum')
         }
         return t
       }),
@@ -5011,7 +4521,7 @@ var bi = (function () {
   mi = 8
 bi.BufferType = {
   ADAPTIVE: ni.s,
-  BLOCK: ni.t,
+  BLOCK: ni.t
 }
 var Si = (function (t) {
     function e() {
@@ -5069,27 +4579,13 @@ var Si = (function (t) {
           if (t) {
             t.position = 0
             var e = t.readUnsignedInt()
-            if (
-              ((t.position = 0), 73730 === e && void 0 === this.userEncryptKey)
-            )
-              return (
-                (this.userEncryptKey = new egret.ByteArray(
-                  t.buffer.slice(49, 53)
-                )),
-                t
-              )
-            if (
-              this.encryptList.indexOf(e) >= 0 ||
-              (e >= 3718905856 && e <= 3718914047)
-            ) {
+            if (((t.position = 0), 73730 === e && void 0 === this.userEncryptKey))
+              return (this.userEncryptKey = new egret.ByteArray(t.buffer.slice(49, 53))), t
+            if (this.encryptList.indexOf(e) >= 0 || (e >= 3718905856 && e <= 3718914047)) {
               var n = this.$encrypt(t, this.userEncryptKey),
                 r = new egret.ByteArray()
               return (
-                r.writeUnsignedInt(301840),
-                r.writeUnsignedInt(n.length + 12),
-                r.writeUnsignedInt(0),
-                r.writeBytes(n),
-                r
+                r.writeUnsignedInt(301840), r.writeUnsignedInt(n.length + 12), r.writeUnsignedInt(0), r.writeBytes(n), r
               )
             }
           }
@@ -5133,20 +4629,14 @@ var Si = (function (t) {
         }),
         (e.prototype.$generateACKPacket = function (t, e) {
           var n = new egret.ByteArray(new ArrayBuffer(16))
-          n.writeUnsignedInt(301826),
-            n.writeUnsignedInt(16),
-            n.writeUnsignedInt(0),
-            (t.position = 0),
-            (e.position = 0)
+          n.writeUnsignedInt(301826), n.writeUnsignedInt(16), n.writeUnsignedInt(0), (t.position = 0), (e.position = 0)
           for (var r = 0; r < 4; r++) n.writeByte(t.readByte() ^ e.readByte())
           return (t.position = 0), (e.position = 0), (n.position = 0), n
         }),
         (e.prototype.$decrypt = function (t, e) {
           var n = new egret.ByteArray()
           ;(t.position = 0), (e.position = 0)
-          for (var r = 0; r < t.length; r++)
-            (e.position = r % e.length),
-              n.writeByte(t.readByte() ^ e.readByte())
+          for (var r = 0; r < t.length; r++) (e.position = r % e.length), n.writeByte(t.readByte() ^ e.readByte())
           return (n.position = 0), n
         }),
         (e.prototype.$encrypt = function (t, e) {
@@ -5166,7 +4656,7 @@ var Si = (function (t) {
         } catch (t) {
           return ''
         }
-      },
+      }
     }))
 var Di = ft('match'),
   Fi = ''.startsWith
@@ -5191,23 +4681,21 @@ Pt(
           if (or(e)) throw TypeError('String#' + n + " doesn't accept regex!")
           return String($e(t))
         })(this, t, 'startsWith'),
-        n = Vt(
-          Math.min(arguments.length > 1 ? arguments[1] : void 0, e.length)
-        ),
+        n = Vt(Math.min(arguments.length > 1 ? arguments[1] : void 0, e.length)),
         r = String(t)
       return Fi ? Fi.call(e, r, n) : e.slice(n, n + r.length) === r
-    },
+    }
   }
 ),
   Pt(Pt.S, 'Math', {
     trunc: function (t) {
       return (t > 0 ? Math.floor : Math.ceil)(t)
-    },
+    }
   }),
   Pt(Pt.S, 'Math', {
     clz32: function (t) {
       return (t >>>= 0) ? 31 - Math.floor(Math.log(t + 0.5) * Math.LOG2E) : 32
-    },
+    }
   })
 var Ci = Math.imul
 function Li(t) {
@@ -5217,10 +4705,7 @@ function Li(t) {
           return typeof t
         }
       : function (t) {
-          return t &&
-            'function' == typeof Symbol &&
-            t.constructor === Symbol &&
-            t !== Symbol.prototype
+          return t && 'function' == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype
             ? 'symbol'
             : typeof t
         })(t)
@@ -5238,12 +4723,8 @@ Pt(
         r = +e,
         i = 65535 & n,
         o = 65535 & r
-      return (
-        0 |
-        (i * o +
-          ((((65535 & (n >>> 16)) * o + i * (65535 & (r >>> 16))) << 16) >>> 0))
-      )
-    },
+      return 0 | (i * o + ((((65535 & (n >>> 16)) * o + i * (65535 & (r >>> 16))) << 16) >>> 0))
+    }
   }
 ),
   Ir('Float64', 8, function (t) {
@@ -5288,12 +4769,10 @@ var xi = (function (t) {
       o,
       a = !1
     if (
-      ((r =
-        'object' === ('undefined' == typeof window ? 'undefined' : Li(window))),
+      ((r = 'object' === ('undefined' == typeof window ? 'undefined' : Li(window))),
       (i = 'function' == typeof importScripts),
       (a =
-        'object' ===
-          ('undefined' == typeof process ? 'undefined' : Li(process)) &&
+        'object' === ('undefined' == typeof process ? 'undefined' : Li(process)) &&
         'function' == typeof require &&
         !r &&
         !i),
@@ -5328,10 +4807,7 @@ var xi = (function (t) {
           var n
           return (
             (n = ot(t)) ||
-              (s || (s = require('fs')),
-              c || (c = require('path')),
-              (t = c.normalize(t)),
-              (n = s.readFileSync(t))),
+              (s || (s = require('fs')), c || (c = require('path')), (t = c.normalize(t)), (n = s.readFileSync(t))),
             e ? n : n.toString()
           )
         }),
@@ -5339,8 +4815,7 @@ var xi = (function (t) {
           var n = t.read(e, !0)
           return n.buffer || (n = new Uint8Array(n)), y(n.buffer), n
         }),
-        process.argv.length > 1 &&
-          (t.thisProgram = process.argv[1].replace(/\\/g, '/')),
+        process.argv.length > 1 && (t.thisProgram = process.argv[1].replace(/\\/g, '/')),
         (t.arguments = process.argv.slice(2)),
         process.on('uncaughtException', function (t) {
           if (!(t instanceof Ut)) throw t
@@ -5375,11 +4850,8 @@ var xi = (function (t) {
           })
     else {
       if (!r && !i) throw new Error('environment detection error')
-      i
-        ? (u = self.location.href)
-        : document.currentScript && (u = document.currentScript.src),
-        (u =
-          0 !== u.indexOf('blob:') ? u.substr(0, u.lastIndexOf('/') + 1) : ''),
+      i ? (u = self.location.href) : document.currentScript && (u = document.currentScript.src),
+        (u = 0 !== u.indexOf('blob:') ? u.substr(0, u.lastIndexOf('/') + 1) : ''),
         (t.read = function (t) {
           try {
             var e = new XMLHttpRequest()
@@ -5394,12 +4866,7 @@ var xi = (function (t) {
           (t.readBinary = function (t) {
             try {
               var e = new XMLHttpRequest()
-              return (
-                e.open('GET', t, !1),
-                (e.responseType = 'arraybuffer'),
-                e.send(null),
-                new Uint8Array(e.response)
-              )
+              return e.open('GET', t, !1), (e.responseType = 'arraybuffer'), e.send(null), new Uint8Array(e.response)
             } catch (e) {
               var n = ot(t)
               if (n) return n
@@ -5411,8 +4878,7 @@ var xi = (function (t) {
           r.open('GET', t, !0),
             (r.responseType = 'arraybuffer'),
             (r.onload = function () {
-              if (200 == r.status || (0 == r.status && r.response))
-                e(r.response)
+              if (200 == r.status || (0 == r.status && r.response)) e(r.response)
               else {
                 var i = ot(t)
                 i ? e(i.buffer) : n()
@@ -5427,16 +4893,10 @@ var xi = (function (t) {
     }
     var f =
         t.print ||
-        ('undefined' != typeof console
-          ? console.log.bind(console)
-          : 'undefined' != typeof print
-          ? print
-          : null),
+        ('undefined' != typeof console ? console.log.bind(console) : 'undefined' != typeof print ? print : null),
       l =
         t.printErr ||
-        ('undefined' != typeof printErr
-          ? printErr
-          : ('undefined' != typeof console && console.warn.bind(console)) || f)
+        ('undefined' != typeof printErr ? printErr : ('undefined' != typeof console && console.warn.bind(console)) || f)
     for (e in n) n.hasOwnProperty(e) && (t[e] = n[e])
     n = void 0
     var h = 16
@@ -5444,9 +4904,7 @@ var xi = (function (t) {
       return e || (e = h), (t = Math.ceil(t / e) * e)
     }
     kt = Rt = St = function () {
-      Ct(
-        'cannot use the stack before compiled code is ready to run, and has provided stack access'
-      )
+      Ct('cannot use the stack before compiled code is ready to run, and has provided stack access')
     }
     var d = !1
     function y(t, e) {
@@ -5465,10 +4923,7 @@ var xi = (function (t) {
             r = St(t.length)
           return (
             (n = r),
-            y(
-              (e = t).length >= 0,
-              'writeArrayToMemory array must have a length (should be an array or typed array)'
-            ),
+            y((e = t).length >= 0, 'writeArrayToMemory array must have a length (should be an array or typed array)'),
             A.set(e, n),
             r
           )
@@ -5498,9 +4953,7 @@ var xi = (function (t) {
                       ;(e[n++] = 192 | (s >> 6)), (e[n++] = 128 | (63 & s))
                     } else if (s <= 65535) {
                       if (n + 2 >= o) break
-                      ;(e[n++] = 224 | (s >> 12)),
-                        (e[n++] = 128 | ((s >> 6) & 63)),
-                        (e[n++] = 128 | (63 & s))
+                      ;(e[n++] = 224 | (s >> 12)), (e[n++] = 128 | ((s >> 6) & 63)), (e[n++] = 128 | (63 & s))
                     } else if (s <= 2097151) {
                       if (n + 3 >= o) break
                       ;(e[n++] = 240 | (s >> 18)),
@@ -5529,29 +4982,20 @@ var xi = (function (t) {
             })(t, (e = St(n)), n)
           }
           return e
-        },
+        }
       },
       v = {
         string: g.stringToC,
-        array: g.arrayToC,
+        array: g.arrayToC
       }
     function E(t, e) {
       if (0 === e || !t) return ''
-      for (
-        var n, r = 0, i = 0;
-        y(t + i < B),
-          (r |= n = b[(t + i) >> 0]),
-          (0 != n || e) && (i++, !e || i != e);
-
-      );
+      for (var n, r = 0, i = 0; y(t + i < B), (r |= n = b[(t + i) >> 0]), (0 != n || e) && (i++, !e || i != e); );
       e || (e = i)
       var o = ''
       if (r < 128) {
         for (var a; e > 0; )
-          (a = String.fromCharCode.apply(
-            String,
-            b.subarray(t, t + Math.min(e, 1024))
-          )),
+          (a = String.fromCharCode.apply(String, b.subarray(t, t + Math.min(e, 1024)))),
             (o = o ? o + a : a),
             (t += 1024),
             (e -= 1024)
@@ -5579,17 +5023,8 @@ var xi = (function (t) {
                     : ((s = 63 & t[e++]),
                       (r =
                         248 == (252 & r)
-                          ? ((3 & r) << 24) |
-                            (i << 18) |
-                            (o << 12) |
-                            (a << 6) |
-                            s
-                          : ((1 & r) << 30) |
-                            (i << 24) |
-                            (o << 18) |
-                            (a << 12) |
-                            (s << 6) |
-                            (63 & t[e++])))),
+                          ? ((3 & r) << 24) | (i << 18) | (o << 12) | (a << 6) | s
+                          : ((1 & r) << 30) | (i << 24) | (o << 18) | (a << 12) | (s << 6) | (63 & t[e++])))),
               r < 65536)
             )
               c += String.fromCharCode(r)
@@ -5607,9 +5042,7 @@ var xi = (function (t) {
       return (
         (function t(e) {
           t.shown || (t.shown = {}), t.shown[e] || ((t.shown[e] = 1), l(e))
-        })(
-          'warning: build with  -s DEMANGLE_SUPPORT=1  to link in libcxxabi demangling'
-        ),
+        })('warning: build with  -s DEMANGLE_SUPPORT=1  to link in libcxxabi demangling'),
         t
       )
     }
@@ -5658,14 +5091,7 @@ var xi = (function (t) {
     var x = t.TOTAL_STACK || 5242880,
       B = t.TOTAL_MEMORY || 16777216
     if (
-      (B < x &&
-        l(
-          'TOTAL_MEMORY should be larger than TOTAL_STACK, was ' +
-            B +
-            '! (TOTAL_STACK=' +
-            x +
-            ')'
-        ),
+      (B < x && l('TOTAL_MEMORY should be larger than TOTAL_STACK, was ' + B + '! (TOTAL_STACK=' + x + ')'),
       y(
         'undefined' != typeof Int32Array &&
           'undefined' != typeof Float64Array &&
@@ -5674,13 +5100,7 @@ var xi = (function (t) {
         'JS engine does not provide full typed array support'
       ),
       t.buffer
-        ? y(
-            (_ = t.buffer).byteLength === B,
-            'provided buffer should be ' +
-              B +
-              ' bytes, but it is ' +
-              _.byteLength
-          )
+        ? y((_ = t.buffer).byteLength === B, 'provided buffer should be ' + B + ' bytes, but it is ' + _.byteLength)
         : (y((_ = new ArrayBuffer(B)).byteLength === B), (t.buffer = _)),
       (t.HEAP8 = A = new Int8Array(_)),
       (t.HEAP16 = m = new Int16Array(_)),
@@ -5779,10 +5199,9 @@ var xi = (function (t) {
         },
         ErrnoError: function () {
           J.error()
-        },
+        }
       }
-    ;(t.FS_createDataFile = J.createDataFile),
-      (t.FS_createPreloadedFile = J.createPreloadedFile)
+    ;(t.FS_createDataFile = J.createDataFile), (t.FS_createPreloadedFile = J.createPreloadedFile)
     var $ = 'data:application/octet-stream;base64,'
     function Z(t) {
       return String.prototype.startsWith ? t.startsWith($) : 0 === t.indexOf($)
@@ -5808,7 +5227,7 @@ var xi = (function (t) {
       },
       getZero: function () {
         y(0 === et.get())
-      },
+      }
     }
     function nt(t, e) {
       et.varargs = e
@@ -5821,18 +5240,10 @@ var xi = (function (t) {
           ((nt.buffers = [null, [], []]),
           (nt.printChar = function (t, e) {
             var n = nt.buffers[t]
-            y(n),
-              0 === e || 10 === e
-                ? ((1 === t ? f : l)(T(n, 0)), (n.length = 0))
-                : n.push(e)
+            y(n), 0 === e || 10 === e ? ((1 === t ? f : l)(T(n, 0)), (n.length = 0)) : n.push(e)
           }))
         for (var a = 0; a < i; a++) {
-          for (
-            var s = S[(r + 8 * a) >> 2], c = S[(r + (8 * a + 4)) >> 2], u = 0;
-            u < c;
-            u++
-          )
-            nt.printChar(n, b[s + u])
+          for (var s = S[(r + 8 * a) >> 2], c = S[(r + (8 * a + 4)) >> 2], u = 0; u < c; u++) nt.printChar(n, b[s + u])
           o += c
         }
         return o
@@ -5844,16 +5255,7 @@ var xi = (function (t) {
       for (var e = [], n = 0; n < t.length; n++) {
         var r = t[n]
         r > 255 &&
-          (y(
-            !1,
-            'Character code ' +
-              r +
-              ' (' +
-              String.fromCharCode(r) +
-              ')  at offset ' +
-              n +
-              ' not in 0x00-0xFF.'
-          ),
+          (y(!1, 'Character code ' + r + ' (' + String.fromCharCode(r) + ')  at offset ' + n + ' not in 0x00-0xFF.'),
           (r &= 255)),
           e.push(String.fromCharCode(r))
       }
@@ -5862,13 +5264,7 @@ var xi = (function (t) {
     ;(U = (function (t) {
       y(!M)
       var e = k
-      return (
-        y(
-          (k = (k + t + 15) & -16) < B,
-          'not enough memory for static allocation - increase TOTAL_MEMORY'
-        ),
-        e
-      )
+      return y((k = (k + t + 15) & -16) < B, 'not enough memory for static allocation - increase TOTAL_MEMORY'), e
     })(4)),
       (I = O = p(k)),
       (N = p((P = I + x))),
@@ -5885,15 +5281,12 @@ var xi = (function (t) {
               i,
               o,
               a,
-              s =
-                'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
+              s = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
               c = '',
               u = 0
             t = t.replace(/[^A-Za-z0-9\+\/\=]/g, '')
             do {
-              ;(e =
-                (s.indexOf(t.charAt(u++)) << 2) |
-                ((i = s.indexOf(t.charAt(u++))) >> 4)),
+              ;(e = (s.indexOf(t.charAt(u++)) << 2) | ((i = s.indexOf(t.charAt(u++))) >> 4)),
                 (n = ((15 & i) << 4) | ((o = s.indexOf(t.charAt(u++))) >> 2)),
                 (r = ((3 & o) << 6) | (a = s.indexOf(t.charAt(u++)))),
                 (c += String.fromCharCode(e)),
@@ -5915,12 +5308,7 @@ var xi = (function (t) {
             return new Uint8Array(e.buffer, e.byteOffset, e.byteLength)
           }
           try {
-            for (
-              var n = it(t), r = new Uint8Array(n.length), i = 0;
-              i < n.length;
-              ++i
-            )
-              r[i] = n.charCodeAt(i)
+            for (var n = it(t), r = new Uint8Array(n.length), i = 0; i < n.length; ++i) r[i] = n.charCodeAt(i)
             return r
           } catch (t) {
             throw new Error('Converting base64 string to bytes failed.')
@@ -5938,7 +5326,7 @@ var xi = (function (t) {
       Float32Array: Float32Array,
       Float64Array: Float64Array,
       NaN: NaN,
-      Infinity: 1 / 0,
+      Infinity: 1 / 0
     }),
       (t.asmLibraryArg = {
         abort: Ct,
@@ -5963,14 +5351,14 @@ var xi = (function (t) {
           l(
             "Invalid function pointer called with signature 'ii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)"
           ),
-            l('Build with ASSERTIONS=2 for more info.'),
+            l('Build with ASSERTIONS=2 for more gameInfo.'),
             Ct(t)
         },
         nullFunc_iiii: function (t) {
           l(
             "Invalid function pointer called with signature 'iiii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)"
           ),
-            l('Build with ASSERTIONS=2 for more info.'),
+            l('Build with ASSERTIONS=2 for more gameInfo.'),
             Ct(t)
         },
         invoke_ii: function (e, n) {
@@ -5993,12 +5381,7 @@ var xi = (function (t) {
         },
         ___lock: function () {},
         ___setErrNo: function (e) {
-          return (
-            t.___errno_location
-              ? (S[t.___errno_location() >> 2] = e)
-              : l('failed to set errno from JS'),
-            e
-          )
+          return t.___errno_location ? (S[t.___errno_location() >> 2] = e) : l('failed to set errno from JS'), e
         },
         ___syscall140: function (t, e) {
           et.varargs = e
@@ -6009,15 +5392,10 @@ var xi = (function (t) {
               o = et.get(),
               a = r
             return (
-              J.llseek(n, a, o),
-              (S[i >> 2] = n.position),
-              n.getdents && 0 === a && 0 === o && (n.getdents = null),
-              0
+              J.llseek(n, a, o), (S[i >> 2] = n.position), n.getdents && 0 === a && 0 === o && (n.getdents = null), 0
             )
           } catch (t) {
-            return (
-              (void 0 !== J && t instanceof J.ErrnoError) || Ct(t), -t.errno
-            )
+            return (void 0 !== J && t instanceof J.ErrnoError) || Ct(t), -t.errno
           }
         },
         ___syscall146: nt,
@@ -6026,9 +5404,7 @@ var xi = (function (t) {
           try {
             return 0
           } catch (t) {
-            return (
-              (void 0 !== J && t instanceof J.ErrnoError) || Ct(t), -t.errno
-            )
+            return (void 0 !== J && t instanceof J.ErrnoError) || Ct(t), -t.errno
           }
         },
         ___syscall6: function (t, e) {
@@ -6037,9 +5413,7 @@ var xi = (function (t) {
             var n = et.getStreamFromFD()
             return J.close(n), 0
           } catch (t) {
-            return (
-              (void 0 !== J && t instanceof J.ErrnoError) || Ct(t), -t.errno
-            )
+            return (void 0 !== J && t instanceof J.ErrnoError) || Ct(t), -t.errno
           }
         },
         ___unlock: function () {},
@@ -6058,7 +5432,7 @@ var xi = (function (t) {
         DYNAMICTOP_PTR: U,
         tempDoublePtr: tt,
         STACKTOP: O,
-        STACK_MAX: P,
+        STACK_MAX: P
       })
     var at = (function (t, e, n) {
         'use asm'
@@ -6178,13 +5552,7 @@ var xi = (function (t) {
               s = (e + 12) | 0
               y = r[s >> 0] | 0
               c = (e + 13) | 0
-              c =
-                bt(
-                  a[c >> 0] |
-                    (a[(c + 1) >> 0] << 8) |
-                    (a[(c + 2) >> 0] << 16) |
-                    (a[(c + 3) >> 0] << 24)
-                ) | 0
+              c = bt(a[c >> 0] | (a[(c + 1) >> 0] << 8) | (a[(c + 2) >> 0] << 16) | (a[(c + 3) >> 0] << 24)) | 0
               if ((y << 24) >> 24) {
                 o[e >> 2] = bt(c) | 0
                 y = 3
@@ -6197,10 +5565,7 @@ var xi = (function (t) {
               switch (((u >>> 0) % 3 | 0) & 3) {
                 case 1: {
                   t =
-                    ((((((((((a[(16 + (a[(e + 9) >> 0] | 0)) >> 0] | 0) +
-                      (a[(16 + (t & 255)) >> 0] | 0)) |
-                      0) *
-                      131) |
+                    ((((((((((a[(16 + (a[(e + 9) >> 0] | 0)) >> 0] | 0) + (a[(16 + (t & 255)) >> 0] | 0)) | 0) * 131) |
                       0) +
                       (a[(16 + (a[(e + 10) >> 0] | 0)) >> 0] | 0) +
                       (a[(16 + (a[(e + 11) >> 0] | 0)) >> 0] | 0)) |
@@ -6215,15 +5580,8 @@ var xi = (function (t) {
                   t =
                     ((u & 44879) +
                       2 +
-                      (((((a[(16 + ((t + (a[(e + 11) >> 0] | 0)) & 255)) >> 0] |
-                        0) +
-                        (a[
-                          (16 +
-                            (((a[(e + 10) >> 0] | 0) + (a[(e + 9) >> 0] | 0)) &
-                              255)) >>
-                            0
-                        ] |
-                          0)) |
+                      (((((a[(16 + ((t + (a[(e + 11) >> 0] | 0)) & 255)) >> 0] | 0) +
+                        (a[(16 + (((a[(e + 10) >> 0] | 0) + (a[(e + 9) >> 0] | 0)) & 255)) >> 0] | 0)) |
                         0) *
                         131) |
                         0)) |
@@ -6303,9 +5661,7 @@ var xi = (function (t) {
                     do {
                       i = (t + -12) | 0
                       l = (e + t) | 0
-                      r[l >> 0] =
-                        r[(336 + ((i >>> 0) % 67 | 0)) >> 0] ^
-                        (r[l >> 0] ^ r[(h + (i & 3)) >> 0])
+                      r[l >> 0] = r[(336 + ((i >>> 0) % 67 | 0)) >> 0] ^ (r[l >> 0] ^ r[(h + (i & 3)) >> 0])
                       t = (t + 1) | 0
                     } while ((t | 0) != (n | 0))
                   }
@@ -6342,12 +5698,7 @@ var xi = (function (t) {
                       t = 12
                       do {
                         l = (e + t) | 0
-                        r[l >> 0] =
-                          r[
-                            (16 +
-                              ((r[(h + (t & 3)) >> 0] ^ r[l >> 0]) & 255)) >>
-                              0
-                          ] | 0
+                        r[l >> 0] = r[(16 + ((r[(h + (t & 3)) >> 0] ^ r[l >> 0]) & 255)) >> 0] | 0
                         t = (t + 1) | 0
                       } while ((t | 0) != (n | 0))
                     }
@@ -6387,9 +5738,7 @@ var xi = (function (t) {
                       do {
                         i = (t + -12) | 0
                         l = (e + t) | 0
-                        r[l >> 0] =
-                          r[(336 + ((i >>> 0) % 67 | 0)) >> 0] ^
-                          (r[l >> 0] ^ r[(h + ((i + u) & 3)) >> 0])
+                        r[l >> 0] = r[(336 + ((i >>> 0) % 67 | 0)) >> 0] ^ (r[l >> 0] ^ r[(h + ((i + u) & 3)) >> 0])
                         t = (t + 1) | 0
                       } while ((t | 0) != (n | 0))
                     }
@@ -6430,10 +5779,7 @@ var xi = (function (t) {
                         f = (t + -12) | 0
                         l = (e + t) | 0
                         r[l >> 0] =
-                          r[
-                            (336 + (((((f + i) | 0) >>> 0) % 47 | 0) + u)) >> 0
-                          ] ^
-                          (r[l >> 0] ^ r[(h + (f & 3)) >> 0])
+                          r[(336 + (((((f + i) | 0) >>> 0) % 47 | 0) + u)) >> 0] ^ (r[l >> 0] ^ r[(h + (f & 3)) >> 0])
                         t = (t + 1) | 0
                       } while ((t | 0) != (n | 0))
                     }
@@ -6469,12 +5815,7 @@ var xi = (function (t) {
                   if (((i + -900) | 0) >>> 0 < 54) {
                     if (n >>> 0 > 12) {
                       t =
-                        (((((((((((((t * 131) & 255) + (f & 255)) & 255) * 13) |
-                          0) +
-                          (c & 255)) &
-                          255) *
-                          23) |
-                          0) +
+                        (((((((((((((t * 131) & 255) + (f & 255)) & 255) * 13) | 0) + (c & 255)) & 255) * 23) | 0) +
                           (u & 255)) &
                           255) *
                           41) &
@@ -6484,16 +5825,7 @@ var xi = (function (t) {
                         l = (e + u) | 0
                         f = t
                         t = r[l >> 0] | 0
-                        r[l >> 0] =
-                          t ^
-                          f ^
-                          r[
-                            (464 +
-                              ((((i + (a[(h + (u & 3)) >> 0] | 0)) | 0) >>> 0) %
-                                113 |
-                                0)) >>
-                              0
-                          ]
+                        r[l >> 0] = t ^ f ^ r[(464 + ((((i + (a[(h + (u & 3)) >> 0] | 0)) | 0) >>> 0) % 113 | 0)) >> 0]
                         u = (u + 1) | 0
                       } while ((u | 0) != (n | 0))
                     }
@@ -6608,9 +5940,7 @@ var xi = (function (t) {
                       t = 12
                       do {
                         h = (e + t) | 0
-                        r[h >> 0] =
-                          r[h >> 0] ^
-                          r[(l + ((((u + t) | 0) >>> 0) % 53 | 0)) >> 0]
+                        r[h >> 0] = r[h >> 0] ^ r[(l + ((((u + t) | 0) >>> 0) % 53 | 0)) >> 0]
                         t = (t + 1) | 0
                       } while ((t | 0) != (n | 0))
                     }
@@ -6657,16 +5987,7 @@ var xi = (function (t) {
                         l = (e + u) | 0
                         t =
                           (t & 255) ^
-                          (a[
-                            (464 +
-                              (((((s + (a[(h + (u & 3)) >> 0] | 0)) | 0) >>>
-                                0) %
-                                69 |
-                                0) +
-                                13)) >>
-                              0
-                          ] |
-                            0) ^
+                          (a[(464 + (((((s + (a[(h + (u & 3)) >> 0] | 0)) | 0) >>> 0) % 69 | 0) + 13)) >> 0] | 0) ^
                           (a[l >> 0] | 0)
                         r[l >> 0] = t
                         u = (u + 1) | 0
@@ -6709,8 +6030,7 @@ var xi = (function (t) {
                         c = r[s >> 0] ^ r[(h + (u & 3)) >> 0]
                         r[s >> 0] = c
                         t = (u + i) | 0
-                        if (!(u & 1))
-                          t = (336 + ((((t + 77) | 0) >>> 0) % 119 | 0)) | 0
+                        if (!(u & 1)) t = (336 + ((((t + 77) | 0) >>> 0) % 119 | 0)) | 0
                         else t = (464 + ((t + 11) & 127)) | 0
                         r[s >> 0] = r[t >> 0] ^ c
                         u = (u + 1) | 0
@@ -6752,10 +6072,7 @@ var xi = (function (t) {
                         f = (t + -12) | 0
                         l = (e + t) | 0
                         r[l >> 0] =
-                          r[
-                            (592 + (((((f >>> 3) & 7) | (f << 3)) + i) & 63)) >>
-                              0
-                          ] ^
+                          r[(592 + (((((f >>> 3) & 7) | (f << 3)) + i) & 63)) >> 0] ^
                           (r[l >> 0] ^ r[(h + (f & 3)) >> 0])
                         t = (t + 1) | 0
                       } while ((t | 0) != (n | 0))
@@ -7049,9 +6366,7 @@ var xi = (function (t) {
                   c = (n >>> 1) & 2
                   n = n >>> c
                   u = (n >>> 1) & 1
-                  u =
-                    o[(2128 + (((r | i | s | c | u) + (n >>> u)) << 2)) >> 2] |
-                    0
+                  u = o[(2128 + (((r | i | s | c | u) + (n >>> u)) << 2)) >> 2] | 0
                   n = u
                   c = u
                   u = ((o[(u + 4) >> 2] & -8) - f) | 0
@@ -7120,9 +6435,7 @@ var xi = (function (t) {
                           }
                         } else {
                           b = (i + 16) | 0
-                          o[
-                            ((o[b >> 2] | 0) == (c | 0) ? b : (i + 20) | 0) >> 2
-                          ] = n
+                          o[((o[b >> 2] | 0) == (c | 0) ? b : (i + 20) | 0) >> 2] = n
                           if (!n) break
                         }
                         o[(n + 24) >> 2] = i
@@ -7245,10 +6558,7 @@ var xi = (function (t) {
                     h = h >>> u
                     n = (h >>> 1) & 1
                     t = 0
-                    n =
-                      o[
-                        (2128 + (((a | s | c | u | n) + (h >>> n)) << 2)) >> 2
-                      ] | 0
+                    n = o[(2128 + (((a | s | c | u | n) + (h >>> n)) << 2)) >> 2] | 0
                   }
                   if (!n) {
                     c = t
@@ -7326,9 +6636,7 @@ var xi = (function (t) {
                         }
                       } else {
                         b = (a + 16) | 0
-                        o[
-                          ((o[b >> 2] | 0) == (c | 0) ? b : (a + 20) | 0) >> 2
-                        ] = e
+                        o[((o[b >> 2] | 0) == (c | 0) ? b : (a + 20) | 0) >> 2] = e
                         if (!e) break
                       }
                       o[(e + 24) >> 2] = a
@@ -7495,13 +6803,7 @@ var xi = (function (t) {
             return b | 0
           }
           t = o[566] | 0
-          if (
-            t | 0
-              ? ((l = o[564] | 0),
-                (y = (l + f) | 0),
-                (y >>> 0 <= l >>> 0) | (y >>> 0 > t >>> 0))
-              : 0
-          ) {
+          if (t | 0 ? ((l = o[564] | 0), (y = (l + f) | 0), (y >>> 0 <= l >>> 0) | (y >>> 0 > t >>> 0)) : 0) {
             b = 0
             p = m
             return b | 0
@@ -7514,12 +6816,7 @@ var xi = (function (t) {
                   r = 2272
                   while (1) {
                     y = o[r >> 2] | 0
-                    if (
-                      y >>> 0 <= n >>> 0
-                        ? ((y + (o[(r + 4) >> 2] | 0)) | 0) >>> 0 > n >>> 0
-                        : 0
-                    )
-                      break
+                    if (y >>> 0 <= n >>> 0 ? ((y + (o[(r + 4) >> 2] | 0)) | 0) >>> 0 > n >>> 0 : 0) break
                     t = o[(r + 8) >> 2] | 0
                     if (!t) {
                       E = 128
@@ -7529,10 +6826,7 @@ var xi = (function (t) {
                   e = (a - s) & i
                   if (e >>> 0 < 2147483647) {
                     t = Ot(e | 0) | 0
-                    if (
-                      (t | 0) ==
-                      (((o[r >> 2] | 0) + (o[(r + 4) >> 2] | 0)) | 0)
-                    ) {
+                    if ((t | 0) == (((o[r >> 2] | 0) + (o[(r + 4) >> 2] | 0)) | 0)) {
                       if ((t | 0) != (-1 | 0)) {
                         s = e
                         a = t
@@ -7554,21 +6848,14 @@ var xi = (function (t) {
                       ? ((e = n),
                         (g = o[575] | 0),
                         (v = (g + -1) | 0),
-                        (e =
-                          ((((v & e) | 0) == 0
-                            ? 0
-                            : (((v + e) & (0 - g)) - e) | 0) +
-                            f) |
-                          0),
+                        (e = ((((v & e) | 0) == 0 ? 0 : (((v + e) & (0 - g)) - e) | 0) + f) | 0),
                         (g = o[564] | 0),
                         (v = (e + g) | 0),
                         (e >>> 0 > h >>> 0) & (e >>> 0 < 2147483647))
                       : 0
                   ) {
                     y = o[566] | 0
-                    if (
-                      y | 0 ? (v >>> 0 <= g >>> 0) | (v >>> 0 > y >>> 0) : 0
-                    ) {
+                    if (y | 0 ? (v >>> 0 <= g >>> 0) | (v >>> 0 > y >>> 0) : 0) {
                       e = 0
                       break
                     }
@@ -7588,12 +6875,7 @@ var xi = (function (t) {
               do {
                 if ((E | 0) == 136) {
                   n = (0 - e) | 0
-                  if (
-                    !(
-                      (c >>> 0 > e >>> 0) &
-                      ((e >>> 0 < 2147483647) & ((r | 0) != (-1 | 0)))
-                    )
-                  )
+                  if (!((c >>> 0 > e >>> 0) & ((e >>> 0 < 2147483647) & ((r | 0) != (-1 | 0)))))
                     if ((r | 0) == (-1 | 0)) {
                       e = 0
                       break
@@ -7639,9 +6921,7 @@ var xi = (function (t) {
                 !(
                   ((_ | 0) == (-1 | 0)) |
                   (T ^ 1) |
-                  (((_ >>> 0 < v >>> 0) &
-                    (((_ | 0) != (-1 | 0)) & ((v | 0) != (-1 | 0)))) ^
-                    1)
+                  (((_ >>> 0 < v >>> 0) & (((_ | 0) != (-1 | 0)) & ((v | 0) != (-1 | 0)))) ^ 1)
                 ))
               : 0
           ) {
@@ -7669,11 +6949,7 @@ var xi = (function (t) {
                   else e = r
                 }
                 if (
-                  (
-                    (E | 0) == 154
-                      ? ((A = (e + 4) | 0), ((o[(e + 12) >> 2] & 8) | 0) == 0)
-                      : 0
-                  )
+                  ((E | 0) == 154 ? ((A = (e + 4) | 0), ((o[(e + 12) >> 2] & 8) | 0) == 0) : 0)
                     ? (a >>> 0 > u >>> 0) & (t >>> 0 <= u >>> 0)
                     : 0
                 ) {
@@ -7788,11 +7064,7 @@ var xi = (function (t) {
                             do {
                               if ((o[r >> 2] | 0) != (e | 0)) {
                                 b = (a + 16) | 0
-                                o[
-                                  ((o[b >> 2] | 0) == (e | 0)
-                                    ? b
-                                    : (a + 20) | 0) >> 2
-                                ] = t
+                                o[((o[b >> 2] | 0) == (e | 0) ? b : (a + 20) | 0) >> 2] = t
                                 if (!t) break n
                               } else {
                                 o[r >> 2] = t
@@ -7911,13 +7183,7 @@ var xi = (function (t) {
                 e = 2272
                 while (1) {
                   t = o[e >> 2] | 0
-                  if (
-                    t >>> 0 <= u >>> 0
-                      ? ((b = (t + (o[(e + 4) >> 2] | 0)) | 0),
-                        b >>> 0 > u >>> 0)
-                      : 0
-                  )
-                    break
+                  if (t >>> 0 <= u >>> 0 ? ((b = (t + (o[(e + 4) >> 2] | 0)) | 0), b >>> 0 > u >>> 0) : 0) break
                   e = o[(e + 8) >> 2] | 0
                 }
                 i = (b + -47) | 0
@@ -8657,11 +7923,7 @@ var xi = (function (t) {
               t = o[(wt() | 0) >> 2] | 0
               if (t)
                 do {
-                  if (
-                    (o[(t + 20) >> 2] | 0) >>> 0 >
-                    (o[(t + 28) >> 2] | 0) >>> 0
-                  )
-                    e = At(t) | 0 | e
+                  if ((o[(t + 20) >> 2] | 0) >>> 0 > (o[(t + 28) >> 2] | 0) >>> 0) e = At(t) | 0 | e
                   t = o[(t + 56) >> 2] | 0
                 } while ((t | 0) != 0)
               Tt()
@@ -8690,8 +7952,7 @@ var xi = (function (t) {
             r = o[n >> 2] | 0
             i = (t + 8) | 0
             a = o[i >> 2] | 0
-            if (r >>> 0 < a >>> 0)
-              Ct[o[(t + 40) >> 2] & 3](t, (r - a) | 0, 1) | 0
+            if (r >>> 0 < a >>> 0) Ct[o[(t + 40) >> 2] & 3](t, (r - a) | 0, 1) | 0
             o[(t + 16) >> 2] = 0
             o[s >> 2] = 0
             o[e >> 2] = 0
@@ -8712,13 +7973,7 @@ var xi = (function (t) {
         function St() {}
         function Rt(t) {
           t = t | 0
-          return (
-            ((t & 255) << 24) |
-            (((t >> 8) & 255) << 16) |
-            (((t >> 16) & 255) << 8) |
-            (t >>> 24) |
-            0
-          )
+          return ((t & 255) << 24) | (((t >> 8) & 255) << 16) | (((t >> 16) & 255) << 8) | (t >>> 24) | 0
         }
         function kt(t, e, n) {
           t = t | 0
@@ -8916,230 +8171,134 @@ var xi = (function (t) {
           setThrew: ot,
           stackAlloc: et,
           stackRestore: rt,
-          stackSave: nt,
+          stackSave: nt
         }
       })(t.asmGlobalArg, t.asmLibraryArg, _),
       st = at._Encrypt
     at._Encrypt = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         st.apply(null, arguments)
       )
     }
     var ct = at._Process
     at._Process = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         ct.apply(null, arguments)
       )
     }
     var ut = at.___errno_location
     at.___errno_location = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         ut.apply(null, arguments)
       )
     }
     var ft = at._fflush
     at._fflush = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         ft.apply(null, arguments)
       )
     }
     var lt = at._free
     at._free = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         lt.apply(null, arguments)
       )
     }
     var ht = at._llvm_bswap_i32
     at._llvm_bswap_i32 = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         ht.apply(null, arguments)
       )
     }
     var pt = at._malloc
     at._malloc = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         pt.apply(null, arguments)
       )
     }
     var dt = at._memmove
     at._memmove = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         dt.apply(null, arguments)
       )
     }
     var yt = at._sbrk
     at._sbrk = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         yt.apply(null, arguments)
       )
     }
     var gt = at.establishStackSpace
     at.establishStackSpace = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         gt.apply(null, arguments)
       )
     }
     var vt = at.getTempRet0
     at.getTempRet0 = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         vt.apply(null, arguments)
       )
     }
     var Et = at.setTempRet0
     at.setTempRet0 = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         Et.apply(null, arguments)
       )
     }
     var wt = at.setThrew
     at.setThrew = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         wt.apply(null, arguments)
       )
     }
     var Tt = at.stackAlloc
     at.stackAlloc = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         Tt.apply(null, arguments)
       )
     }
     var _t = at.stackRestore
     at.stackRestore = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         _t.apply(null, arguments)
       )
     }
     var At = at.stackSave
     at.stackSave = function () {
       return (
-        y(
-          W,
-          'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'
-        ),
-        y(
-          !0,
-          'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'
-        ),
+        y(W, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)'),
+        y(!0, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)'),
         At.apply(null, arguments)
       )
     }
@@ -9169,28 +8328,16 @@ var xi = (function (t) {
       ((t.asm = at),
       t.intArrayFromString ||
         (t.intArrayFromString = function () {
-          Ct(
-            "'intArrayFromString' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'intArrayFromString' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.intArrayToString ||
         (t.intArrayToString = function () {
-          Ct(
-            "'intArrayToString' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'intArrayToString' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       (t.ccall = function (e, n, r, i, o) {
         var a = (function (e) {
             var n = t['_' + e]
-            return (
-              y(
-                n,
-                'Cannot call unknown function ' +
-                  e +
-                  ', make sure it is exported'
-              ),
-              n
-            )
+            return y(n, 'Cannot call unknown function ' + e + ', make sure it is exported'), n
           })(e),
           s = [],
           c = 0
@@ -9210,27 +8357,19 @@ var xi = (function (t) {
       }),
       t.cwrap ||
         (t.cwrap = function () {
-          Ct(
-            "'cwrap' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'cwrap' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.setValue ||
         (t.setValue = function () {
-          Ct(
-            "'setValue' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'setValue' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.getValue ||
         (t.getValue = function () {
-          Ct(
-            "'getValue' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'getValue' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.allocate ||
         (t.allocate = function () {
-          Ct(
-            "'allocate' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'allocate' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.getMemory ||
         (t.getMemory = function () {
@@ -9240,147 +8379,99 @@ var xi = (function (t) {
         }),
       t.Pointer_stringify ||
         (t.Pointer_stringify = function () {
-          Ct(
-            "'Pointer_stringify' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'Pointer_stringify' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.AsciiToString ||
         (t.AsciiToString = function () {
-          Ct(
-            "'AsciiToString' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'AsciiToString' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.stringToAscii ||
         (t.stringToAscii = function () {
-          Ct(
-            "'stringToAscii' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'stringToAscii' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.UTF8ArrayToString ||
         (t.UTF8ArrayToString = function () {
-          Ct(
-            "'UTF8ArrayToString' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'UTF8ArrayToString' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.UTF8ToString ||
         (t.UTF8ToString = function () {
-          Ct(
-            "'UTF8ToString' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'UTF8ToString' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.stringToUTF8Array ||
         (t.stringToUTF8Array = function () {
-          Ct(
-            "'stringToUTF8Array' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'stringToUTF8Array' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.stringToUTF8 ||
         (t.stringToUTF8 = function () {
-          Ct(
-            "'stringToUTF8' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'stringToUTF8' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.lengthBytesUTF8 ||
         (t.lengthBytesUTF8 = function () {
-          Ct(
-            "'lengthBytesUTF8' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'lengthBytesUTF8' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.UTF16ToString ||
         (t.UTF16ToString = function () {
-          Ct(
-            "'UTF16ToString' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'UTF16ToString' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.stringToUTF16 ||
         (t.stringToUTF16 = function () {
-          Ct(
-            "'stringToUTF16' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'stringToUTF16' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.lengthBytesUTF16 ||
         (t.lengthBytesUTF16 = function () {
-          Ct(
-            "'lengthBytesUTF16' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'lengthBytesUTF16' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.UTF32ToString ||
         (t.UTF32ToString = function () {
-          Ct(
-            "'UTF32ToString' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'UTF32ToString' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.stringToUTF32 ||
         (t.stringToUTF32 = function () {
-          Ct(
-            "'stringToUTF32' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'stringToUTF32' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.lengthBytesUTF32 ||
         (t.lengthBytesUTF32 = function () {
-          Ct(
-            "'lengthBytesUTF32' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'lengthBytesUTF32' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.allocateUTF8 ||
         (t.allocateUTF8 = function () {
-          Ct(
-            "'allocateUTF8' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'allocateUTF8' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.stackTrace ||
         (t.stackTrace = function () {
-          Ct(
-            "'stackTrace' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'stackTrace' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.addOnPreRun ||
         (t.addOnPreRun = function () {
-          Ct(
-            "'addOnPreRun' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'addOnPreRun' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.addOnInit ||
         (t.addOnInit = function () {
-          Ct(
-            "'addOnInit' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'addOnInit' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.addOnPreMain ||
         (t.addOnPreMain = function () {
-          Ct(
-            "'addOnPreMain' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'addOnPreMain' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.addOnExit ||
         (t.addOnExit = function () {
-          Ct(
-            "'addOnExit' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'addOnExit' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.addOnPostRun ||
         (t.addOnPostRun = function () {
-          Ct(
-            "'addOnPostRun' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'addOnPostRun' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.writeStringToMemory ||
         (t.writeStringToMemory = function () {
-          Ct(
-            "'writeStringToMemory' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'writeStringToMemory' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.writeArrayToMemory ||
         (t.writeArrayToMemory = function () {
-          Ct(
-            "'writeArrayToMemory' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'writeArrayToMemory' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.writeAsciiToMemory ||
         (t.writeAsciiToMemory = function () {
-          Ct(
-            "'writeAsciiToMemory' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'writeAsciiToMemory' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.addRunDependency ||
         (t.addRunDependency = function () {
@@ -9396,15 +8487,11 @@ var xi = (function (t) {
         }),
       t.ENV ||
         (t.ENV = function () {
-          Ct(
-            "'ENV' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'ENV' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.FS ||
         (t.FS = function () {
-          Ct(
-            "'FS' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'FS' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.FS_createFolder ||
         (t.FS_createFolder = function () {
@@ -9456,200 +8543,137 @@ var xi = (function (t) {
         }),
       t.GL ||
         (t.GL = function () {
-          Ct(
-            "'GL' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'GL' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.staticAlloc ||
         (t.staticAlloc = function () {
-          Ct(
-            "'staticAlloc' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'staticAlloc' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.dynamicAlloc ||
         (t.dynamicAlloc = function () {
-          Ct(
-            "'dynamicAlloc' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'dynamicAlloc' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.warnOnce ||
         (t.warnOnce = function () {
-          Ct(
-            "'warnOnce' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'warnOnce' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.loadDynamicLibrary ||
         (t.loadDynamicLibrary = function () {
-          Ct(
-            "'loadDynamicLibrary' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'loadDynamicLibrary' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.loadWebAssemblyModule ||
         (t.loadWebAssemblyModule = function () {
-          Ct(
-            "'loadWebAssemblyModule' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'loadWebAssemblyModule' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.getLEB ||
         (t.getLEB = function () {
-          Ct(
-            "'getLEB' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'getLEB' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.getFunctionTables ||
         (t.getFunctionTables = function () {
-          Ct(
-            "'getFunctionTables' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'getFunctionTables' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.alignFunctionTables ||
         (t.alignFunctionTables = function () {
-          Ct(
-            "'alignFunctionTables' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'alignFunctionTables' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.registerFunctions ||
         (t.registerFunctions = function () {
-          Ct(
-            "'registerFunctions' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'registerFunctions' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.addFunction ||
         (t.addFunction = function () {
-          Ct(
-            "'addFunction' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'addFunction' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.removeFunction ||
         (t.removeFunction = function () {
-          Ct(
-            "'removeFunction' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'removeFunction' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.getFuncWrapper ||
         (t.getFuncWrapper = function () {
-          Ct(
-            "'getFuncWrapper' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'getFuncWrapper' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.prettyPrint ||
         (t.prettyPrint = function () {
-          Ct(
-            "'prettyPrint' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'prettyPrint' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.makeBigInt ||
         (t.makeBigInt = function () {
-          Ct(
-            "'makeBigInt' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'makeBigInt' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.dynCall ||
         (t.dynCall = function () {
-          Ct(
-            "'dynCall' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'dynCall' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.getCompilerSetting ||
         (t.getCompilerSetting = function () {
-          Ct(
-            "'getCompilerSetting' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'getCompilerSetting' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.stackSave ||
         (t.stackSave = function () {
-          Ct(
-            "'stackSave' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'stackSave' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.stackRestore ||
         (t.stackRestore = function () {
-          Ct(
-            "'stackRestore' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'stackRestore' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.stackAlloc ||
         (t.stackAlloc = function () {
-          Ct(
-            "'stackAlloc' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'stackAlloc' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.establishStackSpace ||
         (t.establishStackSpace = function () {
-          Ct(
-            "'establishStackSpace' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'establishStackSpace' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.print ||
         (t.print = function () {
-          Ct(
-            "'print' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'print' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.printErr ||
         (t.printErr = function () {
-          Ct(
-            "'printErr' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'printErr' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.intArrayFromBase64 ||
         (t.intArrayFromBase64 = function () {
-          Ct(
-            "'intArrayFromBase64' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'intArrayFromBase64' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.tryParseAsDataURI ||
         (t.tryParseAsDataURI = function () {
-          Ct(
-            "'tryParseAsDataURI' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-          )
+          Ct("'tryParseAsDataURI' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
         }),
       t.ALLOC_NORMAL ||
         Object.defineProperty(t, 'ALLOC_NORMAL', {
           get: function () {
-            Ct(
-              "'ALLOC_NORMAL' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-            )
-          },
+            Ct("'ALLOC_NORMAL' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
+          }
         }),
       t.ALLOC_STACK ||
         Object.defineProperty(t, 'ALLOC_STACK', {
           get: function () {
-            Ct(
-              "'ALLOC_STACK' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-            )
-          },
+            Ct("'ALLOC_STACK' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
+          }
         }),
       t.ALLOC_STATIC ||
         Object.defineProperty(t, 'ALLOC_STATIC', {
           get: function () {
-            Ct(
-              "'ALLOC_STATIC' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-            )
-          },
+            Ct("'ALLOC_STATIC' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
+          }
         }),
       t.ALLOC_DYNAMIC ||
         Object.defineProperty(t, 'ALLOC_DYNAMIC', {
           get: function () {
-            Ct(
-              "'ALLOC_DYNAMIC' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-            )
-          },
+            Ct("'ALLOC_DYNAMIC' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
+          }
         }),
       t.ALLOC_NONE ||
         Object.defineProperty(t, 'ALLOC_NONE', {
           get: function () {
-            Ct(
-              "'ALLOC_NONE' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)"
-            )
-          },
+            Ct("'ALLOC_NONE' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)")
+          }
         }),
       q)
     )
-      if (
-        (Z(q) || ((mt = q), (q = t.locateFile ? t.locateFile(mt, u) : u + mt)),
-        a || o)
-      ) {
+      if ((Z(q) || ((mt = q), (q = t.locateFile ? t.locateFile(mt, u) : u + mt)), a || o)) {
         var Mt = t.readBinary(q)
         b.set(Mt, 8)
       } else {
@@ -9669,29 +8693,21 @@ var xi = (function (t) {
                 (G = setInterval(function () {
                   if (d) return clearInterval(G), void (G = null)
                   var t = !1
-                  for (var e in Y)
-                    t || ((t = !0), l('still waiting on run dependencies:')),
-                      l('dependency: ' + e)
+                  for (var e in Y) t || ((t = !0), l('still waiting on run dependencies:')), l('dependency: ' + e)
                   t && l('(end of list)')
                 }, 1e4)))
             : l('warning: run dependency added without ID')
         var Ot = function (e) {
             e.byteLength && (e = new Uint8Array(e))
             for (var n = 0; n < e.length; n++)
-              y(
-                0 === b[8 + n],
-                "area for memory initializer should not have been touched before it's loaded"
-              )
+              y(0 === b[8 + n], "area for memory initializer should not have been touched before it's loaded")
             b.set(e, 8),
-              t.memoryInitializerRequest &&
-                delete t.memoryInitializerRequest.response,
+              t.memoryInitializerRequest && delete t.memoryInitializerRequest.response,
               (function (e) {
                 if (
                   (Q--,
                   t.monitorRunDependencies && t.monitorRunDependencies(Q),
-                  e
-                    ? (y(Y[e]), delete Y[e])
-                    : l('warning: run dependency removed without ID'),
+                  e ? (y(Y[e]), delete Y[e]) : l('warning: run dependency removed without ID'),
                   0 == Q && (null !== G && (clearInterval(G), (G = null)), K))
                 ) {
                   var n = K
@@ -9727,9 +8743,7 @@ var xi = (function (t) {
         } else It()
       }
     function Ut(t) {
-      ;(this.name = 'ExitStatus'),
-        (this.message = 'Program terminated with exit(' + t + ')'),
-        (this.status = t)
+      ;(this.name = 'ExitStatus'), (this.message = 'Program terminated with exit(' + t + ')'), (this.status = t)
     }
     function Dt(e) {
       function n() {
@@ -9747,11 +8761,7 @@ var xi = (function (t) {
             ),
             (function () {
               if ((C(), t.postRun))
-                for (
-                  'function' == typeof t.postRun && (t.postRun = [t.postRun]);
-                  t.postRun.length;
-
-                )
+                for ('function' == typeof t.postRun && (t.postRun = [t.postRun]); t.postRun.length; )
                   (e = t.postRun.shift()), j.unshift(e)
               var e
               X(j)
@@ -9764,11 +8774,7 @@ var xi = (function (t) {
           (R[(P >> 2) - 2] = 2310721022),
           (function () {
             if (t.preRun)
-              for (
-                'function' == typeof t.preRun && (t.preRun = [t.preRun]);
-                t.preRun.length;
-
-              )
+              for ('function' == typeof t.preRun && (t.preRun = [t.preRun]); t.preRun.length; )
                 (e = t.preRun.shift()), z.unshift(e)
             var e
             X(z)
@@ -9794,9 +8800,7 @@ var xi = (function (t) {
       (t.run = Dt)
     var Ft = []
     function Ct(e) {
-      t.onAbort && t.onAbort(e),
-        void 0 !== e ? (f(e), l(e), (e = JSON.stringify(e))) : (e = ''),
-        (d = !0)
+      t.onAbort && t.onAbort(e), void 0 !== e ? (f(e), l(e), (e = JSON.stringify(e))) : (e = ''), (d = !0)
       var n = 'abort(' + e + ') at ' + F()
       throw (
         (Ft &&
@@ -9807,12 +8811,7 @@ var xi = (function (t) {
       )
     }
     if (((t.abort = Ct), t.preInit))
-      for (
-        'function' == typeof t.preInit && (t.preInit = [t.preInit]);
-        t.preInit.length > 0;
-
-      )
-        t.preInit.pop()()
+      for ('function' == typeof t.preInit && (t.preInit = [t.preInit]); t.preInit.length > 0; ) t.preInit.pop()()
     return (t.noExitRuntime = !0), Dt(), t
   })(),
   Bi = (function (t) {
@@ -9829,9 +8828,7 @@ var xi = (function (t) {
           (n.broadcastDecryptKey = 0),
           (n.userDecryptKey = 0),
           (n.userEncryptKey = 0),
-          (n.jsDecryptKey = new egret.ByteArray(
-            new Uint8Array([90, 191, 82, 114]).buffer
-          ))),
+          (n.jsDecryptKey = new egret.ByteArray(new Uint8Array([90, 191, 82, 114]).buffer))),
         n
       )
     }
@@ -9844,35 +8841,17 @@ var xi = (function (t) {
           switch (((t.position = 0), e)) {
             case 73730:
             case 73986:
-              return (
-                (this.userEncryptKey = new egret.ByteArray(
-                  t.buffer.slice(49, 53)
-                ).readUnsignedInt()),
-                t
-              )
+              return (this.userEncryptKey = new egret.ByteArray(t.buffer.slice(49, 53)).readUnsignedInt()), t
             case 65538:
             case 65794:
             case 69634:
             case 69890:
-              return (
-                (this.userEncryptKey = new egret.ByteArray(
-                  t.buffer.slice(42, 46)
-                ).readUnsignedInt()),
-                t
-              )
+              return (this.userEncryptKey = new egret.ByteArray(t.buffer.slice(42, 46)).readUnsignedInt()), t
             case 45057:
             case 45056:
-              return (
-                (this.userEncryptKey = new egret.ByteArray(
-                  t.buffer.slice(47, 51)
-                ).readUnsignedInt()),
-                t
-              )
+              return (this.userEncryptKey = new egret.ByteArray(t.buffer.slice(47, 51)).readUnsignedInt()), t
           }
-          if (
-            this.encryptList.indexOf(e) > -1 ||
-            (e >= 3718905856 && e <= 3718914047)
-          ) {
+          if (this.encryptList.indexOf(e) > -1 || (e >= 3718905856 && e <= 3718914047)) {
             var n = t.length,
               r = zi(n + 12),
               i = new Uint8Array(n + 12),
@@ -9881,24 +8860,8 @@ var xi = (function (t) {
             xi.ccall(
               'Encrypt',
               'number',
-              [
-                'number',
-                'number',
-                'number',
-                'number',
-                'number',
-                'number',
-                'number',
-              ],
-              [
-                this.socketId,
-                r,
-                n,
-                n + 12,
-                this.userEncryptKey,
-                this.userDecryptKey,
-                this.broadcastDecryptKey,
-              ]
+              ['number', 'number', 'number', 'number', 'number', 'number', 'number'],
+              [this.socketId, r, n, n + 12, this.userEncryptKey, this.userDecryptKey, this.broadcastDecryptKey]
             )
             var a = Xi(r, n + 12).slice(0),
               s = new egret.ByteArray(a)
@@ -9920,14 +8883,7 @@ var xi = (function (t) {
           'Process',
           'number',
           ['number', 'number', 'number', 'number', 'number', 'number'],
-          [
-            this.socketId,
-            n,
-            e,
-            this.userEncryptKey,
-            this.userDecryptKey,
-            this.broadcastDecryptKey,
-          ]
+          [this.socketId, n, e, this.userEncryptKey, this.userDecryptKey, this.broadcastDecryptKey]
         )
         switch (o) {
           case Ri:
@@ -9936,9 +8892,7 @@ var xi = (function (t) {
               s = (function (t, e) {
                 var n = new egret.ByteArray()
                 ;(t.position = 0), (e.position = 0)
-                for (var r = 0; r < t.length; r++)
-                  (e.position = r % e.length),
-                    n.writeByte(t.readByte() ^ e.readByte())
+                for (var r = 0; r < t.length; r++) (e.position = r % e.length), n.writeByte(t.readByte() ^ e.readByte())
                 return (n.position = 0), n
               })(new egret.ByteArray(a), this.jsDecryptKey),
               c = new _(s.readUnsignedInt(), s)
@@ -9948,8 +8902,7 @@ var xi = (function (t) {
             var u = Xi(n, 20).slice(0, 16),
               f = Xi(n, 20).slice(16, 20),
               l = new egret.ByteArray(u)
-            ;(this.userEncryptKey = new egret.ByteArray(f).readUnsignedInt()),
-              this.socket.writeBytes(l)
+            ;(this.userEncryptKey = new egret.ByteArray(f).readUnsignedInt()), this.socket.writeBytes(l)
             break
           case Ii:
             var h = Xi(n, 4)
@@ -10008,18 +8961,14 @@ var Vi = (function (t) {
         t === r &&
           (257 === e.respId
             ? (n.stopPropagation(), this.answerServerQuestion(e))
-            : this.config.qna.aliveList.indexOf(e.respId) >= 0 &&
-              this.replyKeepAlive(e.seqNo))
+            : this.config.qna.aliveList.indexOf(e.respId) >= 0 && this.replyKeepAlive(e.seqNo))
       }),
       (e.prototype.answerServerQuestion = function (t) {
         var e,
           n = new Vi(t.respId, t.bytes)
         switch (n.question) {
           case Hi:
-            e =
-              (navigator.userAgent || navigator.vendor || window.opera) +
-              ';' +
-              this.config.qna.version
+            e = (navigator.userAgent || navigator.vendor || window.opera) + ';' + this.config.qna.version
             break
           case Qi:
             e = window.location.hostname
@@ -10030,10 +8979,7 @@ var Vi = (function (t) {
           case ji:
           case Wi:
           default:
-            e =
-              n.question >= Ki && n.question <= Yi
-                ? '' + 8 * n.question
-                : 'NO_ANSWER'
+            e = n.question >= Ki && n.question <= Yi ? '' + 8 * n.question : 'NO_ANSWER'
         }
         this.socket.writeBytes(
           O(258, function (t) {
@@ -10056,15 +9002,10 @@ var Vi = (function (t) {
       (e.prototype.appendPluginAfter = function () {
         t.prototype.appendPluginAfter.call(this),
           this.config.unzip && this.singleSocket.appendPlugin(new Si()),
-          this.config.crypto.enable &&
-            this.singleSocket.appendPlugin(new Bi(this.config)),
-          this.config.qna.version &&
-            this.singleSocket.appendPlugin(new qi(this.config)),
-          this.singleSocket.appendPlugin(
-            new mt(this.config, this.respClazzMap)
-          ),
-          this.config.debug &&
-            this.singleSocket.appendPlugin(new Et(this.config))
+          this.config.crypto.enable && this.singleSocket.appendPlugin(new Bi(this.config)),
+          this.config.qna.version && this.singleSocket.appendPlugin(new qi(this.config)),
+          this.singleSocket.appendPlugin(new mt(this.config, this.respClazzMap)),
+          this.config.debug && this.singleSocket.appendPlugin(new Et(this.config))
       }),
       e
     )
@@ -10078,19 +9019,11 @@ var Vi = (function (t) {
       (e.prototype.appendPluginAfter = function () {
         t.prototype.appendPluginAfter.call(this),
           this.config.unzip && this.singleSocket.appendPlugin(new Si()),
-          this.config.crypto.enable &&
-            this.singleSocket.appendPlugin(new Bi(this.config)),
-          this.config.qna.version &&
-            this.singleSocket.appendPlugin(new qi(this.config)),
-          this.config.dynamic &&
-            this.singleSocket.appendPlugin(
-              new wt(this.config, this.dynRespClazzMapMap)
-            ),
-          this.singleSocket.appendPlugin(
-            new mt(this.config, this.respClazzMap)
-          ),
-          this.config.debug &&
-            this.singleSocket.appendPlugin(new Et(this.config))
+          this.config.crypto.enable && this.singleSocket.appendPlugin(new Bi(this.config)),
+          this.config.qna.version && this.singleSocket.appendPlugin(new qi(this.config)),
+          this.config.dynamic && this.singleSocket.appendPlugin(new wt(this.config, this.dynRespClazzMapMap)),
+          this.singleSocket.appendPlugin(new mt(this.config, this.respClazzMap)),
+          this.config.debug && this.singleSocket.appendPlugin(new Et(this.config))
       }),
       e
     )
@@ -10106,8 +9039,7 @@ var Vi = (function (t) {
   (bytes.EVENT_RECONNECT_FAILED = 'EVENT_RECONNECT_FAILED'),
   (bytes.createCMD = O),
   (bytes.createPluginCMD = function (e, n, r, a, s) {
-    void 0 === n && (n = bytes.UCGatePluginType.USER_STREAM),
-      void 0 === s && (s = i)
+    void 0 === n && (n = bytes.UCGatePluginType.USER_STREAM), void 0 === s && (s = i)
     var c = new w()
     ;(c.cmdId = r),
       (c.seqNo = s),
@@ -10127,9 +9059,7 @@ var Vi = (function (t) {
       O(
         u,
         function (r) {
-          r.writeUnsignedInt(e),
-            r.writeByte(bytes.UCGatePluginType.CACHE),
-            r.writeUnsignedInt(n)
+          r.writeUnsignedInt(e), r.writeByte(bytes.UCGatePluginType.CACHE), r.writeUnsignedInt(n)
         },
         r
       )
@@ -10155,9 +9085,7 @@ var Vi = (function (t) {
   (bytes.hexStrToBytes = function (t) {
     for (var e = t.length, n = new egret.ByteArray(), r = 0; r < e; r += 2) {
       var i, o
-      r === e - 1
-        ? ((i = 0), (o = parseInt(t[r], 16)))
-        : ((i = parseInt(t[r], 16)), (o = parseInt(t[r + 1], 16))),
+      r === e - 1 ? ((i = 0), (o = parseInt(t[r], 16))) : ((i = parseInt(t[r], 16)), (o = parseInt(t[r + 1], 16))),
         n.writeByte((i << 4) + o)
     }
     return n
@@ -10170,10 +9098,7 @@ var Vi = (function (t) {
     var n = Math.floor(e),
       r = [],
       i = Math.pow(2, 32)
-    ;(r[0] = Math.floor(n / i)),
-      (r[1] = n - r[0] * i),
-      t.writeUnsignedInt(r[0]),
-      t.writeUnsignedInt(r[1])
+    ;(r[0] = Math.floor(n / i)), (r[1] = n - r[0] * i), t.writeUnsignedInt(r[0]), t.writeUnsignedInt(r[1])
   }),
   (bytes.ResponseBase = T),
   (bytes.UnknownResp = _),
@@ -10182,20 +9107,12 @@ var Vi = (function (t) {
   (bytes.WebSocketDynamic = $i),
   bytes
 
-function handleCryptoPacket(
-  byte,
-  socketId,
-  userEncryptKey,
-  userDecryptKey,
-  broadcastDecryptKey
-) {
+function handleCryptoPacket(byte, socketId, userEncryptKey, userDecryptKey, broadcastDecryptKey) {
   let data,
     _userEncryptKey,
     _userDecryptKey,
     _broadcastDecryptKey,
-    jsDecryptKey = new egret.ByteArray(
-      new Uint8Array([90, 191, 82, 114]).buffer
-    )
+    jsDecryptKey = new egret.ByteArray(new Uint8Array([90, 191, 82, 114]).buffer)
   var e = byte.packetLength,
     n = zi(e + 4),
     i = byte.bytes.bytes || new Uint8Array(byte.bytes.buffer)
@@ -10213,9 +9130,7 @@ function handleCryptoPacket(
         s = (function (t, e) {
           var n = new egret.ByteArray()
           ;(t.position = 0), (e.position = 0)
-          for (var r = 0; r < t.length; r++)
-            (e.position = r % e.length),
-              n.writeByte(t.readByte() ^ e.readByte())
+          for (var r = 0; r < t.length; r++) (e.position = r % e.length), n.writeByte(t.readByte() ^ e.readByte())
           return (n.position = 0), n
         })(new egret.ByteArray(a), jsDecryptKey),
         c = new _(s.readUnsignedInt(), s)
@@ -10245,17 +9160,11 @@ function handleCryptoPacket(
     data: data,
     userEncryptKey: _userEncryptKey,
     userDecryptKey: _userDecryptKey,
-    broadcastDecryptKey: _broadcastDecryptKey,
+    broadcastDecryptKey: _broadcastDecryptKey
   }
 }
 
-function doSend(
-  byteArray,
-  socketId,
-  userEncryptKey,
-  userDecryptKey,
-  broadcastDecryptKey
-) {
+function doSend(byteArray, socketId, userEncryptKey, userDecryptKey, broadcastDecryptKey) {
   var n = byteArray.length,
     r = zi(n + 12),
     i = new Uint8Array(n + 12),
@@ -10265,15 +9174,7 @@ function doSend(
     'Encrypt',
     'number',
     ['number', 'number', 'number', 'number', 'number', 'number', 'number'],
-    [
-      socketId,
-      r,
-      n,
-      n + 12,
-      userEncryptKey,
-      userDecryptKey,
-      broadcastDecryptKey,
-    ]
+    [socketId, r, n, n + 12, userEncryptKey, userDecryptKey, broadcastDecryptKey]
   )
   var a = Xi(r, n + 12).slice(0),
     s = new egret.ByteArray(a)

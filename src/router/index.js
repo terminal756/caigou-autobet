@@ -34,14 +34,14 @@ const routes = [
     component: () => import('../views/SchemeDetails.vue')
   },
   {
+    path: '/schemeOperation',
+    name: 'SchemeOperation',
+    component: () => import('../views/SchemeOperation.vue')
+  },
+  {
     path: '/siteview',
     name: 'SiteView',
     component: () => import('../views/SiteView.vue')
-  },
-  {
-    path: '/siteiframe',
-    name: 'SiteIframe',
-    component: () => import('../views/SiteIframe.vue')
   }
 ]
 

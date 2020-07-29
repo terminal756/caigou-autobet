@@ -1,32 +1,27 @@
-import { egret } from '../agingame/egret'
-import { Core } from '../agingame/main.v1983'
-import { VideoGameCore } from '../agingame/VideoGameCore_v1983'
+/* eslint-disable */
+import { egret } from './static/egret'
+import { Core } from './static/main.v1984'
+import { VideoGameCore } from './static/VideoGameCore_v1983'
 
 const assemble = function (bytes) {
   let result
   let bytearray = new egret.ByteArray()
-  for (
-    bytearray.position = bytearray.length, bytearray.writeBytes(bytes);
-    bytearray.length >= 12;
-
-  ) {
+  for (bytearray.position = bytearray.length, bytearray.writeBytes(bytes); bytearray.length >= 12; ) {
     bytearray.position = 4
     const e = bytearray.readUnsignedInt()
     const n = new egret.ByteArray(bytearray.buffer.slice(0, e))
     result = parse(n.readUnsignedInt(), n)
-    bytearray.length === e
-      ? bytearray.clear()
-      : (bytearray = new egret.ByteArray(bytearray.buffer.slice(e)))
+    bytearray.length === e ? bytearray.clear() : (bytearray = new egret.ByteArray(bytearray.buffer.slice(e)))
   }
   return result
 }
 
 const parse = (respId, bytes) => {
   bytes.position = 8
-  let common = {
+  const common = {
     respId: respId,
     seqNo: bytes.readUnsignedInt(),
-    packetLength: bytes.length,
+    packetLength: bytes.length
   }
   if (bytes) {
     switch (respId) {
@@ -35,17 +30,15 @@ const parse = (respId, bytes) => {
       // 登录游戏
       // 账号密码登录返回，获取token clientResultMap.ClientLoginResp
       case 131073:
-        let ClientLoginResp = {}
+        const ClientLoginResp = {}
         ;(ClientLoginResp.code = bytes.readInt()),
-          (ClientLoginResp.tokenBytes = new egret.ByteArray(
-            bytes.buffer.slice(bytes.position, bytes.position + 16)
-          )),
+          (ClientLoginResp.tokenBytes = new egret.ByteArray(bytes.buffer.slice(bytes.position, bytes.position + 16))),
           (ClientLoginResp.svrTime = Core.readInt64FromBytes(bytes)),
           (ClientLoginResp.userFlag = bytes.readInt())
         return Object.assign(common, ClientLoginResp)
       // 获取余额 ClientInfoResp
       case 131087:
-        let ClientInfoResp = {}
+        const ClientInfoResp = {}
         ;(ClientInfoResp.mobileAcountExist = bytes.readByte() !== 0),
           (ClientInfoResp.gesturePwdExist = bytes.readByte() !== 0),
           (bytes.position += 6)
@@ -56,18 +49,17 @@ const parse = (respId, bytes) => {
         return Object.assign(common, ClientInfoResp)
       // 登录大厅 LoginPlazaResp
       case 262151:
-        let LoginPlazaResp = {}
-        ;(LoginPlazaResp.retCode = bytes.readInt()),
-          (LoginPlazaResp.displayGuild = bytes.readUnsignedByte() === 1)
+        const LoginPlazaResp = {}
+        ;(LoginPlazaResp.retCode = bytes.readInt()), (LoginPlazaResp.displayGuild = bytes.readUnsignedByte() === 1)
         return Object.assign(common, LoginPlazaResp)
       // 重复登录 ExceptionExitResp
       case 131142:
-        let ExceptionExitResp = {}
+        const ExceptionExitResp = {}
         ExceptionExitResp.nReason = bytes.readByte()
         return Object.assign(common, ExceptionExitResp)
       // 有效投注 UserPointResp
       case 262233:
-        let UserPointResp = {}
+        const UserPointResp = {}
         ;(UserPointResp.retCodeInt = bytes.readInt()),
           (UserPointResp.graphIndex = bytes.readInt()),
           (UserPointResp.levelInt = bytes.readInt()),
@@ -82,14 +74,13 @@ const parse = (respId, bytes) => {
         return Object.assign(common, UserPointResp)
       // 更新余额 VideoGameCore.UpdateBalanceResp
       case 131106:
-        let UpdateBalanceResp = {}
-        ;(UpdateBalanceResp.balance = bytes.readDouble()),
-          (UpdateBalanceResp.seq = bytes.readInt())
+        const UpdateBalanceResp = {}
+        ;(UpdateBalanceResp.balance = bytes.readDouble()), (UpdateBalanceResp.seq = bytes.readInt())
         return Object.assign(common, UpdateBalanceResp)
       // 房间解析
       // LoginGameExtResp
       case 139266:
-        let LoginGameExtResp = {}
+        const LoginGameExtResp = {}
         ;(LoginGameExtResp.retCode = bytes.readUnsignedInt()),
           (LoginGameExtResp.vid = bytes.readUTFBytes(Core._ba_)),
           (LoginGameExtResp.deviceType = bytes.readByte()),
@@ -99,7 +90,7 @@ const parse = (respId, bytes) => {
 
       // 73735 VideoGameCore.AutoEnterTableVidResp
       case 73735:
-        let AutoEnterTableVidResp = {}
+        const AutoEnterTableVidResp = {}
         ;(AutoEnterTableVidResp.code = bytes.readInt()),
           (AutoEnterTableVidResp.vid = bytes.readUTFBytes(Core._ba_)),
           (AutoEnterTableVidResp.table = bytes.readUTFBytes(Core._pa_)),
@@ -107,7 +98,7 @@ const parse = (respId, bytes) => {
         return Object.assign(common, AutoEnterTableVidResp)
       // VideoGameCore.VideoStatusInfoResp
       case 131125:
-        let VideoStatusInfoResp = {}
+        const VideoStatusInfoResp = {}
         VideoStatusInfoResp.vid = bytes.readUTFBytes(Core._ba_)
         ;(VideoStatusInfoResp.status = bytes.readByte()),
           (VideoStatusInfoResp.timeout = bytes.readShort()),
@@ -119,7 +110,7 @@ const parse = (respId, bytes) => {
 
       // 131126 VideoGameCore.GameJettonResp
       case 131126:
-        let GameJettonResp = {}
+        const GameJettonResp = {}
         ;(GameJettonResp.vid = bytes.readUTFBytes(Core._ba_)),
           (GameJettonResp.name = bytes.readUTFBytes(Core.__u_)),
           (GameJettonResp.nick = bytes.readUTFBytes(Core._Pu_)),
@@ -132,7 +123,7 @@ const parse = (respId, bytes) => {
         return Object.assign(common, GameJettonResp)
       // 172086 VideoGameCore.GameJettonExtResp
       case 172086:
-        let GameJettonExtResp = {}
+        const GameJettonExtResp = {}
         ;(GameJettonExtResp.vid = bytes.readUTFBytes(Core._ba_)),
           (GameJettonExtResp.name = bytes.readUTFBytes(Core.__u_)),
           (GameJettonExtResp.nick = bytes.readUTFBytes(Core._Pu_)),
@@ -145,12 +136,11 @@ const parse = (respId, bytes) => {
         return Object.assign(common, GameJettonExtResp)
       // 解析局号 GameStartResp
       case 131083:
-        let GameStartResp = {}
-        ;(GameStartResp.gmcode = bytes.readUTFBytes(Core._ga_)),
-          (GameStartResp.span = bytes.readShort())
+        const GameStartResp = {}
+        ;(GameStartResp.gmcode = bytes.readUTFBytes(Core._ga_)), (GameStartResp.span = bytes.readShort())
         return Object.assign(common, GameStartResp)
       default:
-        let resp = {}
+        const resp = {}
         resp.bytes = bytes
         return Object.assign(common, resp)
     }
@@ -159,7 +149,7 @@ const parse = (respId, bytes) => {
 
 // 解密历史开奖结果
 function parseBacBeadListResp(respId, bytes) {
-  let BacBeadListResp = {}
+  const BacBeadListResp = {}
   bytes.position = 8
   BacBeadListResp.respId = respId
   BacBeadListResp.seqNo = bytes.readUnsignedInt()
@@ -168,24 +158,20 @@ function parseBacBeadListResp(respId, bytes) {
   BacBeadListResp.num = bytes.readInt()
   BacBeadListResp.beadList = []
   for (let i = 0; i < BacBeadListResp.num; i++) {
-    let res = {}
+    const res = {}
     res.gmcode = bytes.readUTFBytes(Core._ga_)
-    let j = bytes.readByte(),
-      k = bytes.readByte()
-    k < j
-      ? ((res.winType = '庄'), (res.winNum = j))
-      : ((res.winType = j < k ? '闲' : '和'), (res.winNum = k))
-    let _r_ = (bytes.readByte(), bytes.readByte())
-    ;(res.redPair = 1 === (1 & _r_)),
-      (res.bluePair = (2 & _r_) >> 1 === 1),
-      BacBeadListResp.beadList.push(res)
+    const j = bytes.readByte()
+    const k = bytes.readByte()
+    k < j ? ((res.winType = '庄'), (res.winNum = j)) : ((res.winType = j < k ? '闲' : '和'), (res.winNum = k))
+    const _r_ = (bytes.readByte(), bytes.readByte())
+    ;(res.redPair = (1 & _r_) === 1), (res.bluePair = (2 & _r_) >> 1 === 1), BacBeadListResp.beadList.push(res)
   }
   return BacBeadListResp
 }
 
 // 172049 BacGameResultExtResp 解密下注结果
 function parseBacGameResultExtResp(respId, bytes) {
-  let BacGameResultExtResp = {}
+  const BacGameResultExtResp = {}
   bytes.position = 8
   BacGameResultExtResp.respId = respId
   BacGameResultExtResp.seqNo = bytes.readUnsignedInt()
@@ -210,7 +196,7 @@ function parseBacGameResultExtResp(respId, bytes) {
 
 // 176145 解密历史开奖结果
 function parseBacSuperGameResultListResp(respId, bytes) {
-  let BacSuperGameResultListResp = {}
+  const BacSuperGameResultListResp = {}
   bytes.position = 8
   BacSuperGameResultListResp.respId = respId
   BacSuperGameResultListResp.seqNo = bytes.readUnsignedInt()
@@ -229,22 +215,22 @@ function parseBacSuperGameResultListResp(respId, bytes) {
     const _o_ = bytes.readUnsignedByte()
     BacSuperGameResultListResp.playerCardList.push(_o_)
   }
-  ;(BacSuperGameResultListResp.resLen = bytes.readUnsignedByte()),
-    (BacSuperGameResultListResp.winPlayTypes = [])
+  ;(BacSuperGameResultListResp.resLen = bytes.readUnsignedByte()), (BacSuperGameResultListResp.winPlayTypes = [])
   for (let j = 0; j < BacSuperGameResultListResp.resLen; j++) {
-    var _s_ = bytes.readUnsignedShort()
+    const _s_ = bytes.readUnsignedShort()
     BacSuperGameResultListResp.winPlayTypes.push(_s_)
   }
+  return BacSuperGameResultListResp
 }
 
 function parseUserPositionResp(respId, bytes) {
-  let UserPositionResp = {}
+  const UserPositionResp = {}
   bytes.position = 8
   UserPositionResp.respId = respId
   UserPositionResp.seqNo = bytes.readUnsignedInt()
   UserPositionResp.packetLength = bytes.length
-  let _t_ = !1,
-    _o_ = 1
+  let _t_ = !1
+  let _o_ = 1
   switch (respId) {
     // 131092
     case VideoGameCore._ti_:
@@ -266,8 +252,8 @@ function parseUserPositionResp(respId, bytes) {
   }
   UserPositionResp.players = []
   for (let _i_ = 0; _i_ < _o_; _i_++) {
-    let _a_ = bytes.readUTFBytes(Core.__u_),
-      _r_ = new VideoGameCore.TableSeatPlayer(_a_)
+    const _a_ = bytes.readUTFBytes(Core.__u_)
+    const _r_ = new VideoGameCore.TableSeatPlayer(_a_)
     ;(_r_.nickname = bytes.readUTFBytes(Core._Pu_)),
       (_r_.sex = bytes.readUnsignedByte()),
       _t_ && (_r_.vid = bytes.readUTFBytes(Core._ba_)),
@@ -278,71 +264,64 @@ function parseUserPositionResp(respId, bytes) {
       (_r_.action = UserPositionResp.action),
       UserPositionResp.players.push(_r_)
   }
-  1 === _o_ &&
+  _o_ === 1 &&
     ((UserPositionResp.loginname = UserPositionResp.players[0].loginname),
     (UserPositionResp.seat = UserPositionResp.players[0].seat))
   return UserPositionResp
 }
 
 function parseGameCurrentStatusResp(respId, bytes) {
-  let GameCurrentStatusResp = {}
+  const GameCurrentStatusResp = {}
   bytes.position = 8
   GameCurrentStatusResp.respId = respId
   GameCurrentStatusResp.seqNo = bytes.readUnsignedInt()
   GameCurrentStatusResp.packetLength = bytes.length
 
+  GameCurrentStatusResp.vid = bytes.readUTFBytes(Core._ba_)
+  GameCurrentStatusResp.gmtype = bytes.readUTFBytes(Core._Va_)
+  GameCurrentStatusResp.status = bytes.readByte()
+  GameCurrentStatusResp.gmcode = bytes.readUTFBytes(Core._ga_)
   if (
-    ((GameCurrentStatusResp.vid = bytes.readUTFBytes(Core._ba_)),
-    (GameCurrentStatusResp.gmtype = bytes.readUTFBytes(Core._Va_)),
-    (GameCurrentStatusResp.status = bytes.readByte()),
-    (GameCurrentStatusResp.gmcode = bytes.readUTFBytes(Core._ga_)),
-    13 !== GameCurrentStatusResp.gmcode.length &&
-      (GameCurrentStatusResp.gmcode = ''),
-    -1 <
-      [VideoGameCore.GAME_BAC, VideoGameCore.GAME_DT].indexOf(
-        GameCurrentStatusResp.gmtype
-      ))
+    (GameCurrentStatusResp.gmcode.length !== 13 && (GameCurrentStatusResp.gmcode = ''),
+    [VideoGameCore.GAME_BAC, VideoGameCore.GAME_DT].indexOf(GameCurrentStatusResp.gmtype) > -1)
   ) {
-    var _t_ =
-      -1 < [VideoGameCore.GAME_DT].indexOf(GameCurrentStatusResp.gmtype) ? 1 : 3
+    var _t_ = [VideoGameCore.GAME_DT].indexOf(GameCurrentStatusResp.gmtype) > -1 ? 1 : 3
     GameCurrentStatusResp.bcards = []
-    for (var _o_ = 0; _o_ < _t_; _o_++)
+    for (var _o_ = 0; _o_ < _t_; _o_++) {
       GameCurrentStatusResp.bcards.push(bytes.readUnsignedByte())
+    }
     GameCurrentStatusResp.pcards = []
-    for (_o_ = 0; _o_ < _t_; _o_++)
+    for (_o_ = 0; _o_ < _t_; _o_++) {
       GameCurrentStatusResp.pcards.push(bytes.readUnsignedByte())
+    }
     if (GameCurrentStatusResp.gmtype === VideoGameCore.GAME_BAC) {
-      ;(GameCurrentStatusResp.pcards = revertCard(
-        GameCurrentStatusResp.pcards
-      ))(
-        (GameCurrentStatusResp.bcards = revertCard(
-          GameCurrentStatusResp.bcards
-        ))
+      ;(GameCurrentStatusResp.pcards = revertCard(GameCurrentStatusResp.pcards))(
+        (GameCurrentStatusResp.bcards = revertCard(GameCurrentStatusResp.bcards))
       )
     }
-  } else if (
-    -1 < [VideoGameCore.GAME_NN].indexOf(GameCurrentStatusResp.gmtype)
-  ) {
+  } else if ([VideoGameCore.GAME_NN].indexOf(GameCurrentStatusResp.gmtype) > -1) {
     GameCurrentStatusResp.cardlist = []
-    for (_o_ = 0; _o_ < 21; _o_++)
+    for (_o_ = 0; _o_ < 21; _o_++) {
       GameCurrentStatusResp.cardlist.push(bytes.readUnsignedByte())
+    }
     _t_ = (bytes.readUnsignedInt(), bytes.readByte())
     bytes.readByte()
-  } else
-    -1 < [VideoGameCore.GAME_ROU].indexOf(GameCurrentStatusResp.gmtype)
+  } else {
+    ;[VideoGameCore.GAME_ROU].indexOf(GameCurrentStatusResp.gmtype) > -1
       ? (GameCurrentStatusResp.res = bytes.readUnsignedInt())
-      : -1 < [VideoGameCore.GAME_SHB].indexOf(GameCurrentStatusResp.gmtype) &&
+      : [VideoGameCore.GAME_SHB].indexOf(GameCurrentStatusResp.gmtype) > -1 &&
         ((GameCurrentStatusResp.shbInfo = new VideoGameCore.RoadPaper.RoadShbData()),
         (GameCurrentStatusResp.shbInfo.code = GameCurrentStatusResp.gmcode),
         (GameCurrentStatusResp.shbInfo.dice1 = bytes.readByte()),
         (GameCurrentStatusResp.shbInfo.dice2 = bytes.readByte()),
         (GameCurrentStatusResp.shbInfo.dice3 = bytes.readByte()))
-  ;(GameCurrentStatusResp.timeout = bytes.readShort()),
-    (GameCurrentStatusResp.max_timeout = bytes.readShort())
+  }
+  ;(GameCurrentStatusResp.timeout = bytes.readShort()), (GameCurrentStatusResp.max_timeout = bytes.readShort())
+  return GameCurrentStatusResp
 }
 
 function revertCard(_e_) {
-  var _t_ = _e_[1]
+  const _t_ = _e_[1]
   return (_e_[1] = _e_[0]), (_e_[0] = _t_), _e_
 }
 
@@ -352,5 +331,5 @@ export {
   parseBacGameResultExtResp,
   parseBacSuperGameResultListResp,
   parseUserPositionResp,
-  parseGameCurrentStatusResp,
+  parseGameCurrentStatusResp
 }

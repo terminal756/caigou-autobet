@@ -3,31 +3,53 @@
     <Header />
     <Side />
     <v-content>
-      <v-card flat>
+      <v-card height="100%" flat>
         <v-toolbar flat>
           <v-btn color="primary" to="/schemeDetails">创建方案</v-btn>
           <v-spacer></v-spacer>
           <v-text-field v-model="search" append-icon="mdi-magnify" label="输入方案名称搜索" dense solo hide-details />
         </v-toolbar>
         <v-card-text>
-          <v-data-table hide-default-footer :headers="headers" :items="schemes" :search="search">
+          <v-data-table
+            :headers="headers"
+            :items="schemes"
+            :search="search"
+            :height="currentHeight - 50"
+            dense
+            fixed-header
+            hide-default-footer
+            disable-pagination
+          >
             <template v-slot:item.url="{ item }">
-              <v-btn class="mr-2" @click="openUrl(item)">
+              <v-btn class="my-2" @click="openUrl(item)">
                 {{ isSchemeLogin(item) ? '已登录' : '未登录' }}
               </v-btn>
             </template>
             <template v-slot:item.operation="{ item }">
-              <v-btn class="mr-2" @click="operation(item)">
-                {{ isSchemeLogin(item) ? '已登录' : '未登录' }}
-              </v-btn>
+              <template v-if="!isSchemeLogin(item)">
+                <v-card-text>先登录</v-card-text>
+              </template>
+              <template v-else>
+                <v-btn
+                  class="my-2"
+                  :to="{ name: 'SchemeOperation', params: { schemeId: item.schemeId } }"
+                  :disabled="isClick(item)"
+                >
+                  {{ isOperation(item) ? '执行中' : '执行方案' }}
+                </v-btn>
+              </template>
             </template>
             <template v-slot:item.edit="{ item }">
-              <router-link :to="{ name: 'SchemeDetails', params: { schemeId: item.schemeId } }" tag="button">
+              <router-link
+                :to="{ name: 'SchemeDetails', params: { schemeId: item.schemeId } }"
+                tag="button"
+                :disabled="isOperation(item)"
+              >
                 <v-icon small class="mr-2">
                   mdi-pencil
                 </v-icon>
               </router-link>
-              <v-icon small @click="openDeleteScheme(item)">
+              <v-icon small :disabled="isOperation(item)" @click="openDeleteScheme(item)">
                 mdi-delete
               </v-icon>
             </template>
@@ -67,6 +89,7 @@ export default {
     Footer
   },
   data: () => ({
+    currentHeight: null,
     schemes: [],
     search: '',
     headers: [
@@ -87,9 +110,9 @@ export default {
   }),
   computed: {
     ...mapState('site', ['siteList']),
-    ...mapState('scheme', ['schemeList']),
-    ...mapState('gameInfo', ['info']),
-    ...mapState('agConfig', ['agConfig', 'roomConfig'])
+    ...mapState('scheme', ['schemeList', 'operationList']),
+    ...mapState('gameInfo', ['gameInfo']),
+    ...mapState('ag', ['config', 'room'])
   },
   watch: {},
   created() {
@@ -99,6 +122,7 @@ export default {
       const scheme = this.schemeList.find((s) => s.schemeId === gameInfo.schemeId)
       switch (scheme.gameType) {
         case 2:
+          // console.log('监听到的消息', gameInfo)
           this.addAGInfo(gameInfo)
           break
       }
@@ -136,12 +160,16 @@ export default {
         })
       }
     })
+    this.currentHeight = window.innerHeight - 100
+    window.onresize = () => {
+      this.currentHeight = window.innerHeight - 100
+    }
   },
   methods: {
     ...mapActions('scheme', ['deleteSchemeAsync']),
     ...mapActions('gameInfo', ['addAGInfo']),
     openUrl(item) {
-      const siteview = new remote.BrowserWindow({
+      const siteView = new remote.BrowserWindow({
         width: 1000,
         height: 600,
         center: true,
@@ -154,23 +182,28 @@ export default {
         }
       })
       if (process.env.NODE_ENV !== 'production' && !process.env.IS_TEST) {
-        siteview.webContents.openDevTools()
+        siteView.webContents.openDevTools()
       }
       const betUrl =
         process.env.NODE_ENV === 'development'
           ? 'http://localhost:8080/siteview'
           : `file://${__dirname}/index.html#/siteview`
-      siteview.loadURL(betUrl)
-      siteview.removeMenu()
+      siteView.loadURL(betUrl)
+      siteView.removeMenu()
       // 共享参数
       remote.getGlobal('scheme').scheme = item
     },
     isSchemeLogin(scheme) {
-      return this.info.find((i) => i.schemeId === scheme.schemeId)
-        ? this.info.find((i) => i.schemeId === scheme.schemeId).agInfo.length === scheme.sites.length
+      return this.gameInfo.find((i) => i.schemeId === scheme.schemeId)
+        ? this.gameInfo.find((i) => i.schemeId === scheme.schemeId).agInfo.length === scheme.sites.length
         : false
     },
-    operation(scheme) {},
+    isOperation(scheme) {
+      return !!this.operationList.find((o) => o.schemeId === scheme.schemeId)
+    },
+    isClick(scheme) {
+      return !!(this.isSchemeLogin(scheme) && this.isOperation(scheme))
+    },
     openDeleteScheme(scheme) {
       this.deleteSchemeObj = scheme
       this.deleteSchemeDialog = true

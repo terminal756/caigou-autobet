@@ -109,7 +109,7 @@
                       <template v-if="amountType === 1">
                         <v-col cols="12">
                           <p class="blue--text">
-                            输入两个数字，使用*号做分隔，例如:20*100，庄闲随机
+                            最大最小范围，使用*号做分隔，例如:20*100，如果最小值小于20，系统会默认最小金额为20，系统会随机选择范围之间的10的整数倍作为投注金额，投注方庄闲随机
                           </p>
                           <v-text-field v-model="randomRange" filled dense solo prefix="￥" color="primary" />
                         </v-col>
@@ -117,14 +117,29 @@
                       <template v-if="amountType === 2">
                         <v-col cols="12">
                           <p class="blue--text">
-                            随便输入数字个数，使用*号做分隔，例如：20*50*100，庄闲随机
+                            输入下注金额，使用*号做分隔，例如：20*50*100，如果最小值小于20，系统会默认最小金额为20，系统会从输入的数字中随机抽一个作为投注金额，投注方庄闲随机
                           </p>
                           <v-text-field v-model="randomValue" filled dense solo prefix="￥" color="primary" />
                         </v-col>
                       </template>
                       <template v-if="amountType === 3">
-                        <p class="blue--text">
-                          手动分配每个网站的随机投注金额，数字之间使用*号做分割，例如：20*50*100，庄闲随机，注意打水金额是否一致，不要亏水
+                        <p small class="blue--text">
+                          手动分配每个网站的随机投注金额，数字之间使用*号做分割，第一个数字0或者1，用来标识下注分组，第二个数字0或者1，用标识止水金额，
+                          <span class="font-weight-black red--text">只能有一个网站的第二个数字为1，其余必须为0</span>
+                          ，其余网站的标识都为0，第三个数字以后的都是金额：0*0*20*50*100，如果最小值小于20，系统会默认最小金额为20，系统会从输入的数字中随机抽一组作为投注金额
+                          <br />
+                          <br />
+                          例如三个网站分别输入网站1：0*1*50*100*200，网站2：1*0*30*70*160，网站3：1*0*20*30*40,系统会随机选择｛50，30，20｝或者｛100，70，30｝，或者｛200，160，40｝作为下注时候的金额，1组随机下注庄闲，2组下注1组的反方，系统会取第二个数字为1的网站下注金额累加与上面设定的止水金额进行对比，如果达到止水金额，则停止该方案下所有游戏链接
+                          <br />
+                          <br />
+                          如果每个网站输入的数字个数不一致，或者个数小于3，会导致方案创建不成功。例如：
+                          <br />
+                          网站1：0*1*50*100*200，网站2：1*0*30*70，网站3：1*0*20，网站数字个数不一致，错误示范
+                          <br />
+                          网站1：0*1，网站2：1*0，网站3：1*0，网站数字个数小于3，错误示范
+                          <br />
+                          <br />
+                          注意止水金额计算标准只能有一个。如果有多个自动停止下注结果不可预知。请自行确认所有金额设置是否合理，有没有亏水
                         </p>
                         <div v-for="(site, index) in specify" :key="index">
                           <v-row no-gutters justify="space-between">
@@ -171,15 +186,7 @@
                         <v-subheader class="font-weight-black subtitle-1 pa-0">选择房间(非必须)</v-subheader>
                       </v-col>
                       <v-col cols="8">
-                        <v-select
-                          v-model="selectAGRoom"
-                          :items="roomConfig"
-                          label="选择房间"
-                          multiple
-                          solo
-                          dense
-                          filled
-                        >
+                        <v-select v-model="selectAGRoom" :items="room" label="选择房间" multiple solo dense filled>
                           <template v-slot:prepend-item>
                             <v-list-item class="ma-4" ripple @click="selectAllAGRoom">
                               <v-list-item-action>
@@ -273,9 +280,9 @@ export default {
     ...mapState('site', ['siteList']),
     ...mapState('scheme', ['schemeList']),
     ...mapState('treeSite', ['treeSite']),
-    ...mapState('agConfig', ['agConfig', 'roomConfig']),
+    ...mapState('ag', ['config', 'room']),
     isAllAGRoom() {
-      return this.selectAGRoom.length === this.roomConfig.length
+      return this.selectAGRoom.length === this.room.length
     },
     isSomeAGRoom() {
       return this.selectAGRoom.length > 0 && !this.isAllAGRoom
@@ -471,7 +478,7 @@ export default {
       if (this.isAllAGRoom) {
         this.selectAGRoom = []
       } else {
-        this.selectAGRoom = this.roomConfig
+        this.selectAGRoom = this.room
       }
     }
   }

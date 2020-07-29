@@ -1,9 +1,9 @@
 import { getScheme, addScheme, updateScheme, deleteScheme } from '../../api/api'
-
 const scheme = {
   namespaced: true,
   state: () => ({
-    schemeList: []
+    schemeList: [],
+    operationList: []
   }),
   getters: {
     getSitesBySchemeId: (state) => (schemeId) => {
@@ -14,12 +14,14 @@ const scheme = {
         }
       })
       return sites
+    },
+    currentOperation: (state) => (schemeId) => {
+      return state.operationList.find((o) => o.schemeId === schemeId)
     }
   },
   mutations: {
     get(state, payload) {
       if (payload) state.schemeList = payload
-      // console.log('state.schemeList', state.schemeList)
     },
     add(state, payload) {
       state.schemeList.push(payload)
@@ -32,6 +34,25 @@ const scheme = {
     },
     delete(state, payload) {
       state.schemeList.splice(payload.index, 1)
+    },
+    addOperation(state, payload) {
+      if (state.operationList.length) {
+        if (!state.operationList.find((s) => s.schemeId === payload.schemeId)) {
+          state.operationList.push(payload)
+        }
+      } else {
+        state.operationList.push(payload)
+      }
+    },
+    updateOperation(state, payload) {
+      const schemeIndex = state.operationList.findIndex((o) => o.schemeId === payload.schemeId)
+      for (const site of payload.sites) {
+        const siteIndex = state.operationList[schemeIndex].sites.findIndex((s) => s.siteId === site.siteId)
+        state.operationList[schemeIndex].sites.splice(siteIndex, 1, site)
+      }
+    },
+    deleteOperation(state, payload) {
+      state.operationList.splice(payload, 1)
     }
   },
   actions: {
@@ -62,6 +83,15 @@ const scheme = {
         commit('delete', payload)
       }
       return res
+    },
+    addOperation({ commit }, payload) {
+      commit('addOperation', payload)
+    },
+    updateOperation({ commit }, payload) {
+      commit('updateOperation', payload)
+    },
+    deleteOperation({ commit }, payload) {
+      commit('deleteOperation', payload)
     }
   }
 }

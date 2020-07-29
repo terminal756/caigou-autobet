@@ -6,7 +6,7 @@ import site from './modules/site'
 import treeSite from './modules/treeSite'
 import scheme from './modules/scheme'
 import gameInfo from './modules/gameInfo'
-import agConfig from './modules/agConfig'
+import ag from './modules/ag'
 
 Vue.use(Vuex)
 
@@ -21,6 +21,6 @@ export default new Vuex.Store({
     treeSite,
     scheme,
     gameInfo,
-    agConfig
+    ag
   }
 })

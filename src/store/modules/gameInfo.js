@@ -1,16 +1,20 @@
+const info = JSON.parse(localStorage.getItem('gameInfo'))
 const gameInfo = {
   namespaced: true,
   state: () => ({
-    info: []
+    gameInfo: info || []
   }),
   getters: {},
   mutations: {
     addAG(state, payload) {
-      if (state.info.length) {
-        const schemeIndex = state.info.findIndex((game) => game.schemeId === payload.schemeId)
+      if (state.gameInfo.length) {
+        const schemeIndex = state.gameInfo.findIndex((game) => game.schemeId === payload.schemeId)
         if (schemeIndex > -1) {
-          for (const ag of payload.agInfo) {
-            const sameSite = state.info[schemeIndex].agInfo.find((a) => a.siteId === ag.siteId)
+          state.gameInfo.splice(schemeIndex, 1)
+          state.gameInfo.push(payload)
+          localStorage.setItem('gameInfo', JSON.stringify(state.gameInfo))
+          /* for (const ag of payload.agInfo) {
+            const sameSite = state.gameInfo[schemeIndex].agInfo.find((a) => a.siteId === ag.siteId)
             if (sameSite) {
               if (sameSite.loginName !== ag.loginName) {
                 sameSite.loginName = ag.loginName
@@ -24,15 +28,19 @@ const gameInfo = {
               if (sameSite.urlList !== ag.urlList) {
                 sameSite.urlList = ag.urlList
               }
+              localStorage.setItem('gameInfo', JSON.stringify(state.gameInfo))
             } else {
-              state.info[schemeIndex].agInfo.push(ag)
+              state.gameInfo[schemeIndex].agInfo.push(ag)
+              localStorage.setItem('gameInfo', JSON.stringify(state.gameInfo))
             }
-          }
+          }*/
         } else {
-          state.info.push(payload)
+          state.gameInfo.push(payload)
+          localStorage.setItem('gameInfo', JSON.stringify(state.gameInfo))
         }
       } else {
-        state.info.push(payload)
+        state.gameInfo.push(payload)
+        localStorage.setItem('gameInfo', JSON.stringify(state.gameInfo))
       }
     }
   },

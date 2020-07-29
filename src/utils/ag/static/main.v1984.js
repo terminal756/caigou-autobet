@@ -40,15 +40,9 @@ let Core,
       _e_.LANG_VI,
       _e_.LANG_KM,
       _e_.LANG_PT,
-      _e_.LANG_MY,
+      _e_.LANG_MY
     ]),
-    (_e_.LANG_SOUND_SUPPORTED = [
-      _e_.LANG_HANS,
-      _e_.LANG_HANT,
-      _e_.LANG_EN,
-      _e_.LANG_KO,
-      _e_.LANG_JA,
-    ]),
+    (_e_.LANG_SOUND_SUPPORTED = [_e_.LANG_HANS, _e_.LANG_HANT, _e_.LANG_EN, _e_.LANG_KO, _e_.LANG_JA]),
     (_e_.LANG_DEFAULT = _e_.LANG_EN),
     (_e_.LANG_BACKUP = _e_.LANG_EN),
     (_e_.LANG_CNS_XML = 'lang_cns'),
@@ -175,14 +169,14 @@ let Core,
     (_e_.DAY_HOUR = 24),
     (_e_.BAC_SECTION_TYPES = {
       FEATURED: 'FEATURED',
-      OTHERS: 'OTHERS',
+      OTHERS: 'OTHERS'
     }),
     (_e_.GA_CONFIGS = {
       ENTRY_POINT_START_TIME: '21:00:00',
       ENTRY_POINT_END_TIME: '22:00:00',
       FEATURE_SECTION: 'feature_section',
       GAME_SECTION: 'game_section',
-      TABLE_SELECTOR: 'table_selector',
+      TABLE_SELECTOR: 'table_selector'
     })
 })(Core || (Core = {}))
 ;(function (_e_) {
@@ -231,36 +225,20 @@ let Core,
     var _t_,
       _n_ = ''
     if (!_e_) return _n_
-    for (_t_ in _e_)
-      'object' == typeof _e_[_t_] || (_n_ += '&' + _t_ + '=' + _e_[_t_])
+    for (_t_ in _e_) 'object' == typeof _e_[_t_] || (_n_ += '&' + _t_ + '=' + _e_[_t_])
     return 0 < _n_.length && (_n_ = _n_.substr(1)), _n_
   }
   function _r_(_e_, _t_) {
     return (
-      void 0 === _t_ && (_t_ = _s_.EA_TIME_ZONE),
-      _e_ + (_a_ + _t_ * _s_.HOUR_MINUTE) * _s_.MINUTE_SEC * _s_.SEC_MILLI
+      void 0 === _t_ && (_t_ = _s_.EA_TIME_ZONE), _e_ + (_a_ + _t_ * _s_.HOUR_MINUTE) * _s_.MINUTE_SEC * _s_.SEC_MILLI
     )
   }
   function _i_(_e_, _t_) {
     void 0 === _t_ && (_t_ = '')
     var _n_ = ''
-    if (0 <= [_s_.LANG_HANS, _s_.LANG_HANT, ''].indexOf(_t_))
-      _n_ = (_e_.getMonth() + 1).toString()
+    if (0 <= [_s_.LANG_HANS, _s_.LANG_HANT, ''].indexOf(_t_)) _n_ = (_e_.getMonth() + 1).toString()
     else {
-      _n_ = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ][_e_.getMonth()]
+      _n_ = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][_e_.getMonth()]
     }
     return _n_
   }
@@ -274,21 +252,14 @@ let Core,
       'H+': _t_.getHours(),
       'm+': _t_.getMinutes(),
       's+': _t_.getSeconds(),
-      'q+': Math.floor((_t_.getMonth() + 3) / 3),
+      'q+': Math.floor((_t_.getMonth() + 3) / 3)
     }
     for (var _o_ in (/(y+)/.test(_e_) &&
-      (_e_ = _e_.replace(
-        RegExp.$1,
-        (_t_.getFullYear() + '').substr(4 - RegExp.$1.length)
-      )),
+      (_e_ = _e_.replace(RegExp.$1, (_t_.getFullYear() + '').substr(4 - RegExp.$1.length))),
     /(E+)/.test(_e_) &&
       (_e_ = _e_.replace(
         RegExp.$1,
-        (1 < RegExp.$1.length
-          ? 2 < RegExp.$1.length
-            ? '/u661f/u671f'
-            : '/u5468'
-          : '') +
+        (1 < RegExp.$1.length ? (2 < RegExp.$1.length ? '/u661f/u671f' : '/u5468') : '') +
           {
             0: '/u65e5',
             1: '/u4e00',
@@ -296,16 +267,14 @@ let Core,
             3: '/u4e09',
             4: '/u56db',
             5: '/u4e94',
-            6: '/u516d',
+            6: '/u516d'
           }[_t_.getDay() + '']
       )),
     _r_))
       new RegExp('(' + _o_ + ')').test(_e_) &&
         (_e_ = _e_.replace(
           RegExp.$1,
-          1 == RegExp.$1.length
-            ? _r_[_o_]
-            : ('00' + _r_[_o_]).substr(('' + _r_[_o_]).length)
+          1 == RegExp.$1.length ? _r_[_o_] : ('00' + _r_[_o_]).substr(('' + _r_[_o_]).length)
         ))
     return _e_
   }
@@ -326,11 +295,7 @@ let Core,
         '@dm=' +
         _s_.ExternalData.domainName
     return (
-      _s_.ExternalData.serverName +
-      '/forwardPage.do?params=' +
-      _n_ +
-      '&key=' +
-      new md5().hex_md5(_n_ + 'jhs#%!fde')
+      _s_.ExternalData.serverName + '/forwardPage.do?params=' + _n_ + '&key=' + new md5().hex_md5(_n_ + 'jhs#%!fde')
     )
   }
   ;(_s_.getUrlParams = function (_e_) {
@@ -339,9 +304,7 @@ let Core,
     return _n_ && 2 <= _n_.length ? decodeURIComponent(_n_[2]) : null
   }),
     (_s_.urlWithParams = function (_e_, _t_) {
-      return 0 <= _e_.split('/').pop().indexOf('?')
-        ? _e_ + '&' + _n_(_t_)
-        : _e_ + '?' + _n_(_t_)
+      return 0 <= _e_.split('/').pop().indexOf('?') ? _e_ + '&' + _n_(_t_) : _e_ + '?' + _n_(_t_)
     }),
     (_s_.openUrl = function (_e_, _t_, _n_, _r_) {
       if (_n_ && _r_) {
@@ -356,15 +319,10 @@ let Core,
     (_s_.ANONYMOUS_NAME_PREFIX_USERNAME = 'username'),
     (_s_.ANONYMOUS_NAME_PREFIX_NICKNAME = 'nickname'),
     (_s_.getAnonymousName = function (_e_, _t_, _n_, _r_) {
-      if (
-        (void 0 === _n_ && (_n_ = !1),
-        void 0 === _r_ && (_r_ = ''),
-        _e_ === _s_.LoginStore.instance.loginName)
-      )
+      if ((void 0 === _n_ && (_n_ = !1), void 0 === _r_ && (_r_ = ''), _e_ === _s_.LoginStore.instance.loginName))
         return _n_ && 8 < _t_.length ? _t_.substring(0, 8) + '...' : _t_
       var _o_ = _e_.substring(3, _s_._Pu_ + 3)
-      if (_t_ && _t_ != _o_ && _t_ != _e_)
-        return _n_ && 8 < _t_.length ? _t_.substring(0, 7) + '...' : _t_
+      if (_t_ && _t_ != _o_ && _t_ != _e_) return _n_ && 8 < _t_.length ? _t_.substring(0, 7) + '...' : _t_
       var _i_ = '***'
       switch (_r_) {
         case _s_.ANONYMOUS_NAME_PREFIX_USERNAME:
@@ -379,11 +337,7 @@ let Core,
       return _i_
     }),
     (_s_.hexStringToByteArray = function (_e_) {
-      for (
-        var _t_ = _e_.length, _n_ = new egret.ByteArray(), _r_ = 0;
-        _r_ < _t_;
-        _r_ += 2
-      ) {
+      for (var _t_ = _e_.length, _n_ = new egret.ByteArray(), _r_ = 0; _r_ < _t_; _r_ += 2) {
         var _o_ = parseInt(_e_[_r_], 16),
           _i_ = parseInt(_e_[_r_ + 1], 16)
         _n_.writeByte((_o_ << 4) + _i_)
@@ -394,9 +348,7 @@ let Core,
     (_s_.readLong = function (_e_) {
       var _t_, _n_
       return 8 <= _e_.bytesAvailable
-        ? ((_t_ = _e_.readUnsignedInt()),
-          (_n_ = _e_.readUnsignedInt()),
-          _t_ * _s_.BYTE_MAX + _n_)
+        ? ((_t_ = _e_.readUnsignedInt()), (_n_ = _e_.readUnsignedInt()), _t_ * _s_.BYTE_MAX + _n_)
         : 0
     }),
     (_s_.writeLong = function (_e_, _t_) {
@@ -418,14 +370,9 @@ let Core,
       return _e_ > -_s_.FLOAT_MIN_VALUE && _e_ < _s_.FLOAT_MIN_VALUE
     }),
     (_s_.formatNumStr = function (_e_) {
-      return (Math.floor(_e_) == _e_ ? _e_.toFixed(0) : _e_.toFixed(2)).replace(
-        /./g,
-        function (_e_, _t_, _n_) {
-          return _t_ && '.' != _e_ && (_n_.length - _t_) % 3 == 0
-            ? ',' + _e_
-            : _e_
-        }
-      )
+      return (Math.floor(_e_) == _e_ ? _e_.toFixed(0) : _e_.toFixed(2)).replace(/./g, function (_e_, _t_, _n_) {
+        return _t_ && '.' != _e_ && (_n_.length - _t_) % 3 == 0 ? ',' + _e_ : _e_
+      })
     }),
     (_s_.degreeToRadians = function (_e_) {
       return (_e_ * Math.PI) / 180
@@ -470,11 +417,8 @@ let Core,
     (_s_.ARRAY_CASEINSENSITIVE_ASCENDING = 3),
     (_s_.ARRAY_CASEINSENSITIVE_DESCENDING = 4),
     (_s_.arraySort = function (_e_, _t_) {
-      void 0 === _t_ && (_t_ = 0),
-        0 == _t_ && (_t_ = _s_.ARRAY_NUMERIC_ASCENDING)
-      var _n_ =
-        _t_ == _s_.ARRAY_NUMERIC_ASCENDING ||
-        _t_ == _s_.ARRAY_CASEINSENSITIVE_ASCENDING
+      void 0 === _t_ && (_t_ = 0), 0 == _t_ && (_t_ = _s_.ARRAY_NUMERIC_ASCENDING)
+      var _n_ = _t_ == _s_.ARRAY_NUMERIC_ASCENDING || _t_ == _s_.ARRAY_CASEINSENSITIVE_ASCENDING
       _e_.sort(function (_e_, _t_) {
         return _t_ < _e_ ? (_n_ ? 1 : -1) : _n_ ? -1 : 1
       })
@@ -486,9 +430,7 @@ let Core,
           try {
             ;(_e_.contentEditable = 'true'), (_e_.readOnly = !1), _o_(_e_)
           } finally {
-            ;(_e_.contentEditable = _t_),
-              (_e_.readOnly = _n_),
-              document.body.removeChild(_e_)
+            ;(_e_.contentEditable = _t_), (_e_.readOnly = _n_), document.body.removeChild(_e_)
           }
         },
         _o_ = function (_e_) {
@@ -508,8 +450,7 @@ let Core,
               : window.clipboardData
               ? window.clipboardData.setData('text', _e_)
               : _r_(
-                  (((_t_ = document.createElement('textarea')).style.position =
-                    'fixed'),
+                  (((_t_ = document.createElement('textarea')).style.position = 'fixed'),
                   (_t_.style.top = '0'),
                   (_t_.style.left = '0'),
                   (_t_.style.width = '2em'),
@@ -553,21 +494,17 @@ let Core,
           return _s_.LANG_KM_CONF
         case _s_.LANG_PT:
           return _s_.LANG_PT_CONF
+        case _s_.LANG_ID:
+          return _s_.LANG_ID_CONF
       }
       return _s_.LANG_EN_CONF
     }),
     (_s_.pad2 = _t_),
     (_s_.formatToDatetime = function (_e_) {
       return (
-        [_e_.getFullYear(), _t_(_e_.getMonth() + 1), _t_(_e_.getDate())].join(
-          '-'
-        ) +
+        [_e_.getFullYear(), _t_(_e_.getMonth() + 1), _t_(_e_.getDate())].join('-') +
         ' ' +
-        [
-          _t_(_e_.getHours()),
-          _t_(_e_.getMinutes()),
-          _t_(_e_.getSeconds()),
-        ].join(':')
+        [_t_(_e_.getHours()), _t_(_e_.getMinutes()), _t_(_e_.getSeconds())].join(':')
       )
     }),
     (_s_.callCallback = function (_e_) {
@@ -612,24 +549,14 @@ let Core,
     (_r_.startBetCMD = function (_e_, _t_, _n_) {
       void 0 === _n_ && (_n_ = 99999)
       var _r_ = new egret.ByteArray()
-      return (
-        _r_.writeInt(_e_),
-        _r_.writeInt(0),
-        _r_.writeUnsignedShort(_n_),
-        _r_.writeUnsignedShort(_t_),
-        _r_
-      )
+      return _r_.writeInt(_e_), _r_.writeInt(0), _r_.writeUnsignedShort(_n_), _r_.writeUnsignedShort(_t_), _r_
     }),
     (_r_.endCMD = function (_e_) {
       var _t_ = _e_.position
       return (_e_.position = 4), _e_.writeInt(_t_), _e_
     }),
     (_r_.hexStrToBytes = function (_e_) {
-      for (
-        var _t_ = _e_.length, _n_ = new egret.ByteArray(), _r_ = 0;
-        _r_ < _t_;
-        _r_ += 2
-      ) {
+      for (var _t_ = _e_.length, _n_ = new egret.ByteArray(), _r_ = 0; _r_ < _t_; _r_ += 2) {
         var _o_ = parseInt(_e_[_r_], 16),
           _i_ = parseInt(_e_[_r_ + 1], 16)
         _n_.writeByte((_o_ << 4) + _i_)
@@ -647,10 +574,7 @@ let Core,
       var _n_ = Math.floor(_e_),
         _r_ = []
       4294967295 < _n_
-        ? ((_r_[0] = 0),
-          (_r_[1] = (_n_ >> 48) & 31),
-          (_r_[2] = (_n_ >> 40) & 255),
-          (_r_[3] = (_n_ >> 32) & 255))
+        ? ((_r_[0] = 0), (_r_[1] = (_n_ >> 48) & 31), (_r_[2] = (_n_ >> 40) & 255), (_r_[3] = (_n_ >> 32) & 255))
         : ((_r_[0] = 0), (_r_[1] = 0), (_r_[2] = 0), (_r_[3] = 0)),
         (_r_[4] = (_n_ >> 24) & 255),
         (_r_[5] = (_n_ >> 16) & 255),
@@ -659,143 +583,6 @@ let Core,
         _r_.forEach(function (_e_) {
           _t_.writeByte(_e_)
         })
-    })
-})(Core || (Core = {}))
-;(function (_s_) {
-  var _e_
-  ;((_e_ =
-    _s_.APIManager || (_s_.APIManager = {})).getCMDKeepAlive = function () {
-    return _s_.getSimpleCMD(_s_.Protocol.KEEP_ALIVE)
-  }),
-    (_e_.getCMDUCGateAlive = function () {
-      return _s_.getSimpleCMD(_s_.Protocol.UCGATE_ALIVE)
-    }),
-    (_e_.getCMDClientDemoLogin = function () {
-      var _e_ = _s_.startCMD(_s_.Protocol.CLIENT_DEMO_LOGIN)
-      return _e_.writeInt(0), _s_.endCMD(_e_)
-    }),
-    (_e_.getCMDClientLogin = function (_e_, _t_) {
-      var _n_, _r_
-      ;(_r_ = _s_.ExternalData.isTrial
-        ? _s_.Protocol.CLIENT_LOGIN_TRIAL
-        : _s_.Protocol.CLIENT_LOGIN),
-        (_n_ = _s_.startCMD(_r_)).writeBytes(_s_.stringToBytes(_e_, _s_.__u_))
-      var _o_ = _s_.hexStrToBytes(_t_)
-      return _n_.writeBytes(_o_), _n_.writeInt(0), _s_.endCMD(_n_)
-    }),
-    (_e_.getCMDChatLoginServer = function (_e_, _t_) {
-      var _n_ = _s_.startCMD(
-        _s_.ExternalData.isTrial
-          ? _s_.Protocol.CHAT_LOGIN_SERVER_TRIAL
-          : _s_.Protocol.CHAT_LOGIN_SERVER
-      )
-      return (
-        _n_.writeBytes(_s_.stringToBytes(_e_, _s_.__u_)),
-        _n_.writeBytes(_t_),
-        _s_.endCMD(_n_)
-      )
-    }),
-    (_e_.getCMDChatLoginServerExt = function (_e_, _t_, _n_) {
-      var _r_ = _s_.startCMD(
-        _s_.ExternalData.isTrial
-          ? _s_.Protocol.CHAT_LOGIN_SERVER_EXT_TRIAL
-          : _s_.Protocol.CHAT_LOGIN_SERVER_EXT
-      )
-      return (
-        _r_.writeBytes(_s_.stringToBytes(_n_, 4)),
-        _r_.writeBytes(_s_.stringToBytes(_e_, _s_.__u_)),
-        _r_.writeByte(_s_.CHAT_LOGIN_TYPE),
-        _r_.writeByte(0),
-        _r_.writeByte(0),
-        _r_.writeBytes(_t_),
-        _s_.endCMD(_r_)
-      )
-    }),
-    (_e_.getCMDChatEnterTable = function (_e_, _t_, _n_, _r_) {
-      var _o_ = _s_.startCMD(_s_.Protocol.CHAT_ENTER_TABLE)
-      return (
-        _o_.writeBytes(_s_.stringToBytes(_e_, 4)),
-        _o_.writeBytes(_s_.stringToBytes(_t_, 4)),
-        _o_.writeInt(_n_),
-        _o_.writeByte(_r_),
-        _s_.endCMD(_o_)
-      )
-    }),
-    (_e_.getCMDChatChangeNickname = function (_e_) {
-      var _t_ = _s_.startCMD(_s_.Protocol.CHAT_NICKNAME_CHANGE),
-        _n_ = ''
-      return (
-        _e_ && 0 < _e_.length && (_n_ = _e_),
-        _t_.writeBytes(_s_.stringToBytes(_n_, _s_._Pu_)),
-        _s_.endCMD(_t_)
-      )
-    }),
-    (_e_.getCMDChatQuickMessageList = function (_e_) {
-      void 0 === _e_ && (_e_ = 0)
-      var _t_ = _s_.startCMD(_s_.Protocol.CHAT_QUICK_MESSAGE_LIST)
-      return _t_.writeInt(_e_), _s_.endCMD(_t_)
-    }),
-    (_e_.getCMDChatSendMessage = function (_e_, _t_, _n_, _r_) {
-      var _o_ = _s_.startCMD(_s_.Protocol.CHAT_SEND_MESSAGE)
-      _o_.writeBytes(_s_.stringToBytes(_e_, _s_._ba_)),
-        _o_.writeBytes(_s_.stringToBytes('0', 4)),
-        _o_.writeByte(_n_),
-        _o_.writeByte(1)
-      var _i_ = new egret.ByteArray()
-      return (
-        _i_.writeUTFBytes(_r_),
-        _o_.writeUnsignedInt(_i_.length),
-        _o_.writeBytes(_s_.stringToBytes(_r_, _i_.length)),
-        _s_.endCMD(_o_)
-      )
-    }),
-    (_e_.getCMDChatSendQuickMessage = function (_e_, _t_, _n_, _r_) {
-      var _o_ = _s_.startCMD(_s_.Protocol.CHAT_SEND_QUICK_MESSAGE)
-      return (
-        _o_.writeBytes(_s_.stringToBytes(_e_, _s_._ba_)),
-        _o_.writeBytes(_s_.stringToBytes('0', 4)),
-        _o_.writeByte(_r_),
-        _o_.writeUnsignedInt(_t_),
-        _o_.writeBytes(_s_.stringToBytes(_n_, 2)),
-        _s_.endCMD(_o_)
-      )
-    }),
-    (_e_.getCMDLoginLivePlatform = function (_e_, _t_) {
-      var _n_ = _s_.startCMD(
-        _s_.ExternalData.isTrial
-          ? _s_.Protocol.CLIENT_LOGIN_LIVE_PLATFORM_SESSION_TRIAL
-          : _s_.Protocol.CLIENT_LOGIN_LIVE_PLATFORM_SESSION
-      )
-      return (
-        _n_.writeBytes(_s_.stringToBytes(_e_, _s_.__u_)),
-        _n_.writeBytes(_t_),
-        _n_.writeUnsignedInt(0),
-        _s_.endCMD(_n_)
-      )
-    }),
-    (_e_.getCMDCryptoKeyACK = function (_e_, _t_) {
-      var _n_ = _s_.startCMD(_s_.Protocol.CRYPTO_USER_KEY_ACK)
-      _e_.position = 0
-      for (var _r_ = (_t_.position = 0); _r_ < 4; _r_++)
-        _n_.writeByte(_e_.readByte() ^ _t_.readByte())
-      return _s_.endCMD(_n_)
-    }),
-    (_e_.getCMDUserCheck = function (_e_, _t_) {
-      var _n_ = _s_.startCMD(_s_.Protocol._Rf_)
-      return _n_.writeUnsignedInt(_e_), _n_.writeUTFBytes(_t_), _s_.endCMD(_n_)
-    }),
-    (_e_.getCMDChatSendMessageXml = function (_e_, _t_, _n_, _r_) {
-      var _o_ = _s_.startCMD(_s_.Protocol.CHAT_CLIENT_MESSAGE_XML)
-      _o_.writeBytes(_s_.stringToBytes(_e_, _s_._ba_)),
-        _o_.writeBytes(_s_.stringToBytes('0', _s_._pa_)),
-        _o_.writeByte(_n_)
-      var _i_ = new egret.ByteArray()
-      return (
-        _i_.writeUTFBytes(_r_),
-        _o_.writeUnsignedInt(_i_.length),
-        _o_.writeBytes(_s_.stringToBytes(_r_, _i_.length)),
-        _s_.endCMD(_o_)
-      )
     })
 })(Core || (Core = {}))
 

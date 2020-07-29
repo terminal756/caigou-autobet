@@ -1,11 +1,8 @@
 /* eslint-disable */
-let egret
 var __reflect =
   (this && this.__reflect) ||
   function (p, c, t) {
-    ;(p.__class__ = c),
-      t ? t.push(c) : (t = [c]),
-      (p.__types__ = p.__types__ ? t.concat(p.__types__) : t)
+    ;(p.__class__ = c), t ? t.push(c) : (t = [c]), (p.__types__ = p.__types__ ? t.concat(p.__types__) : t)
   }
 var __extends =
   (this && this.__extends) ||
@@ -16,6 +13,35 @@ var __extends =
     for (var i in e) e.hasOwnProperty(i) && (t[i] = e[i])
     ;(r.prototype = e.prototype), (t.prototype = new r())
   }
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+/// <reference path="registerClass.ts" />
 if (typeof global == 'undefined') {
   var global = window
 }
@@ -25,13 +51,9 @@ if (typeof __global == 'undefined') {
 var __define =
   (this && this.__define) ||
   function (o, p, g, s) {
-    Object.defineProperty(o, p, {
-      configurable: true,
-      enumerable: true,
-      get: g,
-      set: s,
-    })
+    Object.defineProperty(o, p, { configurable: true, enumerable: true, get: g, set: s })
   }
+var egret
 ;(function (egret) {
   /**
    * @private
@@ -39,12 +61,25 @@ var __define =
    */
   egret.$hashCount = 1
   /**
+   * The HashObject class is the base class for all objects in the Egret framework.The HashObject
+   * class includes a hashCode property, which is a unique identification number of the instance.
+   * @version Egret 2.4
+   * @platform Web,Native
+   * @language en_US
+   */
+  /**
    * Egret顶级对象。框架内所有对象的基类，为对象实例提供唯一的hashCode值。
    * @version Egret 2.4
    * @platform Web,Native
    * @language zh_CN
    */
   var HashObject = (function () {
+    /**
+     * Initializes a HashObject
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 创建一个 HashObject 对象
      * @version Egret 2.4
@@ -56,6 +91,12 @@ var __define =
     }
     Object.defineProperty(HashObject.prototype, 'hashCode', {
       /**
+       * a unique identification number assigned to this instance.
+       * @version Egret 2.4
+       * @platform Web,Native
+       * @language en_US
+       */
+      /**
        * 返回此对象唯一的哈希值,用于唯一确定一个对象。hashCode为大于等于1的整数。
        * @version Egret 2.4
        * @platform Web,Native
@@ -65,16 +106,65 @@ var __define =
         return this.$hashCode
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     return HashObject
   })()
   egret.HashObject = HashObject
   __reflect(HashObject.prototype, 'egret.HashObject', ['egret.IHashObject'])
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var ONCE_EVENT_LIST = []
-
+  /**
+   * The EventDispatcher class is the base class for all classes that dispatchEvent events. The EventDispatcher class implements
+   * the IEventDispatcher interface and is the base class for the DisplayObject class. The EventDispatcher class allows
+   * any object on the display list to be an event target and as such, to use the methods of the IEventDispatcher interface.
+   * Event targets are an important part of the Egret event model. The event target serves as the focal point for how events
+   * flow through the display list hierarchy. When an event such as a touch tap, Egret dispatches an event object into the
+   * event flow from the root of the display list. The event object then makes its way through the display list until it
+   * reaches the event target, at which point it begins its return trip through the display list. This round-trip journey
+   * to the event target is conceptually divided into three phases: <br/>
+   * the capture phase comprises the journey from the root to the last node before the event target's node, the target
+   * phase comprises only the event target node, and the bubbling phase comprises any subsequent nodes encountered on
+   * the return trip to the root of the display list. In general, the easiest way for a user-defined class to gain event
+   * dispatching capabilities is to extend EventDispatcher. If this is impossible (that is, if the class is already extending
+   * another class), you can instead implement the IEventDispatcher interface, create an EventDispatcher member, and write simple
+   * hooks to route calls into the aggregated EventDispatcher.
+   * @see egret.IEventDispatcher
+   * @version Egret 2.4
+   * @platform Web,Native
+   * @includeExample egret/events/EventDispatcher.ts
+   * @language en_US
+   */
   /**
    * EventDispatcher 是 Egret 的事件派发器类，负责进行事件的发送和侦听。
    * 事件目标是事件如何通过显示列表层次结构这一问题的焦点。当发生鼠标单击、触摸或按键等事件时，
@@ -91,7 +181,15 @@ var __define =
    */
   var EventDispatcher = (function (_super) {
     __extends(EventDispatcher, _super)
-
+    /**
+     * create an instance of the EventDispatcher class.
+     * @param target The target object for events dispatched to the EventDispatcher object. This parameter is used when
+     * the EventDispatcher instance is aggregated by a class that implements IEventDispatcher; it is necessary so that the
+     * containing object can be the target for events. Do not use this parameter in simple cases in which a class extends EventDispatcher.
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 创建一个 EventDispatcher 类的实例
      * @param target 此 EventDispatcher 所抛出事件对象的 target 指向。此参数主要用于一个实现了 IEventDispatcher 接口的自定义类，
@@ -109,7 +207,7 @@ var __define =
         0: target ? target : _this,
         1: {},
         2: {},
-        3: 0,
+        3: 0
       }
       return _this
     }
@@ -120,9 +218,7 @@ var __define =
      */
     EventDispatcher.prototype.$getEventMap = function (useCapture) {
       var values = this.$EventDispatcher
-      var eventMap = useCapture
-        ? values[2 /* captureEventsMap */]
-        : values[1 /* eventsMap */]
+      var eventMap = useCapture ? values[2 /* captureEventsMap */] : values[1 /* eventsMap */]
       return eventMap
     }
     /**
@@ -130,13 +226,7 @@ var __define =
      * @version Egret 2.4
      * @platform Web,Native
      */
-    EventDispatcher.prototype.addEventListener = function (
-      type,
-      listener,
-      thisObject,
-      useCapture,
-      priority
-    ) {
+    EventDispatcher.prototype.addEventListener = function (type, listener, thisObject, useCapture, priority) {
       this.$addListener(type, listener, thisObject, useCapture, priority)
     }
     /**
@@ -144,48 +234,25 @@ var __define =
      * @version Egret 2.4
      * @platform Web,Native
      */
-    EventDispatcher.prototype.once = function (
-      type,
-      listener,
-      thisObject,
-      useCapture,
-      priority
-    ) {
+    EventDispatcher.prototype.once = function (type, listener, thisObject, useCapture, priority) {
       this.$addListener(type, listener, thisObject, useCapture, priority, true)
     }
     /**
      * @private
      */
-    EventDispatcher.prototype.$addListener = function (
-      type,
-      listener,
-      thisObject,
-      useCapture,
-      priority,
-      dispatchOnce
-    ) {
+    EventDispatcher.prototype.$addListener = function (type, listener, thisObject, useCapture, priority, dispatchOnce) {
       if (true && !listener) {
         egret.$error(1003, 'listener')
       }
       var values = this.$EventDispatcher
-      var eventMap = useCapture
-        ? values[2 /* captureEventsMap */]
-        : values[1 /* eventsMap */]
+      var eventMap = useCapture ? values[2 /* captureEventsMap */] : values[1 /* eventsMap */]
       var list = eventMap[type]
       if (!list) {
         list = eventMap[type] = []
       } else if (values[3 /* notifyLevel */] !== 0) {
         eventMap[type] = list = list.concat()
       }
-      this.$insertEventBin(
-        list,
-        type,
-        listener,
-        thisObject,
-        useCapture,
-        priority,
-        dispatchOnce
-      )
+      this.$insertEventBin(list, type, listener, thisObject, useCapture, priority, dispatchOnce)
     }
     EventDispatcher.prototype.$insertEventBin = function (
       list,
@@ -201,11 +268,7 @@ var __define =
       var length = list.length
       for (var i = 0; i < length; i++) {
         var bin = list[i]
-        if (
-          bin.listener == listener &&
-          bin.thisObject == thisObject &&
-          bin.target == this
-        ) {
+        if (bin.listener == listener && bin.thisObject == thisObject && bin.target == this) {
           return false
         }
         if (insertIndex == -1 && bin.priority < priority) {
@@ -219,7 +282,7 @@ var __define =
         priority: priority,
         target: this,
         useCapture: useCapture,
-        dispatchOnce: !!dispatchOnce,
+        dispatchOnce: !!dispatchOnce
       }
       if (insertIndex !== -1) {
         list.splice(insertIndex, 0, eventBin)
@@ -233,16 +296,9 @@ var __define =
      * @version Egret 2.4
      * @platform Web,Native
      */
-    EventDispatcher.prototype.removeEventListener = function (
-      type,
-      listener,
-      thisObject,
-      useCapture
-    ) {
+    EventDispatcher.prototype.removeEventListener = function (type, listener, thisObject, useCapture) {
       var values = this.$EventDispatcher
-      var eventMap = useCapture
-        ? values[2 /* captureEventsMap */]
-        : values[1 /* eventsMap */]
+      var eventMap = useCapture ? values[2 /* captureEventsMap */] : values[1 /* eventsMap */]
       var list = eventMap[type]
       if (!list) {
         return
@@ -255,19 +311,11 @@ var __define =
         eventMap[type] = null
       }
     }
-    EventDispatcher.prototype.$removeEventBin = function (
-      list,
-      listener,
-      thisObject
-    ) {
+    EventDispatcher.prototype.$removeEventBin = function (list, listener, thisObject) {
       var length = list.length
       for (var i = 0; i < length; i++) {
         var bin = list[i]
-        if (
-          bin.listener == listener &&
-          bin.thisObject == thisObject &&
-          bin.target == this
-        ) {
+        if (bin.listener == listener && bin.thisObject == thisObject && bin.target == this) {
           list.splice(i, 1)
           return true
         }
@@ -281,10 +329,7 @@ var __define =
      */
     EventDispatcher.prototype.hasEventListener = function (type) {
       var values = this.$EventDispatcher
-      return !!(
-        values[1 /* eventsMap */][type] ||
-        values[2 /* captureEventsMap */][type]
-      )
+      return !!(values[1 /* eventsMap */][type] || values[2 /* captureEventsMap */][type])
     }
     /**
      * @inheritDoc
@@ -309,9 +354,7 @@ var __define =
      */
     EventDispatcher.prototype.$notifyListener = function (event, capturePhase) {
       var values = this.$EventDispatcher
-      var eventMap = capturePhase
-        ? values[2 /* captureEventsMap */]
-        : values[1 /* eventsMap */]
+      var eventMap = capturePhase ? values[2 /* captureEventsMap */] : values[1 /* eventsMap */]
       var list = eventMap[event.$type]
       if (!list) {
         return true
@@ -336,15 +379,21 @@ var __define =
       values[3 /* notifyLevel */]--
       while (onceList.length) {
         var eventBin = onceList.pop()
-        eventBin.target.removeEventListener(
-          eventBin.type,
-          eventBin.listener,
-          eventBin.thisObject,
-          eventBin.useCapture
-        )
+        eventBin.target.removeEventListener(eventBin.type, eventBin.listener, eventBin.thisObject, eventBin.useCapture)
       }
       return !event.$isDefaultPrevented
     }
+    /**
+     * Distribute a specified event parameters.
+     * @param type The type of the event. Event listeners can access this information through the inherited type property.
+     * @param bubbles Determines whether the Event object bubbles. Event listeners can access this information through
+     * the inherited bubbles property.
+     * @param data {any} data
+     * @param cancelable Determines whether the Event object can be canceled. The default values is false.
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 派发一个指定参数的事件。
      * @param type {string} 事件类型
@@ -355,12 +404,7 @@ var __define =
      * @platform Web,Native
      * @language zh_CN
      */
-    EventDispatcher.prototype.dispatchEventWith = function (
-      type,
-      bubbles,
-      data,
-      cancelable
-    ) {
+    EventDispatcher.prototype.dispatchEventWith = function (type, bubbles, data, cancelable) {
       if (bubbles || this.hasEventListener(type)) {
         var event_1 = egret.Event.create(egret.Event, type, bubbles, cancelable)
         event_1.data = data
@@ -373,10 +417,37 @@ var __define =
     return EventDispatcher
   })(egret.HashObject)
   egret.EventDispatcher = EventDispatcher
-  __reflect(EventDispatcher.prototype, 'egret.EventDispatcher', [
-    'egret.IEventDispatcher',
-  ])
+  __reflect(EventDispatcher.prototype, 'egret.EventDispatcher', ['egret.IEventDispatcher'])
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * @private
@@ -391,6 +462,36 @@ var __define =
     }
     return value
   }
+  /**
+   * The DisplayObject class is the base class for all objects that can be placed on the display list. The display list
+   * manages all objects displayed in the runtime. Use the DisplayObjectContainer class to arrange the display
+   * objects in the display list. DisplayObjectContainer objects can have child display objects, while other display objects,
+   * such as Shape and TextField objects, are "leaf" nodes that have only parents and siblings, no children.
+   * The DisplayObject class supports basic functionality like the x and y position of an object, as well as more advanced
+   * properties of the object such as its transformation matrix.<br/>
+   * The DisplayObject class contains several broadcast events.Normally, the target of any particular event is a specific
+   * DisplayObject instance. For example, the target of an added event is the specific DisplayObject instance that was added
+   * to the display list. Having a single target restricts the placement of event listeners to that target and in some cases
+   * the target's ancestors on the display list. With broadcast events, however, the target is not a specific DisplayObject
+   * instance, but rather all DisplayObject instances, including those that are not on the display list. This means that you
+   * can add a listener to any DisplayObject instance to listen for broadcast events.
+   *
+   * @event egret.Event.ADDED Dispatched when a display object is added to the display list.
+   * @event egret.Event.ADDED_TO_STAGE Dispatched when a display object is added to the on stage display list, either directly or through the addition of a sub tree in which the display object is contained.
+   * @event egret.Event.REMOVED Dispatched when a display object is about to be removed from the display list.
+   * @event egret.Event.REMOVED_FROM_STAGE Dispatched when a display object is about to be removed from the display list, either directly or through the removal of a sub tree in which the display object is contained.
+   * @event egret.Event.ENTER_FRAME [broadcast event] Dispatched when the playhead is entering a new frame.
+   * @event egret.Event.RENDER [broadcast event] Dispatched when the display list is about to be updated and rendered.
+   * @event egret.TouchEvent.TOUCH_MOVE Dispatched when the user touches the device, and is continuously dispatched until the point of contact is removed.
+   * @event egret.TouchEvent.TOUCH_BEGIN Dispatched when the user first contacts a touch-enabled device (such as touches a finger to a mobile phone or tablet with a touch screen).
+   * @event egret.TouchEvent.TOUCH_END Dispatched when the user removes contact with a touch-enabled device (such as lifts a finger off a mobile phone or tablet with a touch screen).
+   * @event egret.TouchEvent.TOUCH_TAP Dispatched when the user lifts the point of contact over the same DisplayObject instance on which the contact was initiated on a touch-enabled device (such as presses and releases a finger from a single point over a display object on a mobile phone or tablet with a touch screen).
+   * @event egret.TouchEvent.TOUCH_RELEASE_OUTSIDE Dispatched when the user lifts the point of contact over the different DisplayObject instance on which the contact was initiated on a touch-enabled device (such as presses and releases a finger from a single point over a display object on a mobile phone or tablet with a touch screen).
+   * @version Egret 2.4
+   * @platform Web,Native
+   * @includeExample egret/display/DisplayObject.ts
+   * @language en_US
+   */
   /**
    * DisplayObject 类是可放在显示列表中的所有对象的基类。该显示列表管理运行时中显示的所有对象。使用 DisplayObjectContainer 类排列
    * 显示列表中的显示对象。DisplayObjectContainer 对象可以有子显示对象，而其他显示对象（如 Shape 和 TextField 对象）是“叶”节点，没有子项，只有父级和
@@ -557,11 +658,16 @@ var __define =
       return _this
     }
     DisplayObject.prototype.createNativeDisplayObject = function () {
-      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(
-        0 /* CONTAINER */
-      )
+      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(0 /* CONTAINER */)
     }
     Object.defineProperty(DisplayObject.prototype, 'name', {
+      /**
+       * Indicates the instance name of the DisplayObject. The object can be identified in the child list of its parent
+       * display object container by calling the getChildByName() method of the display object container.
+       * @version Egret 2.4
+       * @platform Web,Native
+       * @language en_US
+       */
       /**
        * 表示 DisplayObject 的实例名称。
        * 通过调用父显示对象容器的 getChildByName() 方法，可以在父显示对象容器的子列表中标识该对象。
@@ -576,9 +682,16 @@ var __define =
         this.$name = value
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(DisplayObject.prototype, 'parent', {
+      /**
+       * Indicates the DisplayObjectContainer object that contains this display object. Use the parent property to specify
+       * a relative path to display objects that are above the current display object in the display list hierarchy.
+       * @version Egret 2.4
+       * @platform Web,Native
+       * @language en_US
+       */
       /**
        * 表示包含此显示对象的 DisplayObjectContainer 对象。
        * 使用 parent 属性可以指定高于显示列表层次结构中当前显示对象的显示对象的相对路径。
@@ -590,7 +703,7 @@ var __define =
         return this.$parent
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -621,12 +734,7 @@ var __define =
     }
     DisplayObject.prototype.$updateUseTransform = function () {
       var self = this
-      if (
-        self.$scaleX == 1 &&
-        self.$scaleY == 1 &&
-        self.$skewX == 0 &&
-        self.$skewY == 0
-      ) {
+      if (self.$scaleX == 1 && self.$scaleY == 1 && self.$skewX == 0 && self.$skewY == 0) {
         self.$useTranslate = false
       } else {
         self.$useTranslate = true
@@ -653,9 +761,23 @@ var __define =
         return this.$stage
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(DisplayObject.prototype, 'matrix', {
+      /**
+       * A Matrix object containing values that alter the scaling, rotation, and translation of the display object.<br/>
+       * Note: to change the value of a display object's matrix, you must make a copy of the entire matrix object, then copy
+       * the new object into the matrix property of the display object.
+       * @example the following code increases the tx value of a display object's matrix
+       * <pre>
+       *     let myMatrix:Matrix = myDisplayObject.matrix;
+       *     myMatrix.tx += 10;
+       *     myDisplayObject.matrix = myMatrix;
+       * </pre>
+       * @version Egret 2.4
+       * @platform Web,Native
+       * @language en_US
+       */
       /**
        * 一个 Matrix 对象，其中包含更改显示对象的缩放、旋转和平移的值。<br/>
        * 注意：要改变一个显示对象矩阵的值，您必引用整个矩阵对象，然后将它重新赋值给显示对象的 matrix 属性。
@@ -676,7 +798,7 @@ var __define =
         this.$setMatrix(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -686,12 +808,7 @@ var __define =
       var self = this
       if (self.$matrixDirty) {
         self.$matrixDirty = false
-        self.$matrix.$updateScaleAndRotation(
-          self.$scaleX,
-          self.$scaleY,
-          self.$skewX,
-          self.$skewY
-        )
+        self.$matrix.$updateScaleAndRotation(self.$scaleX, self.$scaleY, self.$skewX, self.$skewY)
       }
       self.$matrix.tx = self.$x
       self.$matrix.ty = self.$y
@@ -701,10 +818,7 @@ var __define =
      * @private
      * 设置矩阵
      */
-    DisplayObject.prototype.$setMatrix = function (
-      matrix,
-      needUpdateProperties
-    ) {
+    DisplayObject.prototype.$setMatrix = function (matrix, needUpdateProperties) {
       if (needUpdateProperties === void 0) {
         needUpdateProperties = true
       }
@@ -732,14 +846,7 @@ var __define =
         self.$rotation = clampRotation((self.$skewY * 180) / Math.PI)
       }
       if (egret.nativeRender) {
-        self.$nativeDisplayObject.setMatrix(
-          matrix.a,
-          matrix.b,
-          matrix.c,
-          matrix.d,
-          matrix.tx,
-          matrix.ty
-        )
+        self.$nativeDisplayObject.setMatrix(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty)
       }
     }
     /**
@@ -753,9 +860,7 @@ var __define =
         matrix = self.$concatenatedMatrix = new egret.Matrix()
       }
       if (self.$parent) {
-        self.$parent
-          .$getConcatenatedMatrix()
-          .$preMultiplyInto(self.$getMatrix(), matrix)
+        self.$parent.$getConcatenatedMatrix().$preMultiplyInto(self.$getMatrix(), matrix)
       } else {
         matrix.copyFrom(self.$getMatrix())
       }
@@ -763,22 +868,9 @@ var __define =
       var offsetY = self.$anchorOffsetY
       var rect = self.$scrollRect
       if (rect) {
-        matrix.$preMultiplyInto(
-          egret.$TempMatrix.setTo(
-            1,
-            0,
-            0,
-            1,
-            -rect.x - offsetX,
-            -rect.y - offsetY
-          ),
-          matrix
-        )
+        matrix.$preMultiplyInto(egret.$TempMatrix.setTo(1, 0, 0, 1, -rect.x - offsetX, -rect.y - offsetY), matrix)
       } else if (offsetX != 0 || offsetY != 0) {
-        matrix.$preMultiplyInto(
-          egret.$TempMatrix.setTo(1, 0, 0, 1, -offsetX, -offsetY),
-          matrix
-        )
+        matrix.$preMultiplyInto(egret.$TempMatrix.setTo(1, 0, 0, 1, -offsetX, -offsetY), matrix)
       }
       return self.$concatenatedMatrix
     }
@@ -791,12 +883,22 @@ var __define =
       if (!self.$invertedConcatenatedMatrix) {
         self.$invertedConcatenatedMatrix = new egret.Matrix()
       }
-      self
-        .$getConcatenatedMatrix()
-        .$invertInto(self.$invertedConcatenatedMatrix)
+      self.$getConcatenatedMatrix().$invertInto(self.$invertedConcatenatedMatrix)
       return self.$invertedConcatenatedMatrix
     }
     Object.defineProperty(DisplayObject.prototype, 'x', {
+      /**
+       * Indicates the x coordinate of the DisplayObject instance relative to the local coordinates of the parent
+       * DisplayObjectContainer.<br/>
+       * If the object is inside a DisplayObjectContainer that has transformations, it is in
+       * the local coordinate system of the enclosing DisplayObjectContainer. Thus, for a DisplayObjectContainer
+       * rotated 90° counterclockwise, the DisplayObjectContainer's children inherit a coordinate system that is
+       * rotated 90° counterclockwise. The object's coordinates refer to the registration point position.
+       * @default 0
+       * @version Egret 2.4
+       * @platform Web,Native
+       * @language en_US
+       */
       /**
        * 表示 DisplayObject 实例相对于父级 DisplayObjectContainer 本地坐标的 x 坐标。<br/>
        * 如果该对象位于具有变形的 DisplayObjectContainer 内，则它也位于包含 DisplayObjectContainer 的本地坐标系中。
@@ -813,7 +915,7 @@ var __define =
         this.$setX(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -850,6 +952,18 @@ var __define =
     }
     Object.defineProperty(DisplayObject.prototype, 'y', {
       /**
+       * Indicates the y coordinate of the DisplayObject instance relative to the local coordinates of the parent
+       * DisplayObjectContainer. <br/>
+       * If the object is inside a DisplayObjectContainer that has transformations, it is in
+       * the local coordinate system of the enclosing DisplayObjectContainer. Thus, for a DisplayObjectContainer rotated
+       * 90° counterclockwise, the DisplayObjectContainer's children inherit a coordinate system that is rotated 90°
+       * counterclockwise. The object's coordinates refer to the registration point position.
+       * @default 0
+       * @version Egret 2.4
+       * @platform Web,Native
+       * @language en_US
+       */
+      /**
        * 表示 DisplayObject 实例相对于父级 DisplayObjectContainer 本地坐标的 y 坐标。<br/>
        * 如果该对象位于具有变形的 DisplayObjectContainer 内，则它也位于包含 DisplayObjectContainer 的本地坐标系中。
        * 因此，对于逆时针旋转 90 度的 DisplayObjectContainer，该 DisplayObjectContainer 的子级将继承逆时针旋转 90 度的坐标系。
@@ -865,7 +979,7 @@ var __define =
         this.$setY(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -924,7 +1038,7 @@ var __define =
         this.$setScaleX(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -984,7 +1098,7 @@ var __define =
         this.$setScaleY(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -1048,7 +1162,7 @@ var __define =
         this.$setRotation(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -1099,7 +1213,7 @@ var __define =
         this.$setSkewX(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -1147,7 +1261,7 @@ var __define =
         this.$setSkewY(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -1201,7 +1315,7 @@ var __define =
         this.$setWidth(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -1209,9 +1323,7 @@ var __define =
      */
     DisplayObject.prototype.$getWidth = function () {
       var self = this
-      return isNaN(self.$explicitWidth)
-        ? self.$getOriginalBounds().width
-        : self.$explicitWidth
+      return isNaN(self.$explicitWidth) ? self.$getOriginalBounds().width : self.$explicitWidth
     }
     /**
      * @private
@@ -1245,7 +1357,7 @@ var __define =
         this.$setHeight(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -1253,9 +1365,7 @@ var __define =
      */
     DisplayObject.prototype.$getHeight = function () {
       var self = this
-      return isNaN(self.$explicitHeight)
-        ? self.$getOriginalBounds().height
-        : self.$explicitHeight
+      return isNaN(self.$explicitHeight) ? self.$getOriginalBounds().height : self.$explicitHeight
     }
     /**
      * @private
@@ -1280,7 +1390,7 @@ var __define =
         return this.$getOriginalBounds().width
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(DisplayObject.prototype, 'measuredHeight', {
       /**
@@ -1294,7 +1404,7 @@ var __define =
         return this.$getOriginalBounds().height
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(DisplayObject.prototype, 'anchorOffsetX', {
       /**
@@ -1318,7 +1428,7 @@ var __define =
         this.$setAnchorOffsetX(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -1369,7 +1479,7 @@ var __define =
         this.$setAnchorOffsetY(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -1421,7 +1531,7 @@ var __define =
         this.$setVisible(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     DisplayObject.prototype.$setVisible = function (value) {
       var self = this
@@ -1481,7 +1591,7 @@ var __define =
         }
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     DisplayObject.prototype.$setHasDisplayList = function (value) {
       var self = this
@@ -1530,7 +1640,7 @@ var __define =
         this.$setAlpha(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -1589,7 +1699,7 @@ var __define =
         this.$setTouchEnabled(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -1647,7 +1757,7 @@ var __define =
         this.$setScrollRect(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -1666,12 +1776,7 @@ var __define =
         }
         self.$scrollRect.copyFrom(value)
         if (egret.nativeRender) {
-          self.$nativeDisplayObject.setScrollRect(
-            value.x,
-            value.y,
-            value.width,
-            value.height
-          )
+          self.$nativeDisplayObject.setScrollRect(value.x, value.y, value.width, value.height)
         }
       } else {
         self.$scrollRect = null
@@ -1740,7 +1845,7 @@ var __define =
         }
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(DisplayObject.prototype, 'mask', {
       /**
@@ -1809,12 +1914,7 @@ var __define =
             }
             self.$maskRect.copyFrom(value)
             if (egret.nativeRender) {
-              self.$nativeDisplayObject.setMaskRect(
-                value.x,
-                value.y,
-                value.width,
-                value.height
-              )
+              self.$nativeDisplayObject.setMaskRect(value.x, value.y, value.width, value.height)
             }
             if (self.$mask) {
               self.$mask.$maskedObject = null
@@ -1854,7 +1954,7 @@ var __define =
         }
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     DisplayObject.prototype.$setMaskRect = function (value) {
       var self = this
@@ -1935,7 +2035,7 @@ var __define =
         }
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * Returns a rectangle that defines the area of the display object relative to the coordinate system of the targetCoordinateSpace object.
@@ -1956,10 +2056,7 @@ var __define =
      * @platform Web,Native
      * @language zh_CN
      */
-    DisplayObject.prototype.getTransformedBounds = function (
-      targetCoordinateSpace,
-      resultRect
-    ) {
+    DisplayObject.prototype.getTransformedBounds = function (targetCoordinateSpace, resultRect) {
       targetCoordinateSpace = targetCoordinateSpace || this
       return this.$getTransformedBounds(targetCoordinateSpace, resultRect)
     }
@@ -2000,10 +2097,7 @@ var __define =
     /**
      * @private
      */
-    DisplayObject.prototype.$getTransformedBounds = function (
-      targetCoordinateSpace,
-      resultRect
-    ) {
+    DisplayObject.prototype.$getTransformedBounds = function (targetCoordinateSpace, resultRect) {
       var self = this
       var bounds = self.$getOriginalBounds()
       if (!resultRect) {
@@ -2045,11 +2139,7 @@ var __define =
      * @platform Web,Native
      * @language zh_CN
      */
-    DisplayObject.prototype.globalToLocal = function (
-      stageX,
-      stageY,
-      resultPoint
-    ) {
+    DisplayObject.prototype.globalToLocal = function (stageX, stageY, resultPoint) {
       if (stageX === void 0) {
         stageX = 0
       }
@@ -2058,11 +2148,7 @@ var __define =
       }
       if (egret.nativeRender) {
         egret_native.updateNativeRender()
-        var result = egret_native.nrGlobalToLocal(
-          this.$nativeDisplayObject.id,
-          stageX,
-          stageY
-        )
+        var result = egret_native.nrGlobalToLocal(this.$nativeDisplayObject.id, stageX, stageY)
         var arr = result.split(',')
         var x = parseFloat(arr[0])
         var y = parseFloat(arr[1])
@@ -2098,11 +2184,7 @@ var __define =
      * @platform Web,Native
      * @language zh_CN
      */
-    DisplayObject.prototype.localToGlobal = function (
-      localX,
-      localY,
-      resultPoint
-    ) {
+    DisplayObject.prototype.localToGlobal = function (localX, localY, resultPoint) {
       if (localX === void 0) {
         localX = 0
       }
@@ -2111,11 +2193,7 @@ var __define =
       }
       if (egret.nativeRender) {
         egret_native.updateNativeRender()
-        var result = egret_native.nrLocalToGlobal(
-          this.$nativeDisplayObject.id,
-          localX,
-          localY
-        )
+        var result = egret_native.nrLocalToGlobal(this.$nativeDisplayObject.id, localX, localY)
         var arr = result.split(',')
         var x = parseFloat(arr[0])
         var y = parseFloat(arr[1])
@@ -2281,10 +2359,7 @@ var __define =
      */
     DisplayObject.prototype.$getConcatenatedMatrixAt = function (root, matrix) {
       var invertMatrix = root.$getInvertedConcatenatedMatrix()
-      if (
-        (invertMatrix.a === 0 || invertMatrix.d === 0) &&
-        (invertMatrix.b === 0 || invertMatrix.c === 0)
-      ) {
+      if ((invertMatrix.a === 0 || invertMatrix.d === 0) && (invertMatrix.b === 0 || invertMatrix.c === 0)) {
         var target = this
         var rootLevel = root.$nestLevel
         matrix.identity()
@@ -2310,12 +2385,7 @@ var __define =
      */
     DisplayObject.prototype.$hitTest = function (stageX, stageY) {
       var self = this
-      if (
-        (!egret.nativeRender && !self.$renderNode) ||
-        !self.$visible ||
-        self.$scaleX == 0 ||
-        self.$scaleY == 0
-      ) {
+      if ((!egret.nativeRender && !self.$renderNode) || !self.$visible || self.$scaleX == 0 || self.$scaleY == 0) {
         return null
       }
       var m = self.$getInvertedConcatenatedMatrix()
@@ -2391,12 +2461,7 @@ var __define =
           egret_native.forHitTest = true
           egret_native.activateBuffer(buffer)
           egret_native.updateNativeRender()
-          egret_native.nrRenderDisplayObject2(
-            self.$nativeDisplayObject.id,
-            1 - localX,
-            1 - localY,
-            true
-          )
+          egret_native.nrRenderDisplayObject2(self.$nativeDisplayObject.id, 1 - localX, 1 - localY, true)
           try {
             data = new Uint8Array(4)
             egret_native.nrGetPixels(1, 1, 1, 1, data)
@@ -2414,10 +2479,7 @@ var __define =
           if (displayList) {
             var buffer = displayList.renderBuffer
             try {
-              data = buffer.getPixels(
-                localX - displayList.offsetX,
-                localY - displayList.offsetY
-              )
+              data = buffer.getPixels(localX - displayList.offsetX, localY - displayList.offsetY)
             } catch (e) {
               throw new Error(egret.sys.tr(1039))
             }
@@ -2445,28 +2507,11 @@ var __define =
     /**
      * @private
      */
-    DisplayObject.prototype.$addListener = function (
-      type,
-      listener,
-      thisObject,
-      useCapture,
-      priority,
-      dispatchOnce
-    ) {
-      _super.prototype.$addListener.call(
-        this,
-        type,
-        listener,
-        thisObject,
-        useCapture,
-        priority,
-        dispatchOnce
-      )
+    DisplayObject.prototype.$addListener = function (type, listener, thisObject, useCapture, priority, dispatchOnce) {
+      _super.prototype.$addListener.call(this, type, listener, thisObject, useCapture, priority, dispatchOnce)
       var isEnterFrame = type == egret.Event.ENTER_FRAME
       if (isEnterFrame || type == egret.Event.RENDER) {
-        var list = isEnterFrame
-          ? DisplayObject.$enterFrameCallBackList
-          : DisplayObject.$renderCallBackList
+        var list = isEnterFrame ? DisplayObject.$enterFrameCallBackList : DisplayObject.$renderCallBackList
         if (list.indexOf(this) == -1) {
           list.push(this)
         }
@@ -2477,27 +2522,11 @@ var __define =
      * @version Egret 2.4
      * @platform Web,Native
      */
-    DisplayObject.prototype.removeEventListener = function (
-      type,
-      listener,
-      thisObject,
-      useCapture
-    ) {
-      _super.prototype.removeEventListener.call(
-        this,
-        type,
-        listener,
-        thisObject,
-        useCapture
-      )
+    DisplayObject.prototype.removeEventListener = function (type, listener, thisObject, useCapture) {
+      _super.prototype.removeEventListener.call(this, type, listener, thisObject, useCapture)
       var isEnterFrame = type == egret.Event.ENTER_FRAME
-      if (
-        (isEnterFrame || type == egret.Event.RENDER) &&
-        !this.hasEventListener(type)
-      ) {
-        var list = isEnterFrame
-          ? DisplayObject.$enterFrameCallBackList
-          : DisplayObject.$renderCallBackList
+      if ((isEnterFrame || type == egret.Event.RENDER) && !this.hasEventListener(type)) {
+        var list = isEnterFrame ? DisplayObject.$enterFrameCallBackList : DisplayObject.$renderCallBackList
         var index = list.indexOf(this)
         if (index !== -1) {
           list.splice(index, 1)
@@ -2547,25 +2576,17 @@ var __define =
     /**
      * @private
      */
-    DisplayObject.prototype.$dispatchPropagationEvent = function (
-      event,
-      list,
-      targetIndex
-    ) {
+    DisplayObject.prototype.$dispatchPropagationEvent = function (event, list, targetIndex) {
       var length = list.length
       var captureIndex = targetIndex - 1
       for (var i = 0; i < length; i++) {
         var currentTarget = list[i]
         event.$currentTarget = currentTarget
         if (i < captureIndex) event.$eventPhase = 1
-        /* CAPTURING_PHASE */ else if (i == targetIndex || i == captureIndex)
-          event.$eventPhase = 2
+        /* CAPTURING_PHASE */ else if (i == targetIndex || i == captureIndex) event.$eventPhase = 2
         /* AT_TARGET */ else event.$eventPhase = 3 /* BUBBLING_PHASE */
         currentTarget.$notifyListener(event, i < targetIndex)
-        if (
-          event.$isPropagationStopped ||
-          event.$isPropagationImmediateStopped
-        ) {
+        if (event.$isPropagationStopped || event.$isPropagationImmediateStopped) {
           return
         }
       }
@@ -2601,11 +2622,10 @@ var __define =
       },
       set: function (value) {
         this._tint = value
-        this.$tintRGB =
-          (value >> 16) + (value & 0xff00) + ((value & 0xff) << 16)
+        this.$tintRGB = (value >> 16) + (value & 0xff00) + ((value & 0xff) << 16)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     DisplayObject.prototype.sortChildren = function () {
       this.$sortDirty = false
@@ -2633,7 +2653,7 @@ var __define =
         }
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -2665,6 +2685,35 @@ var __define =
   egret.DisplayObject = DisplayObject
   __reflect(DisplayObject.prototype, 'egret.DisplayObject')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * @private
@@ -2732,6 +2781,35 @@ var __define =
   egret.Filter = Filter
   __reflect(Filter.prototype, 'egret.Filter')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * @private
@@ -2770,6 +2848,35 @@ var __define =
     sys.tr = tr
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * SpriteSheet is a mosaic of multiple sub-bitmaps, comprising a plurality of Texture objects.
@@ -2947,6 +3054,35 @@ var __define =
   egret.SpriteSheet = SpriteSheet
   __reflect(SpriteSheet.prototype, 'egret.SpriteSheet')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The Event class is used as the base class for the creation of Event objects, which are passed as parameters to event
@@ -2984,6 +3120,16 @@ var __define =
    */
   var Event = (function (_super) {
     __extends(Event, _super)
+    /**
+     * Creates an Event object to pass as a parameter to event listeners.
+     * @param type  The type of the event, accessible as Event.type.
+     * @param bubbles  Determines whether the Event object participates in the bubbling stage of the event flow. The default value is false.
+     * @param cancelable Determines whether the Event object can be canceled. The default values is false.
+     * @param data the optional data associated with this event
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 创建一个作为参数传递给事件侦听器的 Event 对象。
      * @param type  事件的类型，可以作为 Event.type 访问。
@@ -3043,7 +3189,7 @@ var __define =
         return this.$type
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Event.prototype, 'bubbles', {
       /**
@@ -3062,7 +3208,7 @@ var __define =
         return this.$bubbles
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Event.prototype, 'cancelable', {
       /**
@@ -3084,7 +3230,7 @@ var __define =
         return this.$cancelable
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Event.prototype, 'eventPhase', {
       /**
@@ -3111,7 +3257,7 @@ var __define =
         return this.$eventPhase
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Event.prototype, 'currentTarget', {
       /**
@@ -3133,9 +3279,16 @@ var __define =
         return this.$currentTarget
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Event.prototype, 'target', {
+      /**
+       * The event target. This property contains the target node. For example, if a user clicks an OK button,
+       * the target node is the display list node containing that button.
+       * @version Egret 2.4
+       * @platform Web,Native
+       * @language en_US
+       */
       /**
        * 事件目标。此属性包含目标节点。例如，如果用户单击“确定”按钮，则目标节点就是包含该按钮的显示列表节点。
        * @version Egret 2.4
@@ -3146,12 +3299,21 @@ var __define =
         return this.$target
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Event.prototype.$setTarget = function (target) {
       this.$target = target
       return true
     }
+    /**
+     * Checks whether the preventDefault() method has been called on the event. If the preventDefault() method has been
+     * called, returns true; otherwise, returns false.
+     * @returns If preventDefault() has been called, returns true; otherwise, returns false.
+     * @see #preventDefault()
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 检查是否已对事件调用 preventDefault() 方法。
      * @returns 如果已调用 preventDefault() 方法，则返回 true；否则返回 false。
@@ -3163,6 +3325,20 @@ var __define =
     Event.prototype.isDefaultPrevented = function () {
       return this.$isDefaultPrevented
     }
+    /**
+     * Cancels an event's default behavior if that behavior can be canceled.Many events have associated behaviors that
+     * are carried out by default. For example, if a user types a character into a text input, the default behavior
+     * is that the character is displayed in the text input. Because the TextEvent.TEXT_INPUT event's default behavior
+     * can be canceled, you can use the preventDefault() method to prevent the character from appearing.
+     * You can use the Event.cancelable property to check whether you can prevent the default behavior associated with
+     * a particular event. If the value of Event.cancelable is true, then preventDefault() can be used to cancel the event;
+     * otherwise, preventDefault() has no effect.
+     * @see #cancelable
+     * @see #isDefaultPrevented
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 如果可以取消事件的默认行为，则取消该行为。
      * 许多事件都有默认执行的关联行为。例如，如果用户在文本字段中键入一个字符，则默认行为就是在文本字段中显示该字符。
@@ -3179,6 +3355,18 @@ var __define =
       if (this.$cancelable) this.$isDefaultPrevented = true
     }
     /**
+     * Prevents processing of any event listeners in nodes subsequent to the current node in the event flow. This method
+     * does not affect any event listeners in the current node (currentTarget). In contrast, the stopImmediatePropagation()
+     * method prevents processing of event listeners in both the current node and subsequent nodes. Additional calls to this
+     * method have no effect. This method can be called in any phase of the event flow.<br/>
+     * Note: This method does not cancel the behavior associated with this event; see preventDefault() for that functionality.
+     * @see #stopImmediatePropagation()
+     * @see #preventDefault()
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
+    /**
      * 防止对事件流中当前节点的后续节点中的所有事件侦听器进行处理。此方法不会影响当前节点 currentTarget 中的任何事件侦听器。
      * 相比之下，stopImmediatePropagation() 方法可以防止对当前节点中和后续节点中的事件侦听器进行处理。
      * 对此方法的其它调用没有任何效果。可以在事件流的任何阶段中调用此方法。<br/>
@@ -3193,6 +3381,17 @@ var __define =
       if (this.$bubbles) this.$isPropagationStopped = true
     }
     /**
+     * Prevents processing of any event listeners in the current node and any subsequent nodes in the event flow.
+     * This method takes effect immediately, and it affects event listeners in the current node. In contrast, the
+     * stopPropagation() method doesn't take effect until all the event listeners in the current node finish processing.<br/>
+     * Note: This method does not cancel the behavior associated with this event; see preventDefault() for that functionality.
+     * @see #stopPropagation()
+     * @see #preventDefault()
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
+    /**
      * 防止对事件流中当前节点中和所有后续节点中的事件侦听器进行处理。此方法会立即生效，并且会影响当前节点中的事件侦听器。
      * 相比之下，在当前节点中的所有事件侦听器都完成处理之前，stopPropagation() 方法不会生效。<br/>
      * 注意：此方法不会取消与此事件相关联的行为；有关此功能的信息，请参阅 preventDefault()。
@@ -3206,6 +3405,16 @@ var __define =
       if (this.$bubbles) this.$isPropagationImmediateStopped = true
     }
     /**
+     * This method will be called automatically when you pass the event object as the parameters to the Event.release() method.
+     * If your custom event is designed for reusable,you should override this method to make sure all the references to external
+     * objects are cleaned. if not,it may cause memory leaking.
+     * @see egret.Event.create()
+     * @see egret.Event.release()
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
+    /**
      * 当事件实例传递给Event.release()静态方法时，实例上的clean()方法将会被自动调用。
      * 若此自定义事件的实例设计为可以循环复用的，为了避免引起内存泄露，自定义事件需要覆盖此方法来确保实例被缓存前断开对外部对象的一切引用。
      * @see egret.Event.create()
@@ -3218,6 +3427,18 @@ var __define =
       this.data = this.$currentTarget = null
       this.$setTarget(null)
     }
+    /**
+     * EventDispatcher object using the specified event object thrown Event. Objects thrown objects will be cached in the pool for the next round robin.
+     * @param target the event target
+     * @param type The type of the event. Event listeners can access this information through the inherited type property.
+     * @param bubbles Determines whether the Event object bubbles. Event listeners can access this information through
+     * the inherited bubbles property.
+     * @param data {any} data
+     * @method egret.Event.dispatchEvent
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 使用指定的 EventDispatcher 对象来抛出 Event 事件对象。抛出的对象将会缓存在对象池上，供下次循环复用。
      * @param target {egret.IEventDispatcher} 派发事件目标
@@ -3253,6 +3474,27 @@ var __define =
       if (!props) props = EventClass._props = {}
       return props
     }
+    /**
+     * Gets one event instance from the object pool or create a new one. We highly recommend using the Event.create()
+     * and Event.release() methods to create and release an event object,it can reduce the number of reallocate objects,
+     * which allows you to get better code execution performance.<br/>
+     * Note: If you want to use this method to initialize your custom event object,you must make sure the constructor
+     * of your custom event is the same as the constructor of egret.Event.
+     * @param EventClass Event Class。
+     * @param type  The type of the event, accessible as Event.type.
+     * @param bubbles  Determines whether the Event object participates in the bubbling stage of the event flow. The default value is false.
+     * @param cancelable Determines whether the Event object can be canceled. The default values is false.
+     * @example
+     * <pre>
+     *    let event = Event.create(Event,type, bubbles);
+     *    event.data = data;    //optional,initializes custom data here
+     *    this.dispatchEvent(event);
+     *    Event.release(event);
+     * </pre>
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 从对象池中取出或创建一个新的事件实例。我们建议您尽可能使用Event.create()和Event.release() 这一对方法来创建和释放事件对象，
      * 这一对方法会将事件实例在内部缓存下来供下次循环使用，减少对象的创建次数,从而获得更高的代码运行性能。<br/>
@@ -3296,6 +3538,24 @@ var __define =
       return new EventClass(type, bubbles, cancelable)
     }
     /**
+     * Releases an event object and cache it into the object pool.We highly recommend using the Event.create()
+     * and Event.release() methods to create and release an event object,it can reduce the number of reallocate objects,
+     * which allows you to get better code execution performance.<br/>
+     * Note: The parameters of this method only accepts an instance created by the Event.create() method.
+     * if not,it may throw an error.
+     * @example
+     * <pre>
+     *    let event = Event.create(Event,type, bubbles);
+     *    event.data = data; //optional,initializes custom data here
+     *    this.dispatchEvent(event);
+     *    Event.release(event);
+     * </pre>
+     * @see #clean()
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
+    /**
      * 释放一个事件对象，并缓存到对象池。我们建议您尽可能使用Event.create()和Event.release() 这一对方法来创建和释放事件对象，
      * 这一对方法会将事件实例在内部缓存下来供下次循环使用，减少对象的创建次数,从而获得更高的代码运行性能。<br/>
      * 注意：此方法只能传入由Event.create()创建的事件实例，传入非法对象实例可能会导致报错。
@@ -3316,6 +3576,13 @@ var __define =
       var EventClass = Object.getPrototypeOf(event).constructor
       EventClass.eventPool.push(event)
     }
+    /**
+     * Dispatched when a display object is added to the on stage display list, either directly or through the addition
+     * of a sub tree in which the display object is contained.
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 在将显示对象直接添加到舞台显示列表或将包含显示对象的子树添加至舞台显示列表中时调度。
      * @version Egret 2.4
@@ -3538,6 +3805,35 @@ var __define =
   egret.Event = Event
   __reflect(Event.prototype, 'egret.Event')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The DisplayObjectContainer class is a basic display list building block: a display list node that can contain children.
@@ -3590,7 +3886,7 @@ var __define =
         return this.$children.length
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * Set children sort mode.
@@ -3678,11 +3974,7 @@ var __define =
     /**
      * @private
      */
-    DisplayObjectContainer.prototype.$doAddChild = function (
-      child,
-      index,
-      notifyListeners
-    ) {
+    DisplayObjectContainer.prototype.$doAddChild = function (child, index, notifyListeners) {
       if (notifyListeners === void 0) {
         notifyListeners = true
       }
@@ -3690,10 +3982,7 @@ var __define =
       if (true) {
         if (child == self) {
           egret.$error(1005)
-        } else if (
-          child instanceof egret.DisplayObjectContainer &&
-          child.contains(self)
-        ) {
+        } else if (child instanceof egret.DisplayObjectContainer && child.contains(self)) {
           egret.$error(1004)
         }
       }
@@ -3708,10 +3997,7 @@ var __define =
       self.$children.splice(index, 0, child)
       child.$setParent(self)
       if (egret.nativeRender) {
-        self.$nativeDisplayObject.addChildAt(
-          child.$nativeDisplayObject.id,
-          index
-        )
+        self.$nativeDisplayObject.addChildAt(child.$nativeDisplayObject.id, index)
       }
       var stage = self.$stage
       if (stage) {
@@ -3924,10 +4210,7 @@ var __define =
     /**
      * @private
      */
-    DisplayObjectContainer.prototype.$doRemoveChild = function (
-      index,
-      notifyListeners
-    ) {
+    DisplayObjectContainer.prototype.$doRemoveChild = function (index, notifyListeners) {
       if (notifyListeners === void 0) {
         notifyListeners = true
       }
@@ -4027,10 +4310,7 @@ var __define =
       this.$childAdded(child, index)
       if (egret.nativeRender) {
         this.$nativeDisplayObject.removeChild(child.$nativeDisplayObject.id)
-        this.$nativeDisplayObject.addChildAt(
-          child.$nativeDisplayObject.id,
-          index
-        )
+        this.$nativeDisplayObject.addChildAt(child.$nativeDisplayObject.id, index)
       } else {
         if (!self.$cacheDirty) {
           self.$cacheDirty = true
@@ -4066,18 +4346,10 @@ var __define =
      * @platform Web,Native
      * @language zh_CN
      */
-    DisplayObjectContainer.prototype.swapChildrenAt = function (
-      index1,
-      index2
-    ) {
+    DisplayObjectContainer.prototype.swapChildrenAt = function (index1, index2) {
       index1 = +index1 | 0
       index2 = +index2 | 0
-      if (
-        index1 >= 0 &&
-        index1 < this.$children.length &&
-        index2 >= 0 &&
-        index2 < this.$children.length
-      ) {
+      if (index1 >= 0 && index1 < this.$children.length && index2 >= 0 && index2 < this.$children.length) {
         this.doSwapChildrenAt(index1, index2)
       } else {
         true && egret.$error(1007)
@@ -4114,10 +4386,7 @@ var __define =
     /**
      * @private
      */
-    DisplayObjectContainer.prototype.doSwapChildrenAt = function (
-      index1,
-      index2
-    ) {
+    DisplayObjectContainer.prototype.doSwapChildrenAt = function (index1, index2) {
       var self = this
       if (index1 > index2) {
         var temp = index2
@@ -4191,10 +4460,7 @@ var __define =
     /**
      * @private
      */
-    DisplayObjectContainer.prototype.$onAddToStage = function (
-      stage,
-      nestLevel
-    ) {
+    DisplayObjectContainer.prototype.$onAddToStage = function (stage, nestLevel) {
       _super.prototype.$onAddToStage.call(this, stage, nestLevel)
       var children = this.$children
       var length = children.length
@@ -4284,7 +4550,7 @@ var __define =
         this.$setTouchChildren(!!value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -4389,6 +4655,35 @@ var __define =
   egret.DisplayObjectContainer = DisplayObjectContainer
   __reflect(DisplayObjectContainer.prototype, 'egret.DisplayObjectContainer')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var pointPool = []
   var DEG_TO_RAD = Math.PI / 180
@@ -4495,7 +4790,7 @@ var __define =
         return Math.sqrt(this.x * this.x + this.y * this.y)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * Sets the members of Point to the specified values
@@ -4571,9 +4866,7 @@ var __define =
      * @language zh_CN
      */
     Point.distance = function (p1, p2) {
-      return Math.sqrt(
-        (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y)
-      )
+      return Math.sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y))
     }
     /**
      * Copies all of the point data from the source Point object into the calling Point object.
@@ -4696,10 +4989,7 @@ var __define =
      * @language zh_CN
      */
     Point.polar = function (len, angle) {
-      return new Point(
-        len * egret.NumberUtils.cos(angle / DEG_TO_RAD),
-        len * egret.NumberUtils.sin(angle / DEG_TO_RAD)
-      )
+      return new Point(len * egret.NumberUtils.cos(angle / DEG_TO_RAD), len * egret.NumberUtils.sin(angle / DEG_TO_RAD))
     }
     /**
      * Subtracts the coordinates of another point from the coordinates of this point to create a new point.
@@ -4747,6 +5037,35 @@ var __define =
    */
   egret.$TempPoint = new Point()
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The Bitmap class represents display objects that represent bitmap images.
@@ -4827,9 +5146,7 @@ var __define =
       return _this
     }
     Bitmap.prototype.createNativeDisplayObject = function () {
-      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(
-        1 /* BITMAP */
-      )
+      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(1 /* BITMAP */)
     }
     /**
      * @private
@@ -4879,7 +5196,7 @@ var __define =
         }
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -5039,7 +5356,7 @@ var __define =
         this.$setScale9Grid(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Bitmap.prototype.$setScale9Grid = function (value) {
       var self = this
@@ -5047,12 +5364,7 @@ var __define =
       self.$renderDirty = true
       if (egret.nativeRender) {
         if (value) {
-          self.$nativeDisplayObject.setScale9Grid(
-            value.x,
-            value.y,
-            value.width,
-            value.height
-          )
+          self.$nativeDisplayObject.setScale9Grid(value.x, value.y, value.width, value.height)
         } else {
           self.$nativeDisplayObject.setScale9Grid(0, 0, -1, -1)
         }
@@ -5101,7 +5413,7 @@ var __define =
         this.$setFillMode(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Bitmap.prototype.$setFillMode = function (value) {
       var self = this
@@ -5163,7 +5475,7 @@ var __define =
         }
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -5226,38 +5538,26 @@ var __define =
      * 获取显示宽度
      */
     Bitmap.prototype.$getWidth = function () {
-      return isNaN(this.$explicitBitmapWidth)
-        ? this.$getContentBounds().width
-        : this.$explicitBitmapWidth
+      return isNaN(this.$explicitBitmapWidth) ? this.$getContentBounds().width : this.$explicitBitmapWidth
     }
     /**
      * @private
      * 获取显示宽度
      */
     Bitmap.prototype.$getHeight = function () {
-      return isNaN(this.$explicitBitmapHeight)
-        ? this.$getContentBounds().height
-        : this.$explicitBitmapHeight
+      return isNaN(this.$explicitBitmapHeight) ? this.$getContentBounds().height : this.$explicitBitmapHeight
     }
     /**
      * @private
      */
     Bitmap.prototype.$measureContentBounds = function (bounds) {
       if (this.$bitmapData) {
-        var w = !isNaN(this.$explicitBitmapWidth)
-          ? this.$explicitBitmapWidth
-          : this.$textureWidth
-        var h = !isNaN(this.$explicitBitmapHeight)
-          ? this.$explicitBitmapHeight
-          : this.$textureHeight
+        var w = !isNaN(this.$explicitBitmapWidth) ? this.$explicitBitmapWidth : this.$textureWidth
+        var h = !isNaN(this.$explicitBitmapHeight) ? this.$explicitBitmapHeight : this.$textureHeight
         bounds.setTo(0, 0, w, h)
       } else {
-        var w = !isNaN(this.$explicitBitmapWidth)
-          ? this.$explicitBitmapWidth
-          : 0
-        var h = !isNaN(this.$explicitBitmapHeight)
-          ? this.$explicitBitmapHeight
-          : 0
+        var w = !isNaN(this.$explicitBitmapWidth) ? this.$explicitBitmapWidth : 0
+        var h = !isNaN(this.$explicitBitmapHeight) ? this.$explicitBitmapHeight : 0
         bounds.setTo(0, 0, w, h)
       }
     }
@@ -5266,12 +5566,8 @@ var __define =
      */
     Bitmap.prototype.$updateRenderNode = function () {
       if (this.$texture) {
-        var destW = !isNaN(this.$explicitBitmapWidth)
-          ? this.$explicitBitmapWidth
-          : this.$textureWidth
-        var destH = !isNaN(this.$explicitBitmapHeight)
-          ? this.$explicitBitmapHeight
-          : this.$textureHeight
+        var destW = !isNaN(this.$explicitBitmapWidth) ? this.$explicitBitmapWidth : this.$textureWidth
+        var destH = !isNaN(this.$explicitBitmapHeight) ? this.$explicitBitmapHeight : this.$textureHeight
         var scale9Grid = this.scale9Grid || this.$texture['scale9Grid']
         if (scale9Grid) {
           if (this.$renderNode instanceof egret.sys.NormalBitmapNode) {
@@ -5296,10 +5592,7 @@ var __define =
             this.$smoothing
           )
         } else {
-          if (
-            this.fillMode == egret.BitmapFillMode.REPEAT &&
-            this.$renderNode instanceof egret.sys.NormalBitmapNode
-          ) {
+          if (this.fillMode == egret.BitmapFillMode.REPEAT && this.$renderNode instanceof egret.sys.NormalBitmapNode) {
             this.$renderNode = new egret.sys.BitmapNode()
           }
           egret.sys.BitmapNode.$updateTextureData(
@@ -5349,7 +5642,7 @@ var __define =
         this._pixelHitTest = !!value
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Bitmap.prototype.$hitTest = function (stageX, stageY) {
       var target = _super.prototype.$hitTest.call(this, stageX, stageY)
@@ -5383,6 +5676,35 @@ var __define =
   egret.Bitmap = Bitmap
   __reflect(Bitmap.prototype, 'egret.Bitmap')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * @class egret.GlowFilter
@@ -5424,16 +5746,7 @@ var __define =
      * @platform Web
      * @language zh_CN
      */
-    function GlowFilter(
-      color,
-      alpha,
-      blurX,
-      blurY,
-      strength,
-      quality,
-      inner,
-      knockout
-    ) {
+    function GlowFilter(color, alpha, blurX, blurY, strength, quality, inner, knockout) {
       if (color === void 0) {
         color = 0xff0000
       }
@@ -5476,12 +5789,7 @@ var __define =
       self.$quality = quality
       self.$inner = inner
       self.$knockout = knockout
-      self.$uniforms.color = {
-        x: _this.$red / 255,
-        y: _this.$green / 255,
-        z: _this.$blue / 255,
-        w: 1,
-      }
+      self.$uniforms.color = { x: _this.$red / 255, y: _this.$green / 255, z: _this.$blue / 255, w: 1 }
       self.$uniforms.alpha = alpha
       self.$uniforms.blurX = blurX
       self.$uniforms.blurY = blurY
@@ -5524,7 +5832,7 @@ var __define =
         this.$uniforms.color.z = this.$blue / 255
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(GlowFilter.prototype, 'alpha', {
       /**
@@ -5550,7 +5858,7 @@ var __define =
         this.$uniforms.alpha = value
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(GlowFilter.prototype, 'blurX', {
       /**
@@ -5578,7 +5886,7 @@ var __define =
         self.onPropertyChange()
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(GlowFilter.prototype, 'blurY', {
       /**
@@ -5606,7 +5914,7 @@ var __define =
         self.onPropertyChange()
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(GlowFilter.prototype, 'strength', {
       /**
@@ -5632,7 +5940,7 @@ var __define =
         this.$uniforms.strength = value
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(GlowFilter.prototype, 'quality', {
       /**
@@ -5657,7 +5965,7 @@ var __define =
         this.$quality = value
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(GlowFilter.prototype, 'inner', {
       /**
@@ -5683,7 +5991,7 @@ var __define =
         this.$uniforms.inner = value ? 1 : 0
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(GlowFilter.prototype, 'knockout', {
       /**
@@ -5709,7 +6017,7 @@ var __define =
         this.$uniforms.knockout = value ? 0 : 1
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -5753,6 +6061,35 @@ var __define =
   egret.GlowFilter = GlowFilter
   __reflect(GlowFilter.prototype, 'egret.GlowFilter')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   egret.$TextureScaleFactor = 1
   /**
@@ -5889,7 +6226,7 @@ var __define =
         return this.$getTextureWidth()
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Texture.prototype.$getTextureWidth = function () {
       return this.$textureWidth
@@ -5911,7 +6248,7 @@ var __define =
         return this.$getTextureHeight()
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Texture.prototype.$getTextureHeight = function () {
       return this.$textureHeight
@@ -5943,7 +6280,7 @@ var __define =
         this._setBitmapData(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * Set the BitmapData object.
@@ -5984,7 +6321,7 @@ var __define =
         this._setKtxData(data)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * Set the KTXData object.
@@ -6168,6 +6505,35 @@ var __define =
   egret.Texture = Texture
   __reflect(Texture.prototype, 'egret.Texture')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -6206,6 +6572,35 @@ var __define =
     __reflect(RenderNode.prototype, 'egret.sys.RenderNode')
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -6267,12 +6662,7 @@ var __define =
        * @param anchorX 一个数字，指定下一个锚点相对于父显示对象注册点的水平位置。
        * @param anchorY 一个数字，指定下一个锚点相对于父显示对象注册点的垂直位置。
        */
-      Path2D.prototype.curveTo = function (
-        controlX,
-        controlY,
-        anchorX,
-        anchorY
-      ) {
+      Path2D.prototype.curveTo = function (controlX, controlY, anchorX, anchorY) {
         this.$commands[this.commandPosition++] = 3 /* CurveTo */
         var pos = this.dataPosition
         this.$data[pos++] = controlX
@@ -6290,14 +6680,7 @@ var __define =
        * @param anchorX 指定锚点相对于父显示对象的注册点的水平位置。
        * @param anchorY 指定锚点相对于父显示对象的注册点的垂直位置。
        */
-      Path2D.prototype.cubicCurveTo = function (
-        controlX1,
-        controlY1,
-        controlX2,
-        controlY2,
-        anchorX,
-        anchorY
-      ) {
+      Path2D.prototype.cubicCurveTo = function (controlX1, controlY1, controlX2, controlY2, anchorX, anchorY) {
         this.$commands[this.commandPosition++] = 4 /* CubicCurveTo */
         var pos = this.dataPosition
         this.$data[pos++] = controlX1
@@ -6333,14 +6716,7 @@ var __define =
        * @param ellipseWidth 用于绘制圆角的椭圆的宽度（以像素为单位）。
        * @param ellipseHeight 用于绘制圆角的椭圆的高度（以像素为单位）。 （可选）如果未指定值，则默认值与为 ellipseWidth 参数提供的值相匹配。
        */
-      Path2D.prototype.drawRoundRect = function (
-        x,
-        y,
-        width,
-        height,
-        ellipseWidth,
-        ellipseHeight
-      ) {
+      Path2D.prototype.drawRoundRect = function (x, y, width, height, ellipseWidth, ellipseHeight) {
         var radiusX = (ellipseWidth * 0.5) | 0
         var radiusY = ellipseHeight ? (ellipseHeight * 0.5) | 0 : radiusX
         if (!radiusX || !radiusY) {
@@ -6419,14 +6795,7 @@ var __define =
        * 注意，必须在0~2π之间。
        * @param anticlockwise 如果为 true，逆时针绘制圆弧，反之，顺时针绘制。
        */
-      Path2D.prototype.drawArc = function (
-        x,
-        y,
-        radius,
-        startAngle,
-        endAngle,
-        anticlockwise
-      ) {
+      Path2D.prototype.drawArc = function (x, y, radius, startAngle, endAngle, anticlockwise) {
         if (anticlockwise) {
           if (endAngle >= startAngle) {
             endAngle -= Math.PI * 2
@@ -6436,15 +6805,7 @@ var __define =
             endAngle += Math.PI * 2
           }
         }
-        this.arcToBezier(
-          x,
-          y,
-          radius,
-          radius,
-          startAngle,
-          endAngle,
-          anticlockwise
-        )
+        this.arcToBezier(x, y, radius, radius, startAngle, endAngle, anticlockwise)
       }
       /**
        * 绘制一段圆弧路径
@@ -6459,15 +6820,7 @@ var __define =
        * @param anticlockwise 如果为 true，逆时针绘制圆弧，反之，顺时针绘制。
        * 注意：如果为true，endAngle必须小于startAngle，反之必须大于。
        */
-      Path2D.prototype.arcToBezier = function (
-        x,
-        y,
-        radiusX,
-        radiusY,
-        startAngle,
-        endAngle,
-        anticlockwise
-      ) {
+      Path2D.prototype.arcToBezier = function (x, y, radiusX, radiusY, startAngle, endAngle, anticlockwise) {
         var halfPI = Math.PI * 0.5
         var start = startAngle
         var end = start
@@ -6524,9 +6877,66 @@ var __define =
     __reflect(Path2D.prototype, 'egret.sys.Path2D')
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
 /**
  * @private
  */
+var egret
 ;(function (egret) {
   //todo remove
   /**
@@ -6534,6 +6944,7 @@ var __define =
    */
   egret.fontMapping = {}
 })(egret || (egret = {}))
+var egret
 ;(function (egret) {
   /**
    * @private
@@ -6546,8 +6957,37 @@ var __define =
   }
   egret.createMap = createMap
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
 global.DEBUG = true
 global.RELEASE = false
+var egret
 ;(function (egret) {
   /**
    * @private
@@ -6588,10 +7028,7 @@ global.RELEASE = false
     if (isProperty === void 0) {
       isProperty = true
     }
-    var data = Object.getOwnPropertyDescriptor(
-      isProperty ? instance.prototype : instance,
-      property
-    )
+    var data = Object.getOwnPropertyDescriptor(isProperty ? instance.prototype : instance, property)
     if (data == null) {
       console.log(instance)
       return
@@ -6615,11 +7052,40 @@ global.RELEASE = false
         egret.$error(1009, egret.getQualifiedClassName(instance), property)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
   }
   egret.$markCannotUse = markCannotUse
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The BitmapFillMode class defines the image fill mode of Bitmap.
@@ -6678,9 +7144,38 @@ global.RELEASE = false
      * @platform Web,Native
      * @language zh_CN
      */
-    CLIP: 'clip',
+    CLIP: 'clip'
   }
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The Stage class represents the main drawing area.The Stage object is not globally accessible. You need to access
@@ -6761,9 +7256,7 @@ global.RELEASE = false
       return _this
     }
     Stage.prototype.createNativeDisplayObject = function () {
-      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(
-        13 /* STAGE */
-      )
+      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(13 /* STAGE */)
     }
     Object.defineProperty(Stage.prototype, 'frameRate', {
       /**
@@ -6790,7 +7283,7 @@ global.RELEASE = false
         egret.ticker.$setFrameRate(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Stage.prototype, 'stageWidth', {
       /**
@@ -6809,7 +7302,7 @@ global.RELEASE = false
         return this.$stageWidth
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Stage.prototype, 'stageHeight', {
       /**
@@ -6828,7 +7321,7 @@ global.RELEASE = false
         return this.$stageHeight
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * After you call the invalidate() method, when the display list is next rendered, the Egret runtime sends a render
@@ -6851,10 +7344,7 @@ global.RELEASE = false
     /**
      * @deprecated
      */
-    Stage.prototype.registerImplementation = function (
-      interfaceName,
-      instance
-    ) {
+    Stage.prototype.registerImplementation = function (interfaceName, instance) {
       egret.registerImplementation(interfaceName, instance)
     }
     /**
@@ -6901,7 +7391,7 @@ global.RELEASE = false
         this.$screen.updateScreenSize()
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Stage.prototype, 'orientation', {
       /**
@@ -6939,7 +7429,7 @@ global.RELEASE = false
         this.$screen.updateScreenSize()
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Stage.prototype, 'textureScaleFactor', {
       /**
@@ -6959,7 +7449,7 @@ global.RELEASE = false
         egret.$TextureScaleFactor = value
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Stage.prototype, 'maxTouches', {
       /**
@@ -6983,7 +7473,7 @@ global.RELEASE = false
         this.$screen.updateMaxTouches()
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * Set resolution size
@@ -7024,6 +7514,35 @@ global.RELEASE = false
     egret.$markCannotUse(Stage, 'matrix', null)
   }
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   //混合模式在Web端只有部分被支持，在 Native 中全部都支持。
   //目前所有平台的浏览器都支持的有：Layer,Alpha,Normal,Add,ERASE。
@@ -7131,6 +7650,35 @@ global.RELEASE = false
     sys.numberToBlendMode = numberToBlendMode
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The ChildrenSortMode class defines a pattern enumeration for children sort mode of egret.DisplayObjectContainer.
@@ -7183,9 +7731,38 @@ global.RELEASE = false
      * @platform Native
      * @language en_US
      */
-    DECREASE_Y: 'decreaseY',
+    DECREASE_Y: 'decreaseY'
   }
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The CapsStyle class is an enumeration of constant values that specify the caps style to use in drawing lines.
@@ -7241,9 +7818,38 @@ global.RELEASE = false
      * @platform Web,Native
      * @language zh_CN
      */
-    SQUARE: 'square',
+    SQUARE: 'square'
   }
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * @private
@@ -7273,7 +7879,7 @@ global.RELEASE = false
       gl.shaderSource(shader, shaderSrc)
       gl.compileShader(shader)
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        //egret.info(gl.getShaderInfoLog(shader));
+        //egret.gameInfo(gl.getShaderInfoLog(shader));
         return null
       }
       return shader
@@ -7284,10 +7890,7 @@ global.RELEASE = false
           var canvas = document.createElement('canvas')
           WebGLUtils.canUseWebGL =
             !!window['WebGLRenderingContext'] &&
-            !!(
-              canvas.getContext('webgl') ||
-              canvas.getContext('experimental-webgl')
-            )
+            !!(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
         } catch (e) {
           WebGLUtils.canUseWebGL = false
         }
@@ -7301,9 +7904,7 @@ global.RELEASE = false
       if (webglTexture[egret.engine_default_empty_texture]) {
         if (true) {
           //引擎默认的空白纹理，不允许删除
-          console.warn(
-            'deleteWebGLTexture:' + egret.engine_default_empty_texture
-          )
+          console.warn('deleteWebGLTexture:' + egret.engine_default_empty_texture)
         }
         return
       }
@@ -7316,16 +7917,16 @@ global.RELEASE = false
         }
       }
       /*old
-          if (webglTexture && !webglTexture['engine_default_empty_texture']) {
-              const gl = webglTexture['glContext'] as WebGLRenderingContext;//bitmapData.glContext;
-              if (gl) {
-                  gl.deleteTexture(webglTexture);
-              }
-              else {
-                  console.error('deleteWebGLTexture gl = ' + gl);
-              }
-          }
-          */
+            if (webglTexture && !webglTexture['engine_default_empty_texture']) {
+                const gl = webglTexture['glContext'] as WebGLRenderingContext;//bitmapData.glContext;
+                if (gl) {
+                    gl.deleteTexture(webglTexture);
+                }
+                else {
+                    console.error('deleteWebGLTexture gl = ' + gl);
+                }
+            }
+            */
     }
     /**
      * inspired by pixi.js
@@ -7350,6 +7951,63 @@ global.RELEASE = false
   egret.WebGLUtils = WebGLUtils
   __reflect(WebGLUtils.prototype, 'egret.WebGLUtils')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   // export interface TextField{
   //     addEventListener<Z>(type: "focusIn" |
@@ -7431,6 +8089,35 @@ global.RELEASE = false
   egret.FocusEvent = FocusEvent
   __reflect(FocusEvent.prototype, 'egret.FocusEvent')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The GeolocationEvent represents the position and altitude of the device on Earth,
@@ -7485,6 +8172,35 @@ global.RELEASE = false
   egret.GeolocationEvent = GeolocationEvent
   __reflect(GeolocationEvent.prototype, 'egret.GeolocationEvent')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * When a network request returns an HTTP status code, the application dispatches HTTPStatusEvent objects.
@@ -7551,7 +8267,7 @@ global.RELEASE = false
         return this._status
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * EventDispatcher object using the specified event object thrown Event. The objects will be thrown in the object cache pool for the next round robin.
@@ -7570,10 +8286,7 @@ global.RELEASE = false
      * @language zh_CN
      */
     HTTPStatusEvent.dispatchHTTPStatusEvent = function (target, status) {
-      var event = egret.Event.create(
-        HTTPStatusEvent,
-        HTTPStatusEvent.HTTP_STATUS
-      )
+      var event = egret.Event.create(HTTPStatusEvent, HTTPStatusEvent.HTTP_STATUS)
       event._status = status
       var result = target.dispatchEvent(event)
       egret.Event.release(event)
@@ -7597,6 +8310,63 @@ global.RELEASE = false
   egret.HTTPStatusEvent = HTTPStatusEvent
   __reflect(HTTPStatusEvent.prototype, 'egret.HTTPStatusEvent')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * @classdesc IO流事件，当错误导致输入或输出操作失败时调度 IOErrorEvent 对象。
@@ -7679,6 +8449,35 @@ global.RELEASE = false
   egret.IOErrorEvent = IOErrorEvent
   __reflect(IOErrorEvent.prototype, 'egret.IOErrorEvent')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * MotionEvent represents the device's movement
@@ -7708,6 +8507,35 @@ global.RELEASE = false
   egret.MotionEvent = MotionEvent
   __reflect(MotionEvent.prototype, 'egret.MotionEvent')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The OrientationEvent provides information from the physical orientation of the device.
@@ -7737,6 +8565,35 @@ global.RELEASE = false
   egret.OrientationEvent = OrientationEvent
   __reflect(OrientationEvent.prototype, 'egret.OrientationEvent')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * When a load operation has begun or a socket has received data, ProgressEvent object is dispatched.
@@ -7840,12 +8697,7 @@ global.RELEASE = false
      * @platform Web,Native
      * @language zh_CN
      */
-    ProgressEvent.dispatchProgressEvent = function (
-      target,
-      type,
-      bytesLoaded,
-      bytesTotal
-    ) {
+    ProgressEvent.dispatchProgressEvent = function (target, type, bytesLoaded, bytesTotal) {
       if (bytesLoaded === void 0) {
         bytesLoaded = 0
       }
@@ -7890,6 +8742,35 @@ global.RELEASE = false
   egret.ProgressEvent = ProgressEvent
   __reflect(ProgressEvent.prototype, 'egret.ProgressEvent')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * When the direction of the stage of change, Stage object dispatches StageOrientationEvent object.
@@ -7950,10 +8831,7 @@ global.RELEASE = false
      * @platform Web,Native
      * @language zh_CN
      */
-    StageOrientationEvent.dispatchStageOrientationEvent = function (
-      target,
-      type
-    ) {
+    StageOrientationEvent.dispatchStageOrientationEvent = function (target, type) {
       var event = egret.Event.create(StageOrientationEvent, type)
       var result = target.dispatchEvent(event)
       egret.Event.release(event)
@@ -7977,6 +8855,35 @@ global.RELEASE = false
   egret.StageOrientationEvent = StageOrientationEvent
   __reflect(StageOrientationEvent.prototype, 'egret.StageOrientationEvent')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   // export interface TextField{
   //     addEventListener<Z>(type: "link"
@@ -8076,6 +8983,35 @@ global.RELEASE = false
   egret.TextEvent = TextEvent
   __reflect(TextEvent.prototype, 'egret.TextEvent')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * A Timer object dispatches a TimerEvent objects whenever the Timer object reaches the interval specified by the Timer.delay property.
@@ -8190,12 +9126,7 @@ global.RELEASE = false
      * @platform Web,Native
      * @language zh_CN
      */
-    TimerEvent.dispatchTimerEvent = function (
-      target,
-      type,
-      bubbles,
-      cancelable
-    ) {
+    TimerEvent.dispatchTimerEvent = function (target, type, bubbles, cancelable) {
       var event = egret.Event.create(TimerEvent, type, bubbles, cancelable)
       var result = target.dispatchEvent(event)
       egret.Event.release(event)
@@ -8232,6 +9163,35 @@ global.RELEASE = false
   egret.TimerEvent = TimerEvent
   __reflect(TimerEvent.prototype, 'egret.TimerEvent')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   //refactor
   var CompressedTextureData = (function () {
@@ -8331,14 +9291,11 @@ global.RELEASE = false
       set: function (value) {
         this.$source = value
         if (egret.nativeRender) {
-          egret_native.NativeDisplayObject.setSourceToNativeBitmapData(
-            this.$nativeBitmapData,
-            value
-          )
+          egret_native.NativeDisplayObject.setSourceToNativeBitmapData(this.$nativeBitmapData, value)
         }
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     BitmapData.create = function (type, data, callback) {
       var base64 = ''
@@ -8384,16 +9341,14 @@ global.RELEASE = false
         this.source.src = ''
       }
       this.source = null
-      ///dispose compressed texture info
+      ///dispose compressed texture gameInfo
       //this.bitmapCompressedData.length = 0;
       this.clearCompressedTextureData()
       this.debugCompressedTextureURL = ''
       this.etcAlphaMask = null
       ///
       if (egret.nativeRender) {
-        egret_native.NativeDisplayObject.disposeNativeBitmapData(
-          this.$nativeBitmapData
-        )
+        egret_native.NativeDisplayObject.disposeNativeBitmapData(this.$nativeBitmapData)
       }
       BitmapData.$dispose(this)
     }
@@ -8511,6 +9466,36 @@ global.RELEASE = false
   egret.BitmapData = BitmapData
   __reflect(BitmapData.prototype, 'egret.BitmapData')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+/// <reference path="../geom/Point.ts" />
+var egret
 ;(function (egret) {
   var localPoint = new egret.Point()
   /**
@@ -8568,14 +9553,7 @@ global.RELEASE = false
      * @platform Web,Native
      * @language zh_CN
      */
-    function TouchEvent(
-      type,
-      bubbles,
-      cancelable,
-      stageX,
-      stageY,
-      touchPointID
-    ) {
+    function TouchEvent(type, bubbles, cancelable, stageX, stageY, touchPointID) {
       var _this = _super.call(this, type, bubbles, cancelable) || this
       _this.targetChanged = true
       /**
@@ -8619,7 +9597,7 @@ global.RELEASE = false
         return this.$stageX
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(TouchEvent.prototype, 'stageY', {
       /**
@@ -8638,7 +9616,7 @@ global.RELEASE = false
         return this.$stageY
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(TouchEvent.prototype, 'localX', {
       /**
@@ -8660,7 +9638,7 @@ global.RELEASE = false
         return this._localX
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(TouchEvent.prototype, 'localY', {
       /**
@@ -8682,7 +9660,7 @@ global.RELEASE = false
         return this._localY
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -8700,6 +9678,12 @@ global.RELEASE = false
       return true
     }
     /**
+     * Instructs Egret runtime to render after processing of this event completes, if the display list has been modified.
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
+    /**
      * 如果已修改显示列表，调用此方法将会忽略帧频限制，在此事件处理完成后立即重绘屏幕。
      * @version Egret 2.4
      * @platform Web,Native
@@ -8708,6 +9692,24 @@ global.RELEASE = false
     TouchEvent.prototype.updateAfterEvent = function () {
       egret.sys.$requestRenderingFlag = true
     }
+    /**
+     * uses a specified target to dispatchEvent an event. Using this method can reduce the number of
+     * reallocate event objects, which allows you to get better code execution performance.
+     * @param target the event target
+     * @param type  The type of the event, accessible as Event.type.
+     * @param bubbles  Determines whether the Event object participates in the bubbling stage of the event flow. The default value is false.
+     * @param cancelable Determines whether the Event object can be canceled. The default values is false.
+     * @param stageX The horizontal coordinate at which the event occurred in global Stage coordinates.
+     * @param stageY The vertical coordinate at which the event occurred in global Stage coordinates.
+     * @param touchPointID A unique identification number (as an int) assigned to the touch point.
+     *
+     * @see egret.Event.create()
+     * @see egret.Event.release()
+     *
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 使用指定的EventDispatcher对象来抛出Event事件对象。抛出的对象将会缓存在对象池上，供下次循环复用。
      * @param target 派发事件目标
@@ -8749,12 +9751,24 @@ global.RELEASE = false
       return result
     }
     /**
+     * Dispatched when the user touches the device, and is continuously dispatched until the point of contact is removed.
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
+    /**
      * 当用户触碰设备时进行调度，而且会连续调度，直到接触点被删除。
      * @version Egret 2.4
      * @platform Web,Native
      * @language zh_CN
      */
     TouchEvent.TOUCH_MOVE = 'touchMove'
+    /**
+     * Dispatched when the user first contacts a touch-enabled device (such as touches a finger to a mobile phone or tablet with a touch screen).
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 当用户第一次触摸启用触摸的设备时（例如，用手指触摸配有触摸屏的移动电话或平板电脑）调度。
      * @version Egret 2.4
@@ -8763,12 +9777,26 @@ global.RELEASE = false
      */
     TouchEvent.TOUCH_BEGIN = 'touchBegin'
     /**
+     * Dispatched when the user removes contact with a touch-enabled device (such as lifts a finger off a mobile phone
+     * or tablet with a touch screen).
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
+    /**
      * 当用户移除与启用触摸的设备的接触时（例如，将手指从配有触摸屏的移动电话或平板电脑上抬起）调度。
      * @version Egret 2.4
      * @platform Web,Native
      * @language zh_CN
      */
     TouchEvent.TOUCH_END = 'touchEnd'
+    /**
+     * Dispatched when an event of some kind occurred that canceled the touch.
+     * Such as the eui.Scroller will dispatch 'TOUCH_CANCEL' when it start move, the 'TOUCH_END' and 'TOUCH_TAP' will not be triggered.
+     * @version Egret 3.0.1
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 由于某个事件取消了触摸时触发。比如 eui.Scroller 在开始滚动后会触发 'TOUCH_CANCEL' 事件，不再触发后续的 'TOUCH_END' 和 'TOUCH_TAP' 事件
      * @version Egret 3.0.1
@@ -8777,12 +9805,27 @@ global.RELEASE = false
      */
     TouchEvent.TOUCH_CANCEL = 'touchCancel'
     /**
+     * Dispatched when the user lifts the point of contact over the same DisplayObject instance on which the contact
+     * was initiated on a touch-enabled device.
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
+    /**
      * 当用户在触摸设备上与开始触摸的同一 DisplayObject 实例上抬起接触点时调度。
      * @version Egret 2.4
      * @platform Web,Native
      * @language zh_CN
      */
     TouchEvent.TOUCH_TAP = 'touchTap'
+    /**
+     * Dispatched when the user lifts the point of contact over the different DisplayObject instance on which the contact
+     * was initiated on a touch-enabled device (such as presses and releases a finger from a single point over a display
+     * object on a mobile phone or tablet with a touch screen).
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 当用户在触摸设备上与开始触摸的不同 DisplayObject 实例上抬起接触点时调度。
      * @version Egret 2.4
@@ -8795,8 +9838,102 @@ global.RELEASE = false
   egret.TouchEvent = TouchEvent
   __reflect(TouchEvent.prototype, 'egret.TouchEvent')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {})(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
+  /**
+   * The BlurFilter class lets you apply a blur visual effect to display objects. A blur effect softens the details of an image.
+   * You can produce blurs that range from a softly unfocused look to a Gaussian blur, a hazy appearance like viewing an image through semi-opaque glass.
+   * @version Egret 3.0.1
+   * @platform Web
+   * @see http://edn.egret.com/cn/docs/page/947#模糊滤镜 模糊滤镜
+   * @language en_US
+   */
   /**
    * 可使用 BlurFilter 类将模糊视觉效果应用于显示对象。模糊效果可以柔化图像的细节。
    * 您可以生成一些模糊效果，范围从创建一个柔化的、未聚焦的外观到高斯模糊（就像通过半透明玻璃查看图像一样的朦胧的外观）。
@@ -8872,7 +10009,7 @@ global.RELEASE = false
         self.onPropertyChange()
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(BlurFilter.prototype, 'blurY', {
       /**
@@ -8900,19 +10037,13 @@ global.RELEASE = false
         self.onPropertyChange()
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
      */
     BlurFilter.prototype.$toJson = function () {
-      return (
-        '{"blurX": ' +
-        this.$blurX +
-        ', "blurY": ' +
-        this.$blurY +
-        ', "quality": 1}'
-      )
+      return '{"blurX": ' + this.$blurX + ', "blurY": ' + this.$blurY + ', "quality": 1}'
     }
     BlurFilter.prototype.updatePadding = function () {
       var self = this
@@ -8970,7 +10101,7 @@ global.RELEASE = false
         this.$uniforms.blur.x = value
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     return BlurXFilter
   })(egret.Filter)
@@ -8999,12 +10130,41 @@ global.RELEASE = false
         this.$uniforms.blur.y = value
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     return BlurYFilter
   })(egret.Filter)
   __reflect(BlurYFilter.prototype, 'BlurYFilter', ['egret.IBlurYFilter'])
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The ColorMatrixFilter class lets you apply a 4 x 5 matrix transformation on the RGBA color and alpha values of every pixel in the input image to produce a result with a new set of RGBA color and alpha values.
@@ -9083,7 +10243,7 @@ global.RELEASE = false
         this.setMatrix(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -9128,11 +10288,38 @@ global.RELEASE = false
   egret.ColorMatrixFilter = ColorMatrixFilter
   __reflect(ColorMatrixFilter.prototype, 'egret.ColorMatrixFilter')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var SOURCE_KEY_MAP = {}
-  var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(
-    ''
-  )
+  var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('')
   var uuid = new Array(36)
   var rnd = 0,
     r
@@ -9232,7 +10419,7 @@ global.RELEASE = false
         self.onPropertyChange()
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(CustomFilter.prototype, 'uniforms', {
       /**
@@ -9251,7 +10438,7 @@ global.RELEASE = false
         return this.$uniforms
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * When native rendering acceleration is turned on, custom shaders need to be called manually when creating and updating properties
@@ -9283,6 +10470,35 @@ global.RELEASE = false
   egret.CustomFilter = CustomFilter
   __reflect(CustomFilter.prototype, 'egret.CustomFilter')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * @class egret.DropShadowFilter
@@ -9376,18 +10592,7 @@ global.RELEASE = false
       if (hideObject === void 0) {
         hideObject = false
       }
-      var _this =
-        _super.call(
-          this,
-          color,
-          alpha,
-          blurX,
-          blurY,
-          strength,
-          quality,
-          inner,
-          knockout
-        ) || this
+      var _this = _super.call(this, color, alpha, blurX, blurY, strength, quality, inner, knockout) || this
       var self = _this
       self.$distance = distance
       self.$angle = angle
@@ -9424,7 +10629,7 @@ global.RELEASE = false
         self.onPropertyChange()
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(DropShadowFilter.prototype, 'angle', {
       /**
@@ -9452,7 +10657,7 @@ global.RELEASE = false
         self.onPropertyChange()
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(DropShadowFilter.prototype, 'hideObject', {
       /**
@@ -9478,7 +10683,7 @@ global.RELEASE = false
         this.$uniforms.hideObject = value ? 1 : 0
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -9550,6 +10755,7 @@ global.RELEASE = false
   egret.DropShadowFilter = DropShadowFilter
   __reflect(DropShadowFilter.prototype, 'egret.DropShadowFilter')
 })(egret || (egret = {}))
+var egret
 ;(function (egret) {
   /**
    * The GradientType class provides values for the type parameter in the beginGradientFill() methods of the egret.Graphics class.
@@ -9600,6 +10806,35 @@ global.RELEASE = false
   egret.GradientType = GradientType
   __reflect(GradientType.prototype, 'egret.GradientType')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * @private
@@ -9675,10 +10910,7 @@ global.RELEASE = false
    * @param factor t，从0到1的闭区间
    */
   function getCurvePoint(value0, value1, value2, factor) {
-    var result =
-      Math.pow(1 - factor, 2) * value0 +
-      2 * factor * (1 - factor) * value1 +
-      Math.pow(factor, 2) * value2
+    var result = Math.pow(1 - factor, 2) * value0 + 2 * factor * (1 - factor) * value1 + Math.pow(factor, 2) * value2
     return result
   }
   /**
@@ -9867,33 +11099,14 @@ global.RELEASE = false
      * @version Egret 2.4
      * @language zh_CN
      */
-    Graphics.prototype.beginGradientFill = function (
-      type,
-      colors,
-      alphas,
-      ratios,
-      matrix
-    ) {
+    Graphics.prototype.beginGradientFill = function (type, colors, alphas, ratios, matrix) {
       if (matrix === void 0) {
         matrix = null
       }
       if (egret.nativeRender) {
-        this.$targetDisplay.$nativeDisplayObject.setBeginGradientFill(
-          type,
-          colors,
-          alphas,
-          ratios,
-          matrix
-        )
+        this.$targetDisplay.$nativeDisplayObject.setBeginGradientFill(type, colors, alphas, ratios, matrix)
       }
-      this.fillPath = this.$renderNode.beginGradientFill(
-        type,
-        colors,
-        alphas,
-        ratios,
-        matrix,
-        this.strokePath
-      )
+      this.fillPath = this.$renderNode.beginGradientFill(type, colors, alphas, ratios, matrix, this.strokePath)
       if (this.$renderNode.drawData.length > 1) {
         this.fillPath.moveTo(this.lastX, this.lastY)
       }
@@ -10002,15 +11215,7 @@ global.RELEASE = false
         this.setStrokeWidth(0)
       } else {
         this.setStrokeWidth(thickness)
-        this.strokePath = this.$renderNode.lineStyle(
-          thickness,
-          color,
-          alpha,
-          caps,
-          joints,
-          miterLimit,
-          lineDash
-        )
+        this.strokePath = this.$renderNode.lineStyle(thickness, color, alpha, caps, joints, miterLimit, lineDash)
         if (this.$renderNode.drawData.length > 1) {
           this.strokePath.moveTo(this.lastX, this.lastY)
         }
@@ -10042,12 +11247,7 @@ global.RELEASE = false
       width = +width || 0
       height = +height || 0
       if (egret.nativeRender) {
-        this.$targetDisplay.$nativeDisplayObject.setDrawRect(
-          x,
-          y,
-          width,
-          height
-        )
+        this.$targetDisplay.$nativeDisplayObject.setDrawRect(x, y, width, height)
       }
       var fillPath = this.fillPath
       var strokePath = this.strokePath
@@ -10081,14 +11281,7 @@ global.RELEASE = false
      * @platform Web,Native
      * @language zh_CN
      */
-    Graphics.prototype.drawRoundRect = function (
-      x,
-      y,
-      width,
-      height,
-      ellipseWidth,
-      ellipseHeight
-    ) {
+    Graphics.prototype.drawRoundRect = function (x, y, width, height, ellipseWidth, ellipseHeight) {
       x = +x || 0
       y = +y || 0
       width = +width || 0
@@ -10096,28 +11289,12 @@ global.RELEASE = false
       ellipseWidth = +ellipseWidth || 0
       ellipseHeight = +ellipseHeight || 0
       if (egret.nativeRender) {
-        this.$targetDisplay.$nativeDisplayObject.setDrawRoundRect(
-          x,
-          y,
-          width,
-          height,
-          ellipseWidth,
-          ellipseHeight
-        )
+        this.$targetDisplay.$nativeDisplayObject.setDrawRoundRect(x, y, width, height, ellipseWidth, ellipseHeight)
       }
       var fillPath = this.fillPath
       var strokePath = this.strokePath
-      fillPath &&
-        fillPath.drawRoundRect(x, y, width, height, ellipseWidth, ellipseHeight)
-      strokePath &&
-        strokePath.drawRoundRect(
-          x,
-          y,
-          width,
-          height,
-          ellipseWidth,
-          ellipseHeight
-        )
+      fillPath && fillPath.drawRoundRect(x, y, width, height, ellipseWidth, ellipseHeight)
+      strokePath && strokePath.drawRoundRect(x, y, width, height, ellipseWidth, ellipseHeight)
       var radiusX = (ellipseWidth * 0.5) | 0
       var radiusY = ellipseHeight ? (ellipseHeight * 0.5) | 0 : radiusX
       var right = x + width
@@ -10189,12 +11366,7 @@ global.RELEASE = false
       width = +width || 0
       height = +height || 0
       if (egret.nativeRender) {
-        this.$targetDisplay.$nativeDisplayObject.setDrawEllipse(
-          x,
-          y,
-          width,
-          height
-        )
+        this.$targetDisplay.$nativeDisplayObject.setDrawEllipse(x, y, width, height)
       }
       var fillPath = this.fillPath
       var strokePath = this.strokePath
@@ -10290,23 +11462,13 @@ global.RELEASE = false
      * @platform Web,Native
      * @language zh_CN
      */
-    Graphics.prototype.curveTo = function (
-      controlX,
-      controlY,
-      anchorX,
-      anchorY
-    ) {
+    Graphics.prototype.curveTo = function (controlX, controlY, anchorX, anchorY) {
       controlX = +controlX || 0
       controlY = +controlY || 0
       anchorX = +anchorX || 0
       anchorY = +anchorY || 0
       if (egret.nativeRender) {
-        this.$targetDisplay.$nativeDisplayObject.setCurveTo(
-          controlX,
-          controlY,
-          anchorX,
-          anchorY
-        )
+        this.$targetDisplay.$nativeDisplayObject.setCurveTo(controlX, controlY, anchorX, anchorY)
       }
       var fillPath = this.fillPath
       var strokePath = this.strokePath
@@ -10314,10 +11476,7 @@ global.RELEASE = false
       strokePath && strokePath.curveTo(controlX, controlY, anchorX, anchorY)
       var lastX = this.lastX || 0
       var lastY = this.lastY || 0
-      var bezierPoints = createBezierPoints(
-        [lastX, lastY, controlX, controlY, anchorX, anchorY],
-        50
-      )
+      var bezierPoints = createBezierPoints([lastX, lastY, controlX, controlY, anchorX, anchorY], 50)
       for (var i = 0; i < bezierPoints.length; i++) {
         var point = bezierPoints[i]
         this.extendBoundsByPoint(point.x, point.y)
@@ -10351,14 +11510,7 @@ global.RELEASE = false
      * @platform Web,Native
      * @language zh_CN
      */
-    Graphics.prototype.cubicCurveTo = function (
-      controlX1,
-      controlY1,
-      controlX2,
-      controlY2,
-      anchorX,
-      anchorY
-    ) {
+    Graphics.prototype.cubicCurveTo = function (controlX1, controlY1, controlX2, controlY2, anchorX, anchorY) {
       controlX1 = +controlX1 || 0
       controlY1 = +controlY1 || 0
       controlX2 = +controlX2 || 0
@@ -10377,37 +11529,12 @@ global.RELEASE = false
       }
       var fillPath = this.fillPath
       var strokePath = this.strokePath
-      fillPath &&
-        fillPath.cubicCurveTo(
-          controlX1,
-          controlY1,
-          controlX2,
-          controlY2,
-          anchorX,
-          anchorY
-        )
-      strokePath &&
-        strokePath.cubicCurveTo(
-          controlX1,
-          controlY1,
-          controlX2,
-          controlY2,
-          anchorX,
-          anchorY
-        )
+      fillPath && fillPath.cubicCurveTo(controlX1, controlY1, controlX2, controlY2, anchorX, anchorY)
+      strokePath && strokePath.cubicCurveTo(controlX1, controlY1, controlX2, controlY2, anchorX, anchorY)
       var lastX = this.lastX || 0
       var lastY = this.lastY || 0
       var bezierPoints = createBezierPoints(
-        [
-          lastX,
-          lastY,
-          controlX1,
-          controlY1,
-          controlX2,
-          controlY2,
-          anchorX,
-          anchorY,
-        ],
+        [lastX, lastY, controlX1, controlY1, controlX2, controlY2, anchorX, anchorY],
         50
       )
       for (var i = 0; i < bezierPoints.length; i++) {
@@ -10444,14 +11571,7 @@ global.RELEASE = false
      * @platform Web,Native
      * @language zh_CN
      */
-    Graphics.prototype.drawArc = function (
-      x,
-      y,
-      radius,
-      startAngle,
-      endAngle,
-      anticlockwise
-    ) {
+    Graphics.prototype.drawArc = function (x, y, radius, startAngle, endAngle, anticlockwise) {
       if (radius < 0 || startAngle === endAngle) {
         return
       }
@@ -10464,14 +11584,7 @@ global.RELEASE = false
       startAngle = clampAngle(startAngle)
       endAngle = clampAngle(endAngle)
       if (egret.nativeRender) {
-        this.$targetDisplay.$nativeDisplayObject.setDrawArc(
-          x,
-          y,
-          radius,
-          startAngle,
-          endAngle,
-          anticlockwise
-        )
+        this.$targetDisplay.$nativeDisplayObject.setDrawArc(x, y, radius, startAngle, endAngle, anticlockwise)
       }
       var fillPath = this.fillPath
       var strokePath = this.strokePath
@@ -10517,13 +11630,7 @@ global.RELEASE = false
      * @private
      * 测量圆弧的矩形大小
      */
-    Graphics.prototype.arcBounds = function (
-      x,
-      y,
-      radius,
-      startAngle,
-      endAngle
-    ) {
+    Graphics.prototype.arcBounds = function (x, y, radius, startAngle, endAngle) {
       var PI = Math.PI
       if (Math.abs(startAngle - endAngle) < 0.01) {
         this.extendBoundsByPoint(x - radius, y - radius)
@@ -10643,12 +11750,7 @@ global.RELEASE = false
       if (this.minX === Infinity) {
         bounds.setEmpty()
       } else {
-        bounds.setTo(
-          this.minX,
-          this.minY,
-          this.maxX - this.minX,
-          this.maxY - this.minY
-        )
+        bounds.setTo(this.minX, this.minY, this.maxX - this.minX, this.maxY - this.minY)
       }
     }
     /**
@@ -10694,6 +11796,35 @@ global.RELEASE = false
   egret.Graphics = Graphics
   __reflect(Graphics.prototype, 'egret.Graphics')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var PI = Math.PI
   var TwoPI = PI * 2
@@ -10848,12 +11979,7 @@ global.RELEASE = false
       var d = this.d * other.d
       var tx = this.tx * other.a + other.tx
       var ty = this.ty * other.d + other.ty
-      if (
-        this.b !== 0.0 ||
-        this.c !== 0.0 ||
-        other.b !== 0.0 ||
-        other.c !== 0.0
-      ) {
+      if (this.b !== 0.0 || this.c !== 0.0 || other.b !== 0.0 || other.c !== 0.0) {
         a += this.b * other.c
         d += this.c * other.b
         b += this.a * other.b + this.b * other.d
@@ -11347,13 +12473,7 @@ global.RELEASE = false
      * @platform Web,Native
      * @language zh_CN
      */
-    Matrix.prototype.createGradientBox = function (
-      width,
-      height,
-      rotation,
-      tx,
-      ty
-    ) {
+    Matrix.prototype.createGradientBox = function (width, height, rotation, tx, ty) {
       if (rotation === void 0) {
         rotation = 0
       }
@@ -11363,13 +12483,7 @@ global.RELEASE = false
       if (ty === void 0) {
         ty = 0
       }
-      this.createBox(
-        width / 1638.4,
-        height / 1638.4,
-        rotation,
-        tx + width / 2,
-        ty + height / 2
-      )
+      this.createBox(width / 1638.4, height / 1638.4, rotation, tx + width / 2, ty + height / 2)
     }
     /**
      * @private
@@ -11470,12 +12584,7 @@ global.RELEASE = false
     /**
      * @private
      */
-    Matrix.prototype.$updateScaleAndRotation = function (
-      scaleX,
-      scaleY,
-      skewX,
-      skewY
-    ) {
+    Matrix.prototype.$updateScaleAndRotation = function (scaleX, scaleY, skewX, skewY) {
       if ((skewX == 0 || skewX == TwoPI) && (skewY == 0 || skewY == TwoPI)) {
         this.a = scaleX
         this.b = this.c = 0
@@ -11507,12 +12616,7 @@ global.RELEASE = false
       var d = other.d * this.d
       var tx = other.tx * this.a + this.tx
       var ty = other.ty * this.d + this.ty
-      if (
-        other.b !== 0.0 ||
-        other.c !== 0.0 ||
-        this.b !== 0.0 ||
-        this.c !== 0.0
-      ) {
+      if (other.b !== 0.0 || other.c !== 0.0 || this.b !== 0.0 || this.c !== 0.0) {
         a += other.b * this.c
         d += other.c * this.b
         b += other.a * this.b + other.b * this.d
@@ -11537,6 +12641,35 @@ global.RELEASE = false
    */
   egret.$TempMatrix = new Matrix()
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var rectanglePool = []
   /**
@@ -11661,7 +12794,7 @@ global.RELEASE = false
         this.width = value - this.x
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Rectangle.prototype, 'bottom', {
       /**
@@ -11683,7 +12816,7 @@ global.RELEASE = false
         this.height = value - this.y
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Rectangle.prototype, 'left', {
       /**
@@ -11710,7 +12843,7 @@ global.RELEASE = false
         this.x = value
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Rectangle.prototype, 'top', {
       /**
@@ -11737,7 +12870,7 @@ global.RELEASE = false
         this.y = value
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Rectangle.prototype, 'topLeft', {
       /**
@@ -11760,7 +12893,7 @@ global.RELEASE = false
         this.left = value.x
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Rectangle.prototype, 'bottomRight', {
       /**
@@ -11783,7 +12916,7 @@ global.RELEASE = false
         this.right = value.x
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * Copies all of rectangle data from the source Rectangle object into the calling Rectangle object.
@@ -11852,12 +12985,7 @@ global.RELEASE = false
      * @language zh_CN
      */
     Rectangle.prototype.contains = function (x, y) {
-      return (
-        this.x <= x &&
-        this.x + this.width >= x &&
-        this.y <= y &&
-        this.y + this.height >= y
-      )
+      return this.x <= x && this.x + this.width >= x && this.y <= y && this.y + this.height >= y
     }
     /**
      * If the Rectangle object specified in the toIntersect parameter intersects with this Rectangle object, returns
@@ -11949,10 +13077,8 @@ global.RELEASE = false
      */
     Rectangle.prototype.intersects = function (toIntersect) {
       return (
-        Math.max(this.x, toIntersect.x) <=
-          Math.min(this.right, toIntersect.right) &&
-        Math.max(this.y, toIntersect.y) <=
-          Math.min(this.bottom, toIntersect.bottom)
+        Math.max(this.x, toIntersect.x) <= Math.min(this.right, toIntersect.right) &&
+        Math.max(this.y, toIntersect.y) <= Math.min(this.bottom, toIntersect.bottom)
       )
     }
     /**
@@ -12026,12 +13152,7 @@ global.RELEASE = false
      * @language zh_CN
      */
     Rectangle.prototype.containsPoint = function (point) {
-      if (
-        this.x <= point.x &&
-        this.x + this.width >= point.x &&
-        this.y <= point.y &&
-        this.y + this.height >= point.y
-      ) {
+      if (this.x <= point.x && this.x + this.width >= point.x && this.y <= point.y && this.y + this.height >= point.y) {
         return true
       }
       return false
@@ -12168,17 +13289,7 @@ global.RELEASE = false
      * @language zh_CN
      */
     Rectangle.prototype.toString = function () {
-      return (
-        '(x=' +
-        this.x +
-        ', y=' +
-        this.y +
-        ', width=' +
-        this.width +
-        ', height=' +
-        this.height +
-        ')'
-      )
+      return '(x=' + this.x + ', y=' + this.y + ', width=' + this.width + ', height=' + this.height + ')'
     }
     /**
      * Adds two rectangles together to create a new Rectangle object, by filling in the horizontal and vertical space between the two rectangles.
@@ -12207,12 +13318,7 @@ global.RELEASE = false
       }
       var l = Math.min(result.x, toUnion.x)
       var t = Math.min(result.y, toUnion.y)
-      result.setTo(
-        l,
-        t,
-        Math.max(result.right, toUnion.right) - l,
-        Math.max(result.bottom, toUnion.bottom) - t
-      )
+      result.setTo(l, t, Math.max(result.right, toUnion.right) - l, Math.max(result.bottom, toUnion.bottom) - t)
       return result
     }
     /**
@@ -12241,23 +13347,20 @@ global.RELEASE = false
    */
   egret.$TempRectangle = new Rectangle()
 })(egret || (egret = {}))
+var egret
 ;(function (egret) {
   egret.$locale_strings = egret.$locale_strings || {}
   egret.$locale_strings['en_US'] = egret.$locale_strings['en_US'] || {}
   var locale_strings = egret.$locale_strings['en_US']
   //core  1000-1999
   locale_strings[1001] = 'Could not find Egret entry class: {0}。'
-  locale_strings[1002] =
-    "Egret entry class '{0}' must inherit from egret.DisplayObject."
+  locale_strings[1002] = "Egret entry class '{0}' must inherit from egret.DisplayObject."
   locale_strings[1003] = 'Parameter {0} must be non-null.'
-  locale_strings[1004] =
-    "An object cannot be added as a child to one of it's children (or children's children, etc.)."
+  locale_strings[1004] = "An object cannot be added as a child to one of it's children (or children's children, etc.)."
   locale_strings[1005] = 'An object cannot be added as a child of itself.'
-  locale_strings[1006] =
-    'The supplied DisplayObject must be a child of the caller.'
+  locale_strings[1006] = 'The supplied DisplayObject must be a child of the caller.'
   locale_strings[1007] = 'An index specified for a parameter was out of range.'
-  locale_strings[1008] =
-    'Instantiate singleton error，singleton class {0} can not create multiple instances.'
+  locale_strings[1008] = 'Instantiate singleton error，singleton class {0} can not create multiple instances.'
   locale_strings[1009] = 'the Class {0} cannot use the property "{1}"'
   locale_strings[1010] = 'the property "{1}" of the Class "{0}" is readonly'
   locale_strings[1011] = 'Stream Error. URL: {0}'
@@ -12274,20 +13377,16 @@ global.RELEASE = false
   locale_strings[1022] = '{0} ArgumentError'
   locale_strings[1023] = 'This method is not available in the ScrollView!'
   locale_strings[1025] = 'end of the file'
-  locale_strings[1026] =
-    '! EncodingError The code point {0} could not be encoded.'
+  locale_strings[1026] = '! EncodingError The code point {0} could not be encoded.'
   locale_strings[1027] = 'DecodingError'
   locale_strings[1028] =
     '. called injection is not configured rule: {0}, please specify configuration during its initial years of injection rule, and then call the corresponding single case.'
-  locale_strings[1029] =
-    'Function.prototype.bind - what is trying to be bound is not callable'
-  locale_strings[1033] =
-    'Photos can not be used across domains toDataURL to convert base64'
+  locale_strings[1029] = 'Function.prototype.bind - what is trying to be bound is not callable'
+  locale_strings[1033] = 'Photos can not be used across domains toDataURL to convert base64'
   locale_strings[1034] =
     'Music file decoding failed: "{0}", please use the standard conversion tool reconversion under mp3.'
   locale_strings[1035] = 'Native does not support this feature!'
-  locale_strings[1036] =
-    'Sound has stopped, please recall Sound.play () to play the sound!'
+  locale_strings[1036] = 'Sound has stopped, please recall Sound.play () to play the sound!'
   locale_strings[1037] = 'Non-load the correct blob!'
   locale_strings[1038] = 'XML format error!'
   locale_strings[1039] = 'Cross domains pictures can not get pixel information!'
@@ -12296,30 +13395,22 @@ global.RELEASE = false
   locale_strings[1041] = '{0} is deprecated, please use {1} replace'
   locale_strings[1042] =
     'The parameters passed in the region needs is an integer in drawToTexture method. Otherwise, some browsers will draw abnormal.'
-  locale_strings[1043] =
-    'Compile errors in {0}, the attribute name: {1}, the attribute value: {2}.'
+  locale_strings[1043] = 'Compile errors in {0}, the attribute name: {1}, the attribute value: {2}.'
   locale_strings[1044] =
     'The current version of the Runtime does not support video playback, please use the latest version'
   locale_strings[1045] = 'The resource url is not found'
-  locale_strings[1046] =
-    'BitmapText no corresponding characters: {0}, please check the configuration file'
-  locale_strings[1047] =
-    'egret.localStorage.setItem save failed,key={0}&value={1}'
+  locale_strings[1046] = 'BitmapText no corresponding characters: {0}, please check the configuration file'
+  locale_strings[1047] = 'egret.localStorage.setItem save failed,key={0}&value={1}'
   locale_strings[1048] = 'Video loading failed'
-  locale_strings[1049] =
-    'In the absence of sound is not allowed to play after loading'
-  locale_strings[1050] =
-    'ExternalInterface calls the method without js registration: {0}'
+  locale_strings[1049] = 'In the absence of sound is not allowed to play after loading'
+  locale_strings[1050] = 'ExternalInterface calls the method without js registration: {0}'
   locale_strings[1051] = 'runtime only support webgl render mode'
   locale_strings[1052] = 'network request timeout{0}'
   //gui  3000-3099
   locale_strings[3000] = 'Theme configuration file failed to load: {0}'
-  locale_strings[3001] =
-    'Cannot find the skin name which is configured in Theme: {0}'
-  locale_strings[3002] =
-    'Index:"{0}" is out of the collection element index range'
-  locale_strings[3003] =
-    'Cannot be available in this component. If this component is container, please continue to use'
+  locale_strings[3001] = 'Cannot find the skin name which is configured in Theme: {0}'
+  locale_strings[3002] = 'Index:"{0}" is out of the collection element index range'
+  locale_strings[3003] = 'Cannot be available in this component. If this component is container, please continue to use'
   locale_strings[3004] = 'addChild(){0}addElement() replace'
   locale_strings[3005] = 'addChildAt(){0}addElementAt() replace'
   locale_strings[3006] = 'removeChild(){0}removeElement() replace'
@@ -12329,8 +13420,7 @@ global.RELEASE = false
   locale_strings[3010] = 'swapChildrenAt(){0}swapElementsAt() replace'
   locale_strings[3011] = 'Index:"{0}" is out of the visual element index range'
   locale_strings[3012] = 'This method is not available in Scroller component!'
-  locale_strings[3013] =
-    'UIStage is GUI root container, and only one such instant is in the display list！'
+  locale_strings[3013] = 'UIStage is GUI root container, and only one such instant is in the display list！'
   locale_strings[3014] = 'set fullscreen error'
   //socket 3100-3199
   locale_strings[3100] = 'Current browser does not support WebSocket'
@@ -12348,6 +13438,35 @@ global.RELEASE = false
   locale_strings[4500] =
     'The platform does not support {0} adapter mode and has been automatically replaced with {1} mode, please modify your code adapter logic'
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The JointStyle class is an enumeration of constant values that specify the joint style to use in drawing lines.
@@ -12403,9 +13522,10 @@ global.RELEASE = false
      * @platform Web,Native
      * @language zh_CN
      */
-    ROUND: 'round',
+    ROUND: 'round'
   }
 })(egret || (egret = {}))
+var egret
 ;(function (egret) {
   egret.$locale_strings = egret.$locale_strings || {}
   egret.$locale_strings['zh_CN'] = egret.$locale_strings['zh_CN'] || {}
@@ -12415,8 +13535,7 @@ global.RELEASE = false
   locale_strings[1001] = '找不到Egret入口类: {0}。'
   locale_strings[1002] = 'Egret入口类 {0} 必须继承自egret.DisplayObject。'
   locale_strings[1003] = '参数 {0} 不能为 null。'
-  locale_strings[1004] =
-    '无法将对象添加为它的一个子对象（或子对象的子对象等）的子对象。'
+  locale_strings[1004] = '无法将对象添加为它的一个子对象（或子对象的子对象等）的子对象。'
   locale_strings[1005] = '不能将对象添加为其自身的子对象。'
   locale_strings[1006] = '提供的 DisplayObject 必须是调用者的子级。'
   locale_strings[1007] = '为参数指定的索引不在范围内。'
@@ -12437,26 +13556,20 @@ global.RELEASE = false
   locale_strings[1022] = '{0} ArgumentError'
   locale_strings[1023] = '此方法在ScrollView内不可用!'
   locale_strings[1025] = '遇到文件尾'
-  locale_strings[1026] =
-    'EncodingError! The code point {0} could not be encoded.'
+  locale_strings[1026] = 'EncodingError! The code point {0} could not be encoded.'
   locale_strings[1027] = 'DecodingError'
-  locale_strings[1028] =
-    '调用了未配置的注入规则:{0}。 请先在项目初始化里配置指定的注入规则，再调用对应单例。'
-  locale_strings[1029] =
-    'Function.prototype.bind - what is trying to be bound is not callable'
+  locale_strings[1028] = '调用了未配置的注入规则:{0}。 请先在项目初始化里配置指定的注入规则，再调用对应单例。'
+  locale_strings[1029] = 'Function.prototype.bind - what is trying to be bound is not callable'
   locale_strings[1033] = '跨域图片不可以使用toDataURL来转换成base64'
-  locale_strings[1034] =
-    '音乐文件解码失败："{0}"，请使用标准的转换工具重新转换下mp3。'
+  locale_strings[1034] = '音乐文件解码失败："{0}"，请使用标准的转换工具重新转换下mp3。'
   locale_strings[1035] = 'Native 下暂未实现此功能！'
   locale_strings[1036] = '声音已停止，请重新调用 Sound.play() 来播放声音！'
   locale_strings[1037] = '非正确的blob加载！'
   locale_strings[1038] = 'XML 格式错误!'
   locale_strings[1039] = '跨域图片不能获取像素信息!'
-  locale_strings[1040] =
-    'hitTestPoint 不能对跨域图片进行检测! 请检查该显示对象内是否含有跨域元素'
+  locale_strings[1040] = 'hitTestPoint 不能对跨域图片进行检测! 请检查该显示对象内是否含有跨域元素'
   locale_strings[1041] = '{0} 已废弃,请使用 {1} 代替'
-  locale_strings[1042] =
-    'drawToTexture方法传入的区域各个参数需要为整数,否则某些浏览器绘制会出现异常'
+  locale_strings[1042] = 'drawToTexture方法传入的区域各个参数需要为整数,否则某些浏览器绘制会出现异常'
   locale_strings[1043] = '{0} 中存在编译错误，属性名 : {1}，属性值 : {2}'
   locale_strings[1044] = '当前的 runtime 版本不支持视频播放,请使用最新的版本'
   locale_strings[1045] = '没有设置要加载的资源地址'
@@ -12496,15 +13609,75 @@ global.RELEASE = false
   locale_strings[4002] = 'Unnamed data!'
   locale_strings[4003] = 'Nonsupport version!'
   //4500-5000 platform
-  locale_strings[4500] =
-    '该平台不支持 {0} 适配模式，已经自动替换为 {1} 模式，请修改您的代码适配逻辑'
+  locale_strings[4500] = '该平台不支持 {0} 适配模式，已经自动替换为 {1} 模式，请修改您的代码适配逻辑'
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+/**
+ * @version Egret 2.4
+ * @platform Web,Native
+ * @includeExample egret/localStorage/localStorage.ts
+ */
+var egret
 ;(function (egret) {
   var localStorage
-  ;(function (localStorage) {})(
-    (localStorage = egret.localStorage || (egret.localStorage = {}))
-  )
+  ;(function (localStorage) {})((localStorage = egret.localStorage || (egret.localStorage = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -12535,7 +13708,93 @@ global.RELEASE = false
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
 ;(function (egret) {})(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {})(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The HttpMethod class provides values that specify whether the HttpRequest object should use the POST method
@@ -12583,7 +13842,65 @@ global.RELEASE = false
     HttpMethod.POST = 'POST'
   })((HttpMethod = egret.HttpMethod || (egret.HttpMethod = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {})(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The HttpResponseType class provides values that specify how downloaded data is received.
@@ -12632,7 +13949,65 @@ global.RELEASE = false
   egret.HttpResponseType = HttpResponseType
   __reflect(HttpResponseType.prototype, 'egret.HttpResponseType')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {})(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -12680,11 +14055,7 @@ global.RELEASE = false
          * stage渲染
          */
         _this.$stageRenderToSurface = function () {
-          sys.systemRenderer.render(
-            this.root,
-            this.renderBuffer,
-            this.offsetMatrix
-          )
+          sys.systemRenderer.render(this.root, this.renderBuffer, this.offsetMatrix)
         }
         _this.root = root
         _this.isStage = root instanceof egret.Stage
@@ -12733,11 +14104,7 @@ global.RELEASE = false
         }
         var buffer = this.renderBuffer
         buffer.clear()
-        drawCalls = sys.systemRenderer.render(
-          this.root,
-          buffer,
-          this.offsetMatrix
-        )
+        drawCalls = sys.systemRenderer.render(this.root, buffer, this.offsetMatrix)
         if (!this.isStage) {
           var surface = buffer.surface
           var renderNode = this.$renderNode
@@ -12780,14 +14147,7 @@ global.RELEASE = false
         var scaleY = this.$canvasScaleY
         this.offsetX = -bounds.x
         this.offsetY = -bounds.y
-        this.offsetMatrix.setTo(
-          this.offsetMatrix.a,
-          0,
-          0,
-          this.offsetMatrix.d,
-          this.offsetX,
-          this.offsetY
-        )
+        this.offsetMatrix.setTo(this.offsetMatrix.a, 0, 0, this.offsetMatrix.d, this.offsetX, this.offsetY)
         var buffer = this.renderBuffer
         //在chrome里，小等于256*256的canvas会不启用GPU加速。
         var width = Math.max(257, bounds.width * scaleX)
@@ -12809,11 +14169,7 @@ global.RELEASE = false
         DisplayList.$canvasScaleX = x
         DisplayList.$canvasScaleY = y
         if (egret.nativeRender) {
-          egret_native.nrSetCanvasScaleFactor(
-            DisplayList.$canvasScaleFactor,
-            x,
-            y
-          )
+          egret_native.nrSetCanvasScaleFactor(DisplayList.$canvasScaleFactor, x, y)
         }
       }
       DisplayList.$canvasScaleFactor = 1
@@ -12828,8 +14184,95 @@ global.RELEASE = false
     __reflect(DisplayList.prototype, 'egret.sys.DisplayList')
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {})(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {})(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -12971,12 +14414,7 @@ global.RELEASE = false
        * @private
        * 显示FPS。
        */
-      Player.prototype.displayFPS = function (
-        showFPS,
-        showLog,
-        logFilter,
-        styles
-      ) {
+      Player.prototype.displayFPS = function (showFPS, showLog, logFilter, styles) {
         showLog = !!showLog
         if (showLog) {
           egret.log = function () {
@@ -13082,13 +14520,7 @@ global.RELEASE = false
         this.showLog = showLog
         this.logFilter = logFilter
         this.styles = styles
-        this.fpsDisplay = new egret.FPSDisplay(
-          stage,
-          showFPS,
-          showLog,
-          logFilter,
-          styles
-        )
+        this.fpsDisplay = new egret.FPSDisplay(stage, showFPS, showLog, logFilter, styles)
         var logFilterRegExp
         try {
           logFilterRegExp = logFilter ? new RegExp(logFilter) : null
@@ -13110,10 +14542,7 @@ global.RELEASE = false
         this.costRender += costRender
         this.costTicker += costTicker
         if (this.totalTime >= 1000) {
-          var lastFPS = Math.min(
-            Math.ceil((this.totalTick * 1000) / this.totalTime),
-            egret.ticker.$frameRate
-          )
+          var lastFPS = Math.min(Math.ceil((this.totalTick * 1000) / this.totalTime), egret.ticker.$frameRate)
           var lastDrawCalls = Math.round(this.drawCalls / this.totalTick)
           var lastCostRender = Math.round(this.costRender / this.totalTick)
           var lastCostTicker = Math.round(this.costTicker / this.totalTick)
@@ -13121,7 +14550,7 @@ global.RELEASE = false
             fps: lastFPS,
             draw: lastDrawCalls,
             costTicker: lastCostTicker,
-            costRender: lastCostRender,
+            costRender: lastCostRender
           })
           this.totalTick = 0
           this.totalTime = this.totalTime % 1000
@@ -13228,6 +14657,7 @@ global.RELEASE = false
     }
   }
 })(egret || (egret = {}))
+var egret
 ;(function (egret) {
   var pro
   ;(function (pro) {
@@ -13261,10 +14691,7 @@ global.RELEASE = false
       for (var _i = 1; _i < arguments.length; _i++) {
         args[_i - 1] = arguments[_i]
       }
-      return (_a = Application.instance.egretProUtil).execute.apply(
-        _a,
-        [command].concat(args)
-      )
+      return (_a = Application.instance.egretProUtil).execute.apply(_a, [command].concat(args))
       var _a
     }
     pro.execute = execute
@@ -13277,11 +14704,7 @@ global.RELEASE = false
      * @param thisObject
      */
     function register(command, func, thisObject) {
-      return Application.instance.egretProUtil.register(
-        command,
-        func,
-        thisObject
-      )
+      return Application.instance.egretProUtil.register(command, func, thisObject)
     }
     pro.register = register
     /**
@@ -13292,12 +14715,7 @@ global.RELEASE = false
      * @param thisObject
      */
     function addEventListener(eventType, target, func, thisObject) {
-      return Application.instance.egretProUtil.addEventListener(
-        eventType,
-        target,
-        func,
-        thisObject
-      )
+      return Application.instance.egretProUtil.addEventListener(eventType, target, func, thisObject)
     }
     pro.addEventListener = addEventListener
     /**
@@ -13307,11 +14725,7 @@ global.RELEASE = false
      * @param func
      */
     function removeEventListener(eventType, target, func) {
-      return Application.instance.egretProUtil.removeEventListener(
-        eventType,
-        target,
-        func
-      )
+      return Application.instance.egretProUtil.removeEventListener(eventType, target, func)
     }
     pro.removeEventListener = removeEventListener
     /**
@@ -13325,19 +14739,102 @@ global.RELEASE = false
       for (var _i = 2; _i < arguments.length; _i++) {
         args[_i - 2] = arguments[_i]
       }
-      return (_a = Application.instance.egretProUtil).dispatch.apply(
-        _a,
-        [command, target].concat(args)
-      )
+      return (_a = Application.instance.egretProUtil).dispatch.apply(_a, [command, target].concat(args))
       var _a
     }
     pro.dispatch = dispatch
   })((pro = egret.pro || (egret.pro = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {})((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -13436,19 +14933,44 @@ global.RELEASE = false
           stageWidth: stageWidth,
           stageHeight: stageHeight,
           displayWidth: displayWidth,
-          displayHeight: displayHeight,
+          displayHeight: displayHeight
         }
       }
       return DefaultScreenAdapter
     })(egret.HashObject)
     sys.DefaultScreenAdapter = DefaultScreenAdapter
-    __reflect(
-      DefaultScreenAdapter.prototype,
-      'egret.sys.DefaultScreenAdapter',
-      ['egret.sys.IScreenAdapter']
-    )
+    __reflect(DefaultScreenAdapter.prototype, 'egret.sys.DefaultScreenAdapter', ['egret.sys.IScreenAdapter'])
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * StageScaleMode class provides values for the stage zoom mode.
@@ -13559,6 +15081,35 @@ global.RELEASE = false
   egret.StageScaleMode = StageScaleMode
   __reflect(StageScaleMode.prototype, 'egret.StageScaleMode')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -13579,16 +15130,7 @@ global.RELEASE = false
      * 重新设置主canvas的大小
      */
     function resizeContext(renderContext, width, height, useMaxSize) {
-      console.error(
-        'empty sys.resizeContext = ' +
-          renderContext +
-          ', ' +
-          width +
-          ', ' +
-          height +
-          ', ' +
-          useMaxSize
-      )
+      console.error('empty sys.resizeContext = ' + renderContext + ', ' + width + ', ' + height + ', ' + useMaxSize)
     }
     sys.resizeContext = resizeContext
     /**
@@ -13616,9 +15158,7 @@ global.RELEASE = false
      * 通过 width, height, data创建纹理
      */
     function _createTexture(renderContext, width, height, data) {
-      console.error(
-        'empty sys._createTexture = ' + width + ', ' + height + ', ' + data
-      )
+      console.error('empty sys._createTexture = ' + width + ', ' + height + ', ' + data)
       return null
     }
     sys._createTexture = _createTexture
@@ -13626,14 +15166,7 @@ global.RELEASE = false
      * 画texture
      **/
     function drawTextureElements(renderContext, data, offset) {
-      console.error(
-        'empty sys.drawTextureElements = ' +
-          renderContext +
-          ', ' +
-          data +
-          ', ' +
-          offset
-      )
+      console.error('empty sys.drawTextureElements = ' + renderContext + ', ' + data + ', ' + offset)
       return 0
     }
     sys.drawTextureElements = drawTextureElements
@@ -13655,9 +15188,7 @@ global.RELEASE = false
      * @param root
      */
     function createCanvasRenderBufferSurface(defaultFunc, width, height, root) {
-      console.error(
-        'empty sys.createCanvasRenderBufferSurface = ' + width + ', ' + height
-      )
+      console.error('empty sys.createCanvasRenderBufferSurface = ' + width + ', ' + height)
       return null
     }
     sys.createCanvasRenderBufferSurface = createCanvasRenderBufferSurface
@@ -13668,26 +15199,41 @@ global.RELEASE = false
      * @param height
      * @param useMaxSize
      */
-    function resizeCanvasRenderBuffer(
-      renderContext,
-      width,
-      height,
-      useMaxSize
-    ) {
-      console.error(
-        'empty sys.resizeContext = ' +
-          renderContext +
-          ', ' +
-          width +
-          ', ' +
-          height +
-          ', ' +
-          useMaxSize
-      )
+    function resizeCanvasRenderBuffer(renderContext, width, height, useMaxSize) {
+      console.error('empty sys.resizeContext = ' + renderContext + ', ' + width + ', ' + height + ', ' + useMaxSize)
     }
     sys.resizeCanvasRenderBuffer = resizeCanvasRenderBuffer
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -13755,11 +15301,7 @@ global.RELEASE = false
           var length = callBackList.length
           var timeStamp = egret.getTimer()
           var contexts = egret.lifecycle.contexts
-          for (
-            var _i = 0, contexts_1 = contexts;
-            _i < contexts_1.length;
-            _i++
-          ) {
+          for (var _i = 0, contexts_1 = contexts; _i < contexts_1.length; _i++) {
             var c = contexts_1[_i]
             if (c.onUpdate) {
               c.onUpdate()
@@ -13791,9 +15333,7 @@ global.RELEASE = false
         }
         sys.$START_TIME = Date.now()
         this.frameDeltaTime = 1000 / this.$frameRate
-        this.lastCount = this.frameInterval = Math.round(
-          60000 / this.$frameRate
-        )
+        this.lastCount = this.frameInterval = Math.round(60000 / this.$frameRate)
       }
       /**
        * @private
@@ -14115,6 +15655,35 @@ global.RELEASE = false
 if (true) {
   global.egret_stages = []
 }
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -14179,16 +15748,7 @@ if (true) {
           this.touchDownTarget[touchPointID] = target
           this.useTouchesCount++
         }
-        egret.TouchEvent.dispatchTouchEvent(
-          target,
-          egret.TouchEvent.TOUCH_BEGIN,
-          true,
-          true,
-          x,
-          y,
-          touchPointID,
-          true
-        )
+        egret.TouchEvent.dispatchTouchEvent(target, egret.TouchEvent.TOUCH_BEGIN, true, true, x, y, touchPointID, true)
         //for 3D&2D
         return target !== this.stage
       }
@@ -14209,16 +15769,7 @@ if (true) {
         this.lastTouchX = x
         this.lastTouchY = y
         var target = this.findTarget(x, y)
-        egret.TouchEvent.dispatchTouchEvent(
-          target,
-          egret.TouchEvent.TOUCH_MOVE,
-          true,
-          true,
-          x,
-          y,
-          touchPointID,
-          true
-        )
+        egret.TouchEvent.dispatchTouchEvent(target, egret.TouchEvent.TOUCH_MOVE, true, true, x, y, touchPointID, true)
         //for 3D&2D
         return target !== this.stage
       }
@@ -14237,27 +15788,9 @@ if (true) {
         var oldTarget = this.touchDownTarget[touchPointID]
         delete this.touchDownTarget[touchPointID]
         this.useTouchesCount--
-        egret.TouchEvent.dispatchTouchEvent(
-          target,
-          egret.TouchEvent.TOUCH_END,
-          true,
-          true,
-          x,
-          y,
-          touchPointID,
-          false
-        )
+        egret.TouchEvent.dispatchTouchEvent(target, egret.TouchEvent.TOUCH_END, true, true, x, y, touchPointID, false)
         if (oldTarget == target) {
-          egret.TouchEvent.dispatchTouchEvent(
-            target,
-            egret.TouchEvent.TOUCH_TAP,
-            true,
-            true,
-            x,
-            y,
-            touchPointID,
-            false
-          )
+          egret.TouchEvent.dispatchTouchEvent(target, egret.TouchEvent.TOUCH_TAP, true, true, x, y, touchPointID, false)
         } else {
           egret.TouchEvent.dispatchTouchEvent(
             oldTarget,
@@ -14290,6 +15823,35 @@ if (true) {
     __reflect(TouchHandler.prototype, 'egret.sys.TouchHandler')
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -14331,26 +15893,8 @@ if (true) {
       /**
        * 绘制一次位图
        */
-      BitmapNode.prototype.drawImage = function (
-        sourceX,
-        sourceY,
-        sourceW,
-        sourceH,
-        drawX,
-        drawY,
-        drawW,
-        drawH
-      ) {
-        this.drawData.push(
-          sourceX,
-          sourceY,
-          sourceW,
-          sourceH,
-          drawX,
-          drawY,
-          drawW,
-          drawH
-        )
+      BitmapNode.prototype.drawImage = function (sourceX, sourceY, sourceW, sourceH, drawX, drawY, drawW, drawH) {
+        this.drawData.push(sourceX, sourceY, sourceW, sourceH, drawX, drawY, drawW, drawH)
         this.renderCount++
       }
       /**
@@ -14474,8 +16018,7 @@ if (true) {
         var imageWidth = bitmapWidth
         var imageHeight = bitmapHeight
         destW = destW - (textureWidth - bitmapWidth * egret.$TextureScaleFactor)
-        destH =
-          destH - (textureHeight - bitmapHeight * egret.$TextureScaleFactor)
+        destH = destH - (textureHeight - bitmapHeight * egret.$TextureScaleFactor)
         var targetW0 = scale9Grid.x - offsetX
         var targetH0 = scale9Grid.y - offsetY
         var sourceW0 = targetW0 / egret.$TextureScaleFactor
@@ -14509,16 +16052,7 @@ if (true) {
           (sourceW0 + sourceW2) * egret.$TextureScaleFactor > destW ||
           (sourceH0 + sourceH2) * egret.$TextureScaleFactor > destH
         ) {
-          node.drawImage(
-            bitmapX,
-            bitmapY,
-            bitmapWidth,
-            bitmapHeight,
-            offsetX,
-            offsetY,
-            destW,
-            destH
-          )
+          node.drawImage(bitmapX, bitmapY, bitmapWidth, bitmapHeight, offsetX, offsetY, destW, destH)
           return
         }
         var targetX0 = offsetX
@@ -14545,108 +16079,27 @@ if (true) {
         //
         if (sourceH0 > 0) {
           if (sourceW0 > 0)
-            node.drawImage(
-              sourceX0,
-              sourceY0,
-              sourceW0,
-              sourceH0,
-              targetX0,
-              targetY0,
-              targetW0,
-              targetH0
-            )
+            node.drawImage(sourceX0, sourceY0, sourceW0, sourceH0, targetX0, targetY0, targetW0, targetH0)
           if (sourceW1 > 0)
-            node.drawImage(
-              sourceX1,
-              sourceY0,
-              sourceW1,
-              sourceH0,
-              targetX1,
-              targetY0,
-              targetW1,
-              targetH0
-            )
+            node.drawImage(sourceX1, sourceY0, sourceW1, sourceH0, targetX1, targetY0, targetW1, targetH0)
           if (sourceW2 > 0)
-            node.drawImage(
-              sourceX2,
-              sourceY0,
-              sourceW2,
-              sourceH0,
-              targetX2,
-              targetY0,
-              targetW2,
-              targetH0
-            )
+            node.drawImage(sourceX2, sourceY0, sourceW2, sourceH0, targetX2, targetY0, targetW2, targetH0)
         }
         if (sourceH1 > 0) {
           if (sourceW0 > 0)
-            node.drawImage(
-              sourceX0,
-              sourceY1,
-              sourceW0,
-              sourceH1,
-              targetX0,
-              targetY1,
-              targetW0,
-              targetH1
-            )
+            node.drawImage(sourceX0, sourceY1, sourceW0, sourceH1, targetX0, targetY1, targetW0, targetH1)
           if (sourceW1 > 0)
-            node.drawImage(
-              sourceX1,
-              sourceY1,
-              sourceW1,
-              sourceH1,
-              targetX1,
-              targetY1,
-              targetW1,
-              targetH1
-            )
+            node.drawImage(sourceX1, sourceY1, sourceW1, sourceH1, targetX1, targetY1, targetW1, targetH1)
           if (sourceW2 > 0)
-            node.drawImage(
-              sourceX2,
-              sourceY1,
-              sourceW2,
-              sourceH1,
-              targetX2,
-              targetY1,
-              targetW2,
-              targetH1
-            )
+            node.drawImage(sourceX2, sourceY1, sourceW2, sourceH1, targetX2, targetY1, targetW2, targetH1)
         }
         if (sourceH2 > 0) {
           if (sourceW0 > 0)
-            node.drawImage(
-              sourceX0,
-              sourceY2,
-              sourceW0,
-              sourceH2,
-              targetX0,
-              targetY2,
-              targetW0,
-              targetH2
-            )
+            node.drawImage(sourceX0, sourceY2, sourceW0, sourceH2, targetX0, targetY2, targetW0, targetH2)
           if (sourceW1 > 0)
-            node.drawImage(
-              sourceX1,
-              sourceY2,
-              sourceW1,
-              sourceH2,
-              targetX1,
-              targetY2,
-              targetW1,
-              targetH2
-            )
+            node.drawImage(sourceX1, sourceY2, sourceW1, sourceH2, targetX1, targetY2, targetW1, targetH2)
           if (sourceW2 > 0)
-            node.drawImage(
-              sourceX2,
-              sourceY2,
-              sourceW2,
-              sourceH2,
-              targetX2,
-              targetY2,
-              targetW2,
-              targetH2
-            )
+            node.drawImage(sourceX2, sourceY2, sourceW2, sourceH2, targetX2, targetY2, targetW2, targetH2)
         }
       }
       /**
@@ -14697,6 +16150,35 @@ if (true) {
     __reflect(BitmapNode.prototype, 'egret.sys.BitmapNode')
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -14750,14 +16232,7 @@ if (true) {
        * @param matrix 一个由 egret.Matrix 类定义的转换矩阵。egret.Matrix 类包括 createGradientBox() 方法，通过该方法可以方便地设置矩阵，以便与 beginGradientFill() 方法一起使用
        * @param beforePath 插入在指定的路径命令之前绘制，通常是插入到当前正在绘制的线条路径之前，以确保线条总在填充的上方。
        */
-      GraphicsNode.prototype.beginGradientFill = function (
-        type,
-        colors,
-        alphas,
-        ratios,
-        matrix,
-        beforePath
-      ) {
+      GraphicsNode.prototype.beginGradientFill = function (type, colors, alphas, ratios, matrix, beforePath) {
         var m = new egret.Matrix()
         if (matrix) {
           m.a = matrix.a * 819.2
@@ -14795,15 +16270,7 @@ if (true) {
        * @param joints 指定用于拐角的连接外观的类型。默认值：JointStyle.ROUND
        * @param miterLimit 用于表示剪切斜接的极限值的数字。
        */
-      GraphicsNode.prototype.lineStyle = function (
-        thickness,
-        color,
-        alpha,
-        caps,
-        joints,
-        miterLimit,
-        lineDash
-      ) {
+      GraphicsNode.prototype.lineStyle = function (thickness, color, alpha, caps, joints, miterLimit, lineDash) {
         if (alpha === void 0) {
           alpha = 1
         }
@@ -14859,6 +16326,35 @@ if (true) {
     __reflect(GraphicsNode.prototype, 'egret.sys.GraphicsNode')
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -14900,6 +16396,35 @@ if (true) {
     __reflect(GroupNode.prototype, 'egret.sys.GroupNode')
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -14948,26 +16473,8 @@ if (true) {
       /**
        * 绘制一次位图
        */
-      MeshNode.prototype.drawMesh = function (
-        sourceX,
-        sourceY,
-        sourceW,
-        sourceH,
-        drawX,
-        drawY,
-        drawW,
-        drawH
-      ) {
-        this.drawData.push(
-          sourceX,
-          sourceY,
-          sourceW,
-          sourceH,
-          drawX,
-          drawY,
-          drawW,
-          drawH
-        )
+      MeshNode.prototype.drawMesh = function (sourceX, sourceY, sourceW, sourceH, drawX, drawY, drawW, drawH) {
+        this.drawData.push(sourceX, sourceY, sourceW, sourceH, drawX, drawY, drawW, drawH)
         this.renderCount++
       }
       /**
@@ -14984,6 +16491,35 @@ if (true) {
     __reflect(MeshNode.prototype, 'egret.sys.MeshNode')
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -15013,16 +16549,7 @@ if (true) {
       /**
        * 绘制一次位图
        */
-      NormalBitmapNode.prototype.drawImage = function (
-        sourceX,
-        sourceY,
-        sourceW,
-        sourceH,
-        drawX,
-        drawY,
-        drawW,
-        drawH
-      ) {
+      NormalBitmapNode.prototype.drawImage = function (sourceX, sourceY, sourceW, sourceH, drawX, drawY, drawW, drawH) {
         var self = this
         self.sourceX = sourceX
         self.sourceY = sourceY
@@ -15047,6 +16574,35 @@ if (true) {
     __reflect(NormalBitmapNode.prototype, 'egret.sys.NormalBitmapNode')
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /** !!!!!!!!inspired by Babylon.js!!!!!!!!!!!!!
    * for description see https://www.khronos.org/opengles/sdk/tools/KTX/
@@ -15104,30 +16660,15 @@ if (true) {
       this.glType = headerDataView.getUint32(1 * dataSize, littleEndian) // must be 0 for compressed textures
       this.glTypeSize = headerDataView.getUint32(2 * dataSize, littleEndian) // must be 1 for compressed textures
       this.glFormat = headerDataView.getUint32(3 * dataSize, littleEndian) // must be 0 for compressed textures
-      this.glInternalFormat = headerDataView.getUint32(
-        4 * dataSize,
-        littleEndian
-      ) // the value of arg passed to gl.compressedTexImage2D(,,x,,,,)
-      this.glBaseInternalFormat = headerDataView.getUint32(
-        5 * dataSize,
-        littleEndian
-      ) // specify GL_RGB, GL_RGBA, GL_ALPHA, etc (un-compressed only)
+      this.glInternalFormat = headerDataView.getUint32(4 * dataSize, littleEndian) // the value of arg passed to gl.compressedTexImage2D(,,x,,,,)
+      this.glBaseInternalFormat = headerDataView.getUint32(5 * dataSize, littleEndian) // specify GL_RGB, GL_RGBA, GL_ALPHA, etc (un-compressed only)
       this.pixelWidth = headerDataView.getUint32(6 * dataSize, littleEndian) // level 0 value of arg passed to gl.compressedTexImage2D(,,,x,,,)
       this.pixelHeight = headerDataView.getUint32(7 * dataSize, littleEndian) // level 0 value of arg passed to gl.compressedTexImage2D(,,,,x,,)
       this.pixelDepth = headerDataView.getUint32(8 * dataSize, littleEndian) // level 0 value of arg passed to gl.compressedTexImage3D(,,,,,x,,)
-      this.numberOfArrayElements = headerDataView.getUint32(
-        9 * dataSize,
-        littleEndian
-      ) // used for texture arrays
+      this.numberOfArrayElements = headerDataView.getUint32(9 * dataSize, littleEndian) // used for texture arrays
       this.numberOfFaces = headerDataView.getUint32(10 * dataSize, littleEndian) // used for cubemap textures, should either be 1 or 6
-      this.numberOfMipmapLevels = headerDataView.getUint32(
-        11 * dataSize,
-        littleEndian
-      ) // number of levels; disregard possibility of 0 for compressed textures
-      this.bytesOfKeyValueData = headerDataView.getUint32(
-        12 * dataSize,
-        littleEndian
-      ) // the amount of space after the header for meta-data
+      this.numberOfMipmapLevels = headerDataView.getUint32(11 * dataSize, littleEndian) // number of levels; disregard possibility of 0 for compressed textures
+      this.bytesOfKeyValueData = headerDataView.getUint32(12 * dataSize, littleEndian) // the amount of space after the header for meta-data
       // Make sure we have a compressed type.  Not only reduces work, but probably better to let dev know they are not compressing.
       if (this.glType !== 0) {
         console.error('only compressed formats currently supported')
@@ -15145,12 +16686,7 @@ if (true) {
         return
       }
       if (this.numberOfFaces !== facesExpected) {
-        console.error(
-          'number of faces expected' +
-            facesExpected +
-            ', but found ' +
-            this.numberOfFaces
-        )
+        console.error('number of faces expected' + facesExpected + ', but found ' + this.numberOfFaces)
         return
       }
       // we now have a completely validated file, so could use existence of loadType as success
@@ -15167,10 +16703,7 @@ if (true) {
         this._upload2DCompressedLevels(bitmapData, loadMipmaps)
       }
     }
-    KTXContainer.prototype._upload2DCompressedLevels = function (
-      bitmapData,
-      loadMipmaps
-    ) {
+    KTXContainer.prototype._upload2DCompressedLevels = function (bitmapData, loadMipmaps) {
       bitmapData.clearCompressedTextureData()
       var compressedTextureData = bitmapData.compressedTextureData
       // initialize width & height for level 1
@@ -15183,11 +16716,7 @@ if (true) {
         dataOffset += 4 //image data starts from next multiple of 4 offset. Each face refers to same imagesize field above.
         var levelData = []
         for (var face = 0; face < this.numberOfFaces; face++) {
-          var byteArray = new Uint8Array(
-            this.arrayBuffer,
-            dataOffset,
-            imageSize
-          )
+          var byteArray = new Uint8Array(this.arrayBuffer, dataOffset, imageSize)
           var compressedData = new egret.CompressedTextureData()
           compressedData.glInternalFormat = this.glInternalFormat
           compressedData.width = width
@@ -15220,6 +16749,63 @@ if (true) {
   egret.KTXContainer = KTXContainer
   __reflect(KTXContainer.prototype, 'egret.KTXContainer')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -15297,6 +16883,35 @@ if (true) {
     __reflect(TextNode.prototype, 'egret.sys.TextNode')
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -15317,6 +16932,35 @@ if (true) {
     __reflect(FillPath.prototype, 'egret.sys.FillPath')
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -15337,6 +16981,35 @@ if (true) {
     __reflect(GradientFillPath.prototype, 'egret.sys.GradientFillPath')
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * @private
@@ -15354,9 +17027,7 @@ if (true) {
       return _this
     }
     Mesh.prototype.createNativeDisplayObject = function () {
-      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(
-        12 /* MESH */
-      )
+      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(12 /* MESH */)
     }
     /**
      * @private
@@ -15378,12 +17049,8 @@ if (true) {
       node.image = image
       node.imageWidth = this.$sourceWidth
       node.imageHeight = this.$sourceHeight
-      var destW = !isNaN(this.$explicitBitmapWidth)
-        ? this.$explicitBitmapWidth
-        : this.$textureWidth
-      var destH = !isNaN(this.$explicitBitmapHeight)
-        ? this.$explicitBitmapHeight
-        : this.$textureHeight
+      var destW = !isNaN(this.$explicitBitmapWidth) ? this.$explicitBitmapWidth : this.$textureWidth
+      var destH = !isNaN(this.$explicitBitmapHeight) ? this.$explicitBitmapHeight : this.$textureHeight
       var tsX = destW / this.$textureWidth
       var tsY = destH / this.$textureHeight
       var bitmapWidth = this.$bitmapWidth
@@ -15408,11 +17075,7 @@ if (true) {
       self.$renderDirty = true
       if (egret.nativeRender) {
         var renderNode = this.$renderNode
-        this.$nativeDisplayObject.setDataToMesh(
-          renderNode.vertices,
-          renderNode.indices,
-          renderNode.uvs
-        )
+        this.$nativeDisplayObject.setDataToMesh(renderNode.vertices, renderNode.indices, renderNode.uvs)
       } else {
         var p = self.$parent
         if (p && !p.$cacheDirty) {
@@ -15435,12 +17098,7 @@ if (true) {
         var node = this.$renderNode
         var vertices = node.vertices
         if (vertices.length) {
-          this._bounds.setTo(
-            Number.MAX_VALUE,
-            Number.MAX_VALUE,
-            -Number.MAX_VALUE,
-            -Number.MAX_VALUE
-          )
+          this._bounds.setTo(Number.MAX_VALUE, Number.MAX_VALUE, -Number.MAX_VALUE, -Number.MAX_VALUE)
           for (var i = 0, l = vertices.length; i < l; i += 2) {
             var x = vertices[i]
             var y = vertices[i + 1]
@@ -15463,6 +17121,35 @@ if (true) {
   egret.Mesh = Mesh
   __reflect(Mesh.prototype, 'egret.Mesh')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -15484,6 +17171,35 @@ if (true) {
     __reflect(StrokePath.prototype, 'egret.sys.StrokePath')
   })((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var blendModes = ['source-over', 'lighter', 'destination-out']
   var defaultCompositeOp = 'source-over'
@@ -15496,24 +17212,13 @@ if (true) {
       this.nestLevel = 0 //渲染的嵌套层次，0表示在调用堆栈的最外层。
       this.renderingMask = false
     }
-    CanvasRenderer.prototype.render = function (
-      displayObject,
-      buffer,
-      matrix,
-      forRenderTexture
-    ) {
+    CanvasRenderer.prototype.render = function (displayObject, buffer, matrix, forRenderTexture) {
       this.nestLevel++
       var context = buffer.context
       var root = forRenderTexture ? displayObject : null
       //绘制显示对象
       context.transform(matrix.a, matrix.b, matrix.c, matrix.d, 0, 0)
-      var drawCall = this.drawDisplayObject(
-        displayObject,
-        context,
-        matrix.tx,
-        matrix.ty,
-        true
-      )
+      var drawCall = this.drawDisplayObject(displayObject, context, matrix.tx, matrix.ty, true)
       var invert = egret.Matrix.create()
       matrix.$invertInto(invert)
       context.transform(invert.a, invert.b, invert.c, invert.d, 0, 0)
@@ -15535,13 +17240,7 @@ if (true) {
      * @private
      * 绘制一个显示对象
      */
-    CanvasRenderer.prototype.drawDisplayObject = function (
-      displayObject,
-      context,
-      offsetX,
-      offsetY,
-      isStage
-    ) {
+    CanvasRenderer.prototype.drawDisplayObject = function (displayObject, context, offsetX, offsetY, isStage) {
       var drawCalls = 0
       var node
       var displayList = displayObject.$displayList
@@ -15621,31 +17320,16 @@ if (true) {
             case 1 /* NONE */:
               break
             case 2 /* FILTER */:
-              drawCalls += this.drawWithFilter(
-                child,
-                context,
-                offsetX2,
-                offsetY2
-              )
+              drawCalls += this.drawWithFilter(child, context, offsetX2, offsetY2)
               break
             case 3 /* CLIP */:
               drawCalls += this.drawWithClip(child, context, offsetX2, offsetY2)
               break
             case 4 /* SCROLLRECT */:
-              drawCalls += this.drawWithScrollRect(
-                child,
-                context,
-                offsetX2,
-                offsetY2
-              )
+              drawCalls += this.drawWithScrollRect(child, context, offsetX2, offsetY2)
               break
             default:
-              drawCalls += this.drawDisplayObject(
-                child,
-                context,
-                offsetX2,
-                offsetY2
-              )
+              drawCalls += this.drawDisplayObject(child, context, offsetX2, offsetY2)
               break
           }
           if (child.$useTranslate) {
@@ -15657,17 +17341,11 @@ if (true) {
       }
       return drawCalls
     }
-    CanvasRenderer.prototype.drawWithFilter = function (
-      displayObject,
-      context,
-      offsetX,
-      offsetY
-    ) {
+    CanvasRenderer.prototype.drawWithFilter = function (displayObject, context, offsetX, offsetY) {
       if (
         displayObject.$children &&
         displayObject.$children.length == 0 &&
-        (!displayObject.$renderNode ||
-          displayObject.$renderNode.$getRenderCount() == 0)
+        (!displayObject.$renderNode || displayObject.$renderNode.$getRenderCount() == 0)
       ) {
         return 0
       }
@@ -15698,26 +17376,11 @@ if (true) {
       )
       var displayContext = displayBuffer.context
       if (displayObject.$mask) {
-        drawCalls += this.drawWithClip(
-          displayObject,
-          displayContext,
-          -displayBoundsX,
-          -displayBoundsY
-        )
+        drawCalls += this.drawWithClip(displayObject, displayContext, -displayBoundsX, -displayBoundsY)
       } else if (displayObject.$scrollRect || displayObject.$maskRect) {
-        drawCalls += this.drawWithScrollRect(
-          displayObject,
-          displayContext,
-          -displayBoundsX,
-          -displayBoundsY
-        )
+        drawCalls += this.drawWithScrollRect(displayObject, displayContext, -displayBoundsX, -displayBoundsY)
       } else {
-        drawCalls += this.drawDisplayObject(
-          displayObject,
-          displayContext,
-          -displayBoundsX,
-          -displayBoundsY
-        )
+        drawCalls += this.drawDisplayObject(displayObject, displayContext, -displayBoundsX, -displayBoundsY)
       }
       //绘制结果到屏幕
       if (drawCalls > 0) {
@@ -15726,21 +17389,11 @@ if (true) {
         }
         drawCalls++
         // 应用滤镜
-        var imageData = displayContext.getImageData(
-          0,
-          0,
-          displayBuffer.surface.width,
-          displayBuffer.surface.height
-        )
+        var imageData = displayContext.getImageData(0, 0, displayBuffer.surface.width, displayBuffer.surface.height)
         for (var i = 0; i < filtersLen; i++) {
           var filter = filters[i]
           if (filter.type == 'colorTransform') {
-            colorFilter(
-              imageData.data,
-              displayBuffer.surface.width,
-              displayBuffer.surface.height,
-              filter.$matrix
-            )
+            colorFilter(imageData.data, displayBuffer.surface.width, displayBuffer.surface.height, filter.$matrix)
           } else if (filter.type == 'blur') {
             blurFilter(
               imageData.data,
@@ -15789,11 +17442,7 @@ if (true) {
         }
         displayContext.putImageData(imageData, 0, 0)
         // 绘制结果的时候，应用滤镜
-        context.drawImage(
-          displayBuffer.surface,
-          offsetX + displayBoundsX,
-          offsetY + displayBoundsY
-        )
+        context.drawImage(displayBuffer.surface, offsetX + displayBoundsX, offsetY + displayBoundsY)
         if (hasBlendMode) {
           context.globalCompositeOperation = defaultCompositeOp
         }
@@ -15801,12 +17450,7 @@ if (true) {
       renderBufferPool_Filters.push(displayBuffer)
       return drawCalls
     }
-    CanvasRenderer.prototype.drawWithClip = function (
-      displayObject,
-      context,
-      offsetX,
-      offsetY
-    ) {
+    CanvasRenderer.prototype.drawWithClip = function (displayObject, context, offsetX, offsetY) {
       var drawCalls = 0
       var hasBlendMode = displayObject.$blendMode !== 0
       var compositeOp
@@ -15816,9 +17460,7 @@ if (true) {
           compositeOp = defaultCompositeOp
         }
       }
-      var scrollRect = displayObject.$scrollRect
-        ? displayObject.$scrollRect
-        : displayObject.$maskRect
+      var scrollRect = displayObject.$scrollRect ? displayObject.$scrollRect : displayObject.$maskRect
       var mask = displayObject.$mask
       if (mask) {
         var maskRenderMatrix = mask.$getMatrix()
@@ -15831,30 +17473,17 @@ if (true) {
         }
       }
       //没有遮罩,同时显示对象没有子项
-      if (
-        !mask &&
-        (!displayObject.$children || displayObject.$children.length == 0)
-      ) {
+      if (!mask && (!displayObject.$children || displayObject.$children.length == 0)) {
         if (scrollRect) {
           context.save()
           context.beginPath()
-          context.rect(
-            scrollRect.x + offsetX,
-            scrollRect.y + offsetY,
-            scrollRect.width,
-            scrollRect.height
-          )
+          context.rect(scrollRect.x + offsetX, scrollRect.y + offsetY, scrollRect.width, scrollRect.height)
           context.clip()
         }
         if (hasBlendMode) {
           context.globalCompositeOperation = compositeOp
         }
-        drawCalls += this.drawDisplayObject(
-          displayObject,
-          context,
-          offsetX,
-          offsetY
-        )
+        drawCalls += this.drawDisplayObject(displayObject, context, offsetX, offsetY)
         if (hasBlendMode) {
           context.globalCompositeOperation = defaultCompositeOp
         }
@@ -15880,42 +17509,18 @@ if (true) {
           maskMatrix.copyFrom(mask.$getConcatenatedMatrix())
           mask.$getConcatenatedMatrixAt(displayObject, maskMatrix)
           maskMatrix.prepend(1, 0, 0, 1, offsetX, offsetY)
-          context.transform(
-            maskMatrix.a,
-            maskMatrix.b,
-            maskMatrix.c,
-            maskMatrix.d,
-            maskMatrix.tx,
-            maskMatrix.ty
-          )
+          context.transform(maskMatrix.a, maskMatrix.b, maskMatrix.c, maskMatrix.d, maskMatrix.tx, maskMatrix.ty)
           var calls = this.drawDisplayObject(mask, context, 0, 0)
           this.renderingMask = false
           maskMatrix.$invertInto(maskMatrix)
-          context.transform(
-            maskMatrix.a,
-            maskMatrix.b,
-            maskMatrix.c,
-            maskMatrix.d,
-            maskMatrix.tx,
-            maskMatrix.ty
-          )
+          context.transform(maskMatrix.a, maskMatrix.b, maskMatrix.c, maskMatrix.d, maskMatrix.tx, maskMatrix.ty)
           egret.Matrix.release(maskMatrix)
           if (scrollRect) {
             context.beginPath()
-            context.rect(
-              scrollRect.x + offsetX,
-              scrollRect.y + offsetY,
-              scrollRect.width,
-              scrollRect.height
-            )
+            context.rect(scrollRect.x + offsetX, scrollRect.y + offsetY, scrollRect.width, scrollRect.height)
             context.clip()
           }
-          calls += this.drawDisplayObject(
-            displayObject,
-            context,
-            offsetX,
-            offsetY
-          )
+          calls += this.drawDisplayObject(displayObject, context, offsetX, offsetY)
           context.restore()
           return calls
         }
@@ -15930,26 +17535,13 @@ if (true) {
       if (displayBoundsWidth <= 0 || displayBoundsHeight <= 0) {
         return drawCalls
       }
-      var displayBuffer = this.createRenderBuffer(
-        displayBoundsWidth,
-        displayBoundsHeight
-      )
+      var displayBuffer = this.createRenderBuffer(displayBoundsWidth, displayBoundsHeight)
       var displayContext = displayBuffer.context
       if (!displayContext) {
-        drawCalls += this.drawDisplayObject(
-          displayObject,
-          context,
-          offsetX,
-          offsetY
-        )
+        drawCalls += this.drawDisplayObject(displayObject, context, offsetX, offsetY)
         return drawCalls
       }
-      drawCalls += this.drawDisplayObject(
-        displayObject,
-        displayContext,
-        -displayBoundsX,
-        -displayBoundsY
-      )
+      drawCalls += this.drawDisplayObject(displayObject, displayContext, -displayBoundsX, -displayBoundsY)
       //绘制遮罩
       if (mask) {
         var maskRenderNode = mask.$getRenderNode()
@@ -15958,10 +17550,7 @@ if (true) {
         mask.$getConcatenatedMatrixAt(displayObject, maskMatrix)
         maskMatrix.translate(-displayBoundsX, -displayBoundsY)
         //如果只有一次绘制或是已经被cache直接绘制到displayContext
-        if (
-          (maskRenderNode && maskRenderNode.$getRenderCount() == 1) ||
-          mask.$displayList
-        ) {
+        if ((maskRenderNode && maskRenderNode.$getRenderCount() == 1) || mask.$displayList) {
           displayContext.globalCompositeOperation = 'destination-in'
           displayContext.save()
           displayContext.setTransform(
@@ -15975,19 +17564,9 @@ if (true) {
           drawCalls += this.drawDisplayObject(mask, displayContext, 0, 0)
           displayContext.restore()
         } else {
-          var maskBuffer = this.createRenderBuffer(
-            displayBoundsWidth,
-            displayBoundsHeight
-          )
+          var maskBuffer = this.createRenderBuffer(displayBoundsWidth, displayBoundsHeight)
           var maskContext = maskBuffer.context
-          maskContext.setTransform(
-            maskMatrix.a,
-            maskMatrix.b,
-            maskMatrix.c,
-            maskMatrix.d,
-            maskMatrix.tx,
-            maskMatrix.ty
-          )
+          maskContext.setTransform(maskMatrix.a, maskMatrix.b, maskMatrix.c, maskMatrix.d, maskMatrix.tx, maskMatrix.ty)
           drawCalls += this.drawDisplayObject(mask, maskContext, 0, 0)
           displayContext.globalCompositeOperation = 'destination-in'
           displayContext.drawImage(maskBuffer.surface, 0, 0)
@@ -16004,19 +17583,10 @@ if (true) {
         if (scrollRect) {
           context.save()
           context.beginPath()
-          context.rect(
-            scrollRect.x + offsetX,
-            scrollRect.y + offsetY,
-            scrollRect.width,
-            scrollRect.height
-          )
+          context.rect(scrollRect.x + offsetX, scrollRect.y + offsetY, scrollRect.width, scrollRect.height)
           context.clip()
         }
-        context.drawImage(
-          displayBuffer.surface,
-          offsetX + displayBoundsX,
-          offsetY + displayBoundsY
-        )
+        context.drawImage(displayBuffer.surface, offsetX + displayBoundsX, offsetY + displayBoundsY)
         if (scrollRect) {
           context.restore()
         }
@@ -16027,16 +17597,9 @@ if (true) {
       renderBufferPool.push(displayBuffer)
       return drawCalls
     }
-    CanvasRenderer.prototype.drawWithScrollRect = function (
-      displayObject,
-      context,
-      offsetX,
-      offsetY
-    ) {
+    CanvasRenderer.prototype.drawWithScrollRect = function (displayObject, context, offsetX, offsetY) {
       var drawCalls = 0
-      var scrollRect = displayObject.$scrollRect
-        ? displayObject.$scrollRect
-        : displayObject.$maskRect
+      var scrollRect = displayObject.$scrollRect ? displayObject.$scrollRect : displayObject.$maskRect
       if (scrollRect.isEmpty()) {
         return drawCalls
       }
@@ -16047,37 +17610,15 @@ if (true) {
       //绘制显示对象自身
       context.save()
       context.beginPath()
-      context.rect(
-        scrollRect.x + offsetX,
-        scrollRect.y + offsetY,
-        scrollRect.width,
-        scrollRect.height
-      )
+      context.rect(scrollRect.x + offsetX, scrollRect.y + offsetY, scrollRect.width, scrollRect.height)
       context.clip()
-      drawCalls += this.drawDisplayObject(
-        displayObject,
-        context,
-        offsetX,
-        offsetY
-      )
+      drawCalls += this.drawDisplayObject(displayObject, context, offsetX, offsetY)
       context.restore()
       return drawCalls
     }
-    CanvasRenderer.prototype.drawNodeToBuffer = function (
-      node,
-      buffer,
-      matrix,
-      forHitTest
-    ) {
+    CanvasRenderer.prototype.drawNodeToBuffer = function (node, buffer, matrix, forHitTest) {
       var context = buffer.context
-      context.setTransform(
-        matrix.a,
-        matrix.b,
-        matrix.c,
-        matrix.d,
-        matrix.tx,
-        matrix.ty
-      )
+      context.setTransform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty)
       this.renderNode(node, context, forHitTest)
     }
     /**
@@ -16086,21 +17627,10 @@ if (true) {
      * @param buffer 渲染缓冲
      * @param matrix 要叠加的矩阵
      */
-    CanvasRenderer.prototype.drawDisplayToBuffer = function (
-      displayObject,
-      buffer,
-      matrix
-    ) {
+    CanvasRenderer.prototype.drawDisplayToBuffer = function (displayObject, buffer, matrix) {
       var context = buffer.context
       if (matrix) {
-        context.setTransform(
-          matrix.a,
-          matrix.b,
-          matrix.c,
-          matrix.d,
-          matrix.tx,
-          matrix.ty
-        )
+        context.setTransform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty)
       }
       var node
       if (displayObject.$renderDirty) {
@@ -16291,17 +17821,7 @@ if (true) {
         if (node.rotated) {
           context.transform(0, -1, 1, 0, 0, destWidth)
         }
-        displayContext.drawImage(
-          image.source,
-          sourceX,
-          sourceY,
-          sourceWidth,
-          sourceHeight,
-          0,
-          0,
-          destWidth,
-          destHeight
-        )
+        displayContext.drawImage(image.source, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, destWidth, destHeight)
         //绘制结果到屏幕
         drawCalls++
         // 应用滤镜
@@ -16511,9 +18031,7 @@ if (true) {
       var index1, index2, index3
       var x0, y0, x1, y1, x2, y2
       for (var i = 0; i < indicesLen; i += 3) {
-        ;(index1 = meshIndices[i] * 2),
-          (index2 = meshIndices[i + 1] * 2),
-          (index3 = meshIndices[i + 2] * 2)
+        ;(index1 = meshIndices[i] * 2), (index2 = meshIndices[i + 1] * 2), (index3 = meshIndices[i + 2] * 2)
         u0 = meshUVs[index1] * sourceWidth
         v0 = meshUVs[index1 + 1] * sourceHeight
         u1 = meshUVs[index2] * sourceWidth
@@ -16533,34 +18051,14 @@ if (true) {
         context.lineTo(x2, y2)
         context.closePath()
         context.clip()
-        var ratio =
-          1 / (u0 * v1 + v0 * u2 + u1 * v2 - v1 * u2 - v0 * u1 - u0 * v2)
+        var ratio = 1 / (u0 * v1 + v0 * u2 + u1 * v2 - v1 * u2 - v0 * u1 - u0 * v2)
         a = x0 * v1 + v0 * x2 + x1 * v2 - v1 * x2 - v0 * x1 - x0 * v2
         b = y0 * v1 + v0 * y2 + y1 * v2 - v1 * y2 - v0 * y1 - y0 * v2
         c = u0 * x1 + x0 * u2 + u1 * x2 - x1 * u2 - x0 * u1 - u0 * x2
         d = u0 * y1 + y0 * u2 + u1 * y2 - y1 * u2 - y0 * u1 - u0 * y2
-        tx =
-          u0 * v1 * x2 +
-          v0 * x1 * u2 +
-          x0 * u1 * v2 -
-          x0 * v1 * u2 -
-          v0 * u1 * x2 -
-          u0 * x1 * v2
-        ty =
-          u0 * v1 * y2 +
-          v0 * y1 * u2 +
-          y0 * u1 * v2 -
-          y0 * v1 * u2 -
-          v0 * u1 * y2 -
-          u0 * y1 * v2
-        context.transform(
-          a * ratio,
-          b * ratio,
-          c * ratio,
-          d * ratio,
-          tx * ratio,
-          ty * ratio
-        )
+        tx = u0 * v1 * x2 + v0 * x1 * u2 + x0 * u1 * v2 - x0 * v1 * u2 - v0 * u1 * x2 - u0 * x1 * v2
+        ty = u0 * v1 * y2 + v0 * y1 * u2 + y0 * u1 * v2 - y0 * v1 * u2 - v0 * u1 * y2 - u0 * y1 * v2
+        context.transform(a * ratio, b * ratio, c * ratio, d * ratio, tx * ratio, ty * ratio)
         if (rotated) {
           context.transform(0, -1, 1, 0, 0, _destWidth)
         }
@@ -16593,10 +18091,8 @@ if (true) {
         var text = drawData[pos++]
         var format = drawData[pos++]
         context.font = getFontString(node, format)
-        var textColor =
-          format.textColor == null ? node.textColor : format.textColor
-        var strokeColor =
-          format.strokeColor == null ? node.strokeColor : format.strokeColor
+        var textColor = format.textColor == null ? node.textColor : format.textColor
+        var strokeColor = format.strokeColor == null ? node.strokeColor : format.strokeColor
         var stroke = format.stroke == null ? node.stroke : format.stroke
         context.fillStyle = egret.toColorString(textColor)
         context.strokeStyle = egret.toColorString(strokeColor)
@@ -16610,11 +18106,7 @@ if (true) {
     /**
      * @private
      */
-    CanvasRenderer.prototype.renderGraphics = function (
-      node,
-      context,
-      forHitTest
-    ) {
+    CanvasRenderer.prototype.renderGraphics = function (node, context, forHitTest) {
       var drawData = node.drawData
       var length = drawData.length
       forHitTest = !!forHitTest
@@ -16623,9 +18115,7 @@ if (true) {
         switch (path.type) {
           case 1 /* Fill */:
             var fillPath = path
-            context.fillStyle = forHitTest
-              ? BLACK_COLOR
-              : getRGBAString(fillPath.fillColor, fillPath.fillAlpha)
+            context.fillStyle = forHitTest ? BLACK_COLOR : getRGBAString(fillPath.fillColor, fillPath.fillAlpha)
             this.renderPath(path, context)
             if (this.renderingMask) {
               context.clip()
@@ -16637,14 +18127,7 @@ if (true) {
             var g = path
             context.fillStyle = forHitTest
               ? BLACK_COLOR
-              : getGradient(
-                  context,
-                  g.gradientType,
-                  g.colors,
-                  g.alphas,
-                  g.ratios,
-                  g.matrix
-                )
+              : getGradient(context, g.gradientType, g.colors, g.alphas, g.ratios, g.matrix)
             context.save()
             var m = g.matrix
             this.renderPath(path, context)
@@ -16656,9 +18139,7 @@ if (true) {
             var strokeFill = path
             var lineWidth = strokeFill.lineWidth
             context.lineWidth = lineWidth
-            context.strokeStyle = forHitTest
-              ? BLACK_COLOR
-              : getRGBAString(strokeFill.lineColor, strokeFill.lineAlpha)
+            context.strokeStyle = forHitTest ? BLACK_COLOR : getRGBAString(strokeFill.lineColor, strokeFill.lineAlpha)
             context.lineCap = CAPS_STYLES[strokeFill.caps]
             context.lineJoin = strokeFill.joints
             context.miterLimit = strokeFill.miterLimit
@@ -16708,16 +18189,10 @@ if (true) {
             )
             break
           case 2 /* LineTo */:
-            context.lineTo(
-              data[pos++] + context.$offsetX,
-              data[pos++] + context.$offsetY
-            )
+            context.lineTo(data[pos++] + context.$offsetX, data[pos++] + context.$offsetY)
             break
           case 1 /* MoveTo */:
-            context.moveTo(
-              data[pos++] + context.$offsetX,
-              data[pos++] + context.$offsetY
-            )
+            context.moveTo(data[pos++] + context.$offsetX, data[pos++] + context.$offsetY)
             break
         }
       }
@@ -16756,14 +18231,8 @@ if (true) {
       }
       return drawCalls
     }
-    CanvasRenderer.prototype.createRenderBuffer = function (
-      width,
-      height,
-      useForFilters
-    ) {
-      var buffer = useForFilters
-        ? renderBufferPool_Filters.pop()
-        : renderBufferPool.pop()
+    CanvasRenderer.prototype.createRenderBuffer = function (width, height, useForFilters) {
+      var buffer = useForFilters ? renderBufferPool_Filters.pop() : renderBufferPool.pop()
       if (buffer) {
         buffer.resize(width, height, true)
       } else {
@@ -16816,10 +18285,7 @@ if (true) {
     //todo colors alphas ratios数量不一致情况处理
     var l = colors.length
     for (var i = 0; i < l; i++) {
-      gradient.addColorStop(
-        ratios[i] / 255,
-        getRGBAString(colors[i], alphas[i])
-      )
+      gradient.addColorStop(ratios[i] / 255, getRGBAString(colors[i], alphas[i]))
     }
     return gradient
   }
@@ -16986,11 +18452,7 @@ if (true) {
         alpha = 0,
         alpha2 = 0
       // Fill window
-      for (
-        var ptr = -blurY * stride, end = blurY * stride + stride;
-        ptr < end;
-        ptr += stride
-      ) {
+      for (var ptr = -blurY * stride, end = blurY * stride + stride; ptr < end; ptr += stride) {
         var key = pColumnStart + ptr
         if (key < pColumnStart || key >= pColumnStart + h * stride) {
           continue
@@ -17048,11 +18510,7 @@ if (true) {
         }
       }
       // Copy column
-      for (
-        var i = x * 4, end = i + h * stride, j = 0;
-        i < end;
-        i += stride, j += 4
-      ) {
+      for (var i = x * 4, end = i + h * stride, j = 0; i < end; i += stride, j += 4) {
         buffer[i + 0] = columnBuffer[j + 0]
         buffer[i + 1] = columnBuffer[j + 1]
         buffer[i + 2] = columnBuffer[j + 2]
@@ -17063,17 +18521,7 @@ if (true) {
   // function glowFilter(buffer, w, h, color, blurX, blurY, strength) {
   //     dropShadowFilter(buffer, w, h, color, blurX, blurY, 0, 0, strength)
   // }
-  function dropShadowFilter(
-    buffer,
-    w,
-    h,
-    color,
-    blurX,
-    blurY,
-    angle,
-    distance,
-    strength
-  ) {
+  function dropShadowFilter(buffer, w, h, color, blurX, blurY, angle, distance, strength) {
     var tmp = alphaFilter(buffer, color)
     panFilter(tmp, w, h, angle, distance)
     blurFilter(tmp, w, h, blurX, blurY)
@@ -17255,12 +18703,7 @@ if (true) {
           alpha *
           (1 - inner) *
           Math.max(Math.min(hideObject, knockout), 1 - _a)
-        var innerGlowAlpha =
-          ((maxTotalAlpha - totalAlpha) / maxTotalAlpha) *
-          strength *
-          alpha *
-          inner *
-          _a
+        var innerGlowAlpha = ((maxTotalAlpha - totalAlpha) / maxTotalAlpha) * strength * alpha * inner * _a
         _a = Math.max(_a * knockout * (1 - hideObject), 0.0001)
         var rate1 = innerGlowAlpha / (innerGlowAlpha + _a)
         var r1 = mix(_r, color[0], rate1)
@@ -17285,14 +18728,46 @@ if (true) {
     }
   }
 })(egret || (egret = {}))
+var egret
 ;(function (egret) {
   /**
    * @copy egret.Orientation
    */
   egret.DeviceOrientation = null
 })(egret || (egret = {}))
+var egret
 ;(function (egret) {})(egret || (egret = {}))
+var egret
 ;(function (egret) {})(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * Type of operation.
@@ -17480,16 +18955,12 @@ if (true) {
           return this._supportedCompressedTexture
         } else {
           // 只有 native 环境
-          egret['web']
-            ? egret[
-                'web'
-              ].WebGLRenderContext.getInstance().getSupportedCompressedTexture()
-            : null
+          egret['web'] ? egret['web'].WebGLRenderContext.getInstance().getSupportedCompressedTexture() : null
           return this._supportedCompressedTexture
         }
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * Specifies the language code of the system on which the content is running. The language is specified as a lowercase
@@ -17657,6 +19128,35 @@ if (true) {
   egret.Capabilities = Capabilities
   __reflect(Capabilities.prototype, 'egret.Capabilities')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * OrientationMode 类为舞台初始旋转模式提供值。
@@ -17677,9 +19177,10 @@ if (true) {
     /**
      * 默认横屏，舞台逆时针旋转90度
      */
-    LANDSCAPE_FLIPPED: 'landscapeFlipped',
+    LANDSCAPE_FLIPPED: 'landscapeFlipped'
   }
 })(egret || (egret = {}))
+var egret
 ;(function (egret) {
   /**
    * @private
@@ -17727,6 +19228,35 @@ if (true) {
   }
   egret.getImplementation = getImplementation
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * RenderTexture is a dynamic texture
@@ -17772,11 +19302,7 @@ if (true) {
      * @platform Web,Native
      * @language zh_CN
      */
-    RenderTexture.prototype.drawToTexture = function (
-      displayObject,
-      clipBounds,
-      scale
-    ) {
+    RenderTexture.prototype.drawToTexture = function (displayObject, clipBounds, scale) {
       if (scale === void 0) {
         scale = 1
       }
@@ -17834,12 +19360,7 @@ if (true) {
         if (clipBounds) {
           matrix.translate(-clipBounds.x, -clipBounds.y)
         }
-        egret.sys.systemRenderer.render(
-          displayObject,
-          renderBuffer,
-          matrix,
-          true
-        )
+        egret.sys.systemRenderer.render(displayObject, renderBuffer, matrix, true)
         egret.Matrix.release(matrix)
       }
       //设置纹理参数
@@ -17871,6 +19392,35 @@ if (true) {
   egret.RenderTexture = RenderTexture
   __reflect(RenderTexture.prototype, 'egret.RenderTexture')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * Bitmap font, texture set of a font. It is generally used as the value of the BitmapText.font attribute.
@@ -17946,17 +19496,7 @@ if (true) {
         if (!c) {
           return null
         }
-        texture = this.createTexture(
-          name,
-          c.x,
-          c.y,
-          c.w,
-          c.h,
-          c.offX,
-          c.offY,
-          c.sourceW,
-          c.sourceH
-        )
+        texture = this.createTexture(name, c.x, c.y, c.w, c.h, c.offX, c.offY, c.sourceW, c.sourceH)
         this._textureMap[name] = texture
       }
       return texture
@@ -18051,6 +19591,35 @@ if (true) {
   egret.BitmapFont = BitmapFont
   __reflect(BitmapFont.prototype, 'egret.BitmapFont')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * Bitmap font adopts the Bitmap+SpriteSheet mode to render text.
@@ -18125,9 +19694,7 @@ if (true) {
       return _this
     }
     BitmapText.prototype.createNativeDisplayObject = function () {
-      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(
-        11 /* BITMAP_TEXT */
-      )
+      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(11 /* BITMAP_TEXT */)
     }
     Object.defineProperty(BitmapText.prototype, 'smoothing', {
       /**
@@ -18167,7 +19734,7 @@ if (true) {
         }
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(BitmapText.prototype, 'text', {
       /**
@@ -18189,7 +19756,7 @@ if (true) {
         this.$setText(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -18277,7 +19844,7 @@ if (true) {
         this.$setFont(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     BitmapText.prototype.$setFont = function (value) {
       var self = this
@@ -18291,13 +19858,13 @@ if (true) {
     }
     Object.defineProperty(BitmapText.prototype, 'lineSpacing', {
       /**
-           /**
-			 * An integer representing the amount of vertical space between lines.
-			 * @default 0
-			 * @version Egret 2.4
-			 * @platform Web,Native
-			 * @language en_US
-			 */
+       /**
+       * An integer representing the amount of vertical space between lines.
+       * @default 0
+       * @version Egret 2.4
+       * @platform Web,Native
+       * @language en_US
+       */
       /**
        * 一个整数，表示行与行之间的垂直间距量
        * @default 0
@@ -18312,7 +19879,7 @@ if (true) {
         this.$setLineSpacing(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     BitmapText.prototype.$setLineSpacing = function (value) {
       var self = this
@@ -18343,7 +19910,7 @@ if (true) {
         this.$setLetterSpacing(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     BitmapText.prototype.$setLetterSpacing = function (value) {
       var self = this
@@ -18376,7 +19943,7 @@ if (true) {
         this.$setTextAlign(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     BitmapText.prototype.$setTextAlign = function (value) {
       var self = this
@@ -18409,7 +19976,7 @@ if (true) {
         this.$setVerticalAlign(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     BitmapText.prototype.$setVerticalAlign = function (value) {
       var self = this
@@ -18429,11 +19996,7 @@ if (true) {
       var length = textLines.length
       if (length == 0) {
         if (egret.nativeRender && self.$font) {
-          self.$nativeDisplayObject.setDataToBitmapNode(
-            self.$nativeDisplayObject.id,
-            self.$font.$texture,
-            []
-          )
+          self.$nativeDisplayObject.setDataToBitmapNode(self.$nativeDisplayObject.id, self.$font.$texture, [])
           self.$nativeDisplayObject.setWidth(0)
           self.$nativeDisplayObject.setHeight(0)
         }
@@ -18468,8 +20031,7 @@ if (true) {
         var len = line.length
         var xPos = this.$textOffsetX
         if (align != egret.HorizontalAlign.LEFT) {
-          var countWidth =
-            textFieldWidth > textWidth ? textFieldWidth : textWidth
+          var countWidth = textFieldWidth > textWidth ? textFieldWidth : textWidth
           if (align == egret.HorizontalAlign.RIGHT) {
             xPos += countWidth - textLinesWidth[i]
           } else if (align == egret.HorizontalAlign.CENTER) {
@@ -18516,18 +20078,12 @@ if (true) {
               texture.$getScaleBitmapHeight()
             )
           }
-          xPos +=
-            (bitmapFont.getConfig(character, 'xadvance') ||
-              texture.$getTextureWidth()) + self.$letterSpacing
+          xPos += (bitmapFont.getConfig(character, 'xadvance') || texture.$getTextureWidth()) + self.$letterSpacing
         }
         yPos += lineHeight + self.$lineSpacing
       }
       if (egret.nativeRender) {
-        self.$nativeDisplayObject.setDataToBitmapNode(
-          self.$nativeDisplayObject.id,
-          bitmapFont.$texture,
-          drawArr
-        )
+        self.$nativeDisplayObject.setDataToBitmapNode(self.$nativeDisplayObject.id, bitmapFont.$texture, drawArr)
         var bounds = self.$getContentBounds()
         self.$nativeDisplayObject.setWidth(bounds.width)
         self.$nativeDisplayObject.setHeight(bounds.height)
@@ -18567,7 +20123,7 @@ if (true) {
         return this.$textWidth
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(BitmapText.prototype, 'textHeight', {
       /**
@@ -18587,7 +20143,7 @@ if (true) {
         return this.$textHeight
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -18702,11 +20258,7 @@ if (true) {
         if (!setLineData(line)) break
       }
       function setLineData(str) {
-        if (
-          textFieldHeight &&
-          textLines.length > 0 &&
-          textHeight > textFieldHeight
-        ) {
+        if (textFieldHeight && textLines.length > 0 && textHeight > textFieldHeight) {
           return false
         }
         textHeight += lineHeight + lineSpacing
@@ -18765,6 +20317,35 @@ if (true) {
   egret.BitmapText = BitmapText
   __reflect(BitmapText.prototype, 'egret.BitmapText')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {
@@ -18783,6 +20364,35 @@ if (true) {
     egret.registerFontMapping = _registerFontMapping
   }
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The HorizontalAlign class defines the possible values for the horizontal alignment.
@@ -18880,6 +20490,35 @@ if (true) {
   egret.HorizontalAlign = HorizontalAlign
   __reflect(HorizontalAlign.prototype, 'egret.HorizontalAlign')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * Convert the text in html format to the object that can be assigned to the egret.TextField#textFlow property
@@ -18988,10 +20627,7 @@ if (true) {
       }
       value = this.replaceSpecial(value)
       if (this.stackArray.length > 0) {
-        this.resutlArr.push({
-          text: value,
-          style: this.stackArray[this.stackArray.length - 1],
-        })
+        this.resutlArr.push({ text: value, style: this.stackArray[this.stackArray.length - 1] })
       } else {
         this.resutlArr.push({ text: value })
       }
@@ -19001,11 +20637,7 @@ if (true) {
       str = str.trim()
       var info = {}
       var header = []
-      if (
-        str.charAt(0) == 'i' ||
-        str.charAt(0) == 'b' ||
-        str.charAt(0) == 'u'
-      ) {
+      if (str.charAt(0) == 'i' || str.charAt(0) == 'b' || str.charAt(0) == 'u') {
         this.addProperty(info, str, 'true')
       } else if ((header = str.match(/^(font|a)\s/))) {
         str = str.substring(header[0].length).trim()
@@ -19027,11 +20659,7 @@ if (true) {
             value = str.match(/(\S)+/)[0]
             next = value.length
           }
-          this.addProperty(
-            info,
-            title.substring(0, title.length - 1).trim(),
-            value.trim()
-          )
+          this.addProperty(info, title.substring(0, title.length - 1).trim(), value.trim())
           str = str.substring(next).trim()
         }
       }
@@ -19115,6 +20743,63 @@ if (true) {
   egret.HtmlTextParser = HtmlTextParser
   __reflect(HtmlTextParser.prototype, 'egret.HtmlTextParser')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * @private
@@ -19167,21 +20852,9 @@ if (true) {
       }
       this.tempStage = this._text.stage
       this.stageText.$addToStage()
-      this.stageText.addEventListener(
-        'updateText',
-        this.updateTextHandler,
-        this
-      )
-      this._text.addEventListener(
-        egret.TouchEvent.TOUCH_BEGIN,
-        this.onMouseDownHandler,
-        this
-      )
-      this._text.addEventListener(
-        egret.TouchEvent.TOUCH_MOVE,
-        this.onMouseMoveHandler,
-        this
-      )
+      this.stageText.addEventListener('updateText', this.updateTextHandler, this)
+      this._text.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onMouseDownHandler, this)
+      this._text.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.onMouseMoveHandler, this)
       this.stageText.addEventListener('blur', this.blurHandler, this)
       this.stageText.addEventListener('focus', this.focusHandler, this)
       this.stageTextAdded = true
@@ -19198,26 +20871,10 @@ if (true) {
         this._text.$touchEnabled = false
       }
       this.stageText.$removeFromStage()
-      this.stageText.removeEventListener(
-        'updateText',
-        this.updateTextHandler,
-        this
-      )
-      this._text.removeEventListener(
-        egret.TouchEvent.TOUCH_BEGIN,
-        this.onMouseDownHandler,
-        this
-      )
-      this._text.addEventListener(
-        egret.TouchEvent.TOUCH_MOVE,
-        this.onMouseMoveHandler,
-        this
-      )
-      this.tempStage.removeEventListener(
-        egret.TouchEvent.TOUCH_BEGIN,
-        this.onStageDownHandler,
-        this
-      )
+      this.stageText.removeEventListener('updateText', this.updateTextHandler, this)
+      this._text.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onMouseDownHandler, this)
+      this._text.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.onMouseMoveHandler, this)
+      this.tempStage.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onStageDownHandler, this)
       this.stageText.removeEventListener('blur', this.blurHandler, this)
       this.stageText.removeEventListener('focus', this.focusHandler, this)
       this.stageTextAdded = false
@@ -19256,9 +20913,7 @@ if (true) {
         if (!event['showing']) {
           this._text.$setIsTyping(true)
         }
-        this._text.dispatchEvent(
-          new egret.FocusEvent(egret.FocusEvent.FOCUS_IN, true)
-        )
+        this._text.dispatchEvent(new egret.FocusEvent(egret.FocusEvent.FOCUS_IN, true))
       }
     }
     /**
@@ -19270,17 +20925,11 @@ if (true) {
       if (this._isFocus) {
         //不再显示竖线，并且输入框显示最开始
         this._isFocus = false
-        this.tempStage.removeEventListener(
-          egret.TouchEvent.TOUCH_BEGIN,
-          this.onStageDownHandler,
-          this
-        )
+        this.tempStage.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onStageDownHandler, this)
         this._text.$setIsTyping(false)
         //失去焦点后调用
         this.stageText.$onBlur()
-        this._text.dispatchEvent(
-          new egret.FocusEvent(egret.FocusEvent.FOCUS_OUT, true)
-        )
+        this._text.dispatchEvent(new egret.FocusEvent(egret.FocusEvent.FOCUS_OUT, true))
       }
     }
     //点中文本
@@ -19298,17 +20947,9 @@ if (true) {
       if (this._isFocus) {
         return
       }
-      this.tempStage.removeEventListener(
-        egret.TouchEvent.TOUCH_BEGIN,
-        this.onStageDownHandler,
-        this
-      )
+      this.tempStage.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onStageDownHandler, this)
       egret.callLater(function () {
-        _this.tempStage.addEventListener(
-          egret.TouchEvent.TOUCH_BEGIN,
-          _this.onStageDownHandler,
-          _this
-        )
+        _this.tempStage.addEventListener(egret.TouchEvent.TOUCH_BEGIN, _this.onStageDownHandler, _this)
       }, this)
       if (egret.nativeRender) {
         this.stageText.$setText(this._text.$TextField[13 /* text */])
@@ -19404,11 +21045,67 @@ if (true) {
   egret.InputController = InputController
   __reflect(InputController.prototype, 'egret.InputController')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {})(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
-  var SplitRegex = new RegExp(
-    '(?=[\\u00BF-\\u1FFF\\u2C00-\\uD7FF]|\\b|\\s)(?![。，！、》…）)}”】\\.\\,\\!\\?\\]\\:])'
-  )
+  var SplitRegex = new RegExp('(?=[\\u00BF-\\u1FFF\\u2C00-\\uD7FF]|\\b|\\s)(?![。，！、》…）)}”】\\.\\,\\!\\?\\]\\:])')
   /**
    * @private
    * 根据样式测量文本宽度
@@ -19418,10 +21115,7 @@ if (true) {
     var italic = style.italic == null ? values[16 /* italic */] : style.italic
     var bold = style.bold == null ? values[15 /* bold */] : style.bold
     var size = style.size == null ? values[0 /* fontSize */] : style.size
-    var fontFamily =
-      style.fontFamily ||
-      values[8 /* fontFamily */] ||
-      TextField.default_fontFamily
+    var fontFamily = style.fontFamily || values[8 /* fontFamily */] || TextField.default_fontFamily
     return egret.sys.measureText(text, fontFamily, size, bold, italic)
   }
   /**
@@ -19523,7 +21217,7 @@ if (true) {
         35: null,
         36: null,
         37: egret.TextFieldInputType.TEXT,
-        38: false, //textLinesChangedForNativeRender
+        38: false //textLinesChangedForNativeRender
       }
       if (egret.nativeRender) {
         _this.$nativeDisplayObject.setFontFamily(TextField.default_fontFamily)
@@ -19531,9 +21225,7 @@ if (true) {
       return _this
     }
     TextField.prototype.createNativeDisplayObject = function () {
-      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(
-        7 /* TEXT */
-      )
+      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(7 /* TEXT */)
     }
     /**
      * @private
@@ -19569,7 +21261,7 @@ if (true) {
         this.$setFontFamily(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     TextField.prototype.$setFontFamily = function (value) {
       var values = this.$TextField
@@ -19605,7 +21297,7 @@ if (true) {
         this.$setSize(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     TextField.prototype.$setSize = function (value) {
       var values = this.$TextField
@@ -19641,7 +21333,7 @@ if (true) {
         this.$setBold(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     TextField.prototype.$setBold = function (value) {
       var values = this.$TextField
@@ -19677,7 +21369,7 @@ if (true) {
         this.$setItalic(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     TextField.prototype.$setItalic = function (value) {
       var values = this.$TextField
@@ -19721,7 +21413,7 @@ if (true) {
         this.$setTextAlign(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     TextField.prototype.$setTextAlign = function (value) {
       var values = this.$TextField
@@ -19757,7 +21449,7 @@ if (true) {
         this.$setVerticalAlign(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     TextField.prototype.$setVerticalAlign = function (value) {
       var values = this.$TextField
@@ -19793,7 +21485,7 @@ if (true) {
         this.$setLineSpacing(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     TextField.prototype.$setLineSpacing = function (value) {
       var values = this.$TextField
@@ -19829,7 +21521,7 @@ if (true) {
         this.$setTextColor(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     TextField.prototype.$setTextColor = function (value) {
       var values = this.$TextField
@@ -19870,7 +21562,7 @@ if (true) {
         this.$setWordWrap(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     TextField.prototype.$setWordWrap = function (value) {
       var values = this.$TextField
@@ -19910,7 +21602,7 @@ if (true) {
         this.$setType(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -19980,7 +21672,7 @@ if (true) {
         }
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(TextField.prototype, 'text', {
       /**
@@ -20002,7 +21694,7 @@ if (true) {
         this.$setText(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -20080,7 +21772,7 @@ if (true) {
         this.$setDisplayAsPassword(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -20130,7 +21822,7 @@ if (true) {
         this.$setStrokeColor(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -20174,7 +21866,7 @@ if (true) {
         this.$setStroke(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -20212,7 +21904,7 @@ if (true) {
         this.$setMaxChars(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -20235,10 +21927,7 @@ if (true) {
        * @platform Web,Native
        */
       get: function () {
-        return Math.min(
-          Math.max(this.$TextField[28 /* scrollV */], 1),
-          this.maxScrollV
-        )
+        return Math.min(Math.max(this.$TextField[28 /* scrollV */], 1), this.maxScrollV)
       },
       /**
        * Vertical position of text in a text field. scrollV property helps users locate specific passages in a long article, and create scrolling text fields.
@@ -20264,7 +21953,7 @@ if (true) {
         this.$invalidateTextField()
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(TextField.prototype, 'maxScrollV', {
       /**
@@ -20281,15 +21970,10 @@ if (true) {
        */
       get: function () {
         this.$getLinesArr()
-        return Math.max(
-          this.$TextField[29 /* numLines */] -
-            egret.TextFieldUtils.$getScrollNum(this) +
-            1,
-          1
-        )
+        return Math.max(this.$TextField[29 /* numLines */] - egret.TextFieldUtils.$getScrollNum(this) + 1, 1)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(TextField.prototype, 'selectionBeginIndex', {
       /**
@@ -20301,7 +21985,7 @@ if (true) {
         return 0
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(TextField.prototype, 'selectionEndIndex', {
       /**
@@ -20313,7 +21997,7 @@ if (true) {
         return 0
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(TextField.prototype, 'caretIndex', {
       /**
@@ -20325,7 +22009,7 @@ if (true) {
         return 0
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -20342,9 +22026,7 @@ if (true) {
      * @returns
      */
     TextField.prototype.$getLineHeight = function () {
-      return (
-        this.$TextField[1 /* lineSpacing */] + this.$TextField[0 /* fontSize */]
-      )
+      return this.$TextField[1 /* lineSpacing */] + this.$TextField[0 /* fontSize */]
     }
     Object.defineProperty(TextField.prototype, 'numLines', {
       /**
@@ -20364,7 +22046,7 @@ if (true) {
         return this.$TextField[29 /* numLines */]
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(TextField.prototype, 'multiline', {
       get: function () {
@@ -20386,7 +22068,7 @@ if (true) {
         this.$setMultiline(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -20482,7 +22164,7 @@ if (true) {
         }
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -20546,9 +22228,7 @@ if (true) {
      */
     TextField.prototype.$getWidth = function () {
       var values = this.$TextField
-      return isNaN(values[3 /* textFieldWidth */])
-        ? this.$getContentBounds().width
-        : values[3 /* textFieldWidth */]
+      return isNaN(values[3 /* textFieldWidth */]) ? this.$getContentBounds().width : values[3 /* textFieldWidth */]
     }
     /**
      * @private
@@ -20556,9 +22236,7 @@ if (true) {
      */
     TextField.prototype.$getHeight = function () {
       var values = this.$TextField
-      return isNaN(values[4 /* textFieldHeight */])
-        ? this.$getContentBounds().height
-        : values[4 /* textFieldHeight */]
+      return isNaN(values[4 /* textFieldHeight */]) ? this.$getContentBounds().height : values[4 /* textFieldHeight */]
     }
     Object.defineProperty(TextField.prototype, 'border', {
       /**
@@ -20568,7 +22246,13 @@ if (true) {
       get: function () {
         return this.$TextField[31 /* border */]
       },
-
+      /**
+       * Specifies whether the text field has a border.
+       * If true, the text field has a border. If false, the text field has no border.
+       * Use borderColor property to set the border color.
+       * @default false
+       * @language en_US
+       */
       /**
        * 指定文本字段是否具有边框。
        * 如果为 true，则文本字段具有边框。如果为 false，则文本字段没有边框。
@@ -20580,7 +22264,7 @@ if (true) {
         this.$setBorder(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -20604,7 +22288,12 @@ if (true) {
       get: function () {
         return this.$TextField[32 /* borderColor */]
       },
-
+      /**
+       * The color of the text field border.
+       * Even currently is no border can be retrieved or set this property, but only if the text field has the border property is set to true, the color is visible.
+       * @default 0x000000
+       * @language en_US
+       */
       /**
        * 文本字段边框的颜色。
        * 即使当前没有边框，也可检索或设置此属性，但只有当文本字段已将 border 属性设置为 true 时，才可以看到颜色。
@@ -20615,7 +22304,7 @@ if (true) {
         this.$setBorderColor(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -20639,7 +22328,13 @@ if (true) {
       get: function () {
         return this.$TextField[33 /* background */]
       },
-
+      /**
+       * Specifies whether the text field has a background fill.
+       * If true, the text field has a background fill. If false, the text field has no background fill.
+       * Use the backgroundColor property to set the background color of the text field.
+       * @default false
+       * @language en_US
+       */
       /**
        * 指定文本字段是否具有背景填充。
        * 如果为 true，则文本字段具有背景填充。如果为 false，则文本字段没有背景填充。
@@ -20651,7 +22346,7 @@ if (true) {
         this.$setBackground(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -20674,7 +22369,12 @@ if (true) {
       get: function () {
         return this.$TextField[34 /* backgroundColor */]
       },
-
+      /**
+       * Color of the text field background.
+       * Even currently is no background, can be retrieved or set this property, but only if the text field has the background property set to true, the color is visible.
+       * @default 0xFFFFFF
+       * @language en_US
+       */
       /**
        * 文本字段背景的颜色。
        * 即使当前没有背景，也可检索或设置此属性，但只有当文本字段已将 background 属性设置为 true 时，才可以看到颜色。
@@ -20685,7 +22385,7 @@ if (true) {
         this.$setBackgroundColor(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -20710,11 +22410,7 @@ if (true) {
         graphics.clear()
       }
       var values = this.$TextField
-      if (
-        values[33 /* background */] ||
-        values[31 /* border */] ||
-        (lines && lines.length > 0)
-      ) {
+      if (values[33 /* background */] || values[31 /* border */] || (lines && lines.length > 0)) {
         if (!graphics) {
           graphics = this.$graphicsNode = new egret.sys.GraphicsNode()
           if (!egret.nativeRender) {
@@ -20767,6 +22463,12 @@ if (true) {
         egret.Rectangle.release(bounds)
       }
     }
+    /**
+     * Enter the text automatically entered into the input state, the input type is text only and may only be invoked in the user interaction.
+     * @version Egret 3.0.8
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 输入文本自动进入到输入状态，仅在类型是输入文本并且是在用户交互下才可以调用。
      * @version Egret 3.0.8
@@ -20928,7 +22630,7 @@ if (true) {
         }
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -20986,7 +22688,7 @@ if (true) {
         return this.$TextField[5 /* textWidth */]
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(TextField.prototype, 'textHeight', {
       /**
@@ -21009,7 +22711,7 @@ if (true) {
         return egret.TextFieldUtils.$getTextHeight(this)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -21046,10 +22748,7 @@ if (true) {
     }
     TextField.prototype.$getLinesArr = function () {
       var values = this.$TextField
-      if (
-        egret.nativeRender &&
-        values[38 /* textLinesChangedForNativeRender */]
-      ) {
+      if (egret.nativeRender && values[38 /* textLinesChangedForNativeRender */]) {
         egret_native.updateNativeRender()
         values[38 /* textLinesChangedForNativeRender */] = false
         return
@@ -21076,9 +22775,7 @@ if (true) {
       //宽度被设置为0
       if (!isNaN(textFieldWidth) && textFieldWidth == 0) {
         values[29 /* numLines */] = 0
-        return [
-          { width: 0, height: 0, charNum: 0, elements: [], hasNextLine: false },
-        ]
+        return [{ width: 0, height: 0, charNum: 0, elements: [], hasNextLine: false }]
       }
       var linesArr = this.linesArr
       var lineW = 0
@@ -21086,11 +22783,7 @@ if (true) {
       var lineH = 0
       var lineCount = 0
       var lineElement
-      for (
-        var i = 0, text2ArrLength = text2Arr.length;
-        i < text2ArrLength;
-        i++
-      ) {
+      for (var i = 0, text2ArrLength = text2Arr.length; i < text2ArrLength; i++) {
         var element = text2Arr[i]
         //可能设置为没有文本，忽略绘制
         if (!element.text) {
@@ -21098,10 +22791,7 @@ if (true) {
             lineElement.width = lineW
             lineElement.height = lineH
             lineElement.charNum = lineCharNum
-            values[5 /* textWidth */] = Math.max(
-              values[5 /* textWidth */],
-              lineW
-            )
+            values[5 /* textWidth */] = Math.max(values[5 /* textWidth */], lineW)
             values[6 /* textHeight */] += lineH
           }
           continue
@@ -21109,19 +22799,9 @@ if (true) {
         element.style = element.style || {}
         var text = element.text.toString()
         var textArr = text.split(/(?:\r\n|\r|\n)/)
-        for (
-          var j = 0, textArrLength = textArr.length;
-          j < textArrLength;
-          j++
-        ) {
+        for (var j = 0, textArrLength = textArr.length; j < textArrLength; j++) {
           if (linesArr[lineCount] == null) {
-            lineElement = {
-              width: 0,
-              height: 0,
-              elements: [],
-              charNum: 0,
-              hasNextLine: false,
-            }
+            lineElement = { width: 0, height: 0, elements: [], charNum: 0, hasNextLine: false }
             linesArr[lineCount] = lineElement
             lineW = 0
             lineH = 0
@@ -21130,10 +22810,7 @@ if (true) {
           if (values[24 /* type */] == egret.TextFieldType.INPUT) {
             lineH = values[0 /* fontSize */]
           } else {
-            lineH = Math.max(
-              lineH,
-              element.style.size || values[0 /* fontSize */]
-            )
+            lineH = Math.max(lineH, element.style.size || values[0 /* fontSize */])
           }
           var isNextLine = true
           if (textArr[j] == '') {
@@ -21148,7 +22825,7 @@ if (true) {
               lineElement.elements.push({
                 width: w,
                 text: textArr[j],
-                style: element.style,
+                style: element.style
               })
               if (j == textArrLength - 1) {
                 isNextLine = false
@@ -21158,7 +22835,7 @@ if (true) {
                 lineElement.elements.push({
                   width: w,
                   text: textArr[j],
-                  style: element.style,
+                  style: element.style
                 })
                 lineW += w
                 lineCharNum += textArr[j].length
@@ -21184,11 +22861,7 @@ if (true) {
                   if (codeLen == 1 && k < wl - 1) {
                     var charCodeHigh = words[k].charCodeAt(0)
                     var charCodeLow = words[k + 1].charCodeAt(0)
-                    if (
-                      charCodeHigh >= 0xd800 &&
-                      charCodeHigh <= 0xdbff &&
-                      (charCodeLow & 0xfc00) == 0xdc00
-                    ) {
+                    if (charCodeHigh >= 0xd800 && charCodeHigh <= 0xdbff && (charCodeLow & 0xfc00) == 0xdc00) {
                       var realWord = words[k] + words[k + 1]
                       codeLen = 2
                       has4BytesUnicode = true
@@ -21200,11 +22873,7 @@ if (true) {
                     w = measureTextWidth(words[k], values, element.style)
                   }
                   // w = measureTextWidth(words[k], values, element.style);
-                  if (
-                    lineW != 0 &&
-                    lineW + w > textFieldWidth &&
-                    lineW + k != 0
-                  ) {
+                  if (lineW != 0 && lineW + w > textFieldWidth && lineW + k != 0) {
                     break
                   }
                   if (ww + w > textFieldWidth) {
@@ -21216,21 +22885,13 @@ if (true) {
                       if (codeLen == 1 && k2 < wl2 - 1) {
                         var charCodeHigh = words2[k2].charCodeAt(0)
                         var charCodeLow = words2[k2 + 1].charCodeAt(0)
-                        if (
-                          charCodeHigh >= 0xd800 &&
-                          charCodeHigh <= 0xdbff &&
-                          (charCodeLow & 0xfc00) == 0xdc00
-                        ) {
+                        if (charCodeHigh >= 0xd800 && charCodeHigh <= 0xdbff && (charCodeLow & 0xfc00) == 0xdc00) {
                           var realWord = words2[k2] + words2[k2 + 1]
                           codeLen = 2
                           has4BytesUnicode2 = true
                           w = measureTextWidth(realWord, values, element.style)
                         } else {
-                          w = measureTextWidth(
-                            words2[k2],
-                            values,
-                            element.style
-                          )
+                          w = measureTextWidth(words2[k2], values, element.style)
                         }
                       } else {
                         w = measureTextWidth(words2[k2], values, element.style)
@@ -21263,7 +22924,7 @@ if (true) {
                   lineElement.elements.push({
                     width: ww,
                     text: word.substring(0, charNum),
-                    style: element.style,
+                    style: element.style
                   })
                   var leftWord = word.substring(charNum)
                   var m = void 0
@@ -21290,10 +22951,7 @@ if (true) {
             lineElement.width = lineW
             lineElement.height = lineH
             lineElement.charNum = lineCharNum
-            values[5 /* textWidth */] = Math.max(
-              values[5 /* textWidth */],
-              lineW
-            )
+            values[5 /* textWidth */] = Math.max(values[5 /* textWidth */], lineW)
             values[6 /* textHeight */] += lineH
             //if (this._type == TextFieldType.INPUT && !this._multiline) {
             //    this._numLines = linesArr.length;
@@ -21332,8 +22990,7 @@ if (true) {
       var values = this.$TextField
       //更新文本样式
       node.bold = values[15 /* bold */]
-      node.fontFamily =
-        values[8 /* fontFamily */] || TextField.default_fontFamily
+      node.fontFamily = values[8 /* fontFamily */] || TextField.default_fontFamily
       node.italic = values[16 /* italic */]
       node.size = values[0 /* fontSize */]
       node.stroke = values[27 /* stroke */]
@@ -21344,9 +23001,7 @@ if (true) {
       if (values[5 /* textWidth */] == 0) {
         return []
       }
-      var maxWidth = !isNaN(values[3 /* textFieldWidth */])
-        ? values[3 /* textFieldWidth */]
-        : values[5 /* textWidth */]
+      var maxWidth = !isNaN(values[3 /* textFieldWidth */]) ? values[3 /* textFieldWidth */] : values[5 /* textWidth */]
       var textHeight = egret.TextFieldUtils.$getTextHeight(this)
       var drawY = 0
       var startLine = egret.TextFieldUtils.$getStartLine(this)
@@ -21359,19 +23014,12 @@ if (true) {
       var hAlign = egret.TextFieldUtils.$getHalign(this)
       var drawX = 0
       var underLineData = []
-      for (
-        var i = startLine, numLinesLength = values[29 /* numLines */];
-        i < numLinesLength;
-        i++
-      ) {
+      for (var i = startLine, numLinesLength = values[29 /* numLines */]; i < numLinesLength; i++) {
         var line = lines[i]
         var h = line.height
         drawY += h / 2
         if (i != startLine) {
-          if (
-            values[24 /* type */] == egret.TextFieldType.INPUT &&
-            !values[30 /* multiline */]
-          ) {
+          if (values[24 /* type */] == egret.TextFieldType.INPUT && !values[30 /* multiline */]) {
             break
           }
           if (!isNaN(textFieldHeight) && drawY > textFieldHeight) {
@@ -21379,26 +23027,12 @@ if (true) {
           }
         }
         drawX = Math.round((maxWidth - line.width) * hAlign)
-        for (
-          var j = 0, elementsLength = line.elements.length;
-          j < elementsLength;
-          j++
-        ) {
+        for (var j = 0, elementsLength = line.elements.length; j < elementsLength; j++) {
           var element = line.elements[j]
           var size = element.style.size || values[0 /* fontSize */]
-          node.drawText(
-            drawX,
-            drawY + (h - size) / 2,
-            element.text,
-            element.style
-          )
+          node.drawText(drawX, drawY + (h - size) / 2, element.text, element.style)
           if (element.style.underline) {
-            underLineData.push(
-              drawX,
-              drawY + h / 2,
-              element.width,
-              element.style.textColor
-            )
+            underLineData.push(drawX, drawY + h / 2, element.width, element.style.textColor)
           }
           drawX += element.width
         }
@@ -21412,11 +23046,7 @@ if (true) {
     }
     //释放点击事件
     TextField.prototype.removeEvent = function () {
-      this.removeEventListener(
-        egret.TouchEvent.TOUCH_TAP,
-        this.onTapHandler,
-        this
-      )
+      this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onTapHandler, this)
     }
     //处理富文本中有href的
     TextField.prototype.onTapHandler = function (e) {
@@ -21431,11 +23061,7 @@ if (true) {
       if (style && style.href) {
         if (style.href.match(/^event:/)) {
           var type = style.href.match(/^event:/)[0]
-          egret.TextEvent.dispatchTextEvent(
-            this,
-            egret.TextEvent.LINK,
-            style.href.substring(type.length)
-          )
+          egret.TextEvent.dispatchTextEvent(this, egret.TextEvent.LINK, style.href.substring(type.length))
         } else {
           open(style.href, style.target || '_blank')
         }
@@ -21485,6 +23111,35 @@ if (true) {
   egret.TextField = TextField
   __reflect(TextField.prototype, 'egret.TextField')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * TextFieldInputType class is an enumeration of constant value used in setting the inputType property of the TextField class.
@@ -21544,6 +23199,35 @@ if (true) {
   egret.TextFieldInputType = TextFieldInputType
   __reflect(TextFieldInputType.prototype, 'egret.TextFieldInputType')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * TextFieldType class is an enumeration of constant value used in setting the type property of the TextField class.
@@ -21590,6 +23274,35 @@ if (true) {
   egret.TextFieldType = TextFieldType
   __reflect(TextFieldType.prototype, 'egret.TextFieldType')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * @private
@@ -21633,13 +23346,9 @@ if (true) {
     TextFieldUtils.$getHalign = function (textfield) {
       var lineArr = textfield.$getLinesArr2()
       var halign = 0
-      if (
-        textfield.$TextField[9 /* textAlign */] == egret.HorizontalAlign.CENTER
-      ) {
+      if (textfield.$TextField[9 /* textAlign */] == egret.HorizontalAlign.CENTER) {
         halign = 0.5
-      } else if (
-        textfield.$TextField[9 /* textAlign */] == egret.HorizontalAlign.RIGHT
-      ) {
+      } else if (textfield.$TextField[9 /* textAlign */] == egret.HorizontalAlign.RIGHT) {
         halign = 1
       }
       if (
@@ -21659,12 +23368,10 @@ if (true) {
      */
     TextFieldUtils.$getTextHeight = function (textfield) {
       var textHeight =
-        egret.TextFieldType.INPUT == textfield.$TextField[24 /* type */] &&
-        !textfield.$TextField[30 /* multiline */]
+        egret.TextFieldType.INPUT == textfield.$TextField[24 /* type */] && !textfield.$TextField[30 /* multiline */]
           ? textfield.$TextField[0 /* fontSize */]
           : textfield.$TextField[6 /* textHeight */] +
-            (textfield.$TextField[29 /* numLines */] - 1) *
-              textfield.$TextField[1 /* lineSpacing */]
+            (textfield.$TextField[29 /* numLines */] - 1) * textfield.$TextField[1 /* lineSpacing */]
       return textHeight
     }
     /**
@@ -21685,16 +23392,8 @@ if (true) {
       if (!isNaN(textFieldHeight)) {
         if (textHeight < textFieldHeight) {
           var valign = 0
-          if (
-            textfield.$TextField[10 /* verticalAlign */] ==
-            egret.VerticalAlign.MIDDLE
-          )
-            valign = 0.5
-          else if (
-            textfield.$TextField[10 /* verticalAlign */] ==
-            egret.VerticalAlign.BOTTOM
-          )
-            valign = 1
+          if (textfield.$TextField[10 /* verticalAlign */] == egret.VerticalAlign.MIDDLE) valign = 0.5
+          else if (textfield.$TextField[10 /* verticalAlign */] == egret.VerticalAlign.BOTTOM) valign = 1
           return valign
         }
       }
@@ -21716,9 +23415,7 @@ if (true) {
         lineArr[hitTextEle.lineIndex] &&
         lineArr[hitTextEle.lineIndex].elements[hitTextEle.textElementIndex]
       ) {
-        return lineArr[hitTextEle.lineIndex].elements[
-          hitTextEle.textElementIndex
-        ]
+        return lineArr[hitTextEle.lineIndex].elements[hitTextEle.textElementIndex]
       }
       return null
     }
@@ -21809,13 +23506,71 @@ if (true) {
   egret.TextFieldUtils = TextFieldUtils
   __reflect(TextFieldUtils.prototype, 'egret.TextFieldUtils')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
 /**
  * @private
  */
+var egret
 ;(function (egret) {
   var sys
   ;(function (sys) {})((sys = egret.sys || (egret.sys = {})))
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The VerticalAlign class defines the possible values for the vertical alignment.
@@ -21909,6 +23664,35 @@ if (true) {
   egret.VerticalAlign = VerticalAlign
   __reflect(VerticalAlign.prototype, 'egret.VerticalAlign')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * @language en_US
@@ -22010,7 +23794,43 @@ var lookup = new Uint8Array(256)
 for (var i = 0; i < chars.length; i++) {
   lookup[chars.charCodeAt(i)] = i
 }
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
+  /**
+   * The Endian class contains values that denote the byte order used to represent multibyte numbers.
+   * The byte order is either bigEndian (most significant byte first) or littleEndian (least significant byte first).
+   * @version Egret 2.4
+   * @platform Web,Native
+   * @language en_US
+   */
   /**
    * Endian 类中包含一些值，它们表示用于表示多字节数字的字节顺序。
    * 字节顺序为 bigEndian（最高有效字节位于最前）或 littleEndian（最低有效字节位于最前）。
@@ -22054,6 +23874,14 @@ for (var i = 0; i < chars.length; i++) {
   })()
   egret.Endian = Endian
   __reflect(Endian.prototype, 'egret.Endian')
+  /**
+   * The ByteArray class provides methods and attributes for optimized reading and writing as well as dealing with binary data.
+   * Note: The ByteArray class is applied to the advanced developers who need to access data at the byte layer.
+   * @version Egret 2.4
+   * @platform Web,Native
+   * @includeExample egret/utils/ByteArray.ts
+   * @language en_US
+   */
   /**
    * ByteArray 类提供用于优化读取、写入以及处理二进制数据的方法和属性。
    * 注意：ByteArray 类适用于需要在字节层访问数据的高级开发人员。
@@ -22130,18 +23958,13 @@ for (var i = 0; i < chars.length; i++) {
        * @language zh_CN
        */
       get: function () {
-        return this.$endian == 0 /* LITTLE_ENDIAN */
-          ? Endian.LITTLE_ENDIAN
-          : Endian.BIG_ENDIAN
+        return this.$endian == 0 /* LITTLE_ENDIAN */ ? Endian.LITTLE_ENDIAN : Endian.BIG_ENDIAN
       },
       set: function (value) {
-        this.$endian =
-          value == Endian.LITTLE_ENDIAN
-            ? 0 /* LITTLE_ENDIAN */
-            : 1 /* BIG_ENDIAN */
+        this.$endian = value == Endian.LITTLE_ENDIAN ? 0 /* LITTLE_ENDIAN */ : 1 /* BIG_ENDIAN */
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @deprecated
@@ -22161,7 +23984,7 @@ for (var i = 0; i < chars.length; i++) {
         return this.write_position - this._position
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(ByteArray.prototype, 'buffer', {
       get: function () {
@@ -22187,21 +24010,21 @@ for (var i = 0; i < chars.length; i++) {
         this.data = new DataView(bytes.buffer)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(ByteArray.prototype, 'rawBuffer', {
       get: function () {
         return this.data.buffer
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(ByteArray.prototype, 'bytes', {
       get: function () {
         return this._bytes
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(ByteArray.prototype, 'dataView', {
       /**
@@ -22219,7 +24042,7 @@ for (var i = 0; i < chars.length; i++) {
         this.buffer = value.buffer
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(ByteArray.prototype, 'bufferOffset', {
       /**
@@ -22229,7 +24052,7 @@ for (var i = 0; i < chars.length; i++) {
         return this.data.byteOffset
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(ByteArray.prototype, 'position', {
       /**
@@ -22254,7 +24077,7 @@ for (var i = 0; i < chars.length; i++) {
         }
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(ByteArray.prototype, 'length', {
       /**
@@ -22284,7 +24107,7 @@ for (var i = 0; i < chars.length; i++) {
         this._validateBuffer(value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     ByteArray.prototype._validateBuffer = function (value) {
       if (this.data.byteLength < value) {
@@ -22320,7 +24143,7 @@ for (var i = 0; i < chars.length; i++) {
         return this.data.byteLength - this._position
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * Clears the contents of the byte array and resets the length and position properties to 0.
@@ -22356,8 +24179,7 @@ for (var i = 0; i < chars.length; i++) {
      * @language zh_CN
      */
     ByteArray.prototype.readBoolean = function () {
-      if (this.validate(1 /* SIZE_OF_BOOLEAN */))
-        return !!this._bytes[this.position++]
+      if (this.validate(1 /* SIZE_OF_BOOLEAN */)) return !!this._bytes[this.position++]
     }
     /**
      * Read signed bytes from the byte stream.
@@ -22374,8 +24196,7 @@ for (var i = 0; i < chars.length; i++) {
      * @language zh_CN
      */
     ByteArray.prototype.readByte = function () {
-      if (this.validate(1 /* SIZE_OF_INT8 */))
-        return this.data.getInt8(this.position++)
+      if (this.validate(1 /* SIZE_OF_INT8 */)) return this.data.getInt8(this.position++)
     }
     /**
      * Read data byte number specified by the length parameter from the byte stream. Starting from the position specified by offset, read bytes into the ByteArray object specified by the bytes parameter, and write bytes into the target ByteArray
@@ -22440,10 +24261,7 @@ for (var i = 0; i < chars.length; i++) {
      */
     ByteArray.prototype.readDouble = function () {
       if (this.validate(8 /* SIZE_OF_FLOAT64 */)) {
-        var value = this.data.getFloat64(
-          this._position,
-          this.$endian == 0 /* LITTLE_ENDIAN */
-        )
+        var value = this.data.getFloat64(this._position, this.$endian == 0 /* LITTLE_ENDIAN */)
         this.position += 8 /* SIZE_OF_FLOAT64 */
         return value
       }
@@ -22464,10 +24282,7 @@ for (var i = 0; i < chars.length; i++) {
      */
     ByteArray.prototype.readFloat = function () {
       if (this.validate(4 /* SIZE_OF_FLOAT32 */)) {
-        var value = this.data.getFloat32(
-          this._position,
-          this.$endian == 0 /* LITTLE_ENDIAN */
-        )
+        var value = this.data.getFloat32(this._position, this.$endian == 0 /* LITTLE_ENDIAN */)
         this.position += 4 /* SIZE_OF_FLOAT32 */
         return value
       }
@@ -22488,10 +24303,7 @@ for (var i = 0; i < chars.length; i++) {
      */
     ByteArray.prototype.readInt = function () {
       if (this.validate(4 /* SIZE_OF_INT32 */)) {
-        var value = this.data.getInt32(
-          this._position,
-          this.$endian == 0 /* LITTLE_ENDIAN */
-        )
+        var value = this.data.getInt32(this._position, this.$endian == 0 /* LITTLE_ENDIAN */)
         this.position += 4 /* SIZE_OF_INT32 */
         return value
       }
@@ -22512,10 +24324,7 @@ for (var i = 0; i < chars.length; i++) {
      */
     ByteArray.prototype.readShort = function () {
       if (this.validate(2 /* SIZE_OF_INT16 */)) {
-        var value = this.data.getInt16(
-          this._position,
-          this.$endian == 0 /* LITTLE_ENDIAN */
-        )
+        var value = this.data.getInt16(this._position, this.$endian == 0 /* LITTLE_ENDIAN */)
         this.position += 2 /* SIZE_OF_INT16 */
         return value
       }
@@ -22535,8 +24344,7 @@ for (var i = 0; i < chars.length; i++) {
      * @language zh_CN
      */
     ByteArray.prototype.readUnsignedByte = function () {
-      if (this.validate(1 /* SIZE_OF_UINT8 */))
-        return this._bytes[this.position++]
+      if (this.validate(1 /* SIZE_OF_UINT8 */)) return this._bytes[this.position++]
     }
     /**
      * Read a 32-bit unsigned integer from the byte stream.
@@ -22554,10 +24362,7 @@ for (var i = 0; i < chars.length; i++) {
      */
     ByteArray.prototype.readUnsignedInt = function () {
       if (this.validate(4 /* SIZE_OF_UINT32 */)) {
-        var value = this.data.getUint32(
-          this._position,
-          this.$endian == 0 /* LITTLE_ENDIAN */
-        )
+        var value = this.data.getUint32(this._position, this.$endian == 0 /* LITTLE_ENDIAN */)
         this.position += 4 /* SIZE_OF_UINT32 */
         return value
       }
@@ -22578,10 +24383,7 @@ for (var i = 0; i < chars.length; i++) {
      */
     ByteArray.prototype.readUnsignedShort = function () {
       if (this.validate(2 /* SIZE_OF_UINT16 */)) {
-        var value = this.data.getUint16(
-          this._position,
-          this.$endian == 0 /* LITTLE_ENDIAN */
-        )
+        var value = this.data.getUint16(this._position, this.$endian == 0 /* LITTLE_ENDIAN */)
         this.position += 2 /* SIZE_OF_UINT16 */
         return value
       }
@@ -22629,11 +24431,7 @@ for (var i = 0; i < chars.length; i++) {
         return
       }
       var data = this.data
-      var bytes = new Uint8Array(
-        data.buffer,
-        data.byteOffset + this._position,
-        length
-      )
+      var bytes = new Uint8Array(data.buffer, data.byteOffset + this._position, length)
       this.position += length
       return this.decodeUTF8(bytes)
     }
@@ -22717,10 +24515,7 @@ for (var i = 0; i < chars.length; i++) {
       }
       if (writeLength > 0) {
         this.validateBuffer(writeLength)
-        this._bytes.set(
-          bytes._bytes.subarray(offset, offset + writeLength),
-          this._position
-        )
+        this._bytes.set(bytes._bytes.subarray(offset, offset + writeLength), this._position)
         this.position = this._position + writeLength
       }
     }
@@ -22740,11 +24535,7 @@ for (var i = 0; i < chars.length; i++) {
      */
     ByteArray.prototype.writeDouble = function (value) {
       this.validateBuffer(8 /* SIZE_OF_FLOAT64 */)
-      this.data.setFloat64(
-        this._position,
-        value,
-        this.$endian == 0 /* LITTLE_ENDIAN */
-      )
+      this.data.setFloat64(this._position, value, this.$endian == 0 /* LITTLE_ENDIAN */)
       this.position += 8 /* SIZE_OF_FLOAT64 */
     }
     /**
@@ -22763,11 +24554,7 @@ for (var i = 0; i < chars.length; i++) {
      */
     ByteArray.prototype.writeFloat = function (value) {
       this.validateBuffer(4 /* SIZE_OF_FLOAT32 */)
-      this.data.setFloat32(
-        this._position,
-        value,
-        this.$endian == 0 /* LITTLE_ENDIAN */
-      )
+      this.data.setFloat32(this._position, value, this.$endian == 0 /* LITTLE_ENDIAN */)
       this.position += 4 /* SIZE_OF_FLOAT32 */
     }
     /**
@@ -22786,11 +24573,7 @@ for (var i = 0; i < chars.length; i++) {
      */
     ByteArray.prototype.writeInt = function (value) {
       this.validateBuffer(4 /* SIZE_OF_INT32 */)
-      this.data.setInt32(
-        this._position,
-        value,
-        this.$endian == 0 /* LITTLE_ENDIAN */
-      )
+      this.data.setInt32(this._position, value, this.$endian == 0 /* LITTLE_ENDIAN */)
       this.position += 4 /* SIZE_OF_INT32 */
     }
     /**
@@ -22809,11 +24592,7 @@ for (var i = 0; i < chars.length; i++) {
      */
     ByteArray.prototype.writeShort = function (value) {
       this.validateBuffer(2 /* SIZE_OF_INT16 */)
-      this.data.setInt16(
-        this._position,
-        value,
-        this.$endian == 0 /* LITTLE_ENDIAN */
-      )
+      this.data.setInt16(this._position, value, this.$endian == 0 /* LITTLE_ENDIAN */)
       this.position += 2 /* SIZE_OF_INT16 */
     }
     /**
@@ -22832,11 +24611,7 @@ for (var i = 0; i < chars.length; i++) {
      */
     ByteArray.prototype.writeUnsignedInt = function (value) {
       this.validateBuffer(4 /* SIZE_OF_UINT32 */)
-      this.data.setUint32(
-        this._position,
-        value,
-        this.$endian == 0 /* LITTLE_ENDIAN */
-      )
+      this.data.setUint32(this._position, value, this.$endian == 0 /* LITTLE_ENDIAN */)
       this.position += 4 /* SIZE_OF_UINT32 */
     }
     /**
@@ -22855,11 +24630,7 @@ for (var i = 0; i < chars.length; i++) {
      */
     ByteArray.prototype.writeUnsignedShort = function (value) {
       this.validateBuffer(2 /* SIZE_OF_UINT16 */)
-      this.data.setUint16(
-        this._position,
-        value,
-        this.$endian == 0 /* LITTLE_ENDIAN */
-      )
+      this.data.setUint16(this._position, value, this.$endian == 0 /* LITTLE_ENDIAN */)
       this.position += 2 /* SIZE_OF_UINT16 */
     }
     /**
@@ -22880,11 +24651,7 @@ for (var i = 0; i < chars.length; i++) {
       var utf8bytes = this.encodeUTF8(value)
       var length = utf8bytes.length
       this.validateBuffer(2 /* SIZE_OF_UINT16 */ + length)
-      this.data.setUint16(
-        this._position,
-        length,
-        this.$endian == 0 /* LITTLE_ENDIAN */
-      )
+      this.data.setUint16(this._position, length, this.$endian == 0 /* LITTLE_ENDIAN */)
       this.position += 2 /* SIZE_OF_UINT16 */
       this._writeUint8Array(utf8bytes, false)
     }
@@ -22912,12 +24679,7 @@ for (var i = 0; i < chars.length; i++) {
      * @platform Web,Native
      */
     ByteArray.prototype.toString = function () {
-      return (
-        '[ByteArray] length:' +
-        this.length +
-        ', bytesAvailable:' +
-        this.bytesAvailable
-      )
+      return '[ByteArray] length:' + this.length + ', bytesAvailable:' + this.bytesAvailable
     }
     /**
      * @private
@@ -22961,8 +24723,7 @@ for (var i = 0; i < chars.length; i++) {
      * @param needReplace
      */
     ByteArray.prototype.validateBuffer = function (len) {
-      this.write_position =
-        len > this.write_position ? len : this.write_position
+      this.write_position = len > this.write_position ? len : this.write_position
       len += this._position
       this._validateBuffer(len)
     }
@@ -23046,8 +24807,7 @@ for (var i = 0; i < chars.length; i++) {
               } else {
                 this.decoderError(fatal)
               }
-              utf8_code_point =
-                utf8_code_point * Math.pow(64, utf8_bytes_needed)
+              utf8_code_point = utf8_code_point * Math.pow(64, utf8_bytes_needed)
               code_point = null
             }
           } else if (!this.inRange(_byte, 0x80, 0xbf)) {
@@ -23059,9 +24819,7 @@ for (var i = 0; i < chars.length; i++) {
             code_point = this.decoderError(fatal, _byte)
           } else {
             utf8_bytes_seen += 1
-            utf8_code_point =
-              utf8_code_point +
-              (_byte - 0x80) * Math.pow(64, utf8_bytes_needed - utf8_bytes_seen)
+            utf8_code_point = utf8_code_point + (_byte - 0x80) * Math.pow(64, utf8_bytes_needed - utf8_bytes_seen)
             if (utf8_bytes_seen !== utf8_bytes_needed) {
               code_point = null
             } else {
@@ -23071,10 +24829,7 @@ for (var i = 0; i < chars.length; i++) {
               utf8_bytes_needed = 0
               utf8_bytes_seen = 0
               utf8_lower_boundary = 0
-              if (
-                this.inRange(cp, lower_boundary, 0x10ffff) &&
-                !this.inRange(cp, 0xd800, 0xdfff)
-              ) {
+              if (this.inRange(cp, lower_boundary, 0x10ffff) && !this.inRange(cp, 0xd800, 0xdfff)) {
                 code_point = cp
               } else {
                 code_point = this.decoderError(fatal, _byte)
@@ -23176,7 +24931,45 @@ for (var i = 0; i < chars.length; i++) {
   egret.ByteArray = ByteArray
   __reflect(ByteArray.prototype, 'egret.ByteArray')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
+  /**
+   * This class is used to create lightweight shapes using the drawing application program interface (API). The Shape
+   * class includes a graphics property, which lets you access methods from the Graphics class.
+   * @see egret.Graphics
+   * @version Egret 2.4
+   * @platform Web,Native
+   * @includeExample egret/display/Shape.ts
+   * @language en_US
+   */
   /**
    * 此类用于使用绘图应用程序编程接口 (API) 创建简单形状。Shape 类含有 graphics 属性，通过该属性您可以访问各种矢量绘图方法。
    * @see egret.Graphics
@@ -23187,6 +24980,12 @@ for (var i = 0; i < chars.length; i++) {
    */
   var Shape = (function (_super) {
     __extends(Shape, _super)
+    /**
+     * Creates a new Shape object.
+     * @version Egret 2.4
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 创建一个 Shape 对象
      * @version Egret 2.4
@@ -23200,11 +24999,15 @@ for (var i = 0; i < chars.length; i++) {
       return _this
     }
     Shape.prototype.createNativeDisplayObject = function () {
-      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(
-        8 /* GRAPHICS */
-      )
+      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(8 /* GRAPHICS */)
     }
     Object.defineProperty(Shape.prototype, 'graphics', {
+      /**
+       * Specifies the Graphics object belonging to this Shape object, where vector drawing commands can occur.
+       * @version Egret 2.4
+       * @platform Web,Native
+       * @language en_US
+       */
       /**
        * 获取 Shape 中的 Graphics 对象。可通过此对象执行矢量绘图命令。
        * @version Egret 2.4
@@ -23215,7 +25018,7 @@ for (var i = 0; i < chars.length; i++) {
         return this.$graphics
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * @private
@@ -23244,6 +25047,35 @@ for (var i = 0; i < chars.length; i++) {
   egret.Shape = Shape
   __reflect(Shape.prototype, 'egret.Shape')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * Registers the runtime class information for a class.This method adds some strings which represent the class name or
@@ -23304,7 +25136,7 @@ for (var i = 0; i < chars.length; i++) {
     Object.defineProperty(prototype, '__class__', {
       value: className,
       enumerable: false,
-      writable: true,
+      writable: true
     })
     var types = [className]
     if (interfaceNames) {
@@ -23323,11 +25155,40 @@ for (var i = 0; i < chars.length; i++) {
     Object.defineProperty(prototype, '__types__', {
       value: types,
       enumerable: false,
-      writable: true,
+      writable: true
     })
   }
   egret.registerClass = registerClass
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The Sprite class is a basic display list building block: a display list node that can contain children.
@@ -23364,9 +25225,7 @@ for (var i = 0; i < chars.length; i++) {
       return _this
     }
     Sprite.prototype.createNativeDisplayObject = function () {
-      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(
-        9 /* SPRITE */
-      )
+      this.$nativeDisplayObject = new egret_native.NativeDisplayObject(9 /* SPRITE */)
     }
     Object.defineProperty(Sprite.prototype, 'graphics', {
       /**
@@ -23385,7 +25244,7 @@ for (var i = 0; i < chars.length; i++) {
         return this.$graphics
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Sprite.prototype.$hitTest = function (stageX, stageY) {
       if (!this.$visible) {
@@ -23454,7 +25313,42 @@ for (var i = 0; i < chars.length; i++) {
   egret.Sprite = Sprite
   __reflect(Sprite.prototype, 'egret.Sprite')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
+  /**
+   * Logger is an entrance for the log processing namespace of the engine
+   * @version Egret 2.4
+   * @platform Web,Native
+   * @language en_US
+   */
   /**
    * Logger是引擎的日志处理模块入口
    * @version Egret 2.4
@@ -23465,11 +25359,27 @@ for (var i = 0; i < chars.length; i++) {
     function Logger() {}
     Object.defineProperty(Logger, 'logLevel', {
       /**
+       * Set the current need to open the log level. Grade level are: ALL <DEBUG <INFO <WARN <ERROR <OFF<br/>
+       * This feature is only in DEBUG mode to take effect. <br/>
+       * <Ul>
+       * <Li> Logger.ALL - all levels of log can be printed out. </ li>
+       * <Li> Logger.DEBUG - print debug, gameInfo, log, warn, error. </ li>
+       * <Li> Logger.INFO - print gameInfo, log, warn, error. </ li>
+       * <Li> Logger.WARN - can print warn, error. </ li>
+       * <Li> Logger.ERROR - You can print error. </ li>
+       * <Li> Logger.OFF - all closed. </ li>
+       * </ Ul>
+       *param LogType from this level to start printing.
+       * @version Egret 2.4
+       * @platform Web,Native
+       * @language en_US
+       */
+      /**
        * 设置当前需要开启的log级别。级别等级分别为：ALL < DEBUG < INFO < WARN < ERROR < OFF<br/>
        * 此功能只在 DEBUG 模式下才生效。<br/>
        * <ul>
        * <li>Logger.ALL -- 所有等级的log都可以打印出来。</li>
-       * <li>Logger.DEBUG -- 可以打印debug、info、log、warn、error。</li>
+       * <li>Logger.DEBUG -- 可以打印debug、gameInfo、log、warn、error。</li>
        * <li>Logger.INFO -- 可以打印info、log、warn、error。</li>
        * <li>Logger.WARN -- 可以打印warn、error。</li>
        * <li>Logger.ERROR -- 可以打印error。</li>
@@ -23482,7 +25392,7 @@ for (var i = 0; i < chars.length; i++) {
        */
       set: function (logType) {},
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * open all
@@ -23567,6 +25477,35 @@ for (var i = 0; i < chars.length; i++) {
   egret.Logger = Logger
   __reflect(Logger.prototype, 'egret.Logger')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * @version Egret 2.4
@@ -23617,9 +25556,7 @@ for (var i = 0; i < chars.length; i++) {
         return resultFloor
       }
       var resultCeil = NumberUtils.sinInt(valueCeil)
-      return (
-        (value - valueFloor) * resultCeil + (valueCeil - value) * resultFloor
-      )
+      return (value - valueFloor) * resultCeil + (valueCeil - value) * resultFloor
     }
     /**
      * @private
@@ -23658,9 +25595,7 @@ for (var i = 0; i < chars.length; i++) {
         return resultFloor
       }
       var resultCeil = NumberUtils.cosInt(valueCeil)
-      return (
-        (value - valueFloor) * resultCeil + (valueCeil - value) * resultFloor
-      )
+      return (value - valueFloor) * resultCeil + (valueCeil - value) * resultFloor
     }
     /**
      * @private
@@ -23714,6 +25649,7 @@ egret_sin_map[180] = 0
 egret_cos_map[180] = -1
 egret_sin_map[270] = -1
 egret_cos_map[270] = 0
+//对未提供bind的浏览器实现bind机制
 if (!Function.prototype.bind) {
   Function.prototype.bind = function (oThis) {
     if (typeof this !== 'function') {
@@ -23734,6 +25670,35 @@ if (!Function.prototype.bind) {
     return fBound
   }
 }
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * The Timer class is the interface to timers, which let you run code on a specified time sequence. Use the start()
@@ -23840,7 +25805,7 @@ if (!Function.prototype.bind) {
         this.lastCount = this.updateInterval = Math.round(60 * value)
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Timer.prototype, 'currentCount', {
       /**
@@ -23859,7 +25824,7 @@ if (!Function.prototype.bind) {
         return this._currentCount
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     Object.defineProperty(Timer.prototype, 'running', {
       /**
@@ -23878,7 +25843,7 @@ if (!Function.prototype.bind) {
         return this._running
       },
       enumerable: true,
-      configurable: true,
+      configurable: true
     })
     /**
      * Stops the timer, if it is running, and sets the currentCount property back to 0, like the reset button of a stopwatch.
@@ -23951,17 +25916,13 @@ if (!Function.prototype.bind) {
       }
       this.lastTimeStamp = timeStamp
       this._currentCount++
-      var complete =
-        this.repeatCount > 0 && this._currentCount >= this.repeatCount
+      var complete = this.repeatCount > 0 && this._currentCount >= this.repeatCount
       if (this.repeatCount == 0 || this._currentCount <= this.repeatCount) {
         egret.TimerEvent.dispatchTimerEvent(this, egret.TimerEvent.TIMER)
       }
       if (complete) {
         this.stop()
-        egret.TimerEvent.dispatchTimerEvent(
-          this,
-          egret.TimerEvent.TIMER_COMPLETE
-        )
+        egret.TimerEvent.dispatchTimerEvent(this, egret.TimerEvent.TIMER_COMPLETE)
       }
       return false
     }
@@ -23970,7 +25931,65 @@ if (!Function.prototype.bind) {
   egret.Timer = Timer
   __reflect(Timer.prototype, 'egret.Timer')
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {})(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * @private
@@ -24044,6 +26063,44 @@ if (!Function.prototype.bind) {
   }
   egret.$callAsync = $callAsync
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+//function __extends(d, b) {
+//    for (let p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+//    function __() {
+//        this.constructor = d;
+//    }
+//
+//    __.prototype = b.prototype;
+//    d.prototype = new __();
+//}
+var egret
 ;(function (egret) {
   /**
    * Call setter properties of the parent class, instead of the other writing languages, such as super.alpha = 1;
@@ -24142,6 +26199,35 @@ if (!Function.prototype.bind) {
   }
   egret.superGetter = superGetter
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * @private
@@ -24189,7 +26275,65 @@ if (!Function.prototype.bind) {
     }
   }
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {})(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * Return the fully qualified class name of an object
@@ -24224,9 +26368,7 @@ if (!Function.prototype.bind) {
     if (!value || (type != 'object' && !value.prototype)) {
       return type
     }
-    var prototype = value.prototype
-      ? value.prototype
-      : Object.getPrototypeOf(value)
+    var prototype = value.prototype ? value.prototype : Object.getPrototypeOf(value)
     if (prototype.hasOwnProperty('__class__')) {
       return prototype['__class__']
     }
@@ -24236,12 +26378,41 @@ if (!Function.prototype.bind) {
     Object.defineProperty(prototype, '__class__', {
       value: className,
       enumerable: false,
-      writable: true,
+      writable: true
     })
     return className
   }
   egret.getQualifiedClassName = getQualifiedClassName
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
   /**
    * Returns the fully qualified class name of the base class of the object specified by the value parameter.
@@ -24274,9 +26445,7 @@ if (!Function.prototype.bind) {
     if (!value || (typeof value != 'object' && !value.prototype)) {
       return null
     }
-    var prototype = value.prototype
-      ? value.prototype
-      : Object.getPrototypeOf(value)
+    var prototype = value.prototype ? value.prototype : Object.getPrototypeOf(value)
     var superProto = Object.getPrototypeOf(prototype)
     if (!superProto) {
       return null
@@ -24289,7 +26458,44 @@ if (!Function.prototype.bind) {
   }
   egret.getQualifiedSuperclassName = getQualifiedSuperclassName
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
+  /**
+   * Used to compute relative time.this method returns the number of milliseconds since the Egret framework was initialized
+   * @returns The number of milliseconds since the Egret framework was initialized
+   * @version Egret 2.4
+   * @platform Web,Native
+   * @includeExample egret/utils/getTimer.ts
+   * @language en_US
+   */
   /**
    * 用于计算相对时间。此方法返回自启动 Egret 框架以来经过的毫秒数。
    * @returns 启动 Egret 框架以来经过的毫秒数。
@@ -24303,7 +26509,47 @@ if (!Function.prototype.bind) {
   }
   egret.getTimer = getTimer
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
+  /**
+   * Check whether a public definition exists in the specified application domain. The definition can be that of a class, a naming space or a function.
+   * @param name {string} Name of the definition.
+   * @returns {boolean} Whether the public definition exists
+   * @example
+   * egret.hasDefinition("egret.DisplayObject") //return true
+   * @version Egret 2.4
+   * @platform Web,Native
+   * @includeExample egret/utils/hasDefinition.ts
+   * @language en_US
+   */
   /**
    * 检查指定的应用程序域之内是否存在一个公共定义。该定义可以是一个类、一个命名空间或一个函数的定义。
    * @param name {string} 定义的名称。
@@ -24321,7 +26567,54 @@ if (!Function.prototype.bind) {
   }
   egret.hasDefinition = hasDefinition
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
+  /**
+   * Indicates whether an object is a instance of the class or interface specified as the parameter.This method has better performance
+   * compared width the instanceOf operator,and it can indicate whether an object is a instance of the specific interface.
+   * @param instance the instance to be checked.
+   * @param typeName the string value representing a specific class or interface.
+   * @returns A value of true if the object is a instance of the class or interface specified as the parameter.
+   * @example
+   * <pre>
+   *     let instance = new egret.Sprite();
+   *     egret.log(egret.is(instance,"egret.Sprite"))  //true
+   *     egret.log(egret.is(instance,"egret.DisplayObjectContainer"))  //true
+   *     egret.log(egret.is(instance,"egret.Bitmap"))  //false
+   * </pre>
+   * @see egret.registerClass()
+   * @version Egret 2.4
+   * @platform Web,Native
+   * @language en_US
+   */
   /**
    * 检查指定对象是否为 Egret 框架内指定接口或类或其子类的实例。此方法与使用 instanceOf 关键字相比具有更高的性能，并且能判断接口的实现。
    * @param instance 要判断的实例。
@@ -24352,7 +26645,47 @@ if (!Function.prototype.bind) {
   }
   egret.is = is
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
+  /**
+   * Register and start a timer,which will notify the callback method at a rate of 60 FPS ,and pass the current time stamp as parameters.<br/>
+   * Note: After the registration,it will notify the callback method continuously,you can call the stopTick () method to stop it.
+   * @param callBack the call back method. the timeStamp parameter of this method represents the number of milliseconds
+   * since the Egret framework was initialized. If the return value of this method is true, it will force Egret runtime
+   * to render after processing of this method completes.
+   * @param thisObject the call back method's "this"
+   * @version Egret 2.4
+   * @platform Web,Native
+   * @language en_US
+   */
   /**
    * 注册并启动一个计时器，通常会以60FPS的速率触发回调方法，并传入当前时间戳。注意：注册后将会持续触发回调方法，若要停止回调，需要手动调用stopTick()方法。
    * @param callBack 要执行的回调方法。参数 timeStamp 表示从启动Egret框架开始经过的时间(毫秒)。
@@ -24370,7 +26703,46 @@ if (!Function.prototype.bind) {
   }
   egret.startTick = startTick
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
+  /**
+   * Stops the timer started by the egret.startTick() method.
+   * @param callBack the call back method. the timeStamp parameter of this method represents the number of milliseconds
+   * since the Egret framework was initialized. If the return value of this method is true, it will force Egret runtime
+   * to render after processing of this method completes.
+   * @param thisObject the call back method's "this"
+   * @version Egret 2.4
+   * @platform Web,Native
+   * @language en_US
+   */
   /**
    * 停止之前用 startTick() 方法启动的计时器。
    * @param callBack 要执行的回调方法。参数 timeStamp 表示从启动Egret框架开始经过的时间(毫秒)。
@@ -24388,7 +26760,45 @@ if (!Function.prototype.bind) {
   }
   egret.stopTick = stopTick
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+var egret
 ;(function (egret) {
+  /**
+   * Transfer number to color character string
+   * @param value {number} color value ,such as 0xffffff
+   * @returns {string} Color character string, for example, #ffffff.
+   * @version Egret 2.4
+   * @platform Web,Native
+   * @includeExample egret/utils/toColorString.ts
+   * @language en_US
+   */
   /**
    * 转换数字为颜色字符串
    * @param value {number} 颜色值，例如 0xffffff
@@ -24412,5 +26822,33 @@ if (!Function.prototype.bind) {
   }
   egret.toColorString = toColorString
 })(egret || (egret = {}))
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
 
 export { egret }

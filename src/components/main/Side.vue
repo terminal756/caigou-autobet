@@ -18,9 +18,15 @@
 
       <v-list-item link exact to="/scheme" active-class="grey--text">
         <v-list-item-icon>
-          <v-icon>mdi-note</v-icon>
+          <v-icon>mdi-reorder-horizontal</v-icon>
         </v-list-item-icon>
         <v-list-item-title>我的方案</v-list-item-title>
+      </v-list-item>
+      <v-list-item link exact to="/schemeOperation" active-class="grey--text">
+        <v-list-item-icon>
+          <v-icon>mdi-code-braces</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>方案运行日志</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
@@ -40,7 +46,7 @@ export default {
     this.AGHostConfig()
   },
   methods: {
-    ...mapActions('agConfig', ['addAGConfig', 'addRoomConfig']),
+    ...mapActions('ag', ['addConfig', 'addRoom']),
     AGHostConfig() {
       getAGHostConfig({
         timestamp: new Date().getTime(),
@@ -57,19 +63,19 @@ export default {
           return c.$.hostType === 'plaza'
         })
         if (plazaConfig) config.push(plazaConfig.$)
-        const roomConfig = configArr.filter((c) => c.$.gameType === 'BAC')
-        const newRoomConfig = roomConfig.map((c) => {
+        const oldRoom = configArr.filter((c) => c.$.gameType === 'BAC')
+        const newRoom = oldRoom.map((c) => {
           c.$.vids = c.$.vids.split(' ')
           return c.$
         })
-        config.push.apply(config, newRoomConfig)
-        this.addAGConfig(config)
+        config.push.apply(config, newRoom)
+        this.addConfig(config)
 
         const room = []
-        for (const el of newRoomConfig) {
+        for (const el of newRoom) {
           room.push.apply(room, el.vids)
         }
-        this.addRoomConfig(room)
+        this.addRoom(room)
       })
     }
   }
