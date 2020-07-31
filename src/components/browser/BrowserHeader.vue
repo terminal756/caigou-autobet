@@ -9,7 +9,6 @@
     <v-btn icon style="-webkit-app-region: no-drag;" @click="close">
       <v-icon>refresh</v-icon>
     </v-btn>
-
     <v-toolbar-title>
       {{ title }}
     </v-toolbar-title>
@@ -18,7 +17,7 @@
       <v-icon>mdi-minus</v-icon>
     </v-btn>
     <v-btn icon style="-webkit-app-region: no-drag;" @click="max">
-      <v-icon>{{ this.isMax ? 'fullscreen_exit' : 'fullscreen' }}</v-icon>
+      <v-icon>{{ isMax ? 'fullscreen_exit' : 'fullscreen' }}</v-icon>
     </v-btn>
     <v-btn icon style="-webkit-app-region: no-drag;" @click="close">
       <v-icon>mdi-close</v-icon>
@@ -28,7 +27,6 @@
 
 <script>
 const RendererWindowUtils = require('../../utils/RendererWindowUtils')
-
 export default {
   data() {
     return {
@@ -38,7 +36,6 @@ export default {
   mounted() {
     this.isMaxWindow()
   },
-
   methods: {
     min() {
       RendererWindowUtils.minWindow()

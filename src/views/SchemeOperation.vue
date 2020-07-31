@@ -2,6 +2,7 @@
   <v-app>
     <Header />
     <Side />
+    <Footer />
     <v-content>
       <v-card height="100%" flat>
         <template v-if="operationList.length">
@@ -12,15 +13,16 @@
           </v-tabs>
           <v-tabs-items v-model="tab">
             <v-tab-item v-for="scheme in operationList" :key="scheme.schemeId">
+              {{ scheme.isAllConnect }}
               <v-card-text class="pa-0 ma-0">
                 <v-card-actions>
-                  <v-btn color="error" :disabled="!isAllConnect" @click="stopScheme(scheme.schemeId)">
+                  <v-btn color="error" :disabled="!scheme.isAllConnect" @click="stopScheme(scheme.schemeId)">
                     停止运行
                   </v-btn>
                   <v-card-text class="red--text font-weight-black">
                     {{ `止水金额：${scheme.totalLiushui}` }}
                   </v-card-text>
-                  <v-card-text v-if="!isAllConnect" class="red--text font-weight-black">
+                  <v-card-text v-if="!scheme.isAllConnect" class="red--text font-weight-black">
                     游戏房间连接中，勿动
                   </v-card-text>
                 </v-card-actions>
@@ -83,7 +85,6 @@
         </v-card>
       </v-dialog>
     </v-content>
-    <Footer />
   </v-app>
 </template>
 <script>
@@ -108,7 +109,6 @@ export default {
     currentSchemeId: null,
     currentSchemeIndex: null,
     isConnect: [],
-    isAllConnect: false,
     currentGameCode: null,
     siteEven: [],
     siteOdd: []
@@ -127,7 +127,8 @@ export default {
   watch: {
     isConnect() {
       if (this.currentScheme && this.currentScheme.sites.length === this.isConnect.length) {
-        this.isAllConnect = true
+        this.$set(this.currentScheme, 'isAllConnect', true)
+        this.updateOperation(this.currentScheme)
       }
     },
     currentScheme: {
@@ -167,7 +168,14 @@ export default {
       deep: true
     },
     currentGameCode: function (newVal, oldVal) {
-      if (this.isAllConnect && newVal && newVal !== oldVal) {
+      console.log(
+        'isAllConnect:%s----newVal:%s----oldVal:%s----是否进入下注命令:%s',
+        this.currentScheme.isAllConnect,
+        newVal,
+        oldVal,
+        this.currentScheme.isAllConnect && newVal && newVal !== oldVal
+      )
+      if (this.currentScheme.isAllConnect && newVal && newVal !== oldVal) {
         if (this.currentScheme.amountType === 1) {
           const arr = this.currentScheme.randomRange.split('*').map(Number)
           let amount = Math.floor(Math.random() * (arr[1] - arr[0])) + arr[0]
@@ -184,11 +192,14 @@ export default {
 
           siteEven.map((even) => {
             if (even.roomWebSocket && even.roomWebSocket.readyState === 1) {
+              /*
+              计算下注金额的临界值
               if (even.amount + amount >= this.currentScheme.totalLiushui) {
                 amount = this.currentScheme.totalLiushui - even.amount
                 amount = amount < 20 ? 20 : amount
                 amount = amount % 10 === 0 ? amount + 10 : amount - (amount % 10)
               }
+              */
               even.roomWebSocket.send(
                 doSend(
                   cmd.gameBetExt(newVal, type1, amount),
@@ -210,11 +221,14 @@ export default {
           })
           siteOdd.map((odd) => {
             if (odd.roomWebSocket && odd.roomWebSocket.readyState === 1) {
+              /*
+              计算下注金额的临界值
               if (odd.amount + amount >= this.currentScheme.totalLiushui) {
                 amount = this.currentScheme.totalLiushui - odd.amount
                 amount = amount < 20 ? 20 : amount
                 amount = amount % 10 === 0 ? amount + 10 : amount - (amount % 10)
               }
+              */
               odd.roomWebSocket.send(
                 doSend(
                   cmd.gameBetExt(newVal, type2, amount),
@@ -250,11 +264,14 @@ export default {
 
           siteEven.map((even) => {
             if (even.roomWebSocket && even.roomWebSocket.readyState === 1) {
+              /*
+              计算下注金额的临界值
               if (even.amount + amount >= this.currentScheme.totalLiushui) {
                 amount = this.currentScheme.totalLiushui - even.amount
                 amount = amount < 20 ? 20 : amount
                 amount = amount % 10 === 0 ? amount : amount + 10 - (amount % 10)
               }
+              */
               even.roomWebSocket.send(
                 doSend(
                   cmd.gameBetExt(newVal, type1, amount),
@@ -276,11 +293,14 @@ export default {
           })
           siteOdd.map((odd) => {
             if (odd.roomWebSocket && odd.roomWebSocket.readyState === 1) {
+              /*
+              计算下注金额的临界值
               if (odd.amount + amount >= this.currentScheme.totalLiushui) {
                 amount = this.currentScheme.totalLiushui - odd.amount
                 amount = amount < 20 ? 20 : amount
                 amount = amount % 10 === 0 ? amount : amount + 10 - (amount % 10)
               }
+              */
               odd.roomWebSocket.send(
                 doSend(
                   cmd.gameBetExt(newVal, type2, amount),
@@ -301,6 +321,7 @@ export default {
             }
           })
         } else {
+          console.log('指定金额模式')
           const minLen = Math.min.apply(
             Math,
             this.currentScheme.sites.map((s) => {
@@ -310,18 +331,22 @@ export default {
           const minArr = this.currentScheme.sites.find((s) => s.specifyValue.length === minLen).specifyValue
           const amountIndex = Math.floor(Math.random() * (minArr.length - 2)) + 2
 
+          console.log('minLen:%s，minArr：%s，amountIndex：%s', minLen, minArr, amountIndex)
+
           const type = [1, 2]
           const type1 = type[Math.floor(Math.random() * type.length)]
           let type2
           type1 === 1 ? (type2 = 2) : (type2 = 1)
 
-          let ratio
+          // let ratio
           this.currentScheme.sites.map((s) => {
             if (s.roomWebSocket && s.roomWebSocket.readyState === 1) {
               let playType
               s.specifyValue[0] === 0 ? (playType = type1) : (playType = type2)
-              let amount = s.specifyValue[amountIndex]
+              const amount = s.specifyValue[amountIndex]
 
+              /*
+              计算下注金额的临界值
               if (s.specifyValue[1] === 1) {
                 if (s.amount + amount >= this.currentScheme.totalLiushui) {
                   const currentAmount = amount
@@ -344,6 +369,9 @@ export default {
                   amount = amount % 10 === 0 ? amount : amount + 10 - (amount % 10)
                 }
               }
+              */
+
+              console.log('下注：%s，金额：%s', playType === 1 ? '庄' : '闲', amount)
               setTimeout(() => {
                 s.roomWebSocket.send(
                   doSend(
@@ -397,6 +425,7 @@ export default {
       schemeState.sites = schemeState.sites.map((siteId) => {
         return this.siteList.find((s) => s.siteId === siteId)
       })
+      schemeState.isAllConnect = false
       this.addOperation(schemeState)
     },
     socket() {

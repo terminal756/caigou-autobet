@@ -3,75 +3,73 @@
     <Header />
     <Side />
     <v-content>
+      <v-toolbar flat>
+        <v-btn color="primary" to="/schemeDetails">创建方案</v-btn>
+        <v-spacer></v-spacer>
+        <v-text-field v-model="search" append-icon="mdi-magnify" label="输入方案名称搜索" dense solo hide-details />
+      </v-toolbar>
       <v-card height="100%" flat>
-        <v-toolbar flat>
-          <v-btn color="primary" to="/schemeDetails">创建方案</v-btn>
-          <v-spacer></v-spacer>
-          <v-text-field v-model="search" append-icon="mdi-magnify" label="输入方案名称搜索" dense solo hide-details />
-        </v-toolbar>
-        <v-card-text>
-          <v-data-table
-            :headers="headers"
-            :items="schemes"
-            :search="search"
-            :height="currentHeight - 50"
-            dense
-            fixed-header
-            hide-default-footer
-            disable-pagination
-          >
-            <template v-slot:item.url="{ item }">
-              <v-btn class="my-2" @click="openUrl(item)">
-                {{ isSchemeLogin(item) ? '已登录' : '未登录' }}
-              </v-btn>
+        <v-data-table
+          :headers="headers"
+          :items="schemeList"
+          :search="search"
+          :height="currentHeight - 50"
+          dense
+          fixed-header
+          hide-default-footer
+          disable-pagination
+        >
+          <template v-slot:item.url="{ item }">
+            <v-btn class="my-2" @click="openUrl(item)">
+              {{ isSchemeLogin(item) ? '已登录游戏' : '未登录游戏' }}
+            </v-btn>
+          </template>
+          <template v-slot:item.operation="{ item }">
+            <template v-if="!isSchemeLogin(item)">
+              <v-card-text>先登录游戏</v-card-text>
             </template>
-            <template v-slot:item.operation="{ item }">
-              <template v-if="!isSchemeLogin(item)">
-                <v-card-text>先登录</v-card-text>
-              </template>
-              <template v-else>
-                <v-btn
-                  class="my-2"
-                  :to="{ name: 'SchemeOperation', params: { schemeId: item.schemeId } }"
-                  :disabled="isClick(item)"
-                >
-                  {{ isOperation(item) ? '执行中' : '执行方案' }}
-                </v-btn>
-              </template>
-            </template>
-            <template v-slot:item.edit="{ item }">
-              <router-link
-                :to="{ name: 'SchemeDetails', params: { schemeId: item.schemeId } }"
-                tag="button"
-                :disabled="isOperation(item)"
+            <template v-else>
+              <v-btn
+                class="my-2"
+                :to="{ name: 'SchemeOperation', params: { schemeId: item.schemeId } }"
+                :disabled="isClick(item)"
               >
-                <v-icon small class="mr-2">
-                  mdi-pencil
-                </v-icon>
-              </router-link>
-              <v-icon small :disabled="isOperation(item)" @click="openDeleteScheme(item)">
-                mdi-delete
-              </v-icon>
+                {{ isOperation(item) ? '执行中' : '执行方案' }}
+              </v-btn>
             </template>
-          </v-data-table>
-        </v-card-text>
-        <v-dialog v-model="deleteSchemeDialog" persistent max-width="300">
-          <v-card height="100%">
-            <v-card-title class="align-center">
-              想清楚
-            </v-card-title>
-            <v-card-actions>
-              <v-spacer />
-              <v-btn class="ma-4" color="primary" @click="deleteSchemeDialog = false">
-                返回
-              </v-btn>
-              <v-btn class="ma-4" color="error" @click="deleteScheme">
-                删除
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+          </template>
+          <template v-slot:item.edit="{ item }">
+            <router-link
+              :to="{ name: 'SchemeDetails', params: { schemeId: item.schemeId } }"
+              tag="button"
+              :disabled="isOperation(item)"
+            >
+              <v-icon small class="mr-2">
+                mdi-pencil
+              </v-icon>
+            </router-link>
+            <v-icon small :disabled="isOperation(item)" @click="openDeleteScheme(item)">
+              mdi-delete
+            </v-icon>
+          </template>
+        </v-data-table>
       </v-card>
+      <v-dialog v-model="deleteSchemeDialog" persistent max-width="300">
+        <v-card height="100%">
+          <v-card-title class="align-center">
+            确认删除该方案
+          </v-card-title>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn class="ma-4" color="primary" @click="deleteSchemeDialog = false">
+              返回
+            </v-btn>
+            <v-btn class="ma-4" color="error" @click="deleteScheme">
+              删除
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-content>
     <Footer />
   </v-app>
@@ -90,7 +88,6 @@ export default {
   },
   data: () => ({
     currentHeight: null,
-    schemes: [],
     search: '',
     headers: [
       {
@@ -129,37 +126,7 @@ export default {
     })
   },
   mounted() {
-    this.$nextTick(() => {
-      // console.log(this.schemeList.length)
-      if (this.schemeList) {
-        this.schemes = this.schemeList.map((s) => {
-          const n = {}
-          n.schemeId = s.schemeId
-          n.schemeName = s.schemeName
-          switch (s.gameType) {
-            case 1:
-              n.gameType = 'BBIN百家乐'
-              break
-            case 2:
-              n.gameType = 'AG百家乐'
-              break
-            case 3:
-              n.gameType = 'RM富豪棋牌扎金花'
-              break
-          }
-          const siteArr = JSON.parse(s.sites)
-          n.sites = siteArr.map((siteId) => {
-            const site = this.siteList.find((s) => s.siteId === siteId)
-            const remoteSite = {}
-            remoteSite.siteId = siteId
-            remoteSite.name = site.name
-            remoteSite.url = site.url
-            return remoteSite
-          })
-          return n
-        })
-      }
-    })
+    this.$nextTick(() => {})
     this.currentHeight = window.innerHeight - 100
     window.onresize = () => {
       this.currentHeight = window.innerHeight - 100
@@ -177,8 +144,6 @@ export default {
         webPreferences: {
           nodeIntegration: true,
           webviewTag: true
-          // 预加载脚本
-          // preload: path.resolve('src/components/preload/gameInfo.js')
         }
       })
       if (process.env.NODE_ENV !== 'production' && !process.env.IS_TEST) {
@@ -209,7 +174,6 @@ export default {
       this.deleteSchemeDialog = true
     },
     async deleteScheme() {
-      if (this.schemes) {
         const schemeObj = {
           schemeId: this.deleteSchemeObj.schemeId,
           index: this.schemes.findIndex((s) => s.schemeId === this.deleteSchemeObj.schemeId)
@@ -218,7 +182,6 @@ export default {
         if (res.code === 0) {
           this.deleteSchemeDialog = false
         }
-      }
     }
   }
 }

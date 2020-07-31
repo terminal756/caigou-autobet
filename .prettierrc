@@ -1,13 +1,10 @@
 {
-	"printWidth": 120,
-	"semi": false,
-	"singleQuote": true,
-	"proseWrap": "preserve",
-	"arrowParens": "always",
-	"bracketSpacing": true,
-	"endOfLine": "auto",
-	"htmlWhitespaceSensitivity": "ignore",
-	"ignorePath": ".prettierignore",
-	"requireConfig": false,
-	"trailingComma": "none"
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "singleQuote": true,
+  "semi": false,
+  "trailingComma": "none",
+  "bracketSpacing": true,
+  "eslintIntegration": true
 }

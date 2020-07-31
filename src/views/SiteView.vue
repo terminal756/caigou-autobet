@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <Footer />
     <v-app-bar app dense title style="-webkit-app-region: drag; -webkit-user-select: none;">
       <v-btn icon class="btn" @click="back">
         <v-icon>arrow_back</v-icon>
@@ -62,7 +63,7 @@
       </v-card>
       <v-dialog v-model="loginSuccessDialog" persistent max-width="300">
         <v-card height="100%">
-          <v-card-title class="align-center">所有标签的{{ scheme.gameType }}登陆成功</v-card-title>
+          <v-card-title class="align-center">该方案所有{{ scheme.gameType }}登陆成功</v-card-title>
           <v-card-actions>
             <v-spacer />
             <v-btn class="ma-4" color="primary" @click="loginSuccessDialog = false">
@@ -75,7 +76,6 @@
         </v-card>
       </v-dialog>
     </v-content>
-    <Footer />
   </v-app>
 </template>
 <script>
@@ -242,7 +242,7 @@ export default {
   },
   created() {
     this.info = []
-    this.getRemoteScheme()
+    this.getScheme()
   },
   mounted() {
     this.isMaxWindow()
@@ -250,8 +250,23 @@ export default {
   updated() {},
   methods: {
     // 接收路由传值传递数据
-    getRemoteScheme() {
-      this.scheme = remote.getGlobal('scheme').scheme
+    getScheme() {
+      const scheme = remote.getGlobal('scheme').scheme
+      this.scheme = scheme.map(s => {
+          switch (s.gameType) {
+            case 1:
+                s.gameType === 'BBIN百家乐'
+                break
+            case 2:
+                s.gameType === 'AG百家乐'
+                break
+            case 3:
+                s.gameType === 'RM富豪棋牌'
+                break
+          }
+          s.sites = JSON.parse(s.sites).map(siteId => { return this.siteList.find(site => site.siteId === siteId) })
+        return s
+      })
     },
     min() {
       RendererWindowUtils.minWindow()

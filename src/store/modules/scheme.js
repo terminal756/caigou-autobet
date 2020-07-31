@@ -20,19 +20,19 @@ const scheme = {
     }
   },
   mutations: {
-    get(state, payload) {
+    getScheme(state, payload) {
       if (payload) state.schemeList = payload
     },
-    add(state, payload) {
+    addScheme(state, payload) {
       state.schemeList.push(payload)
     },
-    update(state, payload) {
+    updateScheme(state, payload) {
       if (state.schemeList) {
         const index = state.schemeList.findIndex((s) => s.schemeId === payload.schemeId)
         state.schemeList.splice(index, 1, payload)
       }
     },
-    delete(state, payload) {
+    deleteScheme(state, payload) {
       state.schemeList.splice(payload.index, 1)
     },
     addOperation(state, payload) {
@@ -59,28 +59,31 @@ const scheme = {
     async getSchemeAsync({ commit }) {
       const res = await getScheme()
       if (res.code === 0) {
-        commit('get', res.data)
+        commit('getScheme', res.data)
       }
       return res
     },
     async addSchemeAsync({ commit }, payload) {
       const res = await addScheme(payload)
       if (res.code === 0) {
-        commit('add', payload)
+        commit('addScheme', payload)
       }
       return res
     },
     async updateSchemeAsync({ commit }, payload) {
       const res = await updateScheme(payload)
       if (res.code === 0) {
-        commit('update', payload)
+        commit('updateScheme', payload)
       }
       return res
+    },
+    updateScheme({ commit }, payload) {
+        commit('updateScheme', payload)
     },
     async deleteSchemeAsync({ commit }, payload) {
       const res = await deleteScheme({ schemeId: payload.schemeId })
       if (res.code === 0) {
-        commit('delete', payload)
+        commit('deleteScheme', payload)
       }
       return res
     },
@@ -95,5 +98,4 @@ const scheme = {
     }
   }
 }
-
 export default scheme

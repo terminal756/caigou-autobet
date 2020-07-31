@@ -1,52 +1,46 @@
+const username = window.localStorage.getItem('username')
+const token = window.localStorage.getItem('token')
 const user = {
   namespaced: true,
   state: () => ({
-    isLogin: window.localStorage.getItem('isLogin'),
-    username: window.localStorage.getItem('username'),
-    token: window.localStorage.getItem('token')
+    username: username || null,
+    token: token || null
   }),
 
   getters: {
     isLogin: (state) => {
-      if (state.isLogin != null && state.isLogin) {
-        return true
-      } else {
-        return false
-      }
-    },
-    getUsername: (state) => {
-      if (state.isLogin != null && state.isLogin) {
-        return state.username
-      }
+      return state.username && state.token
     }
   },
 
   mutations: {
-    // 将token保存到sessionStorage里，token表示登陆状态
-    SET_TOKEN: (state, token) => {
-      state.token = token
-      window.localStorage.setItem('token', token)
+    addUsername: (state, payload) => {
+      state.username = payload
+      window.localStorage.setItem('username', state.username)
     },
-    SET_USERNAME: (state, username) => {
-      // 把用户名存起来
-      state.username = username
-      window.localStorage.setItem('username', username)
+    addToken: (state, payload) => {
+      state.token = payload
+      window.localStorage.setItem('token', state.token)
     },
-    IS_LOGIN: (state, isLogin) => {
-      // 把用户名存起来
-      state.isLogin = isLogin
-      window.localStorage.setItem('isLogin', isLogin)
-    },
-    // 登出
-    LOGOUT: (state) => {
-      // 登出的时候要清除token
+    logout: (state) => {
+      state.username = null
       state.token = null
-      state.user = null
+      window.localStorage.removeItem('username')
       window.localStorage.removeItem('token')
-      window.localStorage.removeItem('user')
     }
   },
-  actions: {}
+
+  actions: {
+    addUsername({ commit }, payload) {
+      commit('addUsername', payload)
+    },
+    addToken({ commit }, payload) {
+      commit('addToken', payload)
+    },
+    logoutActions({ commit }) {
+      commit('logout')
+    }
+  }
 }
 
 export default user

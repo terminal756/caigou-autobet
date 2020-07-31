@@ -1,17 +1,16 @@
-/* eslint-disable vue/order-in-components */
 <template>
   <v-app>
     <Header />
     <Side />
+    <Footer />
     <v-content style="overflow: auto;">
-      <v-toolbar>
+      <v-toolbar flat>
         <v-dialog v-model="groupDialog" :retain-focus="false" persistent max-width="500">
           <template v-slot:activator="{ on }">
             <v-btn class="mx-2" color="primary" v-on="on">
               添加分组
             </v-btn>
           </template>
-
           <v-card>
             <v-card-title>
               <span class="headline">{{ groupTitle }}</span>
@@ -42,7 +41,6 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-
         <v-dialog v-model="siteDialog" persistent max-width="500">
           <template v-slot:activator="{ on }">
             <v-btn class="mx-2" color="primary" v-on="on">
@@ -98,7 +96,6 @@
           </v-card>
         </v-dialog>
       </v-toolbar>
-
       <template v-if="getSiteWithoutGroup && getSiteWithoutGroup.length !== 0">
         <v-card>
           <v-card-title>未分组网站列表</v-card-title>
@@ -107,14 +104,13 @@
               <v-icon small class="mr-2" @click="editSite(item)">
                 mdi-pencil
               </v-icon>
-              <v-icon small @click="deleteSitte(item)">
+              <v-icon small @click="openDeleteSiteDialog(item)">
                 mdi-delete
               </v-icon>
             </template>
           </v-data-table>
         </v-card>
       </template>
-
       <template v-if="groupList && groupList.length !==0">
         <v-card>
           <v-card-title>分组列表</v-card-title>
@@ -159,7 +155,7 @@
                       <v-icon small class="mr-2" @click="editSite(item)">
                         mdi-pencil
                       </v-icon>
-                      <v-icon small @click="deleteSite(item)">
+                      <v-icon small @click="openDeleteSiteDialog(item)">
                         mdi-delete
                       </v-icon>
                     </template>
@@ -173,14 +169,14 @@
       <v-dialog v-model="deleteGroupDialog" persistent max-width="300">
         <v-card height="100%">
           <v-card-title class="align-center">
-            想清楚
+            确认删除该分组
           </v-card-title>
           <v-card-actions>
             <v-spacer />
             <v-btn class="ma-4" color="primary" @click="deleteGroupDialog = false">
               返回
             </v-btn>
-            <v-btn class="ma-4" color="error" @click="deleteGroup()">
+            <v-btn class="ma-4" color="error" @click="deleteGroup">
               删除
             </v-btn>
           </v-card-actions>
@@ -189,21 +185,20 @@
       <v-dialog v-model="deleteSiteDialog" persistent max-width="300">
         <v-card height="100%">
           <v-card-title class="align-center">
-            想清楚
+            确认删除该网站
           </v-card-title>
           <v-card-actions>
             <v-spacer />
-            <v-btn class="ma-4" color="primary" @click="deleteGroupDialog = false">
+            <v-btn class="ma-4" color="primary" @click="deleteSiteDialog = false">
               返回
             </v-btn>
-            <v-btn class="ma-4" color="error" @click="deleteSite()">
+            <v-btn class="ma-4" color="error" @click="deleteSite">
               删除
             </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
     </v-content>
-    <Footer />
   </v-app>
 </template>
 <script>
@@ -259,7 +254,8 @@ export default {
       ricun: '',
       ricunLiushui: '',
       description: ''
-    }
+    },
+    currentSite: null
   }),
   computed: {
     ...mapGetters('site', ['getSiteWithoutGroup']),
@@ -294,6 +290,7 @@ export default {
     ...mapMutations('group', ['addGroup']),
     ...mapActions('group', ['addGroupAsync', 'updateGroupAsync', 'deleteGroupAsync']),
     ...mapActions('site', ['addSiteAsync', 'updateSiteAsync', 'deleteSiteAsync']),
+    ...mapActions('scheme', ['updateScheme']),
     editGroup(item) {
       this.editIndex = this.groupList.indexOf(item)
       this.groupForm = Object.assign({}, item)
@@ -302,6 +299,10 @@ export default {
     openDeleteDialog(item) {
       this.groupForm.groupId = item.groupId
       this.deleteGroupDialog = true
+    },
+    openDeleteSiteDialog(site) {
+      this.currentSite = site
+      this.deleteSiteDialog = true
     },
     async deleteGroup() {
       const groupId = this.groupForm.groupId
@@ -375,14 +376,17 @@ export default {
         }
       }
     },
-    async deleteSite(item) {
+    async deleteSite() {
       const site = {
-        index: this.siteList.indexOf(item),
-        siteId: item.siteId
+        index: this.siteList.indexOf(this.currentSite),
+        siteId: this.currentSite.siteId
       }
+      console.log('deleteSite:', site)
       const res = await this.deleteSiteAsync(site)
+      console.log(res)
       if (res.code === 0) {
         this.deleteSiteDialog = false
+        await this.updateScheme(res.data)
       }
     },
     async getSiteListByGroupId(groupId) {

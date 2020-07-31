@@ -3,17 +3,80 @@
     <span class="pr-4 font-weight-black">菜狗投注</span>
     <span>版本 v{{ version }}</span>
     <v-spacer />
+    <span v-show="isLogin && isLogin != null">{{ username }}</span>
+    <v-btn v-show="isLogin" icon style="-webkit-app-region: no-drag;" @click="openLogoutDialog">
+      <v-icon>mdi-logout-variant</v-icon>
+    </v-btn>
+    <!--
+    更换主题皮肤
+    <v-btn icon
+           @click="$vuetify.theme.dark = !$vuetify.theme.dark"
+           style="-webkit-app-region: no-drag;">
+        <v-icon>mdi-brightness-6</v-icon>
+    </v-btn>
+    -->
 
-    <span v-show="isLogin && isLogin != null">{{ getUsername }}</span>
+    <!-- 激活码弹窗 -->
+    <v-dialog v-model="activeDialog" width="300" persistent origin="center center">
+      <template v-slot:activator="{ on }">
+        <v-btn text style="-webkit-app-region: no-drag;" v-on="on">未激活</v-btn>
+      </template>
+      <v-card style="overflow: hidden;">
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn icon class="mr-2" @click="activeDialog = false">
+            <v-icon>close</v-icon>
+          </v-btn>
+        </v-card-actions>
+        <v-card-text>
+          <v-container>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field v-model="key" required label="请输入激活码"></v-text-field>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-row>
+            <v-col cols="12">
+              <v-row class="mx-2">
+                <v-col
+                  cols="12"
+                  class="layout column justify-center"
+                  @click=";(activeDialog = false), sendKey(), (key = '')"
+                >
+                  <v-btn>提交激活码</v-btn>
+                </v-col>
+              </v-row>
+              <v-row class="mx-2">
+                <v-col cols="12" class="layout column justify-center">
+                  <v-btn>购买激活码</v-btn>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
-    <v-dialog v-model="login_dialog" width="300" persistent origin="center center">
+    <v-btn icon style="-webkit-app-region: no-drag;" @click="min">
+      <v-icon>mdi-minus</v-icon>
+    </v-btn>
+    <v-btn icon style="-webkit-app-region: no-drag;" @click="max">
+      <v-icon>{{ isMax ? 'fullscreen_exit' : 'fullscreen' }}</v-icon>
+    </v-btn>
+    <v-btn icon style="-webkit-app-region: no-drag;" @click="openCloseDialog">
+      <v-icon>mdi-close</v-icon>
+    </v-btn>
+    <v-dialog v-model="loginDialog" width="300" persistent origin="center center">
       <template v-slot:activator="{ on }">
         <v-btn v-show="!isLogin" text style="-webkit-app-region: no-drag;" v-on="on">未登录</v-btn>
       </template>
       <v-card height="100%" style="overflow: hidden;">
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn icon class="mr-2" @click="login_dialog = false">
+          <v-btn icon class="mr-2" @click="loginDialog = false">
             <v-icon>close</v-icon>
           </v-btn>
         </v-card-actions>
@@ -66,10 +129,10 @@
                 </v-col>
               </v-row>
 
-              <v-dialog v-model="register_dialog" width="300" persistent origin="center center">
+              <v-dialog v-model="registerDialog" width="300" persistent origin="center center">
                 <template v-slot:activator="{ on }">
                   <v-row class="mx-2">
-                    <v-col cols="12" class="layout column justify-center" @click="register_dialog = true">
+                    <v-col cols="12" class="layout column justify-center" @click="registerDialog = true">
                       <v-btn v-on="on">注册</v-btn>
                     </v-col>
                   </v-row>
@@ -78,7 +141,7 @@
                 <v-card light height="100%" style="overflow: hidden;">
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn icon class="mr-2" @click="register_dialog = false">
+                    <v-btn icon class="mr-2" @click="registerDialog = false">
                       <v-icon>close</v-icon>
                     </v-btn>
                   </v-card-actions>
@@ -175,7 +238,7 @@
 
                 <v-snackbar v-model="snackbar" :timeout="timeout">
                   {{ result.msg }}
-                  <v-btn v-show="!registerFail" text @click=";(snackbar = false), (register_dialog = false)">
+                  <v-btn v-show="!registerFail" text @click=";(snackbar = false), (registerDialog = false)">
                     去登陆
                   </v-btn>
                   <v-btn v-show="registerFail" text @click="snackbar = false">
@@ -188,89 +251,66 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-
-    <!-- 输入激活码弹窗 -->
-    <v-dialog v-model="active_dialog" width="300" persistent origin="center center">
-      <template v-slot:activator="{ on }">
-        <v-btn text style="-webkit-app-region: no-drag;" v-on="on">未激活</v-btn>
-      </template>
-
-      <v-card style="overflow: hidden;">
+    <v-dialog v-model="logoutDialog" width="300">
+      <v-card height="100%">
+        <v-card-title class="align-center red--text">确认退出账号？</v-card-title>
         <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn icon class="mr-2" @click="active_dialog = false">
-            <v-icon>close</v-icon>
+          <v-spacer />
+          <v-btn class="ma-4" color="primary" @click="logoutDialog = false">
+            返回
           </v-btn>
-        </v-card-actions>
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12">
-                <v-text-field v-model="key" required label="请输入激活码"></v-text-field>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card-text>
-        <v-card-actions>
-          <v-row>
-            <v-col cols="12">
-              <v-row class="mx-2">
-                <v-col
-                  cols="12"
-                  class="layout column justify-center"
-                  @click=";(active_dialog = false), sendKey(), (key = '')"
-                >
-                  <v-btn>提交激活码</v-btn>
-                </v-col>
-              </v-row>
-              <v-row class="mx-2">
-                <v-col cols="12" class="layout column justify-center">
-                  <v-btn>购买激活码</v-btn>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
+          <v-btn class="ma-4" color="error" @click="logout">
+            退出
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-btn v-show="isLogin" icon style="-webkit-app-region: no-drag;" @click="logout">
-      <v-icon>mdi-logout-variant</v-icon>
-    </v-btn>
+    <v-dialog v-model="closeDialog" width="300">
+      <v-card height="100%">
+        <v-card-title class="align-center red--text">确认关闭菜狗投注？</v-card-title>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn class="ma-4" color="primary" @click="closeDialog = false">
+            返回
+          </v-btn>
+          <v-btn class="ma-4" color="error" @click="close">
+            关闭
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog v-model="logoutWithConnectDialog" width="300">
+      <v-card height="100%">
+        <v-card-title class="align-center red--text">当前有方案在运行，停止所有运行中的方案才能退出</v-card-title>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn class="ma-4" color="primary" @click="logoutWithConnectDialog = false">
+            返回
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
-    <!--        <v-btn icon-->
-    <!--               @click="$vuetify.theme.dark = !$vuetify.theme.dark"-->
-    <!--               style="-webkit-app-region: no-drag;">-->
-    <!--            <v-icon>mdi-brightness-6</v-icon>-->
-    <!--        </v-btn>-->
-    <v-btn icon style="-webkit-app-region: no-drag;" @click="min">
-      <v-icon>mdi-minus</v-icon>
-    </v-btn>
-    <v-btn icon style="-webkit-app-region: no-drag;" @click="max">
-      <v-icon>{{ this.isMax ? 'fullscreen_exit' : 'fullscreen' }}</v-icon>
-    </v-btn>
-    <v-btn icon style="-webkit-app-region: no-drag;" @click="close">
-      <v-icon>mdi-close</v-icon>
-    </v-btn>
   </v-app-bar>
 </template>
-
 <script>
 import _ from 'underscore'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import { login, logout, register, getUserByParam } from '../../api/api'
-
 const RendererWindowUtils = require('../../utils/RendererWindowUtils')
-
 export default {
   data: () => ({
     valid: true,
     snackbar: false,
     timeout: 0,
     key: '',
-    login_dialog: false,
-    active_dialog: false,
-    register_dialog: false,
-    register_alert: false,
+    loginDialog: false,
+    logoutDialog: false,
+    logoutWithConnectDialog: false,
+    closeDialog: false,
+    activeDialog: false,
+    registerDialog: false,
+    registerAlert: false,
     loginForm: {
       username: '',
       password: '',
@@ -303,23 +343,11 @@ export default {
     isMax: false,
     version: require('../../../package.json').version
   }),
-
-  created() {
-    this.debouncedCheckUsername = _.debounce(this.checkUsername, 500)
-    this.debouncedRepeatPassword = _.debounce(this.checkRepeatPassword, 500)
-    this.debouncedPhone = _.debounce(this.checkPhone, 1000)
-    this.debouncedEmail = _.debounce(this.checkEmail, 1000)
-  },
-
-  mounted() {
-    window.onresize = () => {
-      this.isMaxWindow()
-    }
-  },
   computed: {
-    ...mapGetters('user', ['isLogin', 'getUsername'])
+    ...mapState('user', ['username']),
+    ...mapGetters('user', ['isLogin']),
+    ...mapState('scheme', ['operationList'])
   },
-
   watch: {
     loginForm: {
       deep: true, // 深度监听
@@ -330,7 +358,6 @@ export default {
         }
       }
     },
-
     'registerForm.username'(v) {
       this.debouncedCheckUsername(v)
     },
@@ -344,10 +371,19 @@ export default {
       this.debouncedEmail(v)
     }
   },
-
+  created() {
+    this.debouncedCheckUsername = _.debounce(this.checkUsername, 500)
+    this.debouncedRepeatPassword = _.debounce(this.checkRepeatPassword, 500)
+    this.debouncedPhone = _.debounce(this.checkPhone, 1000)
+    this.debouncedEmail = _.debounce(this.checkEmail, 1000)
+  },
+  mounted() {
+    window.onresize = () => {
+      this.isMaxWindow()
+    }
+  },
   methods: {
-    ...mapMutations('user', ['SET_USERNAME', 'SET_TOKEN', 'IS_LOGIN']),
-
+    ...mapActions('user', ['addUsername', 'addToken', 'logoutActions']),
     min() {
       RendererWindowUtils.minWindow()
     },
@@ -357,35 +393,36 @@ export default {
     close() {
       RendererWindowUtils.hide()
     },
-
     async login() {
       if (this.$refs.loginForm.validate()) {
-        await login({
+        const result = await login({
           username: this.loginForm.username,
           password: this.loginForm.password,
           rememberMe: this.loginForm.autoLogin
-        }).then((res) => {
-          if (res.code === 0) {
-            this.login_dialog = false
-            this.loginFail = false
-            this.SET_USERNAME(this.loginForm.username)
-            this.SET_TOKEN(res.data)
-            this.IS_LOGIN(true)
-          } else {
-            this.result = res
-            this.loginFail = true
-          }
         })
+        if (result.code === 0) {
+          this.loginDialog = false
+          this.loginFail = false
+          this.addUsername(this.loginForm.username)
+          this.addToken(result.data)
+        } else {
+          this.result = result
+          this.loginFail = true
+        }
       }
     },
+    openLogoutDialog() {
+      this.operationList.length ? (this.logoutWithConnectDialog = true) : (this.logoutDialog = true)
+    },
+    openCloseDialog() {
+      this.operationList.length ? (this.logoutWithConnectDialog = true) : (this.closeDialog = true)
+    },
     async logout() {
-      await logout().then((res) => {
-        if (res.code === 0) {
-          this.SET_USERNAME('')
-          this.SET_TOKEN('')
-          this.IS_LOGIN('')
-        }
-      })
+      const result = await logout()
+      if (result.code === 0) {
+        this.logoutActions()
+        await this.$router.push({ path: '/home' })
+      }
     },
     async register() {
       if (this.registerForm.username === '') {
@@ -417,7 +454,6 @@ export default {
         this.registerFail = res.code !== 0
       }
     },
-
     sendKey() {},
     isMaxWindow() {
       this.isMax = RendererWindowUtils.isMaxWindow()
@@ -432,7 +468,6 @@ export default {
         this.registerForm.usernameErrors = res.code === 0 ? [] : res.msg
       }
     },
-
     checkRepeatPassword(repeatPassword) {
       if (repeatPassword.trim() === '') {
         this.registerForm.repeatPasswordErrors = '用户名不能为空'
@@ -442,7 +477,6 @@ export default {
         this.registerForm.repeatPasswordErrors = this.registerForm.password === repeatPassword ? [] : '输入密码不一致'
       }
     },
-
     async checkPhone(phone) {
       if (phone !== '') {
         if (!this.isPhone(phone)) {
@@ -453,7 +487,6 @@ export default {
         }
       }
     },
-
     async checkEmail(email) {
       if (email.trim() !== '') {
         if (!this.isEmail(email)) {
@@ -464,7 +497,6 @@ export default {
         }
       }
     },
-
     isEmail(email) {
       return /.+@.+..+/.test(email)
     },

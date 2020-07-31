@@ -2,6 +2,7 @@
   <v-app>
     <Header />
     <Side />
+    <Footer />
     <v-content>
       <v-card ref="card" class="mb-12" height="100%" flat>
         <v-card-text>
@@ -15,7 +16,8 @@
                       <v-subheader class="font-weight-black subtitle-1 pa-0">选择方案(必须)</v-subheader>
                     </v-col>
                     <v-col cols="8">
-                      <v-select
+                      <v-text-field solo dense filled readonly label="AG百家乐" />
+                      <!--<v-select
                         v-model="gameType"
                         solo
                         dense
@@ -24,7 +26,7 @@
                         item-text="name"
                         item-value="value"
                         :items="gameTypeItems"
-                      />
+                      />-->
                     </v-col>
                   </v-row>
                   <template v-if="gameType === 2">
@@ -225,7 +227,6 @@
         </v-card-text>
       </v-card>
     </v-content>
-    <Footer />
   </v-app>
 </template>
 
@@ -244,12 +245,12 @@ export default {
   },
   data: () => ({
     scheme: {},
-    gameType: '',
-    gameTypeItems: [
+    gameType: 2,
+    /* gameTypeItems: [
       { value: 1, name: 'BBIN百家乐' },
       { value: 2, name: 'AG百家乐' },
       { value: 3, name: 'RM富豪棋牌' }
-    ],
+    ],*/
     amountType: '',
     amountTypeItems: [
       { value: 1, name: '随机范围' },
@@ -304,9 +305,9 @@ export default {
           const specifyObj = {}
           specifyObj.id = t.id
           specifyObj.name = t.name
-          if (this.schemeList && this.$route.params.schemeId) {
+          if (this.schemeList.length && this.$route.params.schemeId) {
             const scheme = this.schemeList.find((s) => s.schemeId === this.$route.params.schemeId)
-            const obj = JSON.parse(scheme.specify).find((s) => s.id === t.id)
+            const obj = scheme.specify ? JSON.parse(scheme.specify).find((s) => s.id === t.id) : null
             specifyObj.specifyValue = obj ? obj.specifyValue : null
           }
           return specifyObj
@@ -387,7 +388,8 @@ export default {
     },
     async submitBBIN() {
       const scheme = {
-        gameType: this.gameType,
+        // gameType: this.gameType,
+        gameType: 2,
         sites: this.treeSelection,
         schemeName: this.schemeName,
         totalLiushui: this.totalLiushui * 1,
@@ -422,7 +424,8 @@ export default {
         return obj
       })
       const scheme = {
-        gameType: this.gameType,
+        // gameType: this.gameType,
+        gameType: 2,
         sites: JSON.stringify(sites),
         schemeName: this.schemeName,
         totalLiushui: this.totalLiushui * 1,
@@ -455,7 +458,8 @@ export default {
       })
       const scheme = {
         schemeId: this.scheme.schemeId,
-        gameType: this.gameType,
+        // gameType: this.gameType,
+        gameType: 2,
         sites: JSON.stringify(sites),
         schemeName: this.schemeName,
         totalLiushui: this.totalLiushui * 1,

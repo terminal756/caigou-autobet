@@ -1,5 +1,4 @@
 import { addSite, deleteSite, getSite, updateSite } from '../../api/api'
-
 const site = {
   namespaced: true,
   state: () => ({
@@ -20,7 +19,6 @@ const site = {
       return result
     }
   },
-
   mutations: {
     pushSite(state, payload) {
       state.siteList.push(payload)
@@ -43,14 +41,12 @@ const site = {
       }
       return res
     },
-
     async getSiteAsync({ commit }) {
       const res = await getSite()
       if (res.code === 0) {
         commit('getSite', res.data)
       }
     },
-
     async updateSiteAsync({ commit }, payload) {
       const res = await updateSite(payload.site)
       if (res.code === 0) {
@@ -58,15 +54,13 @@ const site = {
       }
       return res
     },
-
-    async deleteSiteAsync({ commit }, site) {
-      const res = await deleteSite({ siteId: site.siteId })
+    async deleteSiteAsync({ commit }, payload) {
+      const res = await deleteSite({ siteId: payload.siteId })
       if (res.code === 0) {
-        commit('deleteSite', site)
+        commit('deleteSite', payload)
       }
       return res
     }
   }
 }
-
 export default site

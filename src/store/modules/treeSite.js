@@ -4,7 +4,6 @@ const treeSite = {
   namespaced: true,
   state: () => ({ treeSite: [] }),
   getters: {},
-
   mutations: {
     getTreeSite(state, treeSite) {
       state.treeSite = treeSite || []

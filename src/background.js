@@ -1,13 +1,11 @@
 'use strict'
-import path from 'path'
-import { app, BrowserWindow, protocol, net, session, ipcMain, remote } from 'electron'
+import { app, BrowserWindow, protocol, ipcMain, remote } from 'electron'
 
-let mainWindow
 const winURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : `file://${__dirname}/index.html`
 const isDevelopment = process.env.NODE_ENV !== 'production'
-// app.commandLine.appendSwitch('remote-debugging-port', '9222')
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }])
 
+let mainWindow
 function createMainWindow() {
   mainWindow = new BrowserWindow({
     center: true,
@@ -22,7 +20,6 @@ function createMainWindow() {
       nodeIntegrationInWorker: true,
       webviewTag: true,
       webSecurity: false
-      // preload: path.resolve('src/static/preload/XMLHttpRequest.js')
     }
   })
   mainWindow.removeMenu()
@@ -45,31 +42,11 @@ app.on('activate', () => {
 })
 
 app.on('ready', () => {
-  // 只能拦截请求头信息，无法拦截请求体
-  // webRequest.onCompleted((details) => {})
   createMainWindow()
   if (isDevelopment && !process.env.IS_TEST) {
     BrowserWindow.addDevToolsExtension('D:\\dev\\project\\caigou\\caigou-electron\\src\\vue-devtools')
     mainWindow.webContents.openDevTools()
   }
-  // electron debugger 远程调试协议
-  // try {
-  //   mainWindow.webContents.debugger.attach('1.1')
-  // } catch (err) {
-  //   console.log('Debugger attach failed : ', err)
-  // }
-  //
-  // mainWindow.webContents.debugger.on('detach', (event, reason) => {
-  //   console.log('Debugger detached due to : ', reason)
-  // })
-  //
-  // mainWindow.webContents.debugger.on('message', (event, method, params) => {
-  //   console.log('params:', params)
-  // })
-  //
-  // mainWindow.webContents.debugger.sendCommand('Network.enable')
-  // mainWindow.webContents.debugger.sendCommand('Page.enable')
-  // mainWindow.webContents.debugger.sendCommand('Runtime.enable')
 })
 
 app.on('web-contents-created', (webContentsCreatedEvent, content) => {

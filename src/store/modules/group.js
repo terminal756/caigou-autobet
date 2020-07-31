@@ -1,5 +1,4 @@
 import { getGroup, saveGroup, updateGroup, deleteGroup } from '../../api/api'
-
 const group = {
   namespaced: true,
   state: () => ({
@@ -16,7 +15,6 @@ const group = {
       return groupName
     }
   },
-
   mutations: {
     getGroup(state, groupList) {
       state.groupList = groupList || []
@@ -37,7 +35,6 @@ const group = {
         commit('getGroup', res.data)
       })
     },
-
     async addGroupAsync({ commit }, payload) {
       const res = await saveGroup(payload)
       if (res.code === 0 && !!res.data) {
@@ -45,7 +42,6 @@ const group = {
       }
       return res
     },
-
     async updateGroupAsync({ commit }, request) {
       const res = await updateGroup(request.group)
       if (res.code === 0) {
@@ -53,7 +49,6 @@ const group = {
       }
       return res
     },
-
     async deleteGroupAsync({ commit }, groupId) {
       const res = await deleteGroup({ groupId: groupId })
       if (res.code === 0) {
@@ -63,5 +58,4 @@ const group = {
     }
   }
 }
-
 export default group
