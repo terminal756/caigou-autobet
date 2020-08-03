@@ -13,7 +13,6 @@
           </v-tabs>
           <v-tabs-items v-model="tab">
             <v-tab-item v-for="scheme in operationList" :key="scheme.schemeId">
-              {{ scheme.isAllConnect }}
               <v-card-text class="pa-0 ma-0">
                 <v-card-actions>
                   <v-btn color="error" :disabled="!scheme.isAllConnect" @click="stopScheme(scheme.schemeId)">

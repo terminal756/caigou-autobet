@@ -1,8 +1,8 @@
 'use strict'
 import { app, BrowserWindow, protocol, ipcMain, remote } from 'electron'
 
-const winURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : `file://${__dirname}/index.html`
-const isDevelopment = process.env.NODE_ENV !== 'production'
+const winURL = process.env.VUE_APP_ENV === 'development' ? 'http://localhost:8080' : `file://${__dirname}/index.html`
+const isDevelopment = process.env.VUE_APP_ENV !== 'production'
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }])
 
 let mainWindow

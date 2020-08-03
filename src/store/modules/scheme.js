@@ -1,4 +1,4 @@
-import { getScheme, addScheme, updateScheme, deleteScheme } from '../../api/api'
+import { getScheme, addScheme, updateScheme, deleteScheme } from '../../api/scheme'
 const scheme = {
   namespaced: true,
   state: () => ({

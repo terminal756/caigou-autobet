@@ -4,8 +4,18 @@ import xml2js from 'xml2js'
 
 const xmlParser = new xml2js.Parser()
 
+let baseUrl = ''
+switch (process.env.VUE_APP_ENV) {
+  case 'development':
+    baseUrl = 'http://localhost:8888/' // 开发环境url
+    break
+  case 'production':
+    baseUrl = 'http://localhost:8888/' // 生产环境url
+    break
+}
+
 export const HttpRequest = Axios.create({
-  baseURL: process.env.VUE_APP_BASE_URL,
+  baseURL: baseUrl,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8'
   }
@@ -36,7 +46,7 @@ HttpRequest.interceptors.response.use(
 )
 
 export const LoginRequest = Axios.create({
-  baseURL: process.env.VUE_APP_BASE_URL,
+  baseURL: baseUrl,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
   }

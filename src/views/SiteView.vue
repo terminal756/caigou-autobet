@@ -3,13 +3,13 @@
     <Footer />
     <v-app-bar app dense title style="-webkit-app-region: drag; -webkit-user-select: none;">
       <v-btn icon class="btn" @click="back">
-        <v-icon>arrow_back</v-icon>
+        <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
       <v-btn icon class="btn" @click="forward">
-        <v-icon>arrow_forward</v-icon>
+        <v-icon>mdi-arrow-right</v-icon>
       </v-btn>
       <v-btn icon class="btn" @click="refresh">
-        <v-icon>refresh</v-icon>
+        <v-icon>mdi-refresh</v-icon>
       </v-btn>
       <v-toolbar-title>在标签中登录: {{ scheme.gameType }}</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -17,7 +17,7 @@
         <v-icon>mdi-minus</v-icon>
       </v-btn>
       <v-btn icon class="btn" @click="max">
-        <v-icon>{{ isMax ? 'fullscreen_exit' : 'fullscreen' }}</v-icon>
+        <v-icon>{{ isMax ? 'mdi-fullscreen-exit' : 'mdi-fullscreen' }}</v-icon>
       </v-btn>
       <v-btn icon class="btn" @click="close">
         <v-icon>mdi-close</v-icon>
@@ -228,12 +228,9 @@ export default {
             if (!a[key]) hasValue = false
           }
         })
-        console.log('hasValue:', hasValue)
-        console.log('this.gameInfo:', this.gameInfo)
         if (hasValue) {
           if (this.currentAGInfo.length === this.scheme.sites.length) {
             this.loginSuccessDialog = true
-            console.log('登录参数 gameInfo', this.gameInfo)
             ipcRenderer.send('gameInfo', JSON.stringify(this.gameInfo))
           }
         }
@@ -242,32 +239,13 @@ export default {
   },
   created() {
     this.info = []
-    this.getScheme()
+    this.scheme = remote.getGlobal('scheme').scheme
   },
   mounted() {
     this.isMaxWindow()
   },
   updated() {},
   methods: {
-    // 接收路由传值传递数据
-    getScheme() {
-      const scheme = remote.getGlobal('scheme').scheme
-      this.scheme = scheme.map(s => {
-          switch (s.gameType) {
-            case 1:
-                s.gameType === 'BBIN百家乐'
-                break
-            case 2:
-                s.gameType === 'AG百家乐'
-                break
-            case 3:
-                s.gameType === 'RM富豪棋牌'
-                break
-          }
-          s.sites = JSON.parse(s.sites).map(siteId => { return this.siteList.find(site => site.siteId === siteId) })
-        return s
-      })
-    },
     min() {
       RendererWindowUtils.minWindow()
     },

@@ -1,44 +1,76 @@
-const username = window.localStorage.getItem('username')
-const token = window.localStorage.getItem('token')
+const users = JSON.parse(localStorage.getItem('users'))
+const username = localStorage.getItem('username')
+const token = localStorage.getItem('token')
 const user = {
   namespaced: true,
   state: () => ({
     username: username || null,
-    token: token || null
+    token: token || null,
+    users: users || []
   }),
 
   getters: {
     isLogin: (state) => {
       return state.username && state.token
+    },
+    isAGActive: (state) => {
+      const user = state.users.find((u) => u.username === state.username)
+      return !!user && user.agRecharge === 1 && !!user.agExpiredTime
+    },
+    isBBINActive: (state) => {
+      const user = state.users.find((u) => u.username === state.username)
+      return !!user && user.bbinRecharge === 1 && !!user.bbinExpiredTime
+    },
+    isRMActive: (state) => {
+      const user = state.users.find((u) => u.username === state.username)
+      return !!user && user.rmRecharge === 1 && !!user.rmExpiredTime
     }
   },
 
   mutations: {
-    addUsername: (state, payload) => {
+    ADD_USERNAME: (state, payload) => {
       state.username = payload
-      window.localStorage.setItem('username', state.username)
+      localStorage.setItem('username', state.username)
     },
-    addToken: (state, payload) => {
+    ADD_TOKEN: (state, payload) => {
       state.token = payload
-      window.localStorage.setItem('token', state.token)
+      localStorage.setItem('token', state.token)
     },
-    logout: (state) => {
+    LOGOUT: (state) => {
       state.username = null
       state.token = null
-      window.localStorage.removeItem('username')
-      window.localStorage.removeItem('token')
+      localStorage.removeItem('username')
+      localStorage.removeItem('token')
+    },
+    ADD_USER: (state, user) => {
+      if (state.users.length) {
+        const i = state.users.findIndex(u => u.userId === user.userId)
+        if (i !== -1) {
+          state.users.splice(i, 1, user)
+          localStorage.setItem('users', JSON.stringify(state.users))
+        } else {
+          state.users.push(user)
+          localStorage.setItem('users', JSON.stringify(state.users))
+        }
+      } else {
+        state.users.push(user)
+        localStorage.setItem('users', JSON.stringify(state.users))
+      }
     }
   },
 
   actions: {
     addUsername({ commit }, payload) {
-      commit('addUsername', payload)
+      commit('ADD_USERNAME', payload)
     },
     addToken({ commit }, payload) {
-      commit('addToken', payload)
+      commit('ADD_TOKEN', payload)
     },
     logoutActions({ commit }) {
-      commit('logout')
+      commit('LOGOUT')
+    },
+    addUser({ commit }, user) {
+      commit('ADD_USER', user)
     }
   }
 }

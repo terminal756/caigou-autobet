@@ -3,10 +3,11 @@
     <span class="pr-4 font-weight-black">菜狗投注</span>
     <span>版本 v{{ version }}</span>
     <v-spacer />
-    <span v-show="isLogin && isLogin != null">{{ username }}</span>
+    <span v-show="isLogin">{{ username }}</span>
     <v-btn v-show="isLogin" icon style="-webkit-app-region: no-drag;" @click="openLogoutDialog">
       <v-icon>mdi-logout-variant</v-icon>
     </v-btn>
+    <span v-show="isLogin && !isRecharge">未激活</span>
     <!--
     更换主题皮肤
     <v-btn icon
@@ -16,59 +17,7 @@
     </v-btn>
     -->
 
-    <!-- 激活码弹窗 -->
-    <v-dialog v-model="activeDialog" width="300" persistent origin="center center">
-      <template v-slot:activator="{ on }">
-        <v-btn text style="-webkit-app-region: no-drag;" v-on="on">未激活</v-btn>
-      </template>
-      <v-card style="overflow: hidden;">
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn icon class="mr-2" @click="activeDialog = false">
-            <v-icon>close</v-icon>
-          </v-btn>
-        </v-card-actions>
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12">
-                <v-text-field v-model="key" required label="请输入激活码"></v-text-field>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card-text>
-        <v-card-actions>
-          <v-row>
-            <v-col cols="12">
-              <v-row class="mx-2">
-                <v-col
-                  cols="12"
-                  class="layout column justify-center"
-                  @click=";(activeDialog = false), sendKey(), (key = '')"
-                >
-                  <v-btn>提交激活码</v-btn>
-                </v-col>
-              </v-row>
-              <v-row class="mx-2">
-                <v-col cols="12" class="layout column justify-center">
-                  <v-btn>购买激活码</v-btn>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
-    <v-btn icon style="-webkit-app-region: no-drag;" @click="min">
-      <v-icon>mdi-minus</v-icon>
-    </v-btn>
-    <v-btn icon style="-webkit-app-region: no-drag;" @click="max">
-      <v-icon>{{ isMax ? 'fullscreen_exit' : 'fullscreen' }}</v-icon>
-    </v-btn>
-    <v-btn icon style="-webkit-app-region: no-drag;" @click="openCloseDialog">
-      <v-icon>mdi-close</v-icon>
-    </v-btn>
+    <!-- 登陆弹窗 -->
     <v-dialog v-model="loginDialog" width="300" persistent origin="center center">
       <template v-slot:activator="{ on }">
         <v-btn v-show="!isLogin" text style="-webkit-app-region: no-drag;" v-on="on">未登录</v-btn>
@@ -77,7 +26,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn icon class="mr-2" @click="loginDialog = false">
-            <v-icon>close</v-icon>
+            <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-card-actions>
         <v-card-text>
@@ -96,7 +45,7 @@
             type="text"
             label="账号"
             class="mx-4"
-            prepend-icon="person"
+            prepend-icon="mdi-account"
             :rules="[(v) => !!v || '用户名必填', (v) => (v && v.length <= 10) || '不能超过10位']"
           />
           <v-text-field
@@ -109,7 +58,7 @@
             class="mx-4"
             :counter="10"
             type="password"
-            prepend-icon="lock"
+            prepend-icon="mdi-lock"
             :rules="[(v) => !!v || '密码必填', (v) => (v && v.length <= 10) || '不能超过10位']"
           />
           <v-row justify="space-around">
@@ -129,6 +78,7 @@
                 </v-col>
               </v-row>
 
+              <!-- 注册弹窗 -->
               <v-dialog v-model="registerDialog" width="300" persistent origin="center center">
                 <template v-slot:activator="{ on }">
                   <v-row class="mx-2">
@@ -142,7 +92,7 @@
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn icon class="mr-2" @click="registerDialog = false">
-                      <v-icon>close</v-icon>
+                      <v-icon>mdi-close</v-icon>
                     </v-btn>
                   </v-card-actions>
 
@@ -163,7 +113,7 @@
                       class="mx-4"
                       :counter="10"
                       validate-on-blur
-                      prepend-icon="person"
+                      prepend-icon="mdi-account"
                       :error-messages="registerForm.usernameErrors"
                     />
                     <v-text-field
@@ -178,7 +128,7 @@
                       label="密码"
                       class="mx-4"
                       type="password"
-                      prepend-icon="lock"
+                      prepend-icon="mdi-lock"
                       :rules="[(v) => !!v || '密码必填', (v) => (v && v.length <= 10) || '不能超过10位']"
                     />
                     <v-text-field
@@ -191,7 +141,7 @@
                       class="mx-4"
                       label="确认密码"
                       type="password"
-                      prepend-icon="lock"
+                      prepend-icon="mdi-lock"
                       :error-messages="registerForm.repeatPasswordErrors"
                     />
                     <v-text-field
@@ -251,6 +201,17 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <v-btn icon style="-webkit-app-region: no-drag;" @click="min">
+      <v-icon>mdi-minus</v-icon>
+    </v-btn>
+    <v-btn icon style="-webkit-app-region: no-drag;" @click="max">
+      <v-icon>{{ isMax ? 'mdi-fullscreen-exit' : 'mdi-fullscreen' }}</v-icon>
+    </v-btn>
+    <v-btn icon style="-webkit-app-region: no-drag;" @click="openCloseDialog">
+      <v-icon>mdi-close</v-icon>
+    </v-btn>
+
     <v-dialog v-model="logoutDialog" width="300">
       <v-card height="100%">
         <v-card-title class="align-center red--text">确认退出账号？</v-card-title>
@@ -296,7 +257,7 @@
 <script>
 import _ from 'underscore'
 import { mapState, mapGetters, mapActions } from 'vuex'
-import { login, logout, register, getUserByParam } from '../../api/api'
+import { login, logout, register, getUser, getUserByUsername } from '../../api/user'
 const RendererWindowUtils = require('../../utils/RendererWindowUtils')
 export default {
   data: () => ({
@@ -345,13 +306,16 @@ export default {
   }),
   computed: {
     ...mapState('user', ['username']),
-    ...mapGetters('user', ['isLogin']),
-    ...mapState('scheme', ['operationList'])
+    ...mapGetters('user', ['isLogin', 'isAGActive', 'isBBINActive', 'isRMActive']),
+    ...mapState('scheme', ['operationList']),
+    isRecharge() {
+      return this.isAGActive || this.isBBINActive || this.isRMActive
+    }
   },
   watch: {
     loginForm: {
-      deep: true, // 深度监听
-      immediate: true, // 立即执行
+      deep: true,
+      immediate: true,
       handler(newValue, oldValue) {
         if (newValue !== oldValue) {
           this.loginFail = false
@@ -383,7 +347,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('user', ['addUsername', 'addToken', 'logoutActions']),
+    ...mapActions('user', ['addUsername', 'addToken', 'logoutActions', 'addUser']),
     min() {
       RendererWindowUtils.minWindow()
     },
@@ -401,10 +365,14 @@ export default {
           rememberMe: this.loginForm.autoLogin
         })
         if (result.code === 0) {
-          this.loginDialog = false
-          this.loginFail = false
           this.addUsername(this.loginForm.username)
           this.addToken(result.data)
+          const res = await getUserByUsername({username: this.loginForm.username})
+          if (res.code === 0) {
+              this.addUser(res.data)
+          }
+          this.loginDialog = false
+          this.loginFail = false
         } else {
           this.result = result
           this.loginFail = true
@@ -421,7 +389,8 @@ export default {
       const result = await logout()
       if (result.code === 0) {
         this.logoutActions()
-        await this.$router.push({ path: '/home' })
+        this.logoutDialog = false
+        await this.$router.push('/')
       }
     },
     async register() {
@@ -452,6 +421,7 @@ export default {
         })
         this.result = res
         this.registerFail = res.code !== 0
+        if (res.code === 0) this.registerDialog = false
       }
     },
     sendKey() {},
@@ -464,7 +434,7 @@ export default {
       } else if (username && username.length > 10) {
         this.registerForm.usernameErrors = '长度不能超过10位'
       } else {
-        const res = await getUserByParam({ username: username })
+        const res = await getUser({ username: username })
         this.registerForm.usernameErrors = res.code === 0 ? [] : res.msg
       }
     },
@@ -482,7 +452,7 @@ export default {
         if (!this.isPhone(phone)) {
           this.registerForm.phoneErrors = '手机格式不正确'
         } else {
-          const res = await getUserByParam({ phone: phone })
+          const res = await getUser({ phone: phone })
           this.registerForm.phoneErrors = res.code === 0 ? [] : res.msg
         }
       }
@@ -492,7 +462,7 @@ export default {
         if (!this.isEmail(email)) {
           this.registerForm.emailErrors = 'email格式不正确'
         } else {
-          const res = await getUserByParam({ email: email })
+          const res = await getUser({ email: email })
           this.registerForm.emailErrors = res.code === 0 ? [] : res.msg
         }
       }

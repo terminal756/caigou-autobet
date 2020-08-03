@@ -9,20 +9,20 @@
         <v-list-item-title>首页</v-list-item-title>
       </v-list-item>
 
-      <v-list-item v-if="isLogin" link exact to="/sitegroup" active-class="grey--text">
+      <v-list-item v-if="isRecharge" link exact to="/sitegroup" active-class="grey--text">
         <v-list-item-icon>
           <v-icon>mdi-web</v-icon>
         </v-list-item-icon>
         <v-list-item-title>网站</v-list-item-title>
       </v-list-item>
 
-      <v-list-item v-if="isLogin" link exact to="/scheme" active-class="grey--text">
+      <v-list-item v-if="isRecharge" link exact to="/scheme" active-class="grey--text">
         <v-list-item-icon>
           <v-icon>mdi-reorder-horizontal</v-icon>
         </v-list-item-icon>
         <v-list-item-title>方案</v-list-item-title>
       </v-list-item>
-      <v-list-item v-if="isLogin && operationList.length" link exact to="/schemeOperation" active-class="grey--text">
+      <v-list-item v-if="isRecharge && operationList.length" link exact to="/schemeOperation" active-class="grey--text">
         <v-list-item-icon>
           <v-icon>mdi-code-braces</v-icon>
         </v-list-item-icon>
@@ -33,14 +33,18 @@
 </template>
 
 <script>
-import { getAGHostConfig } from '../../api/api'
+import { getAGHostConfig } from '../../api/hostConfig'
 import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   data: () => ({}),
   computed: {
-    ...mapGetters('user', ['isLogin']),
-    ...mapState('scheme', ['operationList'])
+    ...mapGetters('user', ['isLogin', 'isAGActive', 'isBBINActive', 'isRMActive']),
+    ...mapState('scheme', ['operationList']),
+
+    isRecharge() {
+      return this.isLogin && (this.isAGActive || this.isBBINActive || this.isRMActive)
+    }
   },
   created() {
     this.$store.dispatch('group/getGroupAsync')

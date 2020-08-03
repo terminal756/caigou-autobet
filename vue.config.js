@@ -20,6 +20,8 @@ module.exports = {
     }
   },
   devServer: {
+    // 运行端口号
+    port: 8080,
     proxy: {
       '/ag': {
         target: 'https://gci.eastwillbe.com',
