@@ -67,7 +67,7 @@
     }
   },
   "lint-staged": {
-     "*.js|{lib,setup,bin,hot,tooling,schemas}/**/*.js|test/*.js|{test,examples}/**/webpack.config.js}": [
+    "*.js|{lib,setup,bin,hot,tooling,schemas}/**/*.js|test/*.js|{test,examples}/**/webpack.config.js}": [
       "eslint --cache"
     ],
     "*.{ts,json,yml,yaml,md}|examples/*.md": [

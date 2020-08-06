@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import * as RendererWindowUtils from '../../utils/RendererWindowUtils'
+import { minWindow, maxWindow, close, isMaxWindow } from '../../utils/RendererWindowUtils'
 export default {
   data() {
     return {
@@ -38,16 +38,16 @@ export default {
   },
   methods: {
     min() {
-      RendererWindowUtils.minWindow()
+      minWindow()
     },
     max() {
-      RendererWindowUtils.maxWindow()
+      maxWindow()
     },
     close() {
-      RendererWindowUtils.close()
+      close()
     },
     isMaxWindow() {
-      this.isMax = RendererWindowUtils.isMaxWindow()
+      this.isMax = isMaxWindow()
     }
   }
 }

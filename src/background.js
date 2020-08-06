@@ -4,6 +4,7 @@ import { app, BrowserWindow, protocol, ipcMain } from 'electron'
 const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
 const winURL = process.env.VUE_APP_ENV === 'development' ? 'http://localhost:8080' : `file://${__dirname}/index.html`
 const isDevelopment = process.env.VUE_APP_ENV !== 'production'
+
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }])
 
 let mainWindow
@@ -43,10 +44,16 @@ app.on('activate', () => {
   }
 })
 
-app.on('ready', async () => {
+app.on('ready', () => {
   createMainWindow()
   if (isDevelopment && !process.env.IS_TEST) {
-    await installExtension(VUEJS_DEVTOOLS)
+    installExtension(VUEJS_DEVTOOLS)
+      .then((info) => {
+        console.log(info)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     mainWindow.webContents.openDevTools()
   }
 })
@@ -80,19 +87,6 @@ global.scheme = {
 global.gameInfo = {
   gameInfo: null
 }
-
-ipcMain.on('remote', () => {
-  const page = new BrowserWindow({ show: false })
-  const url = 'http://localhost:9222/json'
-  page.webContents.executeJavaScript('document.body.innerText').then((value) => {
-    ipcMain.on('remote-result', (e) => {
-      console.log(value)
-      e.reply(value)
-      // app.exit()
-    })
-  })
-  page.loadURL(url)
-})
 
 // 中转游戏登录信息
 ipcMain.on('gameInfo', (event, message) => {

@@ -6,6 +6,11 @@ export function minWindow() {
   remote.getCurrentWindow().minimize()
 }
 
+// 窗口最小化
+export function maxWindow() {
+  remote.getCurrentWindow().maxmize()
+}
+
 // 监听窗口最大化状态
 export function isMaxWindow() {
   const browserWindow = remote.getCurrentWindow()

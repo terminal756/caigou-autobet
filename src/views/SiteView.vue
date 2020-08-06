@@ -80,7 +80,7 @@
 </template>
 <script>
 import _ from 'lodash'
-import { minWindow, isMaxWindow, close, hide } from '../utils/RendererWindowUtils'
+import { minWindow, maxWindow, close, isMaxWindow } from '../utils/RendererWindowUtils'
 const { remote, ipcRenderer } = window.require('electron')
 
 export default {
