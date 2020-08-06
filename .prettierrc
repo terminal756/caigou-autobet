@@ -8,9 +8,9 @@
   "bracketSpacing": true,
   "eslintIntegration": true,
   "htmlWhitespaceSensitivity": "ignore",
-  "ignorePath":".prettierignore",
+  "ignorePath": ".prettierignore",
   "endOfLine": "auto",
-  "arrowParens":"always",
+  "arrowParens": "always",
   "overrides": [
     {
       "files": ".prettierrc",

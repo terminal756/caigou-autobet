@@ -5,29 +5,25 @@
     "sourceType": "module", // 指定来源的类型，有两种script或module
     "ecmaVersion": 6, // 指定ECMAScript支持的版本，6为ES6
     "experimentalObjectRestSpread": true,
-    "impliedStrict":true
+    "impliedStrict": true
   },
   "env": {
     "browser": true,
     "es6": true,
     "node": true
   },
-  "plugins": ["vue","prettier"],
+  "plugins": ["vue", "prettier"],
   // 扩展使用 vue 检查规则和eslint推荐规则
-  "extends": [
-    "eslint:recommended",
-    "plugin:vue/essential", 
-    "plugin:prettier/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:vue/essential", "plugin:prettier/recommended"],
   "globals": {
     "process": true
   },
   "rules": {
-    "prettier/prettier":"error",
+    "prettier/prettier": "error",
     "object-curly-spacing": 0, // 对象内的空格
     "vue/attribute-hyphenation": 0, // 忽略属性连字
     // 每行最大属性
-    "vue/max-attributes-per-line": [2, { "singleline": 10, "multiline": { "max": 1, "allowFirstLine": false } }], 
+    "vue/max-attributes-per-line": [2, { "singleline": 10, "multiline": { "max": 1, "allowFirstLine": false } }],
     "vue/singleline-html-element-content-newline": "off", // 单行html元素内容在新的一行
     "vue/multiline-html-element-content-newline": "off", // 多行html元素内容在新的一行
     "vue/html-closing-bracket-newline": "off", // html右括号在新的一行

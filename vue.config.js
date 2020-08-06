@@ -9,7 +9,7 @@ module.exports = {
     plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)]
   },
   chainWebpack: (config) => {
-    config.resolve.alias.set('@$', resolve('src')).set('@views', resolve('src/views'))
+    config.resolve.alias.set('@', resolve('src')).set('root', resolve('./')).set('@views', resolve('src/views'))
   },
   css: {
     loaderOptions: {
@@ -33,8 +33,6 @@ module.exports = {
       }
     }
   },
-  assetsDir: 'static',
-  runtimeCompiler: true,
 
   // electron 打包配置
   pluginOptions: {
@@ -43,7 +41,7 @@ module.exports = {
         electronDownload: {
           mirror: 'https://npm.taobao.org/mirrors/electron/'
         },
-        productName: '菜狗投注',
+        productName: 'CaigouAutoBet',
         appId: 'com.caigoubet.autobet',
         copyright: 'Copyright © 2020', //版权信息
         directories: {
@@ -56,9 +54,8 @@ module.exports = {
             url: 'http://localhost:8080/'
           }
         ],
-        files: ['dist/electron/**/*'],
         win: {
-          icon: './src/icon/caigou_512.ico',
+          icon: 'build/icons/caigou_256.ico',
           target: [
             {
               target: 'nsis',
@@ -70,10 +67,7 @@ module.exports = {
           oneClick: false, // 一键安装
           allowElevation: true, // 权限提升
           allowToChangeInstallationDirectory: true, // 运行修改安装目录
-          installerIcon: './src/icon/caigou_32.ico', // 安装图标
-          installerHeaderIcon: './src/icon/caigou_512.ico',
           createDesktopShortcut: true // 创建桌面图标
-          // include: 'build/script/installer.nsh'
         }
       }
     }

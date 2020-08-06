@@ -1,7 +1,6 @@
 'use strict'
 import { app, BrowserWindow, protocol, ipcMain } from 'electron'
-
-const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
+// const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
 const winURL = process.env.VUE_APP_ENV === 'development' ? 'http://localhost:8080' : `file://${__dirname}/index.html`
 const isDevelopment = process.env.VUE_APP_ENV !== 'production'
 
@@ -47,13 +46,13 @@ app.on('activate', () => {
 app.on('ready', () => {
   createMainWindow()
   if (isDevelopment && !process.env.IS_TEST) {
-    installExtension(VUEJS_DEVTOOLS)
-      .then((info) => {
-        console.log(info)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    // installExtension(VUEJS_DEVTOOLS)
+    //   .then((info) => {
+    //     console.log(info)
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
     mainWindow.webContents.openDevTools()
   }
 })
