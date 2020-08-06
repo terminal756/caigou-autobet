@@ -87,13 +87,13 @@
   </v-app>
 </template>
 <script>
-import Header from '../components/main/Header'
-import Side from '../components/main/Side'
-import Footer from '../components/main/Footer'
-import { loginRoom } from '../utils/ag/room'
+import Side from '@/components/main/Side'
+import Header from '@/components/main/Header'
+import Footer from '@/components/main/Footer'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import * as cmd from '../utils/ag/cmd'
-import { doSend } from '../utils/ag/static/Cube-Socket-Live.v1943'
+import * as cmd from '@/utils/ag/cmd'
+import { loginRoom } from '@/utils/ag/room'
+import { doSend } from '@/utils/ag/static/Cube-Socket-Live.v1943'
 export default {
   components: {
     Header,

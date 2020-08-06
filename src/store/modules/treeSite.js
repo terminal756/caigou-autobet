@@ -1,4 +1,4 @@
-import { getTreeSite } from '../../api/site'
+import { getTreeSite } from '@/api/site'
 
 const treeSite = {
   namespaced: true,

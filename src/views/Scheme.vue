@@ -81,9 +81,9 @@
   </v-app>
 </template>
 <script>
-import Header from '../components/main/Header'
-import Side from '../components/main/Side'
-import Footer from '../components/main/Footer'
+import Side from '@/components/main/Side'
+import Header from '@/components/main/Header'
+import Footer from '@/components/main/Footer'
 import { mapState, mapActions, mapGetters } from 'vuex'
 const { remote, ipcRenderer } = window.require('electron')
 export default {

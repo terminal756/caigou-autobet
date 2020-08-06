@@ -266,8 +266,8 @@
 <script>
 import _ from 'underscore'
 import { mapState, mapGetters, mapActions } from 'vuex'
-import { login, logout, register, getUser, getUserByUsername } from '../../api/user'
-import { min, max, unmax, close, ismax, hide } from '../../utils/renderer'
+import { login, logout, register, getUser, getUserByUsername } from '@/api/user'
+import { min, max, unmax, close, ismax, hide } from '@/utils/renderer'
 export default {
   data: () => ({
     valid: true,
@@ -311,7 +311,7 @@ export default {
     loginFail: false,
     registerFail: false,
     isMax: false,
-    version: require('../../../package.json').version
+    version: require('root/package.json').version
   }),
   computed: {
     ...mapState('user', ['username']),

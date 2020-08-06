@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { getAGHostConfig } from '../../api/hostConfig'
+import { getAGHostConfig } from '@/api/hostConfig'
 import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {

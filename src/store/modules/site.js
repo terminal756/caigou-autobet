@@ -1,4 +1,4 @@
-import { addSite, deleteSite, getSite, updateSite } from '../../api/site'
+import { addSite, deleteSite, getSite, updateSite } from '@/api/site'
 const site = {
   namespaced: true,
   state: () => ({

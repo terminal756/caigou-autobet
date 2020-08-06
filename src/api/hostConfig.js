@@ -1,4 +1,4 @@
-import { hostConfigRequest } from '../utils/request'
+import { hostConfigRequest } from '@/utils/request'
 
 export function getAGHostConfig(params) {
   return hostConfigRequest({

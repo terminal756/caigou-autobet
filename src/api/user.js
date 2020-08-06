@@ -1,4 +1,4 @@
-import { HttpRequest, LoginRequest } from '../utils/request'
+import { HttpRequest, LoginRequest } from '@/utils/request'
 
 export function login(data) {
   return LoginRequest({

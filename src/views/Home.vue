@@ -47,11 +47,10 @@
 </template>
 
 <script>
-import Side from '../components/main/Side'
-import Header from '../components/main/Header'
-import Footer from '../components/main/Footer'
-
-import { active } from '../api/user'
+import { active } from '@/api/user'
+import Side from '@/components/main/Side'
+import Header from '@/components/main/Header'
+import Footer from '@/components/main/Footer'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {

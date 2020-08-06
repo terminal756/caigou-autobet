@@ -1,4 +1,4 @@
-import { HttpRequest } from '../utils/request'
+import { HttpRequest } from '@/utils/request'
 
 export const saveGroup = (data) => {
   return HttpRequest({

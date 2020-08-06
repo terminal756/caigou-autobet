@@ -232,9 +232,9 @@
 
 <script>
 import _ from 'lodash'
-import Side from '../components/main/Side'
-import Header from '../components/main/Header'
-import Footer from '../components/main/Footer'
+import Side from '@/components/main/Side'
+import Header from '@/components/main/Header'
+import Footer from '@/components/main/Footer'
 import { mapState, mapActions } from 'vuex'
 
 export default {

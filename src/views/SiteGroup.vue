@@ -202,11 +202,11 @@
   </v-app>
 </template>
 <script>
-import Side from '../components/main/Side'
-import Header from '../components/main/Header'
-import Footer from '../components/main/Footer'
+import Side from '@/components/main/Side'
+import Header from '@/components/main/Header'
+import Footer from '@/components/main/Footer'
+import { getSiteListByGroupId } from '@/api/site'
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
-import { getSiteListByGroupId } from '../api/site'
 export default {
   components: {
     Header,

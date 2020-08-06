@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { egret } from './egret'
 
 var e,
@@ -227,7 +226,8 @@ var d = (function () {
   })(),
   g =
     "\nlet timeoutMap = {};\nlet intervalMap = {};\nonmessage = function(event){\n    var message = event.data.split(':');\n    var cmd = message[0];\n    var ID = message[1];\n    var delay = parseInt(message[2]);\n\n    switch(cmd) {\n        case 'check':\n            self.postMessage(event.data);\n            break;\n        case 'calibrate':\n            self.postMessage('calibrate:' + ID);\n            break;\n        case 'createTimeout':\n            var $timeout = setTimeout(function(){\n                self.postMessage('timeout:' + ID);\n            }, delay);\n            timeoutMap[ID] = $timeout;\n            self.postMessage('createTimeout:' + ID);\n            break;\n        case 'createInterval':\n            var $interval = setInterval(function(){\n                self.postMessage('interval:' + ID);\n            }, delay);\n            intervalMap[ID] = $interval;\n            self.postMessage('createInterval:' + ID);\n            break;\n        case 'clearTimeout':\n            const timeout = timeoutMap[ID];\n            clearTimeout(timeout);\n            break;\n        case 'clearInterval':\n            const interval = intervalMap[ID];\n            clearInterval(interval);\n            break;\n    }\n}\n",
-  v = new ((function () {
+    /**
+     *  v = new ((function () {
     function t() {
       var t = this
       ;(this.timerCount = 0),
@@ -250,9 +250,9 @@ var d = (function () {
             t.handleWorkerMsg(e.data)
           }),
           this._worker.postMessage('check:0'),
-          (window.onbeforeunload = function () {
-            t._worker.terminate(), console.log('NonstopTimer.timeWorker.terminate')
-          }),
+          // (window.onbeforeunload = function () {
+          //   t._worker.terminate(), console.log('NonstopTimer.timeWorker.terminate')
+          // }),
           (this.checkTimer = window.setTimeout(function () {
             clearTimeout(t.checkTimer), t.isWorker || (t._worker.terminate(), t.replaceNonWorker())
           }, 200))
@@ -418,6 +418,7 @@ var d = (function () {
       t
     )
   })())(),
+     */
   E = (function () {
     function t() {
       ;(this.sys = new d()),

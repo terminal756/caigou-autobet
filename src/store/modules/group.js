@@ -1,4 +1,4 @@
-import { getGroup, saveGroup, updateGroup, deleteGroup } from '../../api/site'
+import { getGroup, saveGroup, updateGroup, deleteGroup } from '@/api/site'
 const group = {
   namespaced: true,
   state: () => ({
