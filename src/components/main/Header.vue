@@ -364,7 +364,7 @@ export default {
       this.isMax ? unmax() : max()
     },
     close() {
-      hide()
+      close()
     },
     async login() {
       if (this.$refs.loginForm.validate()) {

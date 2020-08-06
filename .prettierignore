@@ -1,4 +1,6 @@
 package-lock.json
 **/config/*
 **/utils/*
+/dist/*
+/dist_electron/*
 /node_modules/*

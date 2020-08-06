@@ -5,6 +5,7 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 module.exports = {
+  publicPath: './',
   configureWebpack: {
     plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)]
   },
@@ -44,10 +45,10 @@ module.exports = {
         productName: '菜狗投注',
         appId: 'com.caigoubet.autobet',
         copyright: 'Copyright © 2020', //版权信息
+        files: ['./**/*'],
         directories: {
           output: './build'
         },
-
         publish: [
           {
             provider: 'generic',
@@ -67,7 +68,9 @@ module.exports = {
           oneClick: false, // 一键安装
           allowElevation: true, // 权限提升
           allowToChangeInstallationDirectory: true, // 运行修改安装目录
-          createDesktopShortcut: true // 创建桌面图标
+          createDesktopShortcut: true, // 创建桌面图标
+          installerIcon: 'build/icons/caigou_256.ico', // 安装的图标
+          uninstallerIcon: 'build/icons/caigou_256.ico' // 卸载图标
         }
       }
     }

@@ -1,14 +1,15 @@
 'use strict'
 import { app, BrowserWindow, protocol, ipcMain } from 'electron'
-// const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
-const winURL = process.env.VUE_APP_ENV === 'development' ? 'http://localhost:8080' : `file://${__dirname}/index.html`
+import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
+import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+
 const isDevelopment = process.env.VUE_APP_ENV !== 'production'
 
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }])
 
-let mainWindow
-function createMainWindow() {
-  mainWindow = new BrowserWindow({
+let win
+async function createMainWindow() {
+  win = new BrowserWindow({
     center: true,
     width: 800,
     height: 600,
@@ -24,11 +25,13 @@ function createMainWindow() {
       enableRemoteModule: true
     }
   })
-  mainWindow.removeMenu()
-  mainWindow.loadURL(winURL)
-  mainWindow.on('closed', () => {
-    mainWindow = null
-  })
+  if (isDevelopment) {
+    win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
+    win.webContents.openDevTools()
+  } else {
+    createProtocol('app')
+    win.loadURL('app://./index.html')
+  }
 }
 
 app.on('window-all-closed', () => {
@@ -38,23 +41,20 @@ app.on('window-all-closed', () => {
 })
 
 app.on('activate', () => {
-  if (mainWindow === null) {
+  if (win === null) {
     createMainWindow()
   }
 })
 
-app.on('ready', () => {
-  createMainWindow()
+app.on('ready', async () => {
   if (isDevelopment && !process.env.IS_TEST) {
-    // installExtension(VUEJS_DEVTOOLS)
-    //   .then((info) => {
-    //     console.log(info)
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
-    mainWindow.webContents.openDevTools()
+    try {
+      await installExtension(VUEJS_DEVTOOLS)
+    } catch (e) {
+      console.error('Vue Devtools failed to install:', e.toString())
+    }
   }
+  createMainWindow()
 })
 
 app.on('web-contents-created', (webContentsCreatedEvent, content) => {
@@ -89,5 +89,5 @@ global.gameInfo = {
 
 // 中转游戏登录信息
 ipcMain.on('gameInfo', (event, message) => {
-  mainWindow.webContents.send('gameInfo', message)
+  win.webContents.send('gameInfo', message)
 })
