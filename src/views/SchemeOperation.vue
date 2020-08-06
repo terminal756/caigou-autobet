@@ -3,7 +3,7 @@
     <Header />
     <Side />
     <Footer />
-    <v-content>
+    <v-main>
       <v-card height="100%" flat>
         <template v-if="operationList.length">
           <v-tabs v-model="tab" show-arrows background-color="primary">
@@ -83,7 +83,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 <script>

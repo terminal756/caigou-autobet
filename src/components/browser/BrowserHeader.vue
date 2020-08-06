@@ -26,7 +26,7 @@
 </template>
 
 <script>
-const RendererWindowUtils = require('../../utils/RendererWindowUtils')
+import * as RendererWindowUtils from '../../utils/RendererWindowUtils'
 export default {
   data() {
     return {

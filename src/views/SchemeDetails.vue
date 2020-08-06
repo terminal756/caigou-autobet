@@ -3,7 +3,7 @@
     <Header />
     <Side />
     <Footer />
-    <v-content>
+    <v-main>
       <v-card ref="card" class="mb-12" height="100%" flat>
         <v-card-text>
           <v-card class="ma-4 overflow-y-auto overflow-x-hidden" :height="currentHeight" flat>
@@ -226,7 +226,7 @@
           </v-card>
         </v-card-text>
       </v-card>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 

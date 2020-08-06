@@ -1,0 +1,4 @@
+package-lock.json
+**/config/*
+**/utils/*
+/node_modules/*

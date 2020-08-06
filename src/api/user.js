@@ -1,6 +1,6 @@
-import {HttpRequest, LoginRequest } from '../utils/request'
+import { HttpRequest, LoginRequest } from '../utils/request'
 
-export function login (data) {
+export function login(data) {
   return LoginRequest({
     url: '/auth/login',
     method: 'post',
@@ -8,14 +8,14 @@ export function login (data) {
   })
 }
 
-export function logout () {
+export function logout() {
   return HttpRequest({
     url: '/auth/logout',
     method: 'get'
   })
 }
 
-export function register (data) {
+export function register(data) {
   return HttpRequest({
     url: '/user/register',
     method: 'post',

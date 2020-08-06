@@ -2,18 +2,11 @@
   <v-app>
     <Header />
     <Side />
-    <v-content>
+    <v-main>
       <v-toolbar flat>
         <v-btn color="primary" to="/schemeDetails">创建方案</v-btn>
         <v-spacer></v-spacer>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="输入方案名称搜索"
-          dense
-          solo
-          hide-details
-        />
+        <v-text-field v-model="search" append-icon="mdi-magnify" label="输入方案名称搜索" dense solo hide-details />
       </v-toolbar>
       <v-card height="100%" flat>
         <v-data-table
@@ -61,11 +54,7 @@
                 mdi-pencil
               </v-icon>
             </router-link>
-            <v-icon
-              small
-              :disabled="isOperation(item)"
-              @click="openDeleteScheme(item)"
-            >
+            <v-icon small :disabled="isOperation(item)" @click="openDeleteScheme(item)">
               mdi-delete
             </v-icon>
           </template>
@@ -78,11 +67,7 @@
           </v-card-title>
           <v-card-actions>
             <v-spacer />
-            <v-btn
-              class="ma-4"
-              color="primary"
-              @click="deleteSchemeDialog = false"
-            >
+            <v-btn class="ma-4" color="primary" @click="deleteSchemeDialog = false">
               返回
             </v-btn>
             <v-btn class="ma-4" color="error" @click="deleteScheme">
@@ -91,7 +76,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-content>
+    </v-main>
     <Footer />
   </v-app>
 </template>
@@ -100,7 +85,7 @@ import Header from '../components/main/Header'
 import Side from '../components/main/Side'
 import Footer from '../components/main/Footer'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { remote, ipcRenderer } from 'electron'
+const { remote, ipcRenderer } = window.require('electron')
 export default {
   components: {
     Header,
@@ -154,9 +139,7 @@ export default {
             scheme.gameType = 'RM'
           }
           if (s.sites) {
-            scheme.sites = JSON.parse(s.sites).map((siteId) =>
-              this.siteList.find((site) => site.siteId === siteId)
-            )
+            scheme.sites = JSON.parse(s.sites).map((siteId) => this.siteList.find((site) => site.siteId === siteId))
           }
           return scheme
         })
@@ -167,9 +150,7 @@ export default {
     // 监听从主进程中转发送过来的游戏登录信息
     ipcRenderer.on('gameInfo', (event, message) => {
       const gameInfo = JSON.parse(message)
-      const scheme = this.schemeList.find(
-        (s) => s.schemeId === gameInfo.schemeId
-      )
+      const scheme = this.schemeList.find((s) => s.schemeId === gameInfo.schemeId)
       switch (scheme.gameType) {
         case 2:
           // console.log('监听到的消息', gameInfo)
@@ -193,9 +174,7 @@ export default {
             scheme.gameType = 'RM'
           }
           if (s.sites) {
-            scheme.sites = JSON.parse(s.sites).map((siteId) =>
-              this.siteList.find((site) => site.siteId === siteId)
-            )
+            scheme.sites = JSON.parse(s.sites).map((siteId) => this.siteList.find((site) => site.siteId === siteId))
           }
           return scheme
         })
@@ -234,8 +213,7 @@ export default {
     },
     isSchemeLogin(scheme) {
       return this.gameInfo.find((i) => i.schemeId === scheme.schemeId)
-        ? this.gameInfo.find((i) => i.schemeId === scheme.schemeId).agInfo
-            .length === scheme.sites.length
+        ? this.gameInfo.find((i) => i.schemeId === scheme.schemeId).agInfo.length === scheme.sites.length
         : false
     },
     isOperation(scheme) {
@@ -251,9 +229,7 @@ export default {
     async deleteScheme() {
       const schemeObj = {
         schemeId: this.deleteSchemeObj.schemeId,
-        index: this.schemes.findIndex(
-          (s) => s.schemeId === this.deleteSchemeObj.schemeId
-        )
+        index: this.schemes.findIndex((s) => s.schemeId === this.deleteSchemeObj.schemeId)
       }
       const res = await this.deleteSchemeAsync(schemeObj)
       if (res.code === 0) {

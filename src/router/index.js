@@ -1,41 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Home from '../views/Home'
+import SiteGroup from '../views/SiteGroup'
+import Scheme from '../views/Scheme'
+import SchemeDetails from '../views/SchemeDetails'
+import SchemeOperation from '../views/SchemeOperation'
+import SiteView from '../views/SiteView'
+
 Vue.use(VueRouter)
+
 const routes = [
-  {
-    path: '/home',
-    redirect: '/'
-  },
-  {
-    path: '/',
-    name: 'Home',
-    component: () => import('../views/Home.vue')
-  },
-  {
-    path: '/sitegroup',
-    name: 'SiteGroup',
-    component: () => import('../views/SiteGroup.vue')
-  },
-  {
-    path: '/scheme',
-    name: 'Scheme',
-    component: () => import('../views/Scheme.vue')
-  },
-  {
-    path: '/schemeDetails',
-    name: 'SchemeDetails',
-    component: () => import('../views/SchemeDetails.vue')
-  },
+  { path: '/home', redirect: '/' },
+  { path: '/', name: 'Home', component: Home },
+  { path: '/sitegroup', name: 'SiteGroup', component: SiteGroup },
+  { path: '/scheme', name: 'Scheme', Scheme },
+  { path: '/schemeDetails', name: 'SchemeDetails', component: SchemeDetails },
   {
     path: '/schemeOperation',
     name: 'SchemeOperation',
-    component: () => import('../views/SchemeOperation.vue')
+    component: SchemeOperation
   },
-  {
-    path: '/siteview',
-    name: 'SiteView',
-    component: () => import('../views/SiteView.vue')
-  }
+  { path: '/siteview', name: 'SiteView', component: SiteView }
 ]
 const router = new VueRouter({
   mode: 'history',
@@ -44,12 +29,3 @@ const router = new VueRouter({
 })
 
 export default router
-
-const [routerPush, routerReplace] = [VueRouter.prototype.push, VueRouter.prototype.replace]
-VueRouter.prototype.push = function push(location) {
-  return routerPush.call(this, location).catch(error => error)
-}
-VueRouter.prototype.replace = function replace(location) {
-  return routerReplace.call(this, location).catch(error => error)
-}
-

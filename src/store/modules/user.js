@@ -44,7 +44,7 @@ const user = {
     },
     ADD_USER: (state, user) => {
       if (state.users.length) {
-        const i = state.users.findIndex(u => u.userId === user.userId)
+        const i = state.users.findIndex((u) => u.userId === user.userId)
         if (i !== -1) {
           state.users.splice(i, 1, user)
           localStorage.setItem('users', JSON.stringify(state.users))

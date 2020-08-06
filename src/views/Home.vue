@@ -3,7 +3,7 @@
     <Header />
     <Side />
     <Footer />
-    <v-content>
+    <v-main>
       <v-container class="fill-height d-flex justify-center align-center">
         <v-card hover width="400" class="pa-4 ma-4">
           <v-card-title>使用流程</v-card-title>
@@ -17,25 +17,16 @@
             <p>7. 执行方案</p>
           </v-card-text>
           <v-card-actions class="d-flex justify-space-around">
-            <v-btn
-              class="success"
-              @click="openActive"
-            >激活账户</v-btn
-            >
+            <v-btn class="success" @click="openActive">激活账户</v-btn>
             <v-btn class="primary">购买激活码</v-btn>
           </v-card-actions>
         </v-card>
       </v-container>
-    </v-content>
+    </v-main>
     <v-dialog v-model="activeDialog" width="400">
       <v-card class="pa-4">
         <v-card-title>
-          <v-text-field
-            v-model="key"
-            required
-            label="请输入激活码"
-            :error-messages="errorMsg"
-          />
+          <v-text-field v-model="key" required label="请输入激活码" :error-messages="errorMsg" />
         </v-card-title>
         <v-card-actions class="d-flex justify-space-around">
           <v-btn color="success" @click="active">激活</v-btn>
@@ -47,12 +38,7 @@
     <v-snackbar v-model="snackbar" :timeout="timeout" light rounded>
       未登录
       <template v-slot:action="{ attrs }">
-        <v-btn
-          color="blue"
-          icon
-          v-bind="attrs"
-          @click="snackbar = false"
-        >
+        <v-btn color="blue" icon v-bind="attrs" @click="snackbar = false">
           mdi-close
         </v-btn>
       </template>
@@ -90,7 +76,7 @@ export default {
     ...mapActions('user', ['addUser']),
 
     openActive() {
-      this.isLogin ? this.activeDialog = true : this.snackbar = true
+      this.isLogin ? (this.activeDialog = true) : (this.snackbar = true)
     },
 
     async active() {
@@ -100,7 +86,6 @@ export default {
         this.errorMsg = '激活码长度不正确'
       } else {
         const res = await active({ active: this.key })
-        console.log(res)
         if (res.code === 0) {
           this.addUser(res.data)
           this.activeDialog = false

@@ -1,0 +1,7 @@
+/dist/*
+/*.js
+/utils/
+/node_modules/*
+**/config/*
+**/utils/**
+*.config.js

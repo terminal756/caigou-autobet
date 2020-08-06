@@ -1,6 +1,7 @@
 import Axios from 'axios'
-import qs from 'qs'
 import xml2js from 'xml2js'
+
+const qs = require('qs')
 
 const xmlParser = new xml2js.Parser()
 

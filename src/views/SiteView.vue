@@ -23,7 +23,7 @@
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-content>
+    <v-main>
       <v-card height="100%" class="d-flex flex-column">
         <v-card-text>
           <v-list flat subheader>
@@ -75,13 +75,14 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 <script>
 import _ from 'lodash'
-import { remote, ipcRenderer } from 'electron'
-const RendererWindowUtils = require('../utils/RendererWindowUtils')
+import { minWindow, isMaxWindow, close, hide } from '../utils/RendererWindowUtils'
+const { remote, ipcRenderer } = window.require('electron')
+
 export default {
   data: () => ({
     scheme: {},
@@ -247,17 +248,17 @@ export default {
   updated() {},
   methods: {
     min() {
-      RendererWindowUtils.minWindow()
+      minWindow()
     },
     max() {
-      RendererWindowUtils.maxWindow()
+      maxWindow()
       this.isMax = !this.isMax
     },
     back() {
       this.currentWebview.goBack()
     },
     close() {
-      RendererWindowUtils.close()
+      close()
     },
     refresh() {
       this.currentWebview.reload()
@@ -266,7 +267,7 @@ export default {
       this.currentWebview.goForward()
     },
     isMaxWindow() {
-      this.isMax = RendererWindowUtils.isMaxWindow()
+      this.isMax = isMaxWindow()
     }
   }
 }

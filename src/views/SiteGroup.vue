@@ -3,7 +3,7 @@
     <Header />
     <Side />
     <Footer />
-    <v-content style="overflow: auto;">
+    <v-main style="overflow: auto;">
       <v-toolbar flat>
         <v-dialog v-model="groupDialog" :retain-focus="false" persistent max-width="500">
           <template v-slot:activator="{ on }">
@@ -65,9 +65,9 @@
                   dense
                   persistent-hint
                   label="链接  必填"
-                  :rules="[
-                    (v) => !!v || '网站地址必填',
-                    (v) => /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/.test(v) || '网站地址格式不正确']" />
+                  :rules="[(v) => !!v || '网站地址必填']"
+                />
+                <!-- (v) => /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/.test(v) || '网站地址格式不正确' -->
                 <v-text-field v-model="siteForm.shoucunAll" dense label="首存优惠" />
                 <v-text-field v-model="siteForm.shoucunAllLiushui" dense label="首存流水" />
                 <v-text-field v-model="siteForm.ricun" dense label="日存优惠" />
@@ -111,7 +111,7 @@
           </v-data-table>
         </v-card>
       </template>
-      <template v-if="groupList && groupList.length !==0">
+      <template v-if="groupList && groupList.length !== 0">
         <v-card>
           <v-card-title>分组列表</v-card-title>
           <v-expansion-panels>
@@ -144,7 +144,7 @@
                   </v-col>
                 </v-row>
               </v-expansion-panel-header>
-              <template v-if="$store.getters['site/getSiteByGroupId'](item.groupId).length !==0 ">
+              <template v-if="$store.getters['site/getSiteByGroupId'](item.groupId).length !== 0">
                 <v-expansion-panel-content style="overflow: auto;">
                   <v-data-table
                     hide-default-footer
@@ -198,7 +198,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 <script>
@@ -352,7 +352,11 @@ export default {
           siteId: this.siteForm.siteId,
           groupId: this.siteForm.groupId,
           name: this.siteForm.name,
-          url: (this.siteForm.url.substr(0, 7).toLowerCase() === 'http://' || this.siteForm.url.substr(0, 8).toLowerCase() === 'https://') ? this.siteForm.url : 'http://' + this.siteForm.url,
+          url:
+            this.siteForm.url.substr(0, 7).toLowerCase() === 'http://' ||
+            this.siteForm.url.substr(0, 8).toLowerCase() === 'https://'
+              ? this.siteForm.url
+              : 'http://' + this.siteForm.url,
           shoucunAll: this.siteForm.shoucunAll,
           shoucunAllLiushui: this.siteForm.shoucunAllLiushui,
           ricun: this.siteForm.ricun,

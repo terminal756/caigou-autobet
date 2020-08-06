@@ -78,7 +78,7 @@ const scheme = {
       return res
     },
     updateScheme({ commit }, payload) {
-        commit('updateScheme', payload)
+      commit('updateScheme', payload)
     },
     async deleteSchemeAsync({ commit }, payload) {
       const res = await deleteScheme({ schemeId: payload.schemeId })

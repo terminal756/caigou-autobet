@@ -1,6 +1,7 @@
 'use strict'
-import { app, BrowserWindow, protocol, ipcMain, remote } from 'electron'
+import { app, BrowserWindow, protocol, ipcMain } from 'electron'
 
+const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
 const winURL = process.env.VUE_APP_ENV === 'development' ? 'http://localhost:8080' : `file://${__dirname}/index.html`
 const isDevelopment = process.env.VUE_APP_ENV !== 'production'
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }])
@@ -19,7 +20,8 @@ function createMainWindow() {
       nodeIntegrationInSubFrames: true,
       nodeIntegrationInWorker: true,
       webviewTag: true,
-      webSecurity: false
+      webSecurity: false,
+      enableRemoteModule: true
     }
   })
   mainWindow.removeMenu()
@@ -41,10 +43,10 @@ app.on('activate', () => {
   }
 })
 
-app.on('ready', () => {
+app.on('ready', async () => {
   createMainWindow()
   if (isDevelopment && !process.env.IS_TEST) {
-    BrowserWindow.addDevToolsExtension('D:\\dev\\project\\caigou\\caigou-electron\\src\\vue-devtools')
+    await installExtension(VUEJS_DEVTOOLS)
     mainWindow.webContents.openDevTools()
   }
 })

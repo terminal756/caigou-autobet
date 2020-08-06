@@ -20,7 +20,9 @@
     <!-- 登陆弹窗 -->
     <v-dialog v-model="loginDialog" width="300" persistent origin="center center">
       <template v-slot:activator="{ on }">
-        <v-btn v-show="!isLogin" text style="-webkit-app-region: no-drag;" v-on="on">未登录</v-btn>
+        <v-btn v-show="!isLogin" text style="-webkit-app-region: no-drag;" v-on="on">
+          未登录
+        </v-btn>
       </template>
       <v-card height="100%" style="overflow: hidden;">
         <v-card-actions>
@@ -178,7 +180,9 @@
                       <v-row>
                         <v-row class="mx-2">
                           <v-col cols="12" class="layout column justify-center">
-                            <v-btn :disabled="!valid" @click="register">提交</v-btn>
+                            <v-btn :disabled="!valid" @click="register">
+                              提交
+                            </v-btn>
                           </v-col>
                         </v-row>
                       </v-row>
@@ -214,7 +218,9 @@
 
     <v-dialog v-model="logoutDialog" width="300">
       <v-card height="100%">
-        <v-card-title class="align-center red--text">确认退出账号？</v-card-title>
+        <v-card-title class="align-center red--text">
+          确认退出账号？
+        </v-card-title>
         <v-card-actions>
           <v-spacer />
           <v-btn class="ma-4" color="primary" @click="logoutDialog = false">
@@ -228,7 +234,9 @@
     </v-dialog>
     <v-dialog v-model="closeDialog" width="300">
       <v-card height="100%">
-        <v-card-title class="align-center red--text">确认关闭菜狗投注？</v-card-title>
+        <v-card-title class="align-center red--text">
+          确认关闭菜狗投注？
+        </v-card-title>
         <v-card-actions>
           <v-spacer />
           <v-btn class="ma-4" color="primary" @click="closeDialog = false">
@@ -242,7 +250,9 @@
     </v-dialog>
     <v-dialog v-model="logoutWithConnectDialog" width="300">
       <v-card height="100%">
-        <v-card-title class="align-center red--text">当前有方案在运行，停止所有运行中的方案才能退出</v-card-title>
+        <v-card-title class="align-center red--text">
+          当前有方案在运行，停止所有运行中的方案才能退出
+        </v-card-title>
         <v-card-actions>
           <v-spacer />
           <v-btn class="ma-4" color="primary" @click="logoutWithConnectDialog = false">
@@ -251,14 +261,13 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-
   </v-app-bar>
 </template>
 <script>
 import _ from 'underscore'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { login, logout, register, getUser, getUserByUsername } from '../../api/user'
-const RendererWindowUtils = require('../../utils/RendererWindowUtils')
+import { minWindow, isMaxWindow, close, hide } from '../../utils/RendererWindowUtils'
 export default {
   data: () => ({
     valid: true,
@@ -349,13 +358,13 @@ export default {
   methods: {
     ...mapActions('user', ['addUsername', 'addToken', 'logoutActions', 'addUser']),
     min() {
-      RendererWindowUtils.minWindow()
+      minWindow()
     },
     max() {
-      RendererWindowUtils.maxWindow()
+      isMaxWindow()
     },
     close() {
-      RendererWindowUtils.hide()
+      hide()
     },
     async login() {
       if (this.$refs.loginForm.validate()) {
@@ -367,9 +376,11 @@ export default {
         if (result.code === 0) {
           this.addUsername(this.loginForm.username)
           this.addToken(result.data)
-          const res = await getUserByUsername({username: this.loginForm.username})
+          const res = await getUserByUsername({
+            username: this.loginForm.username
+          })
           if (res.code === 0) {
-              this.addUser(res.data)
+            this.addUser(res.data)
           }
           this.loginDialog = false
           this.loginFail = false
@@ -426,7 +437,7 @@ export default {
     },
     sendKey() {},
     isMaxWindow() {
-      this.isMax = RendererWindowUtils.isMaxWindow()
+      this.isMax = isMaxWindow()
     },
     async checkUsername(username) {
       if (username === '') {
@@ -434,7 +445,9 @@ export default {
       } else if (username && username.length > 10) {
         this.registerForm.usernameErrors = '长度不能超过10位'
       } else {
-        const res = await getUser({ username: username })
+        const res = await getUser({
+          username: username
+        })
         this.registerForm.usernameErrors = res.code === 0 ? [] : res.msg
       }
     },
@@ -452,7 +465,9 @@ export default {
         if (!this.isPhone(phone)) {
           this.registerForm.phoneErrors = '手机格式不正确'
         } else {
-          const res = await getUser({ phone: phone })
+          const res = await getUser({
+            phone: phone
+          })
           this.registerForm.phoneErrors = res.code === 0 ? [] : res.msg
         }
       }
@@ -462,7 +477,9 @@ export default {
         if (!this.isEmail(email)) {
           this.registerForm.emailErrors = 'email格式不正确'
         } else {
-          const res = await getUser({ email: email })
+          const res = await getUser({
+            email: email
+          })
           this.registerForm.emailErrors = res.code === 0 ? [] : res.msg
         }
       }

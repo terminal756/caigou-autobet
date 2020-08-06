@@ -1,11 +1,5 @@
 <template>
-  <v-footer
-    app
-    padless
-    height="28px"
-    style="-webkit-app-region: no-drag;"
-    class="px-4"
-  >
+  <v-footer app padless height="28px" style="-webkit-app-region: no-drag;" class="px-4">
     <span v-if="username" class="red--text font-weight-black">{{ msg }}</span>
   </v-footer>
 </template>
