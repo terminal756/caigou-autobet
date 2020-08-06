@@ -41,7 +41,7 @@ module.exports = {
         electronDownload: {
           mirror: 'https://npm.taobao.org/mirrors/electron/'
         },
-        productName: 'CaigouAutoBet',
+        productName: '菜狗投注',
         appId: 'com.caigoubet.autobet',
         copyright: 'Copyright © 2020', //版权信息
         directories: {

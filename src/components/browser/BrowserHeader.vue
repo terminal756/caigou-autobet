@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { minWindow, maxWindow, close, isMaxWindow } from '../../utils/RendererWindowUtils'
+import { minWindow, maxWindow, close, isMaxWindow } from '../../utils/renderer'
 export default {
   data() {
     return {

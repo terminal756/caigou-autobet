@@ -1,20 +1,19 @@
-'use strict'
-const { remote } = window.require('electron')
+let win = window.require('electron').remote.getCurrentWindow()
 
-// 窗口最小化
-export function minWindow() {
-  remote.getCurrentWindow().minimize()
+export function min() {
+  win.minimize()
 }
 
-// 窗口最小化
-export function maxWindow() {
-  remote.getCurrentWindow().maxmize()
+export function max () {
+  win.maximize()
 }
 
-// 监听窗口最大化状态
-export function isMaxWindow() {
-  const browserWindow = remote.getCurrentWindow()
-  if (browserWindow.isMaximized()) {
+export function unmax () {
+  win.unmaximize()
+}
+
+export function ismax() {
+  if (win.isMaximized()) {
     return true
   } else {
     return false
@@ -23,50 +22,44 @@ export function isMaxWindow() {
 
 // 设置窗口是否能改变大小，参数true/false
 export function setResizable(resizable) {
-  remote.getCurrentWindow().setResizable(resizable)
+  win.setResizable(resizable)
 }
 
 // 下载文件
 export function download(url) {
-  remote.getCurrentWebContents().downloadURL(url)
+  win.downloadURL(url)
 }
 
 export function close() {
-  const browserWindow = remote.getCurrentWindow()
-  browserWindow.close()
+  win.close()
 }
 
 // 隐藏窗口
 export function hide() {
-  const browserWindow = remote.getCurrentWindow()
-  browserWindow.hide()
+  win.hide()
 }
 
 // 显示窗口
 export function show() {
-  const browserWindow = remote.getCurrentWindow()
-  browserWindow.show()
+  win.show()
 }
 
 // 窗口闪烁
-export function flashFrame() {
-  const browserWindow = remote.getCurrentWindow()
+export function flash() {
   //   if(browserWindow.isFocused() || browserWindow.isVisible())
-  if (!browserWindow.isFocused()) {
-    browserWindow.showInactive()
-    browserWindow.flashFrame(true)
+  if (!win.isFocused()) {
+    win.showInactive()
+    win.flashFrame(true)
   }
 }
 
 // 设置窗口最前端显示
 export function setAlwaysOnTop(top) {
-  const browserWindow = remote.getCurrentWindow()
-  browserWindow.setAlwaysOnTop(top)
+  win.setAlwaysOnTop(top)
 }
 
-export function reloadCurrentWindow() {
-  const browserWindow = remote.getCurrentWindow()
-  browserWindow.reload()
+export function reload() {
+  win.reload()
 }
 
 // 设置开机启动

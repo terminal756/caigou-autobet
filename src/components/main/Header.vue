@@ -267,7 +267,7 @@
 import _ from 'underscore'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { login, logout, register, getUser, getUserByUsername } from '../../api/user'
-import { minWindow, isMaxWindow, close, hide } from '../../utils/RendererWindowUtils'
+import { min, max, unmax, close, ismax, hide } from '../../utils/renderer'
 export default {
   data: () => ({
     valid: true,
@@ -352,16 +352,16 @@ export default {
   },
   mounted() {
     window.onresize = () => {
-      this.isMaxWindow()
+      this.isMax = ismax()
     }
   },
   methods: {
     ...mapActions('user', ['addUsername', 'addToken', 'logoutActions', 'addUser']),
     min() {
-      minWindow()
+      min()
     },
     max() {
-      isMaxWindow()
+      this.isMax ? unmax() : max()
     },
     close() {
       hide()
@@ -436,9 +436,6 @@ export default {
       }
     },
     sendKey() {},
-    isMaxWindow() {
-      this.isMax = isMaxWindow()
-    },
     async checkUsername(username) {
       if (username === '') {
         this.registerForm.usernameErrors = '用户名不能为空'

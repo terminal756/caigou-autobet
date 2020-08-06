@@ -80,7 +80,7 @@
 </template>
 <script>
 import _ from 'lodash'
-import { minWindow, maxWindow, close, isMaxWindow } from '../utils/RendererWindowUtils'
+import { min, max, unmax, close, ismax } from '../utils/renderer'
 const { remote, ipcRenderer } = window.require('electron')
 
 export default {
@@ -243,16 +243,17 @@ export default {
     this.scheme = remote.getGlobal('scheme').scheme
   },
   mounted() {
-    this.isMaxWindow()
+    window.onresize = () => {
+      this.isMax = ismax()
+    }
   },
   updated() {},
   methods: {
     min() {
-      minWindow()
+      min()
     },
     max() {
-      maxWindow()
-      this.isMax = !this.isMax
+      this.isMax ? unmax() : max()
     },
     back() {
       this.currentWebview.goBack()
@@ -265,9 +266,6 @@ export default {
     },
     forward() {
       this.currentWebview.goForward()
-    },
-    isMaxWindow() {
-      this.isMax = isMaxWindow()
     }
   }
 }
