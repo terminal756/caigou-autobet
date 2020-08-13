@@ -34,7 +34,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-
     <v-snackbar v-model="snackbar" :timeout="timeout" light rounded>
       未登录
       <template v-slot:action="{ attrs }">
@@ -70,6 +69,7 @@ export default {
   computed: {
     ...mapGetters('user', ['isLogin'])
   },
+  mounted() {},
 
   methods: {
     ...mapActions('user', ['addUser']),

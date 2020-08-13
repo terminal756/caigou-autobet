@@ -4,35 +4,37 @@ import { app, BrowserWindow, protocol, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 
-const isDevelopment = process.env.VUE_APP_ENV !== 'production'
+const isDev = process.env.VUE_APP_ENV === 'development'
 
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }])
 
 let win
 async function createMainWindow() {
   win = new BrowserWindow({
-    center: true,
     width: 800,
     height: 600,
     minWidth: 800,
     minHeight: 600,
     frame: false, // 无边框
+    center: true,
     webPreferences: {
-      nodeIntegration: true,
-      nodeIntegrationInSubFrames: true,
-      nodeIntegrationInWorker: true,
       webviewTag: true,
-      webSecurity: false,
-      enableRemoteModule: true
+      nodeIntegration: true,
+      enableRemoteModule: true,
+      nodeIntegrationInWorker: true,
+      nodeIntegrationInSubFrames: true
     }
   })
-  if (isDevelopment) {
+  if (isDev) {
     win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
     win.webContents.openDevTools()
   } else {
     createProtocol('app')
     win.loadURL('app://./index.html')
   }
+  win.on('close', () => {
+    win = null
+  })
 }
 
 app.on('window-all-closed', () => {
@@ -48,7 +50,7 @@ app.on('activate', () => {
 })
 
 app.on('ready', async () => {
-  if (isDevelopment && !process.env.IS_TEST) {
+  if (isDev && !process.env.IS_TEST) {
     try {
       await installExtension(VUEJS_DEVTOOLS)
     } catch (e) {
@@ -58,7 +60,7 @@ app.on('ready', async () => {
   createMainWindow()
 })
 
-app.on('web-contents-created', (webContentsCreatedEvent, content) => {
+app.on('web-contents-created', (e, content) => {
   if (content.getType() === 'webview') {
     content.on('new-window', (newWindowEvent, url) => {
       content.loadURL(url)
@@ -67,7 +69,7 @@ app.on('web-contents-created', (webContentsCreatedEvent, content) => {
   }
 })
 
-if (isDevelopment) {
+if (isDev) {
   if (process.platform === 'win32') {
     process.on('message', (data) => {
       if (data === 'graceful-exit') {
@@ -80,7 +82,6 @@ if (isDevelopment) {
     })
   }
 }
-
 global.scheme = {
   scheme: null
 }
@@ -91,4 +92,9 @@ global.gameInfo = {
 // 中转游戏登录信息
 ipcMain.on('gameInfo', (event, message) => {
   win.webContents.send('gameInfo', message)
+})
+
+// 监听renderer 关闭信息
+ipcMain.on('window-close', () => {
+  win.close()
 })

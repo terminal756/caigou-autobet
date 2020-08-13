@@ -189,26 +189,32 @@ export default {
     ...mapActions('scheme', ['deleteSchemeAsync']),
     ...mapActions('gameInfo', ['addAGInfo']),
     openUrl(item) {
-      const siteView = new remote.BrowserWindow({
+      let view = new remote.BrowserWindow({
         width: 1000,
         height: 600,
         center: true,
         frame: false, // 无边框
         webPreferences: {
+          webviewTag: true,
           nodeIntegration: true,
-          webviewTag: true
+          enableRemoteModule: true
         }
       })
-      if (process.env.NODE_ENV !== 'production' && !process.env.IS_TEST) {
-        siteView.webContents.openDevTools()
+      view.removeMenu()
+
+      view.on('close', () => {
+        view = null
+      })
+
+      const isDev = process.env.NODE_ENV === 'development'
+      if (isDev) {
+        view.loadURL('http://localhost:8080/siteview')
+        view.webContents.openDevTools()
+      } else {
+        view.loadURL(`file://${__dirname}/index.html#/siteview`)
       }
-      const betUrl =
-        process.env.NODE_ENV === 'development'
-          ? 'http://localhost:8080/siteview'
-          : `file://${__dirname}/index.html#/siteview`
-      siteView.loadURL(betUrl)
-      siteView.removeMenu()
       // 共享参数
+      // console.log('remote参数:', item)
       remote.getGlobal('scheme').scheme = item
     },
     isSchemeLogin(scheme) {

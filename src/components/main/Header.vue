@@ -232,6 +232,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <!-- 关闭弹窗 -->
     <v-dialog v-model="closeDialog" width="300">
       <v-card height="100%">
         <v-card-title class="align-center red--text">
@@ -266,8 +267,9 @@
 <script>
 import _ from 'underscore'
 import { mapState, mapGetters, mapActions } from 'vuex'
+import { min, max, unmax, close, ismax, hide } from '../../utils/renderer'
 import { login, logout, register, getUser, getUserByUsername } from '@/api/user'
-import { min, max, unmax, close, ismax, hide } from '@/utils/renderer'
+const { ipcRenderer: ipc } = window.require('electron')
 export default {
   data: () => ({
     valid: true,
@@ -315,8 +317,8 @@ export default {
   }),
   computed: {
     ...mapState('user', ['username']),
-    ...mapGetters('user', ['isLogin', 'isAGActive', 'isBBINActive', 'isRMActive']),
     ...mapState('scheme', ['operationList']),
+    ...mapGetters('user', ['isLogin', 'isAGActive', 'isBBINActive', 'isRMActive']),
     isRecharge() {
       return this.isAGActive || this.isBBINActive || this.isRMActive
     }
@@ -365,6 +367,7 @@ export default {
     },
     close() {
       close()
+      // ipc.send('window-close')
     },
     async login() {
       if (this.$refs.loginForm.validate()) {
@@ -487,6 +490,10 @@ export default {
     isPhone(phone) {
       return /^1[3456789]\d{9}$/.test(phone)
     }
+  },
+  beforeDestroy() {
+    window.removeEventListener('online', this.updateOnlineStatus)
+    window.removeEventListener('offline', this.updateOnlineStatus)
   }
 }
 </script>

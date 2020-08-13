@@ -2,7 +2,7 @@ import { HttpRequest } from '@/utils/request'
 
 export const saveGroup = (data) => {
   return HttpRequest({
-    url: '/site/group',
+    url: '/group',
     method: 'post',
     data
   })
@@ -10,14 +10,14 @@ export const saveGroup = (data) => {
 
 export const getGroup = () => {
   return HttpRequest({
-    url: '/site/group',
+    url: '/group',
     method: 'get'
   })
 }
 
 export const updateGroup = (data) => {
   return HttpRequest({
-    url: '/site/group',
+    url: '/group',
     method: 'put',
     data
   })
@@ -25,7 +25,7 @@ export const updateGroup = (data) => {
 
 export const deleteGroup = (params) => {
   return HttpRequest({
-    url: '/site/group',
+    url: '/group',
     method: 'delete',
     params
   })

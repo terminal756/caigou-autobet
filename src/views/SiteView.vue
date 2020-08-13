@@ -271,7 +271,7 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss" scoped>
 .btn {
   -webkit-app-region: no-drag;
 }

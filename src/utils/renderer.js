@@ -1,18 +1,18 @@
 let win = window.require('electron').remote.getCurrentWindow()
 
-export function min() {
+function min() {
   win.minimize()
 }
 
-export function max () {
+function max () {
   win.maximize()
 }
 
-export function unmax () {
+function unmax () {
   win.unmaximize()
 }
 
-export function ismax() {
+function ismax() {
   if (win.isMaximized()) {
     return true
   } else {
@@ -21,31 +21,31 @@ export function ismax() {
 }
 
 // 设置窗口是否能改变大小，参数true/false
-export function setResizable(resizable) {
+function setResizable(resizable) {
   win.setResizable(resizable)
 }
 
 // 下载文件
-export function download(url) {
+function download(url) {
   win.downloadURL(url)
 }
 
-export function close() {
+function close() {
   win.close()
 }
 
 // 隐藏窗口
-export function hide() {
+function hide() {
   win.hide()
 }
 
 // 显示窗口
-export function show() {
+function show() {
   win.show()
 }
 
 // 窗口闪烁
-export function flash() {
+function flash() {
   //   if(browserWindow.isFocused() || browserWindow.isVisible())
   if (!win.isFocused()) {
     win.showInactive()
@@ -54,11 +54,11 @@ export function flash() {
 }
 
 // 设置窗口最前端显示
-export function setAlwaysOnTop(top) {
+function setAlwaysOnTop(top) {
   win.setAlwaysOnTop(top)
 }
 
-export function reload() {
+function reload() {
   win.reload()
 }
 
@@ -115,3 +115,6 @@ export function reload() {
 //       ipcRenderer.send('ChangeTrayIcon', tayIcon)
 //     }
 //   }
+
+
+export { min,max,unmax,ismax,close}
