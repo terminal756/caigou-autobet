@@ -189,7 +189,7 @@ export default {
     ...mapActions('scheme', ['deleteSchemeAsync']),
     ...mapActions('gameInfo', ['addAGInfo']),
     openUrl(item) {
-      let view = new remote.BrowserWindow({
+      const view = new remote.BrowserWindow({
         width: 1000,
         height: 600,
         center: true,
@@ -201,11 +201,6 @@ export default {
         }
       })
       view.removeMenu()
-
-      view.on('close', () => {
-        view = null
-      })
-
       const isDev = process.env.NODE_ENV === 'development'
       if (isDev) {
         view.loadURL('http://localhost:8080/siteview')

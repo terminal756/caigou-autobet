@@ -1,5 +1,4 @@
 'use strict'
-
 import { app, BrowserWindow, protocol, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
@@ -20,9 +19,7 @@ async function createMainWindow() {
     webPreferences: {
       webviewTag: true,
       nodeIntegration: true,
-      enableRemoteModule: true,
-      nodeIntegrationInWorker: true,
-      nodeIntegrationInSubFrames: true
+      enableRemoteModule: true
     }
   })
   if (isDev) {
@@ -51,11 +48,11 @@ app.on('activate', () => {
 
 app.on('ready', async () => {
   if (isDev && !process.env.IS_TEST) {
-    try {
-      await installExtension(VUEJS_DEVTOOLS)
-    } catch (e) {
-      console.error('Vue Devtools failed to install:', e.toString())
-    }
+    // try {
+    //   await installExtension(VUEJS_DEVTOOLS)
+    // } catch (e) {
+    //   console.error('Vue Devtools failed to install:', e.toString())
+    // }
   }
   createMainWindow()
 })

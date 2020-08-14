@@ -269,7 +269,7 @@ import _ from 'underscore'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { min, max, unmax, close, ismax, hide } from '../../utils/renderer'
 import { login, logout, register, getUser, getUserByUsername } from '@/api/user'
-const { ipcRenderer: ipc } = window.require('electron')
+const { ipcRenderer, remote } = window.require('electron')
 export default {
   data: () => ({
     valid: true,
@@ -366,8 +366,8 @@ export default {
       this.isMax ? unmax() : max()
     },
     close() {
-      close()
-      // ipc.send('window-close')
+      // close()
+      remote.app.exit()
     },
     async login() {
       if (this.$refs.loginForm.validate()) {

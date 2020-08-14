@@ -24,7 +24,7 @@
       </v-btn>
     </v-app-bar>
     <v-main>
-      <v-card height="100%" class="d-flex flex-column">
+      <v-card height="100%">
         <v-card-text>
           <v-list flat subheader>
             <v-list-item v-for="item in scheme.sites" :key="item.siteId" dense>
@@ -41,7 +41,7 @@
             </v-list-item>
           </v-list>
         </v-card-text>
-        <v-tabs v-model="tab" align-with-title class="flex-grow-0 flex-shrink-0" show-arrows>
+        <v-tabs v-model="tab" align-with-title show-arrows>
           <v-tabs-slider color="primary"></v-tabs-slider>
           <v-tab v-for="item in scheme.sites" :key="item.siteId">
             <template class="red--text">
@@ -49,7 +49,7 @@
             </template>
           </v-tab>
         </v-tabs>
-        <v-tabs-items v-model="tab" class="flex-grow-1">
+        <v-tabs-items v-model="tab">
           <v-tab-item v-for="item in scheme.sites" :key="item.siteId">
             <v-card flat height="100%">
               <webview
@@ -81,7 +81,6 @@
 <script>
 import _ from 'lodash'
 import { min, max, unmax, close, ismax } from '@/utils/renderer'
-
 const { remote, ipcRenderer } = window.require('electron')
 
 export default {
@@ -260,7 +259,7 @@ export default {
       this.currentWebview.goBack()
     },
     close() {
-      close()
+      remote.getCurrentWindow().destroy()
     },
     refresh() {
       this.currentWebview.reload()
@@ -275,8 +274,9 @@ export default {
 .btn {
   -webkit-app-region: no-drag;
 }
-.v-window-item,
-.v-window__container {
+.v-window,
+.v-window__container,
+.v-window-item {
   height: 100%;
 }
 </style>
