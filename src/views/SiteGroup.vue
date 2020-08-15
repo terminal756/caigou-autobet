@@ -385,9 +385,7 @@ export default {
         index: this.siteList.indexOf(this.currentSite),
         siteId: this.currentSite.siteId
       }
-      console.log('deleteSite:', site)
       const res = await this.deleteSiteAsync(site)
-      console.log(res)
       if (res.code === 0) {
         this.deleteSiteDialog = false
         await this.updateScheme(res.data)

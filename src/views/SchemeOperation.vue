@@ -167,13 +167,6 @@ export default {
       deep: true
     },
     currentGameCode: function (newVal, oldVal) {
-      console.log(
-        'isAllConnect:%s----newVal:%s----oldVal:%s----是否进入下注命令:%s',
-        this.currentScheme.isAllConnect,
-        newVal,
-        oldVal,
-        this.currentScheme.isAllConnect && newVal && newVal !== oldVal
-      )
       if (this.currentScheme.isAllConnect && newVal && newVal !== oldVal) {
         if (this.currentScheme.amountType === 1) {
           const arr = this.currentScheme.randomRange.split('*').map(Number)
@@ -320,7 +313,6 @@ export default {
             }
           })
         } else {
-          console.log('指定金额模式')
           const minLen = Math.min.apply(
             Math,
             this.currentScheme.sites.map((s) => {
@@ -329,9 +321,6 @@ export default {
           )
           const minArr = this.currentScheme.sites.find((s) => s.specifyValue.length === minLen).specifyValue
           const amountIndex = Math.floor(Math.random() * (minArr.length - 2)) + 2
-
-          console.log('minLen:%s，minArr：%s，amountIndex：%s', minLen, minArr, amountIndex)
-
           const type = [1, 2]
           const type1 = type[Math.floor(Math.random() * type.length)]
           let type2
@@ -369,8 +358,6 @@ export default {
                 }
               }
               */
-
-              console.log('下注：%s，金额：%s', playType === 1 ? '庄' : '闲', amount)
               setTimeout(() => {
                 s.roomWebSocket.send(
                   doSend(

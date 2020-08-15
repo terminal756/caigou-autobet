@@ -133,10 +133,10 @@ export default {
               try {
                 if (!webContents.debugger.isAttached()) webContents.debugger.attach('1.1')
               } catch (err) {
-                console.log('Debugger attach failed : ', err)
+                // console.log('Debugger attach failed : ', err)
               }
               webContents.debugger.on('detach', (event, reason) => {
-                console.log('Debugger detached due to : ', reason)
+                // console.log('Debugger detached due to : ', reason)
               })
               webContents.debugger.on('message', (event, method, params) => {
                 // 获取AG配置信息
