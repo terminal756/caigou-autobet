@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { getAGHostConfig } from '@/api/hostConfig'
+import { getAgConfig } from '@/api/ag'
 import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -51,40 +51,23 @@ export default {
     this.$store.dispatch('site/getSiteAsync')
     this.$store.dispatch('treeSite/getTreeSiteAsync')
     this.$store.dispatch('scheme/getSchemeAsync')
-    this.AGHostConfig()
+    this.agConfig()
   },
   methods: {
     ...mapActions('ag', ['addConfig', 'addRoom']),
-    AGHostConfig() {
-      getAGHostConfig({
-        timestamp: new Date().getTime(),
-        _count: 0
-      }).then((res) => {
-        // console.log(res.config.environment[0].host)
-        const config = []
-        const configArr = res.config.environment[0].host
-        const loginConfig = configArr.find((c) => {
-          return c.$.hostType === 'login'
-        })
-        if (loginConfig) config.push(loginConfig.$)
-        const plazaConfig = configArr.find((c) => {
-          return c.$.hostType === 'plaza'
-        })
-        if (plazaConfig) config.push(plazaConfig.$)
-        const oldRoom = configArr.filter((c) => c.$.gameType === 'BAC')
-        const newRoom = oldRoom.map((c) => {
-          c.$.vids = c.$.vids.split(' ')
-          return c.$
-        })
-        config.push.apply(config, newRoom)
-        this.addConfig(config)
 
+    async agConfig() {
+      const res = await getAgConfig()
+      if (res.code === 0) {
         const room = []
-        for (const el of newRoom) {
-          room.push.apply(room, el.vids)
-        }
+        res.data
+          .filter((a) => !!a.vids)
+          .map((a) => {
+            room.push.apply(room, a.vids)
+          })
+        this.addConfig(res.data)
         this.addRoom(room)
-      })
+      }
     }
   }
 }

@@ -419,7 +419,6 @@ export default {
       const agInfo = this.currentScheme.sites.map((s) => {
         return gameInfo.agInfo.find((a) => a.siteId === s.siteId)
       })
-
       const room = JSON.parse(this.currentScheme.room)
       const roomRandom = room[Math.floor(Math.random() * room.length)]
       const loginPort = this.config.find((c) => c.hostType === 'login').port

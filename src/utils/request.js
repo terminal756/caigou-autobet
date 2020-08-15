@@ -68,20 +68,4 @@ LoginRequest.interceptors.response.use((response) => {
   return response
 })
 
-export const hostConfigRequest = Axios.create({
-  baseURL: '/ag'
-})
-
-hostConfigRequest.interceptors.response.use((response) => {
-  let res
-  if (response.status === 200) {
-    xmlParser.parseString(response.data, (err, result) => {
-      res = result
-    })
-    return res
-  } else {
-    console.log('AG host_config 数据获取错误')
-  }
-})
-
-export default { HttpRequest, LoginRequest, hostConfigRequest }
+export default { HttpRequest, LoginRequest }

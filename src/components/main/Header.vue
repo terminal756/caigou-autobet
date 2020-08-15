@@ -366,7 +366,6 @@ export default {
       this.isMax ? unmax() : max()
     },
     close() {
-      // close()
       remote.app.exit()
     },
     async login() {
