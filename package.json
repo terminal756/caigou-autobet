@@ -16,10 +16,11 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
-    "qs": "^6.9.4",
-    "xml2js": "^0.4.23",
+    "electron-updater": "^4.3.1",
+    "is-electron": "^2.2.0",
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
+    "qs": "^6.9.4",
     "underscore": "^1.10.2",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
@@ -27,7 +28,7 @@
     "vuelidate": "^0.7.5",
     "vuetify": "^2.3.7",
     "vuex": "^3.5.1",
-    "electron-updater": "^4.3.1"
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "@mdi/font": "^5.3.45",
@@ -62,21 +63,5 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js|{lib,setup,bin,hot,tooling,schemas}/**/*.js|test/*.js|{test,examples}/**/webpack.config.js}": [
-      "eslint --cache"
-    ],
-    "*.{ts,json,yml,yaml,md}|examples/*.md": [
-      "prettier --check"
-    ],
-    "*.md|{.github,benchmark,bin,examples,hot,lib,schemas,setup,tooling}/**/*.{md,yml,yaml,js,json}": [
-      "cspell"
-    ]
-  }
+  ]
 }

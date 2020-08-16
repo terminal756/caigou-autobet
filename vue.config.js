@@ -6,6 +6,8 @@ function resolve(dir) {
 }
 module.exports = {
   publicPath: './',
+  outputDir: process.env.outputDir,
+
   configureWebpack: {
     plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)]
   },
@@ -20,20 +22,6 @@ module.exports = {
       }
     }
   },
-  devServer: {
-    // 运行端口号
-    port: 8080,
-    proxy: {
-      '/ag': {
-        target: 'https://gci.eastwillbe.com',
-        changeOrigin: true,
-        secure: false,
-        pathRewrite: {
-          '^/ag': ''
-        }
-      }
-    }
-  },
 
   // electron 打包配置
   pluginOptions: {
@@ -42,21 +30,24 @@ module.exports = {
         electronDownload: {
           mirror: 'https://npm.taobao.org/mirrors/electron/'
         },
-        productName: '菜狗投注',
+        productName: 'caigoubet',
         appId: 'com.caigoubet.autobet',
         copyright: 'Copyright © 2020', //版权信息
         files: ['./**/*'],
         directories: {
           output: './build'
         },
+
+        // 自动更新配置
         publish: [
           {
             provider: 'generic',
-            url: 'http://localhost:8080/'
+            url: 'http://49.234.156.23:8080/download/' // 安装资源地址
           }
         ],
         win: {
           icon: 'build/icons/caigou_256.ico',
+          artifactName: '${productName}_${version}.${ext}', // 应用程序包名
           target: [
             {
               target: 'nsis',
@@ -68,7 +59,7 @@ module.exports = {
           oneClick: false, // 一键安装
           allowElevation: true, // 权限提升
           allowToChangeInstallationDirectory: true, // 运行修改安装目录
-          createDesktopShortcut: true, // 创建桌面图标
+          createDesktopShortcut: true, // 创建桌面快捷方式
           installerIcon: 'build/icons/caigou_256.ico', // 安装的图标
           uninstallerIcon: 'build/icons/caigou_256.ico' // 卸载图标
         }

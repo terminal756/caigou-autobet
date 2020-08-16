@@ -63,10 +63,13 @@
             prepend-icon="mdi-lock"
             :rules="[(v) => !!v || '密码必填', (v) => (v && v.length <= 10) || '不能超过10位']"
           />
-          <v-row justify="space-around">
+          <!--
+            记住密码
+            <v-row justify="space-around">
             <v-checkbox v-model="loginForm.remember" label="记住密码"></v-checkbox>
             <v-checkbox v-model="loginForm.autoLogin" label="自动登录"></v-checkbox>
           </v-row>
+           -->
         </v-form>
         <p v-if="loginFail" class="caption text-center ma-0 red--text">
           {{ result.msg }}
@@ -285,9 +288,9 @@ export default {
     registerAlert: false,
     loginForm: {
       username: '',
-      password: '',
-      remember: '',
-      autoLogin: ''
+      password: ''
+      // remember: '',
+      // autoLogin: ''
     },
     registerForm: {
       username: '',
@@ -372,8 +375,8 @@ export default {
       if (this.$refs.loginForm.validate()) {
         const result = await login({
           username: this.loginForm.username,
-          password: this.loginForm.password,
-          rememberMe: this.loginForm.autoLogin
+          password: this.loginForm.password
+          // rememberMe: this.loginForm.autoLogin
         })
         if (result.code === 0) {
           this.addUsername(this.loginForm.username)

@@ -155,8 +155,8 @@
                         </div>
                       </template>
                     </template>
-                    <!--补水类型-->
-                    <v-row>
+
+                    <!-- <v-row>
                       <v-col cols="4">
                         <v-subheader class="font-weight-black subtitle-1 pa-0">补水类型(非必须)</v-subheader>
                       </v-col>
@@ -172,16 +172,17 @@
                           :items="bushuiTypeItems"
                         />
                       </v-col>
-                    </v-row>
-                    <!--下注金额取整-->
-                    <v-row>
+                    </v-row> -->
+
+                    <!-- <v-row>
                       <v-col cols="4">
                         <v-subheader class="font-weight-black subtitle-1 pa-0">下注金额取整(非必须)</v-subheader>
                       </v-col>
                       <v-col cols="8">
                         <v-checkbox v-model="intType" label="个位数金额为0" />
                       </v-col>
-                    </v-row>
+                    </v-row> -->
+
                     <!--选择房间-->
                     <v-row>
                       <v-col cols="4">
@@ -265,15 +266,15 @@ export default {
     randomValue: null,
     specify: [],
     specifyValue: [],
-    bushuiType: null,
-    bushuiTypeItems: [
-      { value: null, name: '不选' },
-      { value: 1, name: '庄多下2.5%' },
-      { value: 2, name: '闲少下2.5%' }
-    ],
+    // bushuiType: null,
+    // bushuiTypeItems: [
+    //   { value: null, name: '不选' },
+    //   { value: 1, name: '庄多下2.5%' },
+    //   { value: 2, name: '闲少下2.5%' }
+    // ],
     selectBBINRoom: [],
     selectAGRoom: [],
-    intType: false,
+    // intType: false,
     errorMsg: '',
     currentHeight: ''
   }),
@@ -346,8 +347,8 @@ export default {
         })
       }
 
-      this.bushuiType = this.scheme.bushuiType
-      this.intType = this.scheme.intType === 0 ? (this.intType = false) : (this.intType = true)
+      // this.bushuiType = this.scheme.bushuiType
+      // this.intType = this.scheme.intType === 0 ? (this.intType = false) : (this.intType = true)
       switch (this.gameType) {
         case 1:
           this.selectBBINRoom = JSON.parse(this.scheme.room)
@@ -397,8 +398,8 @@ export default {
         randomRange: this.amountType === '1' ? this.randomRange : null,
         randomValue: this.amountType === '2' ? this.randomValue : null,
         specify: this.amountType === '3' && this.specify.length ? this.specify : null,
-        bushuiType: this.bushuiType,
-        intType: this.intType ? 1 : 0,
+        // bushuiType: this.bushuiType,
+        // intType: this.intType ? 1 : 0,
         room: this.selectAGRoom.length ? JSON.stringify(this.selectAGRoom) : null
       }
       const res = await this.addSchemeAsync(scheme)
@@ -433,8 +434,8 @@ export default {
         randomRange: this.amountType === 1 ? this.randomRange : null,
         randomValue: this.amountType === 2 ? this.randomValue : null,
         specify: this.amountType === 3 && this.specify.length ? JSON.stringify(newSpecify) : null,
-        bushuiType: this.bushuiType * 1,
-        intType: this.intType ? 1 : 0,
+        // bushuiType: this.bushuiType * 1,
+        // intType: this.intType ? 1 : 0,
         room: this.selectAGRoom.length ? JSON.stringify(this.selectAGRoom) : null
       }
       const res = await this.addSchemeAsync(scheme)
@@ -467,8 +468,8 @@ export default {
         randomRange: this.amountType === 1 ? this.randomRange : null,
         randomValue: this.amountType === 2 ? this.randomValue : null,
         specify: this.amountType === 3 && this.specify.length ? JSON.stringify(newSpecify) : null,
-        bushuiType: this.bushuiType * 1,
-        intType: this.intType ? 1 : 0,
+        // bushuiType: this.bushuiType * 1,
+        // intType: this.intType ? 1 : 0,
         room: this.selectAGRoom.length ? JSON.stringify(this.selectAGRoom) : null
       }
       const res = await this.updateSchemeAsync(scheme)

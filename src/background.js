@@ -1,14 +1,16 @@
 'use strict'
 import { app, BrowserWindow, protocol, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
-import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+// import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 
 const isDev = process.env.VUE_APP_ENV === 'development'
+// const { autoUpdater } = require('electron-updater')
+// const uploadUrl = 'http://49.234.156.23:8080/download/'
 
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }])
 
 let win
-async function createMainWindow() {
+function createMainWindow() {
   win = new BrowserWindow({
     width: 800,
     height: 600,
