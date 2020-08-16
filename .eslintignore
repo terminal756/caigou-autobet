@@ -1,8 +1,7 @@
+/biuld/*
 /dist/*
 /dist_electron/*
-/*.js
-/utils/
 /node_modules/*
 **/config/*
-**/utils/**
+**/utils/*
 *.config.js

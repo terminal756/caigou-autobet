@@ -1,19 +1,7 @@
 import Axios from 'axios'
-import xml2js from 'xml2js'
 
 const qs = require('qs')
-
-const xmlParser = new xml2js.Parser()
-
-let baseUrl = ''
-switch (process.env.VUE_APP_ENV) {
-  case 'development':
-    baseUrl = 'http://localhost:8888/' // 开发环境url
-    break
-  case 'production':
-    baseUrl = 'http://localhost:8888/' // 生产环境url
-    break
-}
+const baseUrl = process.env.VUE_APP_BASE_URL
 
 export const HttpRequest = Axios.create({
   baseURL: baseUrl,

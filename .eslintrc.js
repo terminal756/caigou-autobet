@@ -44,15 +44,15 @@ module.exports = {
     'eol-last': 2, // 强制文件以换行符结束（LF）
     eqeqeq: ['error', 'always', { null: 'ignore' }], // 强制使用全等
     'generator-star-spacing': 'off',
-    //'generator-star-spacing': [2, { before: true, after: true }], // 生成器中'*'两侧都要有间距
+    //  'generator-star-spacing': [2, { before: true, after: true }], // 生成器中'*'两侧都要有间距
     'global-require': 0, // 所有调用require()都位于模块的顶层
     indent: 0, // 缩进风格
     'key-spacing': [2, { beforeColon: false, afterColon: true }], // 强制在对象字面量属性中的键和值之间保持一致的间距
     'keyword-spacing': [2, { before: true, after: true }], // 关键字如if/function等的间距
     'new-cap': [2, { newIsCap: true, capIsNew: false }], // 允许在没有new操作符的情况下调用大写启动的函数;（默认）要求new使用大写启动函数调用所有操作符
     'new-parens': 2, // JavaScript通过new关键字调用函数时允许省略括号
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': process.env.VUE_APP_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.VUE_APP_ENV === 'production' ? 'error' : 'off',
     'no-array-constructor': 1, // 不允许使用Array构造函数。除非要指定生成数组的长度
     'no-class-assign': 2, // 不允许修改类声明的变量
     'no-const-assign': 2, // 不能修改使用const关键字声明的变量

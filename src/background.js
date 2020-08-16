@@ -34,7 +34,7 @@ function createMainWindow() {
   win.on('close', () => {
     win = null
   })
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
 }
 
 app.on('window-all-closed', () => {

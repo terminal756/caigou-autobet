@@ -6,7 +6,6 @@ function resolve(dir) {
 }
 module.exports = {
   publicPath: './',
-  outputDir: process.env.outputDir,
 
   configureWebpack: {
     plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)]

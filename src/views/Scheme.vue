@@ -201,7 +201,7 @@ export default {
         }
       })
       view.removeMenu()
-      const isDev = process.env.NODE_ENV === 'development'
+      const isDev = process.env.VUE_APP_ENV === 'development'
       if (isDev) {
         view.loadURL('http://localhost:8080/siteview')
         view.webContents.openDevTools()
