@@ -18,7 +18,7 @@
           </v-card-text>
           <v-card-actions class="d-flex justify-space-around">
             <v-btn class="success" @click="openActive">激活账户</v-btn>
-            <v-btn class="primary" @click="openUrl">购买激活码</v-btn>
+            <v-btn class="primary" @click="openCardUrl">购买激活码</v-btn>
           </v-card-actions>
         </v-card>
       </v-container>
@@ -95,7 +95,7 @@ export default {
         }
       }
     },
-    openUrl() {
+    openCardUrl() {
       const url = 'https://www.vqd.com/links/CBFFA5ED'
       shell.openExternal(url)
     }
