@@ -1,6 +1,8 @@
 <template>
   <v-footer app padless height="28px" style="-webkit-app-region: no-drag;" class="px-4">
     <span v-if="username" class="red--text font-weight-black">{{ msg }}</span>
+    <v-spacer></v-spacer>
+    <span>QQ交流群：972387805</span>
   </v-footer>
 </template>
 

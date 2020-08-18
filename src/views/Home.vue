@@ -18,7 +18,7 @@
           </v-card-text>
           <v-card-actions class="d-flex justify-space-around">
             <v-btn class="success" @click="openActive">激活账户</v-btn>
-            <v-btn class="primary">购买激活码</v-btn>
+            <v-btn class="primary" @click="openUrl">购买激活码</v-btn>
           </v-card-actions>
         </v-card>
       </v-container>
@@ -51,6 +51,8 @@ import Side from '@/components/main/Side'
 import Header from '@/components/main/Header'
 import Footer from '@/components/main/Footer'
 import { mapActions, mapGetters } from 'vuex'
+
+const { shell } = window.require('electron')
 
 export default {
   components: {
@@ -92,6 +94,10 @@ export default {
           this.errorMsg = res.msg
         }
       }
+    },
+    openUrl() {
+      const url = 'https://www.vqd.com/links/CBFFA5ED'
+      shell.openExternal(url)
     }
   }
 }
