@@ -1,14 +1,10 @@
 import Axios from 'axios'
 
 const qs = require('qs')
-const os = require('os')
-
-
-let url
-os.type()==='Linux'?url = 'http://49.234.156.23:8888/':url='http://localhost:8888/'
+const baseUrl = process.env.VUE_APP_BASE_URL
 
 export const HttpRequest = Axios.create({
-  baseURL: url,
+  baseURL: baseUrl,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8'
   }
