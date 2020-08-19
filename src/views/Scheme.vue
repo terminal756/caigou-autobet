@@ -203,11 +203,9 @@ export default {
       view.removeMenu()
       const isDev = process.env.VUE_APP_ENV === 'development'
       if (isDev) {
-        debugger
         view.loadURL('http://localhost:8080/index.html#/siteview')
         view.webContents.openDevTools()
       } else {
-        debugger
         view.loadURL(`file://${__dirname}/index.html#/siteview`)
       }
       // 共享参数

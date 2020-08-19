@@ -11,7 +11,10 @@ const user = {
 
   getters: {
     isLogin: (state) => {
-      return state.username && state.token
+      return !!state.username && !!state.token
+    },
+    currentUser: (state) => {
+      return state.users.find((u) => u.username === state.username)
     },
     isAGActive: (state) => {
       const user = state.users.find((u) => u.username === state.username)
@@ -32,8 +35,8 @@ const user = {
       state.username = payload
       localStorage.setItem('username', state.username)
     },
-    ADD_TOKEN: (state, payload) => {
-      state.token = payload
+    ADD_TOKEN: (state, token) => {
+      state.token = token
       localStorage.setItem('token', state.token)
     },
     LOGOUT: (state) => {

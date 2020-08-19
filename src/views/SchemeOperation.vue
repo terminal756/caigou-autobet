@@ -33,9 +33,9 @@
                           <tr v-for="(site, i) in currentScheme.sites" :key="i">
                             <th class="red--text font-weight-black">
                               {{
-                                `网站：${site.name}————余额：${
+                                `网站：${site.name}——余额：${
                                   site.balance === undefined ? '读取中...' : site.balance
-                                }————当前流水：${site.amount === undefined ? '读取中...' : site.amount}`
+                                }——当前流水：${site.amount === undefined ? '读取中...' : site.amount}`
                               }}
                             </th>
                           </tr>
@@ -87,6 +87,7 @@
   </v-app>
 </template>
 <script>
+import moment from 'moment'
 import * as cmd from '@/utils/ag/cmd'
 import { loginRoom } from '@/utils/ag/room'
 import Side from '@/components/main/Side'
@@ -438,7 +439,7 @@ export default {
           (msg) => {
             this.addWebSocketLog({
               schemeId: this.currentScheme.schemeId,
-              msg: `网站：${site.name}————` + msg
+              msg: `${moment().locale('zh-cn').format('YYYY-MM-DD HH:mm:ss')}————网站：${site.name}————` + msg
             })
           },
           (balance) => {

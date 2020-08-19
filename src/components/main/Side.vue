@@ -47,10 +47,6 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('group/getGroupAsync')
-    this.$store.dispatch('site/getSiteAsync')
-    this.$store.dispatch('treeSite/getTreeSiteAsync')
-    this.$store.dispatch('scheme/getSchemeAsync')
     this.agConfig()
   },
   methods: {

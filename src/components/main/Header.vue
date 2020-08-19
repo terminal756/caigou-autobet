@@ -183,7 +183,7 @@
                       <v-row>
                         <v-row class="mx-2">
                           <v-col cols="12" class="layout column justify-center">
-                            <v-btn :disabled="!valid" @click="register">
+                            <v-btn @click="register">
                               提交
                             </v-btn>
                           </v-col>
@@ -389,6 +389,11 @@ export default {
           }
           this.loginDialog = false
           this.loginFail = false
+
+          this.$store.dispatch('group/getGroupAsync')
+          this.$store.dispatch('site/getSiteAsync')
+          this.$store.dispatch('treeSite/getTreeSiteAsync')
+          this.$store.dispatch('scheme/getSchemeAsync')
         } else {
           this.result = result
           this.loginFail = true

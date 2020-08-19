@@ -39,10 +39,17 @@ export function getUserByUsername(params) {
   })
 }
 
-export function active(params) {
+export function getUserById(userId) {
+  return HttpRequest({
+    url: '/user/' + userId,
+    method: 'get'
+  })
+}
+
+export function active(data) {
   return HttpRequest({
     url: '/user/active',
-    method: 'get',
-    params
+    method: 'post',
+    data
   })
 }

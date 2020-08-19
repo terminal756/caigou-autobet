@@ -23,11 +23,33 @@
         </v-card>
       </v-container>
     </v-main>
-    <v-dialog v-model="activeDialog" width="400">
+    <v-dialog v-model="activeDialog" width="600">
       <v-card class="pa-4">
-        <v-card-title>
-          <v-text-field v-model="key" required label="请输入激活码" :error-messages="errorMsg" />
-        </v-card-title>
+        <v-card-text>
+          <v-row justify="space-between">
+            <v-col cols="4">
+              <v-subheader class="font-weight-black">{{ hasReferrer ? '推荐人已绑定' : '推荐人选填' }}</v-subheader>
+            </v-col>
+            <v-col cols="8">
+              <v-text-field
+                dense
+                flat
+                v-model="referrer"
+                required
+                :error-messages="refererError"
+                :disabled="hasReferrer"
+              />
+            </v-col>
+          </v-row>
+          <v-row justify="space-between">
+            <v-col cols="4">
+              <v-subheader class="font-weight-black">激活码必填</v-subheader>
+            </v-col>
+            <v-col cols="8">
+              <v-text-field flat dense v-model="key" required :error-messages="keyError" />
+            </v-col>
+          </v-row>
+        </v-card-text>
         <v-card-actions class="d-flex justify-space-around">
           <v-btn color="success" @click="active">激活</v-btn>
           <v-btn color="primary" @click="activeDialog = false">返回</v-btn>
@@ -37,8 +59,8 @@
     <v-snackbar v-model="snackbar" :timeout="timeout" light rounded>
       未登录
       <template v-slot:action="{ attrs }">
-        <v-btn color="blue" icon v-bind="attrs" @click="snackbar = false">
-          mdi-close
+        <v-btn v-bind="attrs" color="error" @click="snackbar = false">
+          <v-icon>mdi-close</v-icon>
         </v-btn>
       </template>
     </v-snackbar>
@@ -46,12 +68,11 @@
 </template>
 
 <script>
-import { active } from '@/api/user'
 import Side from '@/components/main/Side'
 import Header from '@/components/main/Header'
 import Footer from '@/components/main/Footer'
-import { mapActions, mapGetters } from 'vuex'
-
+import { mapActions, mapGetters, mapState } from 'vuex'
+import { active, getUserByUsername, getUserById } from '@/api/user'
 const { shell } = window.require('electron')
 
 export default {
@@ -61,17 +82,34 @@ export default {
     Footer
   },
   data: () => ({
-    activeDialog: false,
     key: null,
-    errorMsg: null,
+    referrer: null,
+    refererError: null,
+    keyError: null,
     snackbar: false,
-    timeout: 3000
+    timeout: 3000,
+    activeDialog: false
   }),
 
   computed: {
-    ...mapGetters('user', ['isLogin'])
+    ...mapGetters('user', ['isLogin', 'currentUser']),
+    ...mapState('user', ['username', 'users']),
+
+    hasReferrer() {
+      return this.isLogin && !!this.currentUser.referrer
+    }
   },
-  mounted() {},
+
+  created() {
+    if (this.isLogin) this.getReferrer()
+  },
+  mounted() {
+    console.log('username:', this.username)
+    console.log('users:', this.users)
+    console.log('hasReferrer:', this.hasReferrer)
+    console.log('isLogin:', this.isLogin)
+    console.log('referrer:', this.referrer)
+  },
 
   methods: {
     ...mapActions('user', ['addUser']),
@@ -80,18 +118,31 @@ export default {
       this.isLogin ? (this.activeDialog = true) : (this.snackbar = true)
     },
 
+    async getReferrer() {
+      const referrerUser = await getUserById(this.currentUser.referrer)
+      if (referrerUser.code === 0) {
+        this.referrer = referrerUser.data
+      }
+    },
+
     async active() {
       if (!this.key) {
-        this.errorMsg = '激活码必填'
+        this.keyError = '激活码必填'
       } else if (this.key.length !== 32) {
-        this.errorMsg = '激活码长度不正确'
+        this.keyError = '激活码长度不正确'
       } else {
-        const res = await active({ active: this.key })
-        if (res.code === 0) {
-          this.addUser(res.data)
-          this.activeDialog = false
+        if (this.referrer) {
+          const userRes = await getUserByUsername({ username: this.referrer })
+          if (userRes.code !== 0) {
+            this.refererError = userRes.msg
+          }
+        }
+        const activeRes = await active({ referrer: this.referrer, key: this.key })
+        if (activeRes.code !== 0) {
+          this.keyError = activeRes.msg
         } else {
-          this.errorMsg = res.msg
+          this.addUser(activeRes.data)
+          this.activeDialog = false
         }
       }
     },
