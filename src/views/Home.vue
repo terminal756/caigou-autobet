@@ -143,6 +143,10 @@ export default {
         } else {
           this.addUser(activeRes.data)
           this.activeDialog = false
+          this.key = null
+          this.keyError = null
+          this.referrer = null
+          this.refererError = null
         }
       }
     },
