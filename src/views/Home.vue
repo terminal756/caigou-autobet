@@ -5,6 +5,11 @@
     <Footer />
     <v-main>
       <v-container class="fill-height d-flex justify-center align-center">
+        <v-card flat width="400" class="pa-4 ma-4 d-flex justify-space-around">
+          <!-- <v-btn @click="downloadUrl">软件下载链接</v-btn> -->
+          <v-btn @click="docuementUrl">使用说明文档</v-btn>
+        </v-card>
+
         <v-card hover width="400" class="pa-4 ma-4">
           <v-card-title>使用流程</v-card-title>
           <v-card-text class="font-weight-black">
@@ -154,6 +159,10 @@ export default {
     },
     openCardUrl() {
       const url = 'https://www.vqd.com/links/CBFFA5ED'
+      shell.openExternal(url)
+    },
+    docuementUrl() {
+      const url = 'https://docs.qq.com/doc/DSElXeFFNZmN0SEVx'
       shell.openExternal(url)
     }
   }
