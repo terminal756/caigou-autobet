@@ -389,11 +389,6 @@ export default {
           }
           this.loginDialog = false
           this.loginFail = false
-
-          this.$store.dispatch('group/getGroupAsync')
-          this.$store.dispatch('site/getSiteAsync')
-          this.$store.dispatch('treeSite/getTreeSiteAsync')
-          this.$store.dispatch('scheme/getSchemeAsync')
         } else {
           this.result = result
           this.loginFail = true

@@ -151,9 +151,9 @@ export default {
     ipcRenderer.on('gameInfo', (event, message) => {
       const gameInfo = JSON.parse(message)
       const scheme = this.schemeList.find((s) => s.schemeId === gameInfo.schemeId)
+      // console.log('监听到的消息', scheme)
       switch (scheme.gameType) {
         case 2:
-          // console.log('监听到的消息', gameInfo)
           this.addAGInfo(gameInfo)
           break
       }

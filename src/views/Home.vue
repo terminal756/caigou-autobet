@@ -104,11 +104,11 @@ export default {
     if (this.isLogin) this.getReferrer()
   },
   mounted() {
-    console.log('username:', this.username)
-    console.log('users:', this.users)
-    console.log('hasReferrer:', this.hasReferrer)
-    console.log('isLogin:', this.isLogin)
-    console.log('referrer:', this.referrer)
+    // console.log('username:', this.username)
+    // console.log('users:', this.users)
+    // console.log('hasReferrer:', this.hasReferrer)
+    // console.log('isLogin:', this.isLogin)
+    // console.log('referrer:', this.referrer)
   },
 
   methods: {
@@ -145,7 +145,9 @@ export default {
           this.activeDialog = false
           this.key = null
           this.keyError = null
-          this.referrer = null
+          if (!this.hasReferrer) {
+            this.referrer = null
+          }
           this.refererError = null
         }
       }
