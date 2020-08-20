@@ -1,7 +1,7 @@
 'use strict'
 import { app, BrowserWindow, protocol, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
-import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+// import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 
 const isDev = process.env.VUE_APP_ENV === 'development'
 // const { autoUpdater } = require('electron-updater')
@@ -58,6 +58,9 @@ app.on('ready', async () => {
     // }
   }
   createMainWindow()
+  win.webContents.on('did-finish-load', () => {
+    win.webContents.send('ready')
+  })
 })
 
 app.on('web-contents-created', (e, content) => {

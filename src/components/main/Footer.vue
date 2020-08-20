@@ -10,9 +10,10 @@
 import moment from 'moment'
 import { mapState, mapGetters } from 'vuex'
 export default {
+  data: () => ({}),
   computed: {
     ...mapState('user', ['username', 'users']),
-    ...mapGetters('user', ['isAGActive', 'isBBINActive', 'isRMActive']),
+    ...mapGetters('user', ['isLogin', 'isAGActive', 'isBBINActive', 'isRMActive']),
 
     user() {
       return this.users.find((u) => u.username === this.username)
@@ -40,6 +41,9 @@ export default {
       }
       return msg
     }
-  }
+  },
+  created() {},
+  mounted() {},
+  watch: {}
 }
 </script>

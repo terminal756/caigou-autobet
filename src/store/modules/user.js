@@ -1,10 +1,12 @@
 const users = JSON.parse(localStorage.getItem('users'))
 const username = localStorage.getItem('username')
+const password = localStorage.getItem('password')
 const token = localStorage.getItem('token')
 const user = {
   namespaced: true,
   state: () => ({
     username: username || null,
+    password: password || null,
     token: token || null,
     users: users || []
   }),
@@ -35,6 +37,10 @@ const user = {
       state.username = payload
       localStorage.setItem('username', state.username)
     },
+    ADD_PASSWORD: (state, password) => {
+      state.password = password
+      localStorage.setItem('password', state.password)
+    },
     ADD_TOKEN: (state, token) => {
       state.token = token
       localStorage.setItem('token', state.token)
@@ -59,12 +65,20 @@ const user = {
         state.users.push(user)
         localStorage.setItem('users', JSON.stringify(state.users))
       }
+    },
+    UPDATE_USER: (state, user) => {
+      const index = state.users.findIndex((u) => u.userId === user.userId)
+      state.users.splice(index, 1, user)
+      localStorage.setItem('users', JSON.stringify(state.users))
     }
   },
 
   actions: {
     addUsername({ commit }, payload) {
       commit('ADD_USERNAME', payload)
+    },
+    addPassword({ commit }, password) {
+      commit('ADD_PASSWORD', password)
     },
     addToken({ commit }, payload) {
       commit('ADD_TOKEN', payload)
@@ -74,6 +88,9 @@ const user = {
     },
     addUser({ commit }, user) {
       commit('ADD_USER', user)
+    },
+    updateUser({ commit }, user) {
+      commit('UPDATE_USER', user)
     }
   }
 }

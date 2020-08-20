@@ -265,6 +265,22 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <!-- 时间到期提示窗口 -->
+    <v-dialog v-model="isExpireDialig" width="300">
+      <v-card height="100%">
+        <v-card-title class="align-center red--text">
+          当前账号AG还有一个小时就要过期，请及时充值
+        </v-card-title>
+        <v-card-actions class="d-flex justify-space-around">
+          <v-btn class="ma-4" color="success" @click="openCardUrl">
+            购买激活码
+          </v-btn>
+          <v-btn class="ma-4" color="error" @click="isExpireDialig = false">
+            返回
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-app-bar>
 </template>
 <script>
@@ -274,6 +290,7 @@ import { min, max, unmax, close, ismax, hide } from '../../utils/renderer'
 import { login, logout, register, getUser, getUserByUsername } from '@/api/user'
 const { ipcRenderer, remote } = window.require('electron')
 export default {
+  props: ['openCardUrl'],
   data: () => ({
     valid: true,
     snackbar: false,
@@ -313,15 +330,23 @@ export default {
         token: ''
       }
     },
+
     loginFail: false,
     registerFail: false,
     isMax: false,
-    version: require('root/package.json').version
+    isExpireDialig: false,
+    expireCount: 0,
+    version: require('root/package.json').version,
+
+    timer: null
   }),
   computed: {
-    ...mapState('user', ['username']),
+    ...mapState('user', ['username', 'password', 'users']),
     ...mapState('scheme', ['operationList']),
     ...mapGetters('user', ['isLogin', 'isAGActive', 'isBBINActive', 'isRMActive']),
+    user() {
+      return this.users.find((u) => u.username === this.username)
+    },
     isRecharge() {
       return this.isAGActive || this.isBBINActive || this.isRMActive
     }
@@ -334,6 +359,14 @@ export default {
         if (newValue !== oldValue) {
           this.loginFail = false
         }
+      }
+    },
+    username() {
+      if (this.username) {
+        this.onExpire()
+      } else {
+        clearInterval(this.timer)
+        this.timer = null
       }
     },
     'registerForm.username'(v) {
@@ -354,14 +387,16 @@ export default {
     this.debouncedRepeatPassword = _.debounce(this.checkRepeatPassword, 500)
     this.debouncedPhone = _.debounce(this.checkPhone, 1000)
     this.debouncedEmail = _.debounce(this.checkEmail, 1000)
+    ipcRenderer.on('ready', () => {})
   },
   mounted() {
     window.onresize = () => {
       this.isMax = ismax()
     }
+    this.onExpire()
   },
   methods: {
-    ...mapActions('user', ['addUsername', 'addToken', 'logoutActions', 'addUser']),
+    ...mapActions('user', ['addUsername', 'addPassword', 'addToken', 'logoutActions', 'addUser', 'updateUser']),
     min() {
       min()
     },
@@ -380,6 +415,7 @@ export default {
         })
         if (result.code === 0) {
           this.addUsername(this.loginForm.username)
+          this.addPassword(this.loginForm.password)
           this.addToken(result.data)
           const res = await getUserByUsername({
             username: this.loginForm.username
@@ -395,6 +431,7 @@ export default {
         }
       }
     },
+
     openLogoutDialog() {
       this.operationList.length ? (this.logoutWithConnectDialog = true) : (this.logoutDialog = true)
     },
@@ -491,6 +528,25 @@ export default {
     },
     isPhone(phone) {
       return /^1[3456789]\d{9}$/.test(phone)
+    },
+
+    onExpire() {
+      if (!this.timer && this.username) {
+        this.timer = setInterval(() => {
+          const now = new Date().getTime()
+          const agExpiredTime = this.user.agExpiredTime
+          if (agExpiredTime - now < 3600000 && agExpiredTime - now > 0) {
+            if (this.expireCount === 0) {
+              this.isExpireDialig = true
+              this.expireCount = this.expireCount + 1
+            }
+          }
+          if (agExpiredTime - now <= 0) {
+            this.user.agRecharge = 0
+            this.updateUser(this.user)
+          }
+        }, 1000)
+      }
     }
   },
   beforeDestroy() {

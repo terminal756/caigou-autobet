@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Header />
+    <Header :openCardUrl="openCardUrl" />
     <Side />
     <Footer />
     <v-main>
@@ -108,13 +108,7 @@ export default {
   created() {
     if (this.isLogin) this.getReferrer()
   },
-  mounted() {
-    // console.log('username:', this.username)
-    // console.log('users:', this.users)
-    // console.log('hasReferrer:', this.hasReferrer)
-    // console.log('isLogin:', this.isLogin)
-    // console.log('referrer:', this.referrer)
-  },
+  mounted() {},
 
   methods: {
     ...mapActions('user', ['addUser']),
@@ -124,9 +118,11 @@ export default {
     },
 
     async getReferrer() {
-      const referrerUser = await getUserById(this.currentUser.referrer)
-      if (referrerUser.code === 0) {
-        this.referrer = referrerUser.data
+      if (this.currentUser.referrer) {
+        const referrerUser = await getUserById(this.currentUser.referrer)
+        if (referrerUser.code === 0) {
+          this.referrer = referrerUser.data
+        }
       }
     },
 
