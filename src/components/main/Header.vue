@@ -330,14 +330,12 @@ export default {
         token: ''
       }
     },
-
     loginFail: false,
     registerFail: false,
     isMax: false,
     isExpireDialig: false,
     expireCount: 0,
-    version: require('root/package.json').version,
-
+    version: require('~/package.json').version,
     timer: null
   }),
   computed: {

@@ -4,28 +4,32 @@
     <Side />
     <Footer />
     <v-main>
-      <v-container class="fill-height d-flex justify-center align-center">
-        <v-card flat width="400" class="pa-4 ma-4 d-flex justify-space-around">
-          <!-- <v-btn @click="downloadUrl">软件下载链接</v-btn> -->
-          <v-btn @click="docuementUrl">使用说明文档</v-btn>
-        </v-card>
-
-        <v-card hover width="400" class="pa-4 ma-4">
-          <v-card-title>使用流程</v-card-title>
-          <v-card-text class="font-weight-black">
-            <p>1. 注册</p>
-            <p>2. 登陆</p>
-            <p>3. 购买激活码</p>
-            <p>4. 激活账号</p>
-            <p>5. 创建网站</p>
-            <p>6. 创建方案</p>
-            <p>7. 执行方案</p>
-          </v-card-text>
-          <v-card-actions class="d-flex justify-space-around">
-            <v-btn class="success" @click="openActive">激活账户</v-btn>
-            <v-btn class="primary" @click="openCardUrl">购买激活码</v-btn>
-          </v-card-actions>
-        </v-card>
+      <v-container class="fill-height d-flex">
+        <v-row>
+          <v-col cols="12">
+            <v-card flat width="400" class="pa-4 ma-4 d-flex justify-space-around">
+              <v-btn @click="docuementUrl">使用说明文档</v-btn>
+            </v-card>
+          </v-col>
+          <v-col cols="12">
+            <v-card hover width="400" class="pa-4 ma-4">
+              <v-card-title>使用流程</v-card-title>
+              <v-card-text class="font-weight-black">
+                <p>1. 注册</p>
+                <p>2. 登陆</p>
+                <p>3. 购买激活码</p>
+                <p>4. 激活账号</p>
+                <p>5. 创建网站</p>
+                <p>6. 创建方案</p>
+                <p>7. 执行方案</p>
+              </v-card-text>
+              <v-card-actions class="d-flex justify-space-around">
+                <v-btn class="success" @click="openActive">激活账户</v-btn>
+                <v-btn class="primary" @click="openCardUrl">购买激活码</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
     <v-dialog v-model="activeDialog" width="600">
@@ -100,8 +104,12 @@ export default {
     ...mapGetters('user', ['isLogin', 'currentUser']),
     ...mapState('user', ['username', 'users']),
 
+    user() {
+      return this.users.find((u) => u.username === this.username)
+    },
+
     hasReferrer() {
-      return this.isLogin && !!this.currentUser.referrer
+      return this.isLogin && this.user.referrer
     }
   },
 
@@ -109,6 +117,7 @@ export default {
     if (this.isLogin) this.getReferrer()
   },
   mounted() {},
+  watch: {},
 
   methods: {
     ...mapActions('user', ['addUser']),

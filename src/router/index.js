@@ -8,11 +8,15 @@ import SiteGroup from '@views/SiteGroup'
 import SchemeDetails from '@views/SchemeDetails'
 import SchemeOperation from '@views/SchemeOperation'
 
+// js中引用vuex
+// import user from '@/store/modules/user'
+// console.log(user.state().username)
+
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/home', redirect: '/' },
-  { path: '/', name: 'Home', component: Home },
+  { path: '/', redirect: '/home' },
+  { path: '/home', name: 'Home', component: Home },
   { path: '/scheme', name: 'Scheme', component: Scheme },
   { path: '/siteview', name: 'SiteView', component: SiteView },
   { path: '/sitegroup', name: 'SiteGroup', component: SiteGroup },
@@ -25,7 +29,7 @@ const routes = [
 ]
 const router = new VueRouter({
   mode: 'hash',
-  base: process.env.BASE_URL,
+  base: process.env.VUE_APP_BASE_URL,
   routes
 })
 

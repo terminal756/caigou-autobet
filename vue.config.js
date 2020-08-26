@@ -10,8 +10,10 @@ module.exports = {
   configureWebpack: {
     plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)]
   },
+
+  // 路径别名配置
   chainWebpack: (config) => {
-    config.resolve.alias.set('@', resolve('src')).set('root', resolve('./')).set('@views', resolve('src/views'))
+    config.resolve.alias.set('@', resolve('src')).set('~', resolve('./')).set('@views', resolve('src/views'))
   },
   css: {
     loaderOptions: {

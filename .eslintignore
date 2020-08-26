@@ -5,3 +5,4 @@
 **/config/*
 **/utils/*
 *.config.js
+/server/*
