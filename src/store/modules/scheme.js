@@ -32,7 +32,7 @@ const scheme = {
         state.schemeList.splice(index, 1, scheme)
       }
     },
-    DELETE_SCHEME(state, payload) {
+    SCHEME_DELETE(state, payload) {
       state.schemeList.splice(payload.index, 1)
     },
     addOperation(state, payload) {
@@ -51,8 +51,8 @@ const scheme = {
         state.operationList[schemeIndex].sites.splice(siteIndex, 1, site)
       }
     },
-    deleteOperation(state, payload) {
-      state.operationList.splice(payload, 1)
+    OPERATION_DELETE(state, index) {
+      state.operationList.splice(index, 1)
     }
   },
   actions: {
@@ -83,7 +83,7 @@ const scheme = {
     async deleteSchemeAsync({ commit }, payload) {
       const res = await deleteScheme({ schemeId: payload.schemeId })
       if (res.code === 0) {
-        commit('DELETE_SCHEME', payload)
+        commit('SCHEME_DELETE', payload)
       }
       return res
     },
@@ -93,8 +93,8 @@ const scheme = {
     updateOperation({ commit }, payload) {
       commit('updateOperation', payload)
     },
-    deleteOperation({ commit }, payload) {
-      commit('deleteOperation', payload)
+    deleteOperation({ commit }, index) {
+      commit('OPERATION_DELETE', index)
     }
   }
 }

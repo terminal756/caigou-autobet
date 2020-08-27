@@ -22,7 +22,7 @@
                     {{ `止水金额：${scheme.totalLiushui}` }}
                   </v-card-text>
                   <v-card-text v-if="!scheme.isAllConnect" class="red--text font-weight-black">
-                    游戏房间连接中，勿动
+                    游戏房间连接中...
                   </v-card-text>
                 </v-card-actions>
                 <v-card flat>
@@ -515,12 +515,18 @@ export default {
     },
     stop() {
       const schemeId = this.operationList[this.tab].schemeId
+
+      const index = this.schemes.findIndex((s) => s.schemeId === schemeId)
+
       const scheme = this.schemes.find((s) => s.schemeId === schemeId)
       scheme.sites.map((s) => {
         s.platformWebSocket.close()
         s.plazaWebSocket.close()
         s.roomWebSocket.close()
       })
+
+      this.schemes.splice(index, 1)
+
       this.deleteOperation(this.tab)
       this.deleteWebSocketLog(schemeId)
       this.stopSchemeDialog = false
