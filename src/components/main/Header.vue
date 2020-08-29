@@ -228,7 +228,7 @@
           <v-btn class="ma-4" color="primary" @click="logoutDialog = false">
             返回
           </v-btn>
-          <v-btn class="ma-4" color="error" @click="logout">
+          <v-btn class="ma-4" color="error" @click="exit">
             退出
           </v-btn>
         </v-card-actions>
@@ -414,8 +414,8 @@ export default {
     max() {
       this.isMax ? unmax() : max()
     },
-    close() {
-      this.logout()
+    async close() {
+      await this.exit()
       remote.app.exit()
     },
     async login() {
@@ -452,7 +452,7 @@ export default {
     openCloseDialog() {
       this.operationList.length ? (this.logoutWithConnectDialog = true) : (this.closeDialog = true)
     },
-    async logout() {
+    async exit() {
       const result = await logout()
       if (result.code === 0) {
         this.logoutActions()
