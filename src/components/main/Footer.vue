@@ -12,11 +12,11 @@ import { mapState, mapGetters } from 'vuex'
 export default {
   data: () => ({}),
   computed: {
-    ...mapState('user', ['username', 'users']),
+    ...mapState('user', ['userId', 'username', 'users']),
     ...mapGetters('user', ['isLogin', 'isAGActive', 'isBBINActive', 'isRMActive']),
 
     user() {
-      return this.users.find((u) => u.username === this.username)
+      return this.users.find((u) => u.userId === this.userId)
     },
 
     msg() {

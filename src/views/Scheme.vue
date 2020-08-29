@@ -186,7 +186,7 @@ export default {
   },
   methods: {
     ...mapActions('scheme', ['deleteSchemeAsync']),
-    ...mapActions('gameInfo', ['addAGInfo']),
+    ...mapActions('gameInfo', ['addAGInfo', 'deleteGameInfo']),
     openUrl(item) {
       const view = new remote.BrowserWindow({
         width: 1000,
@@ -234,6 +234,7 @@ export default {
       const res = await this.deleteSchemeAsync(schemeObj)
       if (res.code === 0) {
         this.deleteSchemeDialog = false
+        this.deleteGameInfo(this.deleteSchemeObj.schemeId)
       }
     }
   }

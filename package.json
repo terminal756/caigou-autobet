@@ -21,6 +21,7 @@
     "moment": "^2.27.0",
     "qs": "^6.9.4",
     "standard": "^14.3.4",
+    "terser-webpack-plugin": "^4.1.0",
     "underscore": "^1.10.2",
     "vue": "^2.6.12",
     "vue-axios": "^2.1.5",

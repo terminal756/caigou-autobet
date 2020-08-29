@@ -6,7 +6,7 @@ const gameInfo = {
   }),
   getters: {},
   mutations: {
-    addAG(state, payload) {
+    ADD_AG(state, payload) {
       if (state.gameInfo.length) {
         const schemeIndex = state.gameInfo.findIndex((game) => game.schemeId === payload.schemeId)
         if (schemeIndex > -1) {
@@ -42,11 +42,19 @@ const gameInfo = {
         state.gameInfo.push(payload)
         localStorage.setItem('gameInfo', JSON.stringify(state.gameInfo))
       }
+    },
+    DELETE_GAME_INFO(state, schemeId) {
+      const index = state.gameInfo.findIndex((g) => g.schemeId === schemeId)
+      state.gameInfo.splice(index, 1)
+      localStorage.setItem('gameInfo', JSON.stringify(state.gameInfo))
     }
   },
   actions: {
     addAGInfo({ commit }, payload) {
-      commit('addAG', payload)
+      commit('ADD_AG', payload)
+    },
+    deleteGameInfo({ commit }, schemeId) {
+      commit('DELETE_GAME_INFO', schemeId)
     }
   }
 }

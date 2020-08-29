@@ -64,8 +64,8 @@ app.on('ready', async () => {
     } catch (e) {
       console.error('Vue Devtools failed to install:', e.toString())
     }
-    win.webContents.openDevTools()
   }
+  win.webContents.openDevTools()
   win.webContents.on('did-finish-load', () => {
     win.webContents.send('ready')
   })

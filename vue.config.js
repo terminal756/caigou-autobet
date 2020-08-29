@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const TerserPlugin = require('terser-webpack-plugin')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -8,7 +9,25 @@ module.exports = {
   publicPath: './',
 
   configureWebpack: {
-    plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)]
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          parallel: true,
+          sourceMap: false,
+          terserOptions: {
+            ecma: undefined,
+            warnings: false,
+            parse: {},
+            compress: {
+              drop_console: true,
+              drop_debugger: true,
+              pure_funcs: ['console.log']
+            }
+          }
+        })
+      ]
+    }
   },
 
   // 路径别名配置

@@ -11,7 +11,7 @@ export default {}
 </script>
 
 <style>
-html {
+/* html {
   overflow: hidden;
-}
+} */
 </style>

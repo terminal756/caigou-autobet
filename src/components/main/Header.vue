@@ -192,7 +192,6 @@
                     </v-card-actions>
                   </v-form>
                 </v-card>
-
                 <v-snackbar v-model="snackbar" :timeout="timeout">
                   {{ result.msg }}
                   <v-btn v-show="!registerFail" text @click=";(snackbar = false), (registerDialog = false)">
@@ -294,7 +293,7 @@ export default {
   data: () => ({
     valid: true,
     snackbar: false,
-    timeout: 0,
+    timeout: -1,
     key: '',
     loginDialog: false,
     logoutDialog: false,
@@ -346,7 +345,13 @@ export default {
       return this.users.find((u) => u.username === this.username)
     },
     isRecharge() {
-      return this.isAGActive || this.isBBINActive || this.isRMActive
+      return (
+        (this.user.agRecharge === 1 && this.user.agExpiredTime && this.user.agExpiredTime >= new Date().getTime()) ||
+        (this.user.bbinRecharge === 1 &&
+          this.user.bbinExpiredTime &&
+          this.user.bbinExpiredTime >= new Date().getTime()) ||
+        (this.user.rmRecharge === 1 && this.user.rmExpiredTime && this.user.rmExpiredTime >= new Date().getTime())
+      )
     }
   },
   watch: {
@@ -385,16 +390,24 @@ export default {
     this.debouncedRepeatPassword = _.debounce(this.checkRepeatPassword, 500)
     this.debouncedPhone = _.debounce(this.checkPhone, 1000)
     this.debouncedEmail = _.debounce(this.checkEmail, 1000)
-    ipcRenderer.on('ready', () => {})
+    // ipcRenderer.on('ready', () => {})
   },
   mounted() {
     window.onresize = () => {
       this.isMax = ismax()
     }
-    this.onExpire()
+    if (this.username) this.onExpire()
   },
   methods: {
-    ...mapActions('user', ['addUsername', 'addPassword', 'addToken', 'logoutActions', 'addUser', 'updateUser']),
+    ...mapActions('user', [
+      'addUserId',
+      'addUsername',
+      'addPassword',
+      'addToken',
+      'logoutActions',
+      'addUser',
+      'updateUser'
+    ]),
     min() {
       min()
     },
@@ -402,6 +415,7 @@ export default {
       this.isMax ? unmax() : max()
     },
     close() {
+      this.logout()
       remote.app.exit()
     },
     async login() {
@@ -412,6 +426,8 @@ export default {
           // rememberMe: this.loginForm.autoLogin
         })
         if (result.code === 0) {
+          this.loginDialog = false
+          this.loginFail = false
           this.addUsername(this.loginForm.username)
           this.addPassword(this.loginForm.password)
           this.addToken(result.data)
@@ -419,10 +435,10 @@ export default {
             username: this.loginForm.username
           })
           if (res.code === 0) {
+            this.addUserId(res.data.userId)
             this.addUser(res.data)
           }
-          this.loginDialog = false
-          this.loginFail = false
+          this.onExpire()
         } else {
           this.result = result
           this.loginFail = true
@@ -529,7 +545,7 @@ export default {
     },
 
     onExpire() {
-      if (!this.timer && this.username) {
+      if (!this.timer && (this.isAGActive || this.isBBINActive || this.isRMActive)) {
         this.timer = setInterval(() => {
           const now = new Date().getTime()
           const agExpiredTime = this.user.agExpiredTime

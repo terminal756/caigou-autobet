@@ -101,15 +101,15 @@ export default {
   }),
 
   computed: {
-    ...mapGetters('user', ['isLogin', 'currentUser']),
-    ...mapState('user', ['username', 'users']),
+    ...mapGetters('user', ['isLogin']),
+    ...mapState('user', ['userId', 'username', 'users']),
 
     user() {
-      return this.users.find((u) => u.username === this.username)
+      return this.users.find((u) => u.userId === this.userId)
     },
 
     hasReferrer() {
-      return this.isLogin && this.user.referrer
+      return this.userId && this.user && this.user.referrer
     }
   },
 
@@ -127,8 +127,8 @@ export default {
     },
 
     async getReferrer() {
-      if (this.currentUser.referrer) {
-        const referrerUser = await getUserById(this.currentUser.referrer)
+      if (this.user.referrer) {
+        const referrerUser = await getUserById(this.user.referrer)
         if (referrerUser.code === 0) {
           this.referrer = referrerUser.data
         }
